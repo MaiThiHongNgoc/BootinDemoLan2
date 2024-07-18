@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts, deleteProduct } from '../Service/productService';
+import { getProducts, deleteProduct } from '../Service (1)/productService';
 import ProductForm from './ProductForm';
 import './ProductList.css';
 

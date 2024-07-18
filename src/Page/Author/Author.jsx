@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuthors } from '../../Backend/Service/authorService';
+import { getAuthors } from '../../Backend/Service (1)/authorService';
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import './Author.css';

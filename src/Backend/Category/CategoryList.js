@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import CategoryForm from './CategoryForm';
-import { getCategories, deleteCategory } from '../Service/categoryService';
+import { getCategories, deleteCategory } from '../Service (1)/categoryService';
 import './CategoryList.css'
 
 const CategoryList = () => {

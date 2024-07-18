@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getOrderDetails, deleteOrderDetail } from '../Service/orderDetailService';
+import { getOrderDetails, deleteOrderDetail } from '../Service (1)/orderDetailService';
 import OrderDetailForm from './orderDetailForm'; // Assuming this is your component name for order detail form
 import './orderDetailList.css'; // Update CSS import as needed
 

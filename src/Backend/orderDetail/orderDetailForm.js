@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { createOrderDetail, updateOrderDetail } from '../Service/orderDetailService';
+import { createOrderDetail, updateOrderDetail } from '../Service (1)/orderDetailService';
 import './orderDetailForm.css';
 
 const OrderDetailForm = ({ orderDetail, onSave }) => {

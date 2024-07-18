@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import imgService from '../Service/imgService';
+import imgService from '../Service (1)/imgService';
 import ImageForm from './ImageForm';
 import './ImageList.css'
 

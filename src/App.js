@@ -10,7 +10,6 @@ import Contact from "./Page/Contact/Contact";
 import TopRating from "./Page/Home/OurBookStore/TopRating/TopRating";
 import BestSellers from "./Page/Home/OurBookStore/BestSellers/BestSellers";
 import Featured from "./Page/Home/OurBookStore/Featured/Featured";
-import Login from "./Page/Login/Login"
 // import PageNotFound from "./Page/404";
 
 
@@ -45,14 +44,13 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           {/* <Route path="/404" element={<PageNotFound />} /> */}
 
-<<<<<<< Updated upstream
+
           <Route path="/login" element={<Login />} />
-=======
-         
->>>>>>> Stashed changes
 
 
-          <Route path="/admin" element={<Admin />} />
+
+          <Route path="/admin" element={<Admin />} >
+          </Route>
           <Route path="/user" element={<UserList />} />
           <Route path="/category" element={<CategoryList />} />
           <Route path="/authors" element={<AuthorList />} />

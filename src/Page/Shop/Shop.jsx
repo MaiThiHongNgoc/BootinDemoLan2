@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts } from '../../Backend/Service/productService';
-import { getCategories } from '../../Backend/Service/categoryService';
-import { getAuthors } from '../../Backend/Service/authorService';
+import { getProducts } from '../../Backend/Service (1)/productService';
+import { getCategories } from '../../Backend/Service (1)/categoryService';
+import { getAuthors } from '../../Backend/Service (1)/authorService';
 import { IoSearch } from "react-icons/io5";
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
-import { FiSearch, FiHeart, FiShoppingCart } from "react-icons/fi";
+import { FiSearch, FiShoppingCart } from "react-icons/fi";
 import './Shop.css';
 import { RxSlash } from "react-icons/rx";
 
@@ -34,7 +34,7 @@ const Shop = () => {
     setError('');
     try {
       const response = await getProducts(page - 1, category, priceRange, author, search); // Adjust page number for pagination
-      const { content, totalPages } = response.data;
+      const { content, totalPages } = response;
       setProducts(Array.isArray(content) ? content : []);
       setTotalPages(totalPages || 0);
     } catch (error) {
@@ -88,9 +88,7 @@ const Shop = () => {
     // Implement search click functionality
   };
 
-  const handleFavoriteClick = (product) => {
-    // Implement favorite click functionality
-  };
+
 
   const handleCartClick = (product) => {
     // Implement add to cart functionality
@@ -196,9 +194,6 @@ const Shop = () => {
                       <div className="customer-shop-icons">
                         <button onClick={() => handleSearchClick(product)}>
                           <FiSearch />
-                        </button>
-                        <button onClick={() => handleFavoriteClick(product)}>
-                          <FiHeart />
                         </button>
                         <button onClick={() => handleCartClick(product)}>
                           <FiShoppingCart />

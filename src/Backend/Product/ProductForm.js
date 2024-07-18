@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { createProduct, updateProduct } from '../Service/productService';
-import { getAuthors } from '../Service/authorService';
-import { getCategories } from '../Service/categoryService';
+import { createProduct, updateProduct } from '../Service (1)/productService';
+import { getAuthors } from '../Service (1)/authorService';
+import { getCategories } from '../Service (1)/categoryService';
 import './ProductForm.css';
 
 const ProductForm = ({ product, onSave }) => {

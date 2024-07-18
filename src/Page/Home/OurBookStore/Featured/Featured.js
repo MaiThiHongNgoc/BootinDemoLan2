@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts } from '../../../../Backend/Service/productService';
+import { getProducts } from '../../../../Backend/Service (1)/productService';
 import { FiSearch, FiShoppingCart } from 'react-icons/fi'; // Import icons from react-icons
 
 import '../TopRating/TopRating.css';
@@ -18,7 +18,7 @@ const Featured = () => {
     setError('');
     try {
       const response = await getProducts();
-      const allProducts = response.data.content;
+      const allProducts = response.content;
       const randomProducts = allProducts.sort(() => 0.5 - Math.random()).slice(0, 10);
       setProducts(randomProducts);
     } catch (error) {

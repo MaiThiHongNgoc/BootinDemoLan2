@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts } from '../Service/productService';
-import imgService from '../Service/imgService';
+import { getProducts } from '../Service (1)/productService';
+import imgService from '../Service (1)/imgService';
 import './ImageForm.css'
 
 const ImageForm = ({ img_product, onSave }) => {

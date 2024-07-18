@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AuthorForm from './AuthorForm';
-import { getAuthors, deleteAuthor } from '../Service/authorService';
+import { getAuthors, deleteAuthor } from '../Service (1)/authorService';
 import './AuthorList.css';
 
 const AuthorList = () => {

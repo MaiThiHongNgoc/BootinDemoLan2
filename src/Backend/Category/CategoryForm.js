@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { createCategory, updateCategory } from '../Service/categoryService';
+import { createCategory, updateCategory } from '../Service (1)/categoryService';
 import './CategoryForm.css'
 
 const CategoryForm = ({ category, onSave }) => {
