@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllProducts } from '../Service/productService';
+import { getProducts } from '../Service/productService';
 import imgService from '../Service/imgService';
 import './ImageForm.css'
 
@@ -38,7 +38,7 @@ const ImageForm = ({ img_product, onSave }) => {
       setLoading(true);
       setError('');
       try {
-          const response = await getAllProducts(); // Use the new function
+          const response = await getProducts(); // Use the new function
           setProducts(response.data.content);
       } catch (error) {
           console.error('Failed to fetch products', error);

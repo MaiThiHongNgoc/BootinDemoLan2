@@ -25,6 +25,7 @@ import OrderList from "./Backend/Order/orderList"
 import OrderDetailList from "./Backend/orderDetail/orderDetailList";
 import Staff from "./Backend/staff/Staff";
 import ImageList from "./Backend/Image/ImageList";
+import Login from "./Page/Login/Login";
 
 
 function App() {
@@ -44,7 +45,11 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           {/* <Route path="/404" element={<PageNotFound />} /> */}
 
+<<<<<<< Updated upstream
           <Route path="/login" element={<Login />} />
+=======
+         
+>>>>>>> Stashed changes
 
 
           <Route path="/admin" element={<Admin />} />
@@ -59,7 +64,8 @@ function App() {
 
           <Route path="/staff" element={<Staff />} />
 
-
+        
+          <Route path="/login" element={<Login />} />
 
 
         </Routes>

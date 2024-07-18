@@ -11,20 +11,18 @@ const ProductList = () => {
     const [error, setError] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1); // Total number of pages
     const [productsPerPage] = useState(10); // Number of products per page
 
     useEffect(() => {
         loadProducts(currentPage);
-    }, [currentPage]);
+    }, [currentPage, productsPerPage]);
 
     const loadProducts = async (page) => {
         setLoading(true);
         setError('');
         try {
             const response = await getProducts(page - 1, productsPerPage); // Adjust page number for pagination
-            setProducts(response.data.content);
-            setTotalPages(response.data.totalPages); // Update the total number of pages
+            setProducts(response.content);
         } catch (error) {
             console.error('Failed to fetch products', error);
             setError('Failed to load products. Please try again later.');
@@ -111,7 +109,6 @@ const ProductList = () => {
                                     <td>
                                         {product.imgProducts && product.imgProducts.map(img => (
                                             <img key={img.img_id} src={img.img_url} alt={img.img_name} className="product-image" />
-
                                         ))}
                                     </td>
                                     <td>
@@ -124,8 +121,8 @@ const ProductList = () => {
                     </table>
                     {/* Pagination */}
                     <ul className="pagination">
-                        {Array.from({ length: totalPages }, (_, index) => (
-                            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+                        {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, index) => (
+                            <li key={index} className="page-item">
                                 <button onClick={() => paginate(index + 1)} className="page-link">
                                     {index + 1}
                                 </button>

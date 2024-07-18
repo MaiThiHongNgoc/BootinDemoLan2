@@ -2,41 +2,92 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:9191/api/products/v1/';
 
-// Lấy danh sách sản phẩm theo trang
-export const getProducts =  async (page = 0) => {
-    return  axios.get(`${API_URL}?p=${page}`);
-};
-export const getAllProducts = () => {
-    return axios.get(`${API_URL}`);
-};
 
-// Lấy chi tiết sản phẩm theo ID
-export const getProductById = (id) => {
-    return axios.get(`${API_URL}${id}`);
-};
-
-// Tạo mới một sản phẩm
-export const createProduct = async (productData) => {
+export const getProducts = async (page = 0, productsPerPage = 10) => {
     try {
-        const response = await axios.post(API_URL, productData);
+        const response = await axios.get(`${API_URL}?p=${page}&size=${productsPerPage}`);
         return response.data;
     } catch (error) {
-        console.error('Failed to create product:', error.response.data);
+        console.error('Failed to get products:', error.response?.data || error.message);
         throw error;
     }
 };
 
-// Cập nhật thông tin sản phẩm theo ID
-export const updateProduct = (id, product) => {
-    return axios.put(`${API_URL}${id}`, product);
+
+// Function to create a new product, only accessible to admins
+export const createProduct = async (productData) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('Token not found. Please log in.');
+
+    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
+    const role = payload.scope;
+
+    try {
+        // Check if the user has admin role
+        if (role !== 'ADMIN') {
+            throw new Error('Unauthorized: Only admins can create products.');
+        }
+
+        const response = await axios.post(API_URL, productData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Failed to create product:', error.response?.data || error.message);
+        throw error;
+    }
 };
 
-// Xóa sản phẩm theo ID
-export const deleteProduct = (id) => {
-    return axios.delete(`${API_URL}${id}`);
+// Function to update a product by ID, only accessible to admins
+export const updateProduct = async (id, productData) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('Token not found. Please log in.');
+
+    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
+    const role = payload.scope;
+
+    try {
+        // Check if the user has admin role
+        if (role !== 'ADMIN') {
+            throw new Error(`Unauthorized: Only admins can update product ${id}.`);
+        }
+
+        const response = await axios.put(`${API_URL}${id}`, productData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error(`Failed to update product ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
 };
 
-// Lấy danh sách danh mục sản phẩm
-export const getCategories = () => {
-    return axios.get('http://localhost:9191/api/categories/v1/');
+// Function to delete a product by ID, only accessible to admins
+export const deleteProduct = async (id) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('Token not found. Please log in.');
+
+    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
+    const role = payload.scope;
+
+    try {
+        // Check if the user has admin role
+        if (role !== 'ADMIN') {
+            throw new Error(`Unauthorized: Only admins can delete product ${id}.`);
+        }
+
+        const response = await axios.delete(`${API_URL}${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error(`Failed to delete product ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
 };
