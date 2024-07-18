@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from '../../../../Backend/Service/productService';
 import './TopRating.css';
-import { FiSearch, FiHeart, FiShoppingCart } from 'react-icons/fi'; // Import icons from react-icons
+import { FiSearch, FiShoppingCart } from 'react-icons/fi'; // Import icons from react-icons
 
 const TopRating = () => {
   const [products, setProducts] = useState([]);
@@ -33,10 +33,6 @@ const TopRating = () => {
     console.log('Search clicked for:', product);
   };
 
-  const handleFavoriteClick = (product) => {
-    // Handle favorite click logic
-    console.log('Favorite clicked for:', product);
-  };
 
   const handleCartClick = (product) => {
     // Handle cart click logic
@@ -56,9 +52,6 @@ const TopRating = () => {
                 <div className="top-rating-icons">
                   <button onClick={() => handleSearchClick(product)}>
                     <FiSearch />
-                  </button>
-                  <button onClick={() => handleFavoriteClick(product)}>
-                    <FiHeart />
                   </button>
                   <button onClick={() => handleCartClick(product)}>
                     <FiShoppingCart />

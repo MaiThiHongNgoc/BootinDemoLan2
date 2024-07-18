@@ -9,7 +9,8 @@ import Author from "./Page/Author/Author";
 import Contact from "./Page/Contact/Contact";
 import TopRating from "./Page/Home/OurBookStore/TopRating/TopRating";
 import BestSellers from "./Page/Home/OurBookStore/BestSellers/BestSellers";
-import Featured from "./Page/Home/OurBookStore/Featured/Featured"
+import Featured from "./Page/Home/OurBookStore/Featured/Featured";
+import Login from "./Page/Login/Login"
 // import PageNotFound from "./Page/404";
 
 
@@ -43,7 +44,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           {/* <Route path="/404" element={<PageNotFound />} /> */}
 
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/login" element={<Login />} />
 
 
           <Route path="/admin" element={<Admin />} />

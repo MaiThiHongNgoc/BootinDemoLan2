@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from '../../../../Backend/Service/productService';
+import { FiSearch, FiShoppingCart } from 'react-icons/fi'; // Import icons from react-icons
+
 import '../TopRating/TopRating.css';
 
 const Featured = () => {
@@ -26,6 +28,16 @@ const Featured = () => {
       setLoading(false);
     }
   };
+  const handleSearchClick = (product) => {
+    // Handle search click logic
+    console.log('Search clicked for:', product);
+  };
+
+
+  const handleCartClick = (product) => {
+    // Handle cart click logic
+    console.log('Add to cart clicked for:', product);
+  };
 
   return (
     <div className='top-rating'>
@@ -37,6 +49,14 @@ const Featured = () => {
             <div key={product.product_id} className="top-rating-card">
               <div className="top-rating-image-container">
                 <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="top-rating-image" />
+                <div className="top-rating-icons">
+                  <button onClick={() => handleSearchClick(product)}>
+                    <FiSearch />
+                  </button>
+                  <button onClick={() => handleCartClick(product)}>
+                    <FiShoppingCart />
+                  </button>
+                </div>
               </div>
               <h2 className="top-rating-product-name">{product.product_name}</h2>
               <p className="top-rating-author-name">{product.author.author_name}</p>
