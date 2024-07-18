@@ -1,0 +1,30 @@
+.category-form {
+    width: 300px;
+    margin: 20px auto; /* Đưa form ra giữa */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .category-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .category-form input[type='text'] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .category-form-button-save {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50; /* Green */
+    color: white;
+    border: none;
+    cursor: pointer;
+  }

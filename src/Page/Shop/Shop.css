@@ -1,0 +1,366 @@
+.shop-title{
+  background-image: url(https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/05/Breadcumd.jpg);
+    margin: 0 0 100px;
+    font-size: 20px;
+    background-position: 50%;
+    padding-top: 100px;
+    padding-bottom: 248px;
+    text-align: center;
+    height: 200px;
+    width: 100%;
+}
+.customer-shop-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.customer-shop-sidebar {
+  width: 25%;
+  float: left;
+  padding: 20px;
+  /* background-color: #f4f4f4; */
+  position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+.customer-shop-content {
+  width: 75%;
+  padding: 20px;
+}
+
+.shop-search {
+  margin-bottom: 60px;
+  border: 0 solid transparent;
+  position: relative;
+  padding: 0;
+  display: block;
+  width: 345px;
+  height: 45px;
+  padding: 0 15px;
+  height: 45px;
+  border: 1px solid hsla(0, 0%, 56%, .25);
+  position: relative;
+
+}
+
+.shop-search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  height: 45px;
+    border: 0;
+    padding: 0;
+    width: calc(100% - 35px);
+    background: 0 0;
+    box-shadow: none;
+    -webkit-appearance: none;
+    margin-left: -10%;
+    outline: none;
+  color: inherit;
+  font: inherit;
+
+}
+.shop-btn{
+  line-height: 100%;
+  height: 45px;
+  padding: 0 15px;
+  background: #f86d72;
+  position: absolute;
+  right: 0;
+  top: -1px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+.shop-icon{
+  font-size: 20px;
+    color: #fff;
+    transform: rotateY(180deg);
+}
+
+.shop-filter {
+  margin-bottom: 60px;
+  border: 0 solid transparent;
+  position: relative;
+  padding: 0;
+  display: block;
+  height: 294.4px;
+}
+
+.shop-filter h3 {
+  margin-bottom: 10px;
+  color: #2b2b2b;
+  padding: 0;
+    background: 0 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: -3px 0 30px;
+    position: relative;
+    text-transform: capitalize;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(248, 109, 114, .25);
+    line-height: 1.3;
+    font-family: Merriweather, serif;
+    text-align: justify;
+
+}
+.shop-filter ul{
+  height: 224px;
+  background: 0 0;
+  padding: 0;
+  border: none;
+  padding-left: 0 !important;
+  margin-bottom: 0;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+.shop-filter li{
+  padding: 8px 0;
+    list-style: none;
+    color: #666;
+    padding-top: 0 !important;
+}
+
+
+.shop-filter-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.shop-filter-button {
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  color: #666;
+  background: 0 0;
+  background: none;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+/* Đổi màu sắc của thanh trượt */
+input[type="range"] {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #f86d72; /* Màu nền của thanh trượt */
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background-color: #fff; /* Màu của con trỏ khi kéo thanh trượt trên trình duyệt WebKit (Chrome, Safari, Opera) */
+}
+
+input[type="range"]::-moz-range-thumb {
+  background-color: #fff; /* Màu của con trỏ khi kéo thanh trượt trên Firefox */
+}
+
+input[type="range"]::-ms-thumb {
+  background-color: #fff; /* Màu của con trỏ khi kéo thanh trượt trên Internet Explorer/Edge */
+}
+#price-display {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.shop-ul {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin: -9.5px 0;
+  padding: 0;
+  border: none;
+  list-style-type: none;
+  box-sizing: border-box;
+}
+
+.shop-ul li {
+  text-align: justify;
+  height: 37px;
+  padding: 9.5px 0 !important;
+  line-height: 18px;
+  display: block;
+  width: 100%;
+}
+
+.shop-ul span {
+  box-sizing: content-box;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  margin: 0 10px 0 0;
+  display: inline-block;
+  vertical-align: top;
+  border: 2px solid rgba(248, 109, 114, 0.25) !important;
+}
+.shop-ton{
+  display: none;
+  /* margin: 4px 0 0;
+  line-height: normal;
+  box-sizing: border-box;
+  padding: 0; */
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  font: inherit;
+}
+.shop-ul span:hover{
+  border: 2px solid #f86d72;
+}
+.shop-filter-ton{
+  color: #666;
+  margin-bottom: 0;
+  font-weight: 400;
+  display: inline-block;
+  max-width: 100%;
+  border: none;
+  background: 0;
+}
+.shop-filter-ton:focus{
+  outline: none;
+}
+
+.shop-filter-button:hover {
+  background-color: #ddd;
+}
+
+
+
+
+
+.customer-shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.customer-shop-card {
+  position: relative;
+  padding: 20px;
+  text-align: center;
+}
+
+.customer-shop-image-container {
+  position: relative; /* Position relative for absolute positioning */
+  height: 300px; /* Adjust the height as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.customer-shop-image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  border: none; /* Remove border */
+  transition: filter 0.3s ease;
+}
+
+.customer-shop-icons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease;
+}
+
+.customer-shop-icons button {
+  background: #fff; /* Màu nền */
+  border: 1px solid #f86d72; /* Viền */
+  padding: 8px; /* Kích thước padding phù hợp */
+  margin: 5px 0;
+  cursor: pointer;
+  outline: none;
+  color: #f86d72; /* Màu icon */
+  font-size: 1.2rem; /* Kích thước icon */
+  width: 36px; /* Đường kính */
+  height: 36px; /* Chiều cao */
+  border-radius: 50%; /* Hình tròn */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.customer-shop-icons button:hover {
+  background-color: #f86d72; /* Màu nền hover */
+  color: #fff; /* Màu icon hover */
+}
+
+.customer-shop-card:hover .customer-shop-image {
+  filter: blur(3px); /* Apply blur effect on hover */
+}
+
+.customer-shop-card:hover .customer-shop-icons {
+  opacity: 1; /* Show icons on hover */
+}
+.customer-shop-product-name,.customer-shop-author-name,.customer-shop-price{
+  margin: 5px 0;
+    text-align: left;
+}
+.customer-shop-product-name{
+  font-size: 1.5rem;
+    color: #2b2b2b;
+    font-weight: 400;
+    font-family: Merriweather, serif;
+    text-transform: capitalize;
+}
+.customer-shop-product-name:hover{
+  color: #f86d72;
+}
+.customer-shop-author-name{
+  padding: 0;
+    margin-bottom: 15px;
+    color: #909090;
+    font-style: italic;
+    font-family: Merriweather, serif;
+    font-size: 1rem;
+}
+.customer-shop-author-name:hover{
+  color: #f86d72;
+}
+.customer-shop-price{
+  line-height: 100%;
+    font-family: Merriweather, serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #f86d72;
+    padding: 0;
+    font-size: 1.3rem;
+}
+
+
+
+.customer-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.customer-page-item {
+  margin: 0 5px;
+}
+
+.customer-page-link {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.customer-page-link:hover {
+  background-color: #ddd;
+}

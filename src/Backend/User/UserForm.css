@@ -1,0 +1,44 @@
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Khoảng cách giữa các input và label */
+    max-width: 400px; /* Giới hạn chiều rộng của form */
+    margin: 20px auto; /* Căn giữa form */
+    padding: 20px;
+    background-color: #f9f9f9; /* Màu nền của form */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho form */
+  }
+  
+  .user-form label {
+    font-weight: bold;
+    display: block;
+  }
+  
+  .user-form input[type="text"],
+  .user-form input[type="email"],
+  .user-form input[type="number"],
+  .user-form input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Viền input */
+    border-radius: 4px;
+    width: 100%; /* Độ rộng 100% để điền vào không gian còn lại */
+  }
+  
+  .user-form-button-save {
+    align-self: flex-end; /* Đẩy nút Save sang phía cuối */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50; /* Màu nền xanh */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền */
+  }
+  
+  .user-form-button-save:hover {
+    background-color: #45a049; /* Màu xanh nhạt khi hover */
+  }

@@ -1,0 +1,41 @@
+.order-form {
+  width: 420px;
+  margin: 20px auto; /* Đưa form ra giữa */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.order-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.order-form input[type='text'],
+.order-form input[type='number']
+{
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc; /* Viền input */
+  border-radius: 4px;
+  width: 100%; 
+}
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc; /* Viền input */
+  border-radius: 4px;
+  width: 100%; 
+}
+
+.order-form-button-save {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}

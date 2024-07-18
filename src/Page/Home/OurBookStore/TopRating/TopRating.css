@@ -1,0 +1,184 @@
+.top-rating-title {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .top-rating-header {
+    font-size: 2rem;
+  }
+  
+  .top-rating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .top-rating-loading, .top-rating-error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: red;
+  }
+  
+  .top-rating-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-rows: repeat(2, 1fr); /* 2 rows */
+    gap: 10px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .top-rating-card {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .top-rating-image-container {
+    height: 300px; /* Adjust the height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .top-rating-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border: none; /* Remove border */
+  }
+  
+  .top-rating-product-name, .top-rating-author-name, .top-rating-price {
+    margin: 5px 0;
+    text-align: left;
+  }
+  .top-rating-product-name{
+    font-size: 1.5rem;
+    color: #2b2b2b;
+    font-weight: 400;
+    font-family: Merriweather, serif;
+    text-transform: capitalize;
+  }
+  .top-rating-product-name:hover{
+    color: #f86d72;
+  }
+  .top-rating-author-name{
+    padding: 0;
+    margin-bottom: 15px;
+    color: #909090;
+    font-style: italic;
+    font-family: Merriweather, serif;
+    font-size: 1rem;
+  }
+  .top-rating-author-name:hover{
+    color: #f86d72;
+  }
+  .top-rating-price{
+    line-height: 100%;
+    font-family: Merriweather, serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #f86d72;
+    padding: 0;
+    font-size: 1.3rem;
+  }
+  .top-rating-title {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .top-rating-header {
+    font-size: 2rem;
+  }
+  
+  .top-rating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .top-rating-loading,
+  .top-rating-error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: red;
+  }
+  
+  .top-rating-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-rows: repeat(2, 1fr); /* 2 rows */
+    gap: 10px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .top-rating-card {
+    position: relative; /* Position relative for absolute positioning */
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .top-rating-image-container {
+    position: relative; /* Position relative for absolute positioning */
+    height: 300px; /* Adjust the height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    overflow: hidden; /* Ensure icons are hidden outside image container */
+  }
+  
+  .top-rating-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border: none; /* Remove border */
+    transition: filter 0.3s ease; /* Transition for filter effect */
+  }
+  
+  .top-rating-icons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease;
+  }
+  
+  .top-rating-icons button {
+    background: #fff; /* Màu nền */
+    border: 1px solid #f86d72; /* Viền */
+    padding: 8px; /* Kích thước padding phù hợp */
+    margin: 5px 0;
+    cursor: pointer;
+    outline: none;
+    color: #f86d72; /* Màu icon */
+    font-size: 1.2rem; /* Kích thước icon */
+    width: 36px; /* Đường kính */
+    height: 36px; /* Chiều cao */
+    border-radius: 50%; /* Hình tròn */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng hover */
+  }
+  
+  .top-rating-icons button:hover {
+    background-color: #f86d72; /* Màu nền hover */
+    color: #fff; /* Màu icon hover */
+  }
+  
+  .top-rating-card:hover .top-rating-image {
+    filter: blur(3px); /* Apply blur effect on hover */
+  }
+  
+  .top-rating-card:hover .top-rating-icons {
+    opacity: 1; /* Show icons on hover */
+  }
+  

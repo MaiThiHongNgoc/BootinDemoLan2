@@ -1,0 +1,101 @@
+.order-detail-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.order-detail-form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-detail-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.order-detail-form input, .order-detail-form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.order-detail-form-button-save {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.order-detail-form-button-save:hover {
+    background-color: #45a049;
+}
+
+.order-detail-container {
+    padding: 20px;
+}
+
+.order-detail-button-add {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.order-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-detail-table th, .order-detail-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.order-detail-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f2f2f2;
+    color: black;
+}
+
+.order-detail-button-edit, .order-detail-button-delete {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.order-detail-button-edit {
+    background-color: #008CBA;
+    color: white;
+    margin-right: 5px;
+}
+
+.order-detail-button-delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.order-detail-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+.author-search {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
