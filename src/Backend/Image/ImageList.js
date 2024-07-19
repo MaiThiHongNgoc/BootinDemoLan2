@@ -79,7 +79,7 @@ const ImageList = () => {
                             <tr key={img_product.img_id}>
                                 <td>{img_product.img_name}</td>
                                 <td><img src={img_product.img_url} alt={img_product.img_name} className="image-list-img" /></td>
-                                <td>{img_product.products ? img_product.products.product_name : 'No Product'}</td>
+                                <td>{img_product.product ? img_product.product.product_name : 'No Product'}</td>
                                 <td>
                                     <button className="image-list-button-edit" onClick={() => handleEdit(img_product)}>Edit</button>
                                     <button className="image-list-button-delete" onClick={() => handleDelete(img_product.img_id)}>Delete</button>
