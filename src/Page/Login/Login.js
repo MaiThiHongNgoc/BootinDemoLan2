@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Assuming you're using React Router
 import './Login.css';
+import Header from '../../Component/Header/Header';
+import Footer from '../../Component/Footer/Footer';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -25,9 +28,9 @@ const Login = () => {
             if (userRole === 'ADMIN') {
                 window.location.href = '/admin'; // Redirect to admin page
             } else if(userRole === "STAFF"){
-                window.location.href = '/staff'; // Redirect to default page
-            }else if(userRole === "USER"){
-                window.location.href = '/'
+                window.location.href = '/staff'; // Redirect to staff page
+            } else if(userRole === "USER"){
+                window.location.href = '/'; // Redirect to user home page
             }
         } catch (error) {
             setError('Invalid login credentials');
@@ -35,10 +38,12 @@ const Login = () => {
     };
 
     return (
+        <div>
+            <Header/>
         <div className="login-container">
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="login-field">
                     <label>Username:</label>
                     <input
                         type="text"
@@ -46,7 +51,7 @@ const Login = () => {
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="login-field">
                     <label>Password:</label>
                     <input
                         type="password"
@@ -55,8 +60,13 @@ const Login = () => {
                     />
                 </div>
                 <button type="submit">Login</button>
-                {error && <p className="error">{error}</p>}
+                {error && <p className="login-error">{error}</p>}
             </form>
+            <p className="login-register-link">
+                Don't have an account? <Link to="/register">Register here</Link>
+            </p>
+        </div>
+        <Footer/>
         </div>
     );
 };

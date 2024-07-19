@@ -3,7 +3,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Box, Button, Container, Typography } from '@mui/material';
 
 const PageNotFound = () => {
-  // Set document title directly
   React.useEffect(() => {
     document.title = 'Error: Not Found | Carpatin Free';
   }, []);
