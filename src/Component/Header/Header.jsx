@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Header.css'
 import { RxAvatar } from "react-icons/rx";
+import Search from "../../Search/Search"
 const Header = () => {
   const [activeLink, setActiveLink] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,6 +16,7 @@ const Header = () => {
           <div className="navbar-header-container1">
               <div className='navbar-header-category'>
                   {/* Add category links or content here */}
+                  <Search/>
               </div>
           </div>
 

@@ -185,3 +185,48 @@
     opacity: 1; /* Show icons on hover */
   }
   
+
+ /* Notification message styles */
+.login-required-message {
+  position: fixed; /* Fixes the position relative to the viewport */
+  top: 20px; /* Distance from the top of the viewport */
+  right: 20px; /* Distance from the right edge of the viewport */
+  background-color: #f86d72; /* Background color */
+  color: white; /* Text color */
+  padding: 15px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow */
+  z-index: 1000; /* Ensure it's above other elements */
+  font-size: 1rem; /* Font size */
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Vertical alignment */
+  max-width: 300px; /* Optional: Set a maximum width for better control */
+}
+
+/* Close button styles */
+.login-required-message .close-button {
+  position: absolute; /* Position it absolutely within the message container */
+  top: 5px; /* Distance from the top edge of the message */
+  right: 5px; /* Distance from the right edge of the message */
+  background: none; /* No background */
+  border: none; /* Remove border */
+  color: white; /* Close button color */
+  font-size: 1.2rem; /* Size of the close button */
+  cursor: pointer; /* Pointer cursor on hover */
+  line-height: 1; /* Ensure it's vertically aligned */
+  width: 30px;
+  height: 40px;
+}
+
+.login-required-message .close-button:hover {
+  color: #ffd700; /* Change color on hover */
+}
+
+.login-required-message a {
+  color: white; /* Link color */
+  text-decoration: underline; /* Underline for links */
+}
+
+.login-required-message a:hover {
+  color: #ffd700; /* Change link color on hover */
+}
