@@ -6,15 +6,15 @@ import { IoSearch } from "react-icons/io5";
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import { FiSearch, FiShoppingCart } from "react-icons/fi";
-import './Shop.css';
 import { RxSlash } from "react-icons/rx";
+import './Shop.css';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(8); // Number of products per page
+  const [productsPerPage] = useState(8);
   const [totalPages, setTotalPages] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedPriceRange, setSelectedPriceRange] = useState([0, 1000]);
@@ -22,6 +22,8 @@ const Shop = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [loginRequired, setLoginRequired] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     loadProducts(currentPage, selectedCategory, selectedPriceRange, selectedAuthor, searchQuery);
@@ -33,7 +35,7 @@ const Shop = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await getProducts(page - 1, category, priceRange, author, search); // Adjust page number for pagination
+      const response = await getProducts(page - 1, category, priceRange, author, search);
       const { content, totalPages } = response;
       setProducts(Array.isArray(content) ? content : []);
       setTotalPages(totalPages || 0);
@@ -88,10 +90,30 @@ const Shop = () => {
     // Implement search click functionality
   };
 
-
-
   const handleCartClick = (product) => {
-    // Implement add to cart functionality
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setShowNotification(true); // Show notification if not logged in
+      return;
+    }
+
+    // Decode the token to get user role information
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jwtPayload = JSON.parse(atob(base64));
+    const userRole = jwtPayload.scope; // Assuming role is stored in the JWT payload
+
+    if (userRole !== 'USER') {
+      setShowNotification(true); // Show notification if role is not 'USER'
+      return;
+    }
+
+    // Handle add to cart logic
+    console.log('Add to cart clicked for:', product);
+  };
+
+  const handleCloseNotification = () => {
+    setShowNotification(false);
   };
 
   return (
@@ -145,17 +167,17 @@ const Shop = () => {
             <h3>Price</h3>
             <div className='shop-div'>
               <div className='shop-em'>
-            <input 
-              type="range" 
-              min="0" 
-              max="1000" 
-              step="50" 
-              value={selectedPriceRange[1]}
-              onChange={handlePriceChange} 
-              className="shop-filter-range"
-            />
-            </div>
-            <span id="price-display">$0 - ${selectedPriceRange[1]}</span>
+                <input 
+                  type="range" 
+                  min="0" 
+                  max="1000" 
+                  step="50" 
+                  value={selectedPriceRange[1]}
+                  onChange={handlePriceChange} 
+                  className="shop-filter-range"
+                />
+              </div>
+              <span id="price-display">$0 - ${selectedPriceRange[1]}</span>
             </div>
           </div>
           <div className="shop-filter">
@@ -221,6 +243,14 @@ const Shop = () => {
         </div>
       </div>
       <Footer />
+      
+      {/* Notification Message */}
+      {showNotification && (
+        <div className='login-required-message'>
+          <span>Please log in to add items to the cart. <a href="/login">Log in here</a></span>
+          <button className='close-button' onClick={handleCloseNotification}>×</button>
+        </div>
+      )}
     </div>
   );
 };

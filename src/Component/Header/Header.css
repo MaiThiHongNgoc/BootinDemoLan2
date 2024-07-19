@@ -1,9 +1,10 @@
 .Header{
     max-width: 100%;
-    height: 200px;
+    height: 150px;
     display: flex;
     justify-content: space-between;
-    padding-top: 40px;
+    padding-top: 20px;
+
 }
 .navbar-header-container1{
     width: 20%;
@@ -20,12 +21,12 @@
     justify-content: center;
 }
 .logo-header img  {
-    width: 30%;
-    height: 30%;
+    width: 25%;
+    height: 25%;
     background-color: var(--white-color);
     text-align: center;
     justify-content: center;
-    padding: 20px 0 20px 0px;
+    padding: 20px 0 10px 0px;
 }
 .navbar-header-link {
     display: flex;
@@ -40,6 +41,8 @@
     font-size: 1rem;
     color: black;
     cursor: pointer;
+    font-weight: 400;
+    text-transform: uppercase;
 }
 
 .navbar-header-link div a {
@@ -59,3 +62,21 @@
     text-decoration: underline;
 }
 
+.login-icon {
+    font-size: 1.8rem; /* Adjust the size as needed */
+    color: #333; /* Default color */
+    transition: color 0.3s ease-in-out; /* Smooth transition for color change */
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+    margin-bottom: 90px;
+    margin-right: 20px;
+}
+
+.login-icon:hover {
+    color: #f86d72; /* Change color on hover */
+}
+.navbar-header-container3 {
+    display: flex;
+    justify-content: flex-end; /* Aligns items to the end (right side) */
+    align-items: center; /* Vertically centers the items */
+    padding-right: 20px; /* Adjust padding to move the icon closer to the edge */
+}
