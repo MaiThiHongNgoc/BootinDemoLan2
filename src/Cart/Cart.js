@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCartItems, addCartItem } from '../Backend/Service (1)/cartService'; // Ensure this import is correct
+import { getCartItems, addCartItem } from '../Backend/Service (1)/cartService'; // Đảm bảo rằng import này đúng
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -20,8 +20,13 @@ const Cart = () => {
     }, []); // Empty dependency array to run once on component mount
 
     const fetchCartItems = async (userId) => {
+        setLoading(true);
+        setError('');
         try {
             const response = await getCartItems(userId);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             const data = await response.json(); // Assuming the API returns JSON
             setCartItems(data.cart_products); // Use the correct field from the response
         } catch (error) {
@@ -41,9 +46,13 @@ const Cart = () => {
         }
 
         setAdding(true);
+        setError('');
         try {
             const userId = JSON.parse(atob(token.split('.')[1])).user_id;
-            await addCartItem({ ...newItem, userId });
+            const response = await addCartItem({ ...newItem, userId });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             fetchCartItems(userId); // Refresh cart items after adding
             setNewItem({ productId: '', quantity: 1 }); // Reset form
         } catch (error) {

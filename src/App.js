@@ -13,14 +13,6 @@ import Featured from "./Page/Home/OurBookStore/Featured/Featured";
 import Login from "./Page/Login/Login"
 import PageNotFound from "./Page/404";
 import Cart from "./Cart/Cart";
-
-
-
-
-
-
-
-
 import Admin from "./Backend/Admin/Admin";
 import UserList from "./Backend/User/UserList";
 import CategoryList from "./Backend/Category/CategoryList";
