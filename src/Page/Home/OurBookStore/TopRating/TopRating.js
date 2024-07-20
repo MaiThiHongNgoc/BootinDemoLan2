@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from '../../../../Backend/Service (1)/productService';
+import { addCartItem } from '../../../../Backend/Service (1)/cartService'; // Import the addCartItem function
 import './TopRating.css';
-import { FiSearch, FiShoppingCart } from 'react-icons/fi'; // Import icons from react-icons
-import { useNavigate } from 'react-router-dom'; // Using useNavigate instead of useHistory
+import { FiSearch, FiShoppingCart } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 const TopRating = () => {
   const [products, setProducts] = useState([]);
@@ -36,27 +37,33 @@ const TopRating = () => {
     console.log('Search clicked for:', product);
   };
 
-  const handleCartClick = (product) => {
+  const handleCartClick = async (product) => {
     const token = localStorage.getItem('token');
     if (!token) {
-      setShowNotification(true); // Show message to log in
-      return;
+        setShowNotification(true); // Show message to log in
+        return;
     }
 
-    // Decode the token to get user role information
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jwtPayload = JSON.parse(atob(base64));
-    const userRole = jwtPayload.scope; // Assuming role is stored in the JWT payload
+    try {
+        // Construct the cart item object
+        const cartItem = {
+            cart: { cart_id:1}, // Example cart ID, you may need to dynamically get this
+            product: {
+                product_id: product.product_id
+            },
+            quantity: 1 // Default quantity
+        };
 
-    if (userRole !== 'USER') {
-      setShowNotification(true); // Show message to log in
-      return;
+        // Add item to cart
+        await addCartItem(cartItem);
+
+        // Optionally, show success message or update cart state
+        console.log('Product added to cart:', product);
+    } catch (error) {
+        console.error('Failed to add product to cart:', error);
+        setShowNotification(true); // Show error message
     }
-
-    // Handle add to cart logic
-    console.log('Add to cart clicked for:', product);
-  };
+};
 
   const handleCloseNotification = () => {
     setShowNotification(false);

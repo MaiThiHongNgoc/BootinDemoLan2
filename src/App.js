@@ -11,6 +11,7 @@ import TopRating from "./Page/Home/OurBookStore/TopRating/TopRating";
 import BestSellers from "./Page/Home/OurBookStore/BestSellers/BestSellers";
 import Featured from "./Page/Home/OurBookStore/Featured/Featured";
 import PageNotFound from "./Page/404";
+import Cart from "./Cart/Cart";
 
 
 
@@ -46,6 +47,7 @@ function App() {
 
 
           <Route path="/login" element={<Login />} />
+          <Route path="/cart" element={<Cart />} />
 
 
 

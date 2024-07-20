@@ -45,7 +45,7 @@
     border-radius: 4px;
 }
 
-button {
+.login_button {
     width: 100%;
     max-width: 400px;
     padding: 10px;
@@ -58,7 +58,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+.login_button:hover {
     background-color: #d75a60;
 }
 
