@@ -10,14 +10,13 @@ import Contact from "./Page/Contact/Contact";
 import TopRating from "./Page/Home/OurBookStore/TopRating/TopRating";
 import BestSellers from "./Page/Home/OurBookStore/BestSellers/BestSellers";
 import Featured from "./Page/Home/OurBookStore/Featured/Featured";
-<<<<<<< HEAD
 import Login from "./Page/Login/Login"
 import PageNotFound from "./Page/404";
 import Cart from "./Cart/Cart";
 
-=======
-import PageNotFound from "./Page/404";
->>>>>>> 1fc889a0d84d3e632d7bf8e9b04b0c2dc62b439f
+
+
+
 
 
 
@@ -58,7 +57,7 @@ function App() {
 
           <Route path="/admin" element={<Admin />} >
           </Route>
-          <Route path="/404" element={<PageNotFound />} />
+          
           <Route path="/admin" element={<Admin />} />
 
           <Route path="/user" element={<UserList />} />
@@ -74,11 +73,11 @@ function App() {
 
         
           <Route path="/login" element={<Login />} />
-<<<<<<< HEAD
+
            
-=======
+
     <Route path="*" element={<PageNotFound/>}/>
->>>>>>> 1fc889a0d84d3e632d7bf8e9b04b0c2dc62b439f
+
 
         </Routes>
       </BrowserRouter>
