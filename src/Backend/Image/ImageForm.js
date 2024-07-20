@@ -23,7 +23,7 @@ const ImageForm = ({ img_product, onSave }) => {
           setFormData({
               img_name: img_product.img_name,
               img_url: img_product.img_url,
-              product: { product_id: img_product.products ? img_product.products.product_id : '' },
+              product: { product_id: img_product.product ? img_product.product.product_id : '' },
           });
       } else {
           setFormData({
@@ -39,7 +39,7 @@ const ImageForm = ({ img_product, onSave }) => {
       setError('');
       try {
           const response = await getProducts(); // Use the new function
-          setProducts(response.data.content);
+          setProducts(response.content);
       } catch (error) {
           console.error('Failed to fetch products', error);
           setError('Failed to load products. Please try again later.');
@@ -68,7 +68,7 @@ const ImageForm = ({ img_product, onSave }) => {
       try {
           const submissionData = {
               ...formData,
-              products: {
+              product: {
                   product_id: formData.product.product_id,
               },
           };
