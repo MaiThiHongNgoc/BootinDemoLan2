@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:9191/api/cart/v1';
+const API_URL = 'http://localhost:9191/api/cart/v1/';
 
 // Function to fetch all cart items for a specific user
 export const getCartItems = async (cart_id) => {
