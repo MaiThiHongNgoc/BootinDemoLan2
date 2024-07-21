@@ -13,7 +13,7 @@ const Gift = () => {
                             <p className='gift-p'>
                             Give your Family and friend a Books
                             <br/>
-                            <a className='gift-a' href='#'>Shop Now</a>
+                            <a className='gift-a' href='http://localhost:3000/shop'>Shop Now</a>
                             </p>
                         </div>
                     </div>

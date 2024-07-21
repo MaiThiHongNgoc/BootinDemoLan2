@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RxAvatar } from 'react-icons/rx';
 import { FaShoppingCart } from 'react-icons/fa';
-import Cart from '../../Cart/Cart';  // Ensure the correct import path
+import Cart from '../../Cart/Cart'; 
+import Search from '../../Search/Search'; // Ensure the correct import path
 import './Header.css';
 //import CartSidebar from '../../Cart/CartSidebar';
 
@@ -25,6 +26,7 @@ const Header = ({ user_id }) => {
             <div className="navbar-header-container1">
                 <div className='navbar-header-category'>
                     {/* Add category links or content here */}
+                    <Search/>
                 </div>
             </div>
 

@@ -78,3 +78,20 @@
     color: #fff;
     z-index: 1; /* Đảm bảo chữ hiển thị trên ảnh */
   }
+  .banner-img1{
+    width: 150px;
+    height: 91px;
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+   }
+   .image-1 .banner-img info {
+    line-height: 20px;
+    padding: 0 20px;
+    border-radius: 4px;
+    background: #79b67d;
+    color: #fff;
+    font-family: Merriweather, serif;
+    display: inline-block;
+  }
