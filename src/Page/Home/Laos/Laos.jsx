@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaYoutube } from "react-icons/fa";
+import CountUp from 'react-countup';
 import './Laos.css';
 
 const Laos = () => {
@@ -23,7 +24,9 @@ const Laos = () => {
                     <div className="laos-inner">
                         <div className="laos-wpb">
                             <div className="laos-counterup">
-                                <div className="laos-number">4500</div>
+                                <div className="laos-number">
+                                    <CountUp end={4500} duration={2} separator="" />
+                                </div>
                                 <h4 className="laos-title">ACTIVE READERS</h4>
                             </div>
                         </div>
@@ -33,7 +36,9 @@ const Laos = () => {
                     <div className="laos-inner">
                         <div className="laos-wpb">
                             <div className="laos-counterup">
-                                <div className="laos-number">2000</div>
+                                <div className="laos-number">
+                                    <CountUp end={2000} duration={2} separator="" />
+                                </div>
                                 <h4 className="laos-title">TOTAL PAGES</h4>
                             </div>
                         </div>
@@ -43,7 +48,9 @@ const Laos = () => {
                     <div className="laos-inner">
                         <div className="laos-wpb">
                             <div className="laos-counterup">
-                                <div className="laos-number">160</div>
+                                <div className="laos-number">
+                                    <CountUp end={160} duration={2} separator="" />
+                                </div>
                                 <h4 className="laos-title">CUP OF COFFEE</h4>
                             </div>
                         </div>
@@ -53,7 +60,9 @@ const Laos = () => {
                     <div className="laos-inner">
                         <div className="laos-wpb">
                             <div className="laos-counterup">
-                                <div className="laos-number">1000</div>
+                                <div className="laos-number">
+                                    <CountUp end={1000} duration={2} separator="" />
+                                </div>
                                 <h4 className="laos-title">Fan follow us</h4>
                             </div>
                         </div>

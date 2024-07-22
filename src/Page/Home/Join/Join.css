@@ -69,6 +69,7 @@
     position: relative;
 }
 .join-form-control{
+    outline: none;
     height: 50px;
     line-height: 50px;
     border: 0;
@@ -97,7 +98,7 @@
 }
 .join-before{
     position: absolute;
-    top: 7px;
+    top: 13px;
     color: #2b2b2b;
     right: 0;
     font-size: 24px;

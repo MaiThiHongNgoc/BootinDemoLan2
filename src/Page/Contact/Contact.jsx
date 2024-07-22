@@ -6,6 +6,8 @@ import { BsTwitterX } from "react-icons/bs";
 import { TiSocialGooglePlus } from "react-icons/ti";
 import { FaFacebookF } from "react-icons/fa";
 import { RiLinkedinLine } from "react-icons/ri";
+import Header from '../../Component/Header/Header';
+import Footer from '../../Component/Footer/Footer';
 
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -47,6 +49,8 @@ const Contact = () => {
   };
 
   return (
+    <div>
+      <Header/>
     <div className="contact-main">
       <div className="contact-title">
         <div className="contact-page">
@@ -201,6 +205,8 @@ const Contact = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+  </div>
   )
 }
 
