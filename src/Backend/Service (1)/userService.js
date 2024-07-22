@@ -23,6 +23,7 @@ const getUsers = async () => {
     }
 };
 
+
 const createUser = (user) => {
     const token = localStorage.getItem('token');
 

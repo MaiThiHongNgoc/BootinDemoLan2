@@ -1,69 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { getCartItems, addCartItem } from '../Backend/Service (1)/cartService'; // Ensure this import is correct
+import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService'; // Ensure this import is correct
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState([]);
+    const [purchasedProducts, setPurchasedProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [newItem, setNewItem] = useState({ productId: '', quantity: 1 });
-    const [adding, setAdding] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (token) {
-            const userId = JSON.parse(atob(token.split('.')[1])).user_id;
-            fetchCartItems(userId);
+        const user_id = localStorage.getItem('user_id'); // Assume user_id is stored in localStorage
+
+        if (token && user_id) {
+            fetchPurchasedProducts(user_id);
         } else {
-            setError('No token found. Please log in.');
+            setError('No token or user ID found. Please log in.');
             setLoading(false);
         }
     }, []); // Empty dependency array to run once on component mount
 
-    const fetchCartItems = async (userId) => {
+    const fetchPurchasedProducts = async (userId) => {
         try {
-            const response = await getCartItems(userId);
-            const data = await response.json(); // Assuming the API returns JSON
-            setCartItems(data.cart_products); // Use the correct field from the response
+            const data = await getPurchasedProductsByUserId(userId);
+            console.log('API Response:', data); // Log the entire response for debugging
+            setPurchasedProducts(data);
         } catch (error) {
-            console.error('Failed to fetch cart items:', error);
-            setError('Failed to load cart items. Please try again later.');
+            console.error('Failed to fetch purchased products:', error);
+            setError('Failed to load purchased products. Please try again later.');
         } finally {
             setLoading(false);
         }
     };
 
-    const handleAddItem = async (e) => {
-        e.preventDefault();
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setError('No token found. Please log in.');
-            return;
-        }
-
-        setAdding(true);
-        try {
-            const userId = JSON.parse(atob(token.split('.')[1])).user_id;
-            await addCartItem({ ...newItem, userId });
-            fetchCartItems(userId); // Refresh cart items after adding
-            setNewItem({ productId: '', quantity: 1 }); // Reset form
-        } catch (error) {
-            console.error('Failed to add cart item:', error);
-            setError('Failed to add item to cart. Please try again later.');
-        } finally {
-            setAdding(false);
-        }
-    };
-
     return (
-        <div>
-            {loading && <p>Loading cart...</p>}
+        <div className="purchased-products-content">
+            {loading && <p>Loading purchased products...</p>}
             {error && <p>{error}</p>}
-            <h2>Your Cart</h2>
-            {cartItems.length === 0 ? (
-                <p>Your cart is empty!</p>
+            <h2>Your Purchased Products</h2>
+            {purchasedProducts.length === 0 ? (
+                <p>You haven't purchased any products yet!</p>
             ) : (
                 <ul>
-                    {cartItems.map(item => (
+                    {purchasedProducts.map(item => (
                         <li key={item.id}>
                             <h3>{item.product.product_name}</h3>
                             <p>Price: ${item.product.price}</p>
@@ -72,31 +49,6 @@ const Cart = () => {
                     ))}
                 </ul>
             )}
-            <h3>Add Item to Cart</h3>
-            <form onSubmit={handleAddItem}>
-                <label>
-                    Product ID:
-                    <input
-                        type="text"
-                        value={newItem.productId}
-                        onChange={(e) => setNewItem({ ...newItem, productId: e.target.value })}
-                        required
-                    />
-                </label>
-                <label>
-                    Quantity:
-                    <input
-                        type="number"
-                        value={newItem.quantity}
-                        onChange={(e) => setNewItem({ ...newItem, quantity: parseInt(e.target.value, 10) })}
-                        min="1"
-                        required
-                    />
-                </label>
-                <button type="submit" disabled={adding}>
-                    {adding ? 'Adding...' : 'Add to Cart'}
-                </button>
-            </form>
         </div>
     );
 };

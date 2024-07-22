@@ -1,6 +1,24 @@
 import axios from 'axios';
 
 const API_URL = 'http://localhost:9191/api/cart/v1/';
+ const API_BASE_URL ='http://localhost:9191/api/user/v1/';
+
+export const getPurchasedProductsByUserId = async (user_id) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('Token not found. Please log in.');
+
+    try {
+        const response = await axios.get(`${API_BASE_URL}${user_id}/purchases`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Failed to get purchased products:', error.response?.data || error.message);
+        throw error;
+    }
+};
 
 // Function to fetch all cart items for a specific user
 export const getCartItems = async (cart_id) => {
@@ -8,7 +26,7 @@ export const getCartItems = async (cart_id) => {
     if (!token) throw new Error('Token not found. Please log in.');
 
     try {
-        const response = await axios.get(`${API_URL}/${cart_id}`, {
+        const response = await axios.get(`${API_URL}${cart_id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -19,7 +37,22 @@ export const getCartItems = async (cart_id) => {
         throw error;
     }
 };
+export const getCartItemsByUserId = async (user_id) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('Token not found. Please log in.');
 
+    try {
+        const response = await axios.get(`${API_URL}$cart?user_id=${user_id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Failed to get cart items:', error.response?.data || error.message);
+        throw error;
+    }
+};
 // Function to create a new cart item, accessible by users
 export const addCartItem = async (cartItem) => {
     const token = localStorage.getItem('token');

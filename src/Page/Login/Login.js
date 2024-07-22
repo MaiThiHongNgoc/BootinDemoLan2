@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Assuming you're using React Router
 import './Login.css';
-import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 
 const Login = () => {
@@ -39,7 +38,6 @@ const Login = () => {
 
     return (
         <div>
-            <Header/>
         <div className="login-container">
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>

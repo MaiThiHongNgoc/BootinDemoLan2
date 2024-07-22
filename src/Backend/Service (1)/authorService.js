@@ -8,9 +8,6 @@ export const getAuthors = async () => {
   const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
   const role = payload.scope;
   try {
-    if (role !== 'ADMIN' && role !== 'STAFF') {
-      throw new Error('Unauthorized: Only admins or staff can get categories.');
-  }
    
     const response = await axios.get(API_URL, {
       headers: {
