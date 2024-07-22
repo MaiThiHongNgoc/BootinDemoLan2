@@ -2,13 +2,13 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:9191/api/cart/v1/';
 
-// Function to fetch all cart items for a specific user
-export const getCartItems = async (cart_id) => {
+// Function to fetch all cart items for a specific cart ID
+export const getCartItems = async (cartId) => {
     const token = localStorage.getItem('token');
     if (!token) throw new Error('Token not found. Please log in.');
 
     try {
-        const response = await axios.get(`${API_URL}${cart_id}`, {
+        const response = await axios.get(`${API_URL}${4}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -44,7 +44,7 @@ export const updateCartItem = async (id, updatedItem) => {
     if (!token) throw new Error('Token not found. Please log in.');
 
     try {
-        const response = await axios.put(`${API_URL}/${id}`, updatedItem, {
+        const response = await axios.put(`${API_URL}${id}`, updatedItem, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -62,7 +62,7 @@ export const deleteCartItem = async (id) => {
     if (!token) throw new Error('Token not found. Please log in.');
 
     try {
-        const response = await axios.delete(`${API_URL}/${id}`, {
+        const response = await axios.delete(`${API_URL}${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
