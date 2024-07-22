@@ -1,3 +1,4 @@
+
 import React, { useState, useContext } from 'react';  
 import { Link } from 'react-router-dom';  
 import { RxAvatar } from 'react-icons/rx';  
@@ -5,6 +6,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import './Header.css';  
 import { AuthContext } from '../../AuthContext';  
 import Cart from '../../Cart/Cart';
+
 
 const Header = () => {  
     const [activeLink, setActiveLink] = useState(null);  
@@ -26,11 +28,11 @@ const Header = () => {
                     {/* Optional category links or content */}  
                 </div>  
             </div>  
-
             <div className="navbar-header-container2">  
                 <div className="logo-header">  
                     <img src="https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/07/logo.png" alt="Logo" />  
                 </div>  
+
 
                 <div className="navbar-header-link">  
                     <div className={`navbar-header-home ${activeLink === "home" ? "active" : ""}`} onClick={() => handleLinkClick("home")}>  

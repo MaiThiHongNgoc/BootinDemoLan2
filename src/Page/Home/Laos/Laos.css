@@ -111,14 +111,14 @@
     background: 0 0;
 }
 .laos-youtube{
-    top: 35%;
-    color: #f86d72;
-    font-size: 70px;
+    /* top: 35%; */
+    /* color: #f86d72;
+    font-size: 70px; */
     z-index: 9;
     position: absolute;
     font-weight: 600;
     top: calc(50% - 38px);
-    left: calc(50% - 48.5px);
+    left: calc(50% - 33.5px);
     transition: all .2s ease;
     line-height: 20px;
     /* background: #fff;
@@ -158,7 +158,7 @@
 }
 
 .laos-youtube {
-    left: 567px;
+    /* left: 567px; */
     font-size: 65px;
     color: red;
 }

@@ -3,6 +3,7 @@ import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService
 
 const Cart = () => {
     const [purchasedProducts, setPurchasedProducts] = useState([]);
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -41,10 +42,14 @@ const Cart = () => {
             ) : (
                 <ul>
                     {purchasedProducts.map(item => (
+
                         <li key={item.id}>
-                            <h3>{item.product.product_name}</h3>
+                            <h4>Product Name: {item.product.product_name}</h4>
+                            <p>Author: {item.product.author.author_name}</p>
                             <p>Price: ${item.product.price}</p>
                             <p>Quantity: {item.quantity}</p>
+                            <p>Description: {item.product.description}</p>
+                            <img src={item.product.imgProducts[0].img_url} alt={item.product.product_name} />
                         </li>
                     ))}
                 </ul>

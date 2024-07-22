@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Assuming you're using React Router
+import { Link } from 'react-router-dom';
+import { RxSlash } from "react-icons/rx"; // Assuming you're using React Router
 import './Login.css';
 import Footer from '../../Component/Footer/Footer';
 
@@ -39,8 +40,24 @@ const Login = () => {
     return (
         <div>
         <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
+            <div className='login-page'>
+                <div className='login-conten'>
+                    <h1 className='login-h1'>Login</h1>
+                    <div className='login-bread'>
+                        <div className='login-bwp'>
+                            <a className='login-a' href='#'>Home</a>
+                            <span className='login-delimi'>
+                                <i className='login-icon'><RxSlash /></i>
+                            </span>
+                            <span className='login-current'>Login</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form className='login-post' onSubmit={handleSubmit}>
+                <div className='login-on'>
+                <h1 className='login-pas'>Login</h1>
+                </div>
                 <div className="login-field">
                     <label>Username:</label>
                     <input

@@ -18,7 +18,7 @@ const Join = () => {
                                             <p className='join-the'>Newsletter to get in touch</p>
                                         </div>
                                         <div className='join-content'>
-                                            <button className='join-the'>
+                                            <div className='join-the'>
                                                 <span className='join-control' data-name="your-email">
                                                     <input className='join-form-control' placeholder='Your Email address...'/>
                                                 </span>
@@ -27,7 +27,7 @@ const Join = () => {
                                                     <i className='join-before'><IoMdArrowRoundForward /></i>
                                                     <input className='join-submit' type='submit' />
                                                 </span>
-                                            </button>
+                                            </div>
                                         </div>
                                     </div>
                             </form>

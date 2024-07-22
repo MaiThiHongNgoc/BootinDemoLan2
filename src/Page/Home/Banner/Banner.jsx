@@ -18,9 +18,9 @@ const Banner = ({ alt }) => {
 
   // Mảng các ảnh để hiển thị
   const images = [
-    { id: 1, src: "https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/04/banner3-3.jpg", title: "Travel Books Summer", info: "45% OFF" },
-    { id: 2, src: "https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/04/banner3-4.jpg", title: "Cooking Books", info: "60% OFF" },
-    { id: 3, src: "https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/04/banner3-5.jpg", title: "Design Books 2024", info: "50% OFF" }
+    { id: 1, src: "https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/04/banner3-3.jpg", title: "Travel Books Summer", info: "45% OFF", className:"image-1"},
+    { id: 2, src: "https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/04/banner3-4.jpg", title: "Cooking Books", info: "60% OFF",  className:"image-2"},
+    { id: 3, src: "https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/04/banner3-5.jpg", title: "Design Books 2024", info: "50% OFF",  className:"image-3"}
   ];
 
   return (
