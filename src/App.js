@@ -32,7 +32,6 @@ function App() {
     <div className="App">  
       <BrowserRouter>  
         <AuthProvider>  {/* Move AuthProvider up here */}  
-          <Header />  
           <Routes>  
             <Route path="/" element={<Home />} >  
               <Route path="topRating" element={<TopRating />} />  

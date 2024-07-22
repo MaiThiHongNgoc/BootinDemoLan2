@@ -1,14 +1,15 @@
 import axios from 'axios';
 
 const API_URL = 'http://localhost:9191/api/cart/v1/';
- const API_BASE_URL ='http://localhost:9191/api/user/v1/';
 
-export const getPurchasedProductsByUserId = async (user_id) => {
+// Fetch purchased products by user ID
+export const getPurchasedProductsByUserId = async () => {
     const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId')
     if (!token) throw new Error('Token not found. Please log in.');
 
     try {
-        const response = await axios.get(`${API_BASE_URL}${user_id}/purchases`, {
+        const response = await axios.get(`${API_URL}${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -20,14 +21,13 @@ export const getPurchasedProductsByUserId = async (user_id) => {
     }
 };
 
-// Function to fetch all cart items for a specific cart ID
-export const getCartItems = async (cart_id) => {
+// Fetch all cart items for a specific cart ID
+export const getCartItems = async (cartId) => {
     const token = localStorage.getItem('token');
     if (!token) throw new Error('Token not found. Please log in.');
 
     try {
-        const response = await axios.get(`${API_URL}${cart_id}`, {
-
+        const response = await axios.get(`${API_URL}${cartId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -38,12 +38,14 @@ export const getCartItems = async (cart_id) => {
         throw error;
     }
 };
-export const getCartItemsByUserId = async (user_id) => {
+
+// Fetch cart items by user ID
+export const getCartItemsByUserId = async (userId) => {
     const token = localStorage.getItem('token');
     if (!token) throw new Error('Token not found. Please log in.');
 
     try {
-        const response = await axios.get(`${API_URL}$cart?user_id=${user_id}`, {
+        const response = await axios.get(`${API_URL}cart?user_id=${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -54,7 +56,8 @@ export const getCartItemsByUserId = async (user_id) => {
         throw error;
     }
 };
-// Function to create a new cart item, accessible by users
+
+// Add a new cart item
 export const addCartItem = async (cartItem) => {
     const token = localStorage.getItem('token');
     if (!token) throw new Error('Token not found. Please log in.');
@@ -72,7 +75,7 @@ export const addCartItem = async (cartItem) => {
     }
 };
 
-// Function to update a cart item by ID, accessible by users
+// Update a cart item by ID
 export const updateCartItem = async (id, updatedItem) => {
     const token = localStorage.getItem('token');
     if (!token) throw new Error('Token not found. Please log in.');
@@ -90,7 +93,7 @@ export const updateCartItem = async (id, updatedItem) => {
     }
 };
 
-// Function to delete a cart item by ID, accessible by users
+// Delete a cart item by ID
 export const deleteCartItem = async (id) => {
     const token = localStorage.getItem('token');
     if (!token) throw new Error('Token not found. Please log in.');

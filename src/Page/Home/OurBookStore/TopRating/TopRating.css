@@ -24,7 +24,7 @@
   
   .top-rating-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-columns: repeat(10, 1fr); /* 5 columns */
     grid-template-rows: repeat(2, 1fr); /* 2 rows */
     gap: 10px;
     width: 100%;

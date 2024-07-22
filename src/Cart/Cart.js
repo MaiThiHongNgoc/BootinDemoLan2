@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService'; // Ensure this import is correct
 
-const Cart = () => {
+const Cart = ({ userId }) => {
     const [purchasedProducts, setPurchasedProducts] = useState([]);
-
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        const user_id = localStorage.getItem('user_id'); // Assume user_id is stored in localStorage
+        const fetchProducts = async () => {
+            try {
+                const data = await getPurchasedProductsByUserId(userId);
+                console.log("Fetched Data:", data); // Debugging fetched data
+                if (Array.isArray(data) && data.length > 0) {
+                    const cartData = data[0];
+                    setPurchasedProducts(cartData.cart_Product || []);
+                } else {
+                    console.error("Unexpected data structure:", data);
+                    setError('Unexpected data structure');
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error); // Debugging error
+                setError('Failed to fetch purchased products');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-        if (token && user_id) {
-            fetchPurchasedProducts(user_id);
-        } else {
-            setError('No token or user ID found. Please log in.');
-            setLoading(false);
-        }
-    }, []); // Empty dependency array to run once on component mount
-
-    const fetchPurchasedProducts = async (userId) => {
-        try {
-            const data = await getPurchasedProductsByUserId(userId);
-            console.log('API Response:', data); // Log the entire response for debugging
-            setPurchasedProducts(data);
-        } catch (error) {
-            console.error('Failed to fetch purchased products:', error);
-            setError('Failed to load purchased products. Please try again later.');
-        } finally {
-            setLoading(false);
-        }
-    };
+        fetchProducts();
+    }, [userId]);
 
     return (
         <div className="purchased-products-content">
@@ -42,14 +39,15 @@ const Cart = () => {
             ) : (
                 <ul>
                     {purchasedProducts.map(item => (
-
-                        <li key={item.id}>
+                        <li key={item.cart_item_id}>
                             <h4>Product Name: {item.product.product_name}</h4>
                             <p>Author: {item.product.author.author_name}</p>
                             <p>Price: ${item.product.price}</p>
                             <p>Quantity: {item.quantity}</p>
                             <p>Description: {item.product.description}</p>
-                            <img src={item.product.imgProducts[0].img_url} alt={item.product.product_name} />
+                            {item.product.imgProducts && item.product.imgProducts.length > 0 && (
+                                <img src={item.product.imgProducts[0].img_url} alt={item.product.product_name} />
+                            )}
                         </li>
                     ))}
                 </ul>

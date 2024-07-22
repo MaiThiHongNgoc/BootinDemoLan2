@@ -46,7 +46,7 @@
     border-radius: 4px;
 }
 
-.login_button {
+.login-button {
     width: 100%;
     max-width: 400px;
     padding: 10px;
@@ -59,7 +59,7 @@
     transition: background-color 0.3s ease;
 }
 
-.login_button:hover {
+.login-button:hover {
     background-color: #d75a60;
 }
 
@@ -85,8 +85,8 @@
 .login-register-link a:hover {
     text-decoration: underline;
 }
-/* làm lại ảnh */
-.login-page{
+
+.login-page {
     width: 100%;
     background-image: url(https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/05/Breadcumd.jpg);
     margin: 0 0 100px;
@@ -96,7 +96,8 @@
     padding-bottom: 130px;
     text-align: center;
 }
-.login-conten{
+
+.login-content {
     margin-right: auto;
     margin-left: auto;
     padding-left: 15px;
@@ -104,18 +105,18 @@
     max-width: 100%;
     height: 88px;
 }
-.login-h1{
+
+.login-heading {
     text-transform: capitalize;
     margin-top: 0;
     margin-bottom: 10px;
-    /* font-size: 35px; */
     color: #2b2b2b;
     font-weight: 700;
     font-family: Merriweather, serif;
     line-height: 1.3;
-    /* margin: .67em 0; */
 }
-.login-bread{
+
+.login-breadcrumb {
     height: 28.8px;
     margin: 0;
     color: #f86d72;
@@ -123,30 +124,30 @@
     font-size: 18px;
     font-weight: 400;
     list-style: none;
-    background-color: transparent;   
+    background-color: transparent;
 }
-.login-a{
+
+.login-link {
     color: #666;
     position: relative;
     text-decoration: none;
     background: 0 0;
 }
-.login-delimi{
+
+.login-delimiter {
     margin: 0 8px;
 }
-.login-icon{
+
+.login-icon {
     font-size: 17px;
     margin-right: 0px;
     margin-bottom: 0px;
-     /* width: 1px;
-    height: 13px;
-    background: #666; */
     display: inline-block;
-    /* -webkit-transform: rotate(17deg); */
     transform: rotate(10deg);
     color: #666;
 }
-.login-pas{
+
+.login-pas {
     font-size: 30px;
     margin-top: 12px;
     margin-bottom: 12px;
@@ -154,17 +155,18 @@
     font-weight: 700;
     line-height: 1.3;
 }
-.login-post{
+
+.login-post {
     width: 100%;
 }
-.login-field{
+
+.login-field {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* position: absolute; */
     transform: translate(140%, -10%);
     width: 100%;
-    max-width: 400px; /* Adjust as necessary */
+    max-width: 400px;
     border-radius: 8px;
 }

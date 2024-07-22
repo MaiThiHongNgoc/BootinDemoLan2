@@ -1,4 +1,3 @@
-
 import React, { useState, useContext } from 'react';  
 import { Link } from 'react-router-dom';  
 import { RxAvatar } from 'react-icons/rx';  
@@ -6,7 +5,6 @@ import { FiShoppingCart } from 'react-icons/fi';
 import './Header.css';  
 import { AuthContext } from '../../AuthContext';  
 import Cart from '../../Cart/Cart';
-
 
 const Header = () => {  
     const [activeLink, setActiveLink] = useState(null);  
@@ -33,7 +31,6 @@ const Header = () => {
                     <img src="https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/07/logo.png" alt="Logo" />  
                 </div>  
 
-
                 <div className="navbar-header-link">  
                     <div className={`navbar-header-home ${activeLink === "home" ? "active" : ""}`} onClick={() => handleLinkClick("home")}>  
                         <Link to="/">HOME</Link>  
@@ -55,25 +52,16 @@ const Header = () => {
 
             <div className="navbar-header-container3">  
                 <div className="user-info">  
-                    {isLoggedIn ? (  
-                        <>  
-                            <RxAvatar className="login-icon" onClick={() => {/* handle user info click here if needed */}} />  
-                            <FiShoppingCart className="cart-icon" onClick={toggleCart} />  
-                        </>  
-                    ) : (  
-                        <Link to="/login">  
-                            <RxAvatar className="login-icon" />  
-                        </Link>  
-                    )}  
+                    <Link to="/login">  
+                        <RxAvatar className="login-icon" aria-label="User Info" />  
+                    </Link>  
+                    <FiShoppingCart className="cart-icon" onClick={toggleCart} aria-label="Shopping Cart" />  
                 </div>  
             </div>  
 
-            {showCart && isLoggedIn && cart_id && (  
+            {showCart && (  
                 <div className="cart-sidebar">  
-                   {/* <Link to="/cart">
-                   <FiShoppingCart className="cart-icon"/>
-                   </Link> */}
-                   <Cart/>
+                    <Cart/>
                 </div>  
             )}  
         </div>  

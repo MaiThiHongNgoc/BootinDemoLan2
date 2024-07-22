@@ -8,11 +8,13 @@ import Join from './Join/Join'
 import Laos from './Laos/Laos'
 import Footer from '../../Component/Footer/Footer'
 import OurBookStore from './OurBookStore/OurBookStore'
+import Header from '../../Component/Header/Header'
 
 
 const Home = () => {
   return (
     <div>
+       <Header />  
       <Slide/>
       <Welcome/>
       <Banner/>
