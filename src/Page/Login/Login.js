@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import './Login.css';
 import Footer from '../../Component/Footer/Footer';
 import { RxSlash } from 'react-icons/rx';
-import {jwtDecode} from 'jwt-decode';
-
+import { jwtDecode } from 'jwt-decode';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -20,11 +19,11 @@ const Login = () => {
             const token = response.data.token;
             localStorage.setItem('token', token);
 
-             // Decode the token to get user role information
-             const decodedToken = jwtDecode(token);
-             const userRole = decodedToken.scope; // Assuming role is stored in the 'scope' field
+            // Decode the token to get user role information
+            const decodedToken = jwtDecode(token);
+            const userRole = decodedToken.scope; // Assuming role is stored in the 'scope' field
 
-            // Lấy thông tin người dùng từ API
+            // Fetch user information
             const userResponse = await axios.get('http://localhost:9191/api/user/v1/myinfo', {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -32,8 +31,12 @@ const Login = () => {
             });
 
             const user = userResponse.data;
+<<<<<<< HEAD
             localStorage.setItem('user_id', user.user_id);
             
+=======
+            localStorage.setItem('userId', user.user_id);
+>>>>>>> 7d9feb9746628e145b91a98d076e40fced33e4ab
 
             // Redirect based on role
             if (userRole === 'ADMIN') {
@@ -44,6 +47,7 @@ const Login = () => {
                 window.location.href = '/'; // Redirect to user home page
             }
         } catch (error) {
+            console.error('Login failed:', error); // Improved error logging
             setError('Login failed. Please check your credentials and try again.');
         }
     };
@@ -66,8 +70,6 @@ const Login = () => {
                     </div>
                 </div>
                 <form className='login-form' onSubmit={handleSubmit}>
-                    <div className='login-form-header'>
-                    </div>
                     <div className="login-field">
                         <label>Username:</label>
                         <input
