@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:9191/api/cart/v1/';
 // Fetch purchased products by user ID
 export const getPurchasedProductsByUserId = async () => {
     const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId')
+    const userId = localStorage.getItem('user_id');
     if (!token) throw new Error('Token not found. Please log in.');
 
     try {
@@ -57,33 +57,6 @@ export const getCartItemsByUserId = async (userId) => {
     }
 };
 
-// Add a new cart item
-export const addProductToCart = async (user_id, product_id, quantity, token) => {  
-    try {  
-        const response = await fetch(`${API_URL}${user_id}`, {  
-            method: 'POST',  
-            headers: {  
-                'Content-Type': 'application/json',  
-                'Authorization': `Bearer ${token}`  
-            },  
-            body: JSON.stringify({  
-                user_id,        // Be sure user_id is passed correctly  
-                product_id,     // product_id should also match the backend expectations  
-                quantity        // Sending the quantity  
-            })  
-        });  
-
-        if (!response.ok) {  
-            const errorDetails = await response.text();  
-            throw new Error(`Failed to add product to cart: ${errorDetails}`);  
-        }  
-
-        return response.json();  
-    } catch (error) {  
-        console.error('Error adding product to cart:', error);  
-        throw error; // Optional: you may want to set an error state or display a message  
-    }  
-};  
 // Update a cart item by ID
 export const updateCartItem = async (id, updatedItem) => {
     const token = localStorage.getItem('token');

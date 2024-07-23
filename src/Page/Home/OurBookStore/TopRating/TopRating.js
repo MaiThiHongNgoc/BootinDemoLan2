@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { getProducts } from '../../../../Backend/Service (1)/productService';
-import { addProductToCart as addProductToCartAPI } from '../../../../Backend/Service (1)/cartService';
+import { addProductToCart as addProductToCartService } from '../../../../Backend/Service (1)/cartItemsService';
 import './TopRating.css';
 import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContext';
+import { getPurchasedProductsByUserId } from '../../../../Backend/Service (1)/cartService';
 
 const TopRating = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ const TopRating = () => {
 
   useEffect(() => {
     if (isLoggedIn && pendingProduct) {
-      addProductToCart(pendingProduct);
+      handleAddProductToCart(pendingProduct);
       setPendingProduct(null);
     }
   }, [isLoggedIn, pendingProduct]);
@@ -46,33 +47,48 @@ const TopRating = () => {
     console.log('Search clicked for:', product);
   };
 
-  const handleCartClick = async (product) => {
+  const handleCartClick = (product) => {
     if (!isLoggedIn) {
       setPendingProduct(product);
       setShowNotification(true);
     } else {
-      await addProductToCart(product);
+      handleAddProductToCart(product);
     }
   };
 
-  const addProductToCart = async (product) => {
+  const handleAddProductToCart = async (product) => {
     const token = localStorage.getItem('token');
     const user_id = localStorage.getItem('user_id');
 
     if (!token || !user_id) {
-      setShowNotification(true);
-      return;
+        setShowNotification(true);
+        return;
     }
 
     try {
-      await addProductToCartAPI(user_id, product.product_id, 1, token);
-      console.log('Product added to cart:', product);
+        const cartData = await getPurchasedProductsByUserId(user_id);
+        console.log('Cart data:', cartData);
+
+        // Assuming cartData is an array of carts and we need to get the first one
+        if (cartData.length > 0) {
+            const cartId = cartData[0].cart_id;
+            console.log('Cart ID:', cartId);
+
+            await addProductToCartService(cartId, product.product_id, 1, token);
+            console.log('Product added to cart:', product);
+        } else {
+            console.error('No cart found for user');
+            setError('No cart found for user.');
+            setShowNotification(true);
+        }
     } catch (error) {
-      console.error('Failed to add product to cart:', error.message);
-      setError(`Failed to add product to cart: `);
-      setShowNotification(true);
+        console.error('Failed to add product to cart:', error.message);
+        setError('Failed to add product to cart.');
+        setShowNotification(true);
     }
-  };
+};
+
+  
 
   const handleCloseNotification = () => {
     setShowNotification(false);
