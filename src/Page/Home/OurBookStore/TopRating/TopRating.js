@@ -1,24 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { getProducts } from '../../../../Backend/Service (1)/productService';
-import { addCartItem } from '../../../../Backend/Service (1)/cartService';
+import { addProductToCart as addProductToCartAPI } from '../../../../Backend/Service (1)/cartService';
 import './TopRating.css';
 import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../../AuthContext'; // Adjust the import path based on your structure
+import { AuthContext } from '../../../../AuthContext';
 
 const TopRating = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showNotification, setShowNotification] = useState(false);
+  const [pendingProduct, setPendingProduct] = useState(null);
   const navigate = useNavigate();
-
-  // Accessing AuthContext
   const { isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     loadRandomProducts();
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn && pendingProduct) {
+      addProductToCart(pendingProduct);
+      setPendingProduct(null);
+    }
+  }, [isLoggedIn, pendingProduct]);
 
   const loadRandomProducts = async () => {
     setLoading(true);
@@ -42,37 +48,37 @@ const TopRating = () => {
 
   const handleCartClick = async (product) => {
     if (!isLoggedIn) {
-      setShowNotification(true); // Show message to log in
-      return;
+      setPendingProduct(product);
+      setShowNotification(true);
+    } else {
+      await addProductToCart(product);
     }
+  };
 
+  const addProductToCart = async (product) => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      setShowNotification(true); // Show message to log in
+    const user_id = localStorage.getItem('user_id');
+
+    if (!token || !user_id) {
+      setShowNotification(true);
       return;
     }
 
     try {
-      const cartItem = {
-        cart: { cart_id: 1 }, // Example cart ID
-        product: {
-          product_id: product.product_id
-        },
-        quantity: 1 // Default quantity
-      };
-
-      await addCartItem(cartItem, token);
-
+      await addProductToCartAPI(user_id, product.product_id, 1, token);
       console.log('Product added to cart:', product);
     } catch (error) {
-      console.error('Failed to add product to cart:', error);
-      setError('Failed to add product to cart. Please try again later.');
-      setShowNotification(true); // Show error message
+      console.error('Failed to add product to cart:', error.message);
+      setError(`Failed to add product to cart: `);
+      setShowNotification(true);
     }
   };
 
   const handleCloseNotification = () => {
     setShowNotification(false);
+    if (!isLoggedIn) {
+      navigate('/login');
+    }
   };
 
   return (
@@ -83,7 +89,7 @@ const TopRating = () => {
         {showNotification && (
           <div className="login-required-message">
             <p>Please log in to add items to the cart. <a href="/login">Log in here</a></p>
-            <button className="close-button" onClick={handleCloseNotification}> × </button>
+            <button className="close-button" onClick={handleCloseNotification}>×</button>
           </div>
         )}
         <div className="top-rating-grid">

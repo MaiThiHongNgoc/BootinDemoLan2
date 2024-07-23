@@ -32,7 +32,7 @@ const Login = () => {
             });
 
             const user = userResponse.data;
-            localStorage.setItem('userId', user.user_id);
+            localStorage.setItem('user_id', user.user_id);
             
 
             // Redirect based on role

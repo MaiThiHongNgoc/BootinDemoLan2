@@ -11,7 +11,8 @@ const ProductList = () => {
     const [error, setError] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(10); // Number of products per page
+    const [productsPerPage] = useState(10);
+    const [totalProducts, setTotalProducts] = useState(0);
 
     useEffect(() => {
         loadProducts(currentPage);
@@ -21,8 +22,9 @@ const ProductList = () => {
         setLoading(true);
         setError('');
         try {
-            const response = await getProducts(page - 1, productsPerPage); // Adjust page number for pagination
+            const response = await getProducts(page - 1, productsPerPage);
             setProducts(response.content);
+            setTotalProducts(response.totalElements);
         } catch (error) {
             console.error('Failed to fetch products', error);
             setError('Failed to load products. Please try again later.');
@@ -66,6 +68,8 @@ const ProductList = () => {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+
     return (
         <div className="product-container">
             <h1>Product Management</h1>
@@ -107,8 +111,8 @@ const ProductList = () => {
                                     <td>{product.price}</td>
                                     <td>{product.categories.category_name}</td>
                                     <td>
-                                        {product.imgProducts && product.imgProducts.map(img => (
-                                            <img key={img.img_id} src={img.img_url} alt={img.img_name} className="product-image" />
+                                        {product.img_products && product.img_products.map(img_product => (
+                                            <img key={img_product.img_id} src={img_product.img_url} alt={img_product.img_name} className="product-image" />
                                         ))}
                                     </td>
                                     <td>
@@ -119,10 +123,9 @@ const ProductList = () => {
                             ))}
                         </tbody>
                     </table>
-                    {/* Pagination */}
                     <ul className="pagination">
-                        {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, index) => (
-                            <li key={index} className="page-item">
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
                                 <button onClick={() => paginate(index + 1)} className="page-link">
                                     {index + 1}
                                 </button>
