@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { getProducts } from '../../../../Backend/Service (1)/productService';
 import { addProductToCart as addProductToCartService } from '../../../../Backend/Service (1)/cartItemsService';
 import './TopRating.css';
-import { FiSearch, FiShoppingCart } from 'react-icons/fi';
+import { FiSearch, FiShoppingCart, FiCheck } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContext';
 import { getPurchasedProductsByUserId } from '../../../../Backend/Service (1)/cartService';
@@ -13,6 +13,7 @@ const TopRating = () => {
   const [error, setError] = useState('');
   const [showNotification, setShowNotification] = useState(false);
   const [pendingProduct, setPendingProduct] = useState(null);
+  const [cartIconState, setCartIconState] = useState({});
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -61,34 +62,45 @@ const TopRating = () => {
     const user_id = localStorage.getItem('user_id');
 
     if (!token || !user_id) {
-        setShowNotification(true);
-        return;
+      setShowNotification(true);
+      return;
     }
 
     try {
-        const cartData = await getPurchasedProductsByUserId(user_id);
-        console.log('Cart data:', cartData);
+      const cartData = await getPurchasedProductsByUserId(user_id);
+      console.log('Cart data:', cartData);
 
-        // Assuming cartData is an array of carts and we need to get the first one
-        if (cartData.length > 0) {
-            const cartId = cartData[0].cart_id;
-            console.log('Cart ID:', cartId);
+      if (cartData.length > 0) {
+        const cartId = cartData[0].cart_id;
+        console.log('Cart ID:', cartId);
 
-            await addProductToCartService(cartId, product.product_id, 1, token);
-            console.log('Product added to cart:', product);
-        } else {
-            console.error('No cart found for user');
-            setError('No cart found for user.');
-            setShowNotification(true);
-        }
-    } catch (error) {
-        console.error('Failed to add product to cart:', error.message);
-        setError('Failed to add product to cart.');
+        await addProductToCartService(cartId, product.product_id, 1, token);
+        console.log('Product added to cart:', product);
+
+        // Update cart icon state to spinning
+        setCartIconState((prevState) => ({
+          ...prevState,
+          [product.product_id]: 'spinning',
+        }));
+
+        setTimeout(() => {
+          // Update cart icon state to checkmark after spinning
+          setCartIconState((prevState) => ({
+            ...prevState,
+            [product.product_id]: 'checkmark',
+          }));
+        }, 1000);
+      } else {
+        console.error('No cart found for user');
+        setError('No cart found for user.');
         setShowNotification(true);
+      }
+    } catch (error) {
+      console.error('Failed to add product to cart:', error.message);
+      setError('Failed to add product to cart.');
+      setShowNotification(true);
     }
-};
-
-  
+  };
 
   const handleCloseNotification = () => {
     setShowNotification(false);
@@ -117,8 +129,8 @@ const TopRating = () => {
                   <button onClick={() => handleSearchClick(product)}>
                     <FiSearch />
                   </button>
-                  <button onClick={() => handleCartClick(product)}>
-                    <FiShoppingCart />
+                  <button onClick={() => handleCartClick(product)} className={`cart-icon ${cartIconState[product.product_id]}`}>
+                    {cartIconState[product.product_id] === 'checkmark' ? <FiCheck /> : <FiShoppingCart />}
                   </button>
                 </div>
               </div>
