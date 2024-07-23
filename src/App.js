@@ -26,6 +26,7 @@ import OrderDetailList from "./Backend/orderDetail/orderDetailList";
 import Staff from "./Backend/staff/Staff";  
 import ImageList from "./Backend/Image/ImageList";  
 import RegisterForm from "./Page/Register/Register";
+import Logout from "./Page/LogOut/LogOut";
 
 function App() {  
   return (  
@@ -45,7 +46,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />  
 
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<RegisterForm />} />  
+            <Route path="/register" element={<RegisterForm />} /> 
+            <Route path="/logout" element={<Logout /> } /> 
             <Route path="/cart" element={<Cart />} />  
 
             {/* Admin Routes */}  

@@ -63,14 +63,18 @@
 }
 
 
+/* Adjusted .login-icon class */
 .login-icon {
     font-size: 1.8rem; /* Adjust the size as needed */
     color: #333; /* Default color */
     transition: color 0.3s ease-in-out; /* Smooth transition for color change */
     cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-    margin-bottom: 90px;
-    margin-right: 20px;
+    margin-bottom: 20px; /* Adjusted to 20px */
+    margin-right: 20px; /* Right margin of 20px */
+    width: 30px;
+    height: 30px;
 }
+
 
 
 .navbar-header-container3 {
@@ -84,19 +88,12 @@
     align-items: center; /* Vertically centers the items */  
 }  
 
-.login-icon {  
-    font-size: 1.8rem; /* Adjust the size as needed */  
-    color: #333; /* Default color */  
-    transition: color 0.3s ease-in-out; /* Smooth transition for color change */  
-    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */  
-    margin: 0 15px; /* Adjust margins to provide space between icons */  
-}  
-
 .cart-icon {  
     font-size: 1.8rem; /* Same size as login icon */  
     color: #333; /* Default color for cart icon */  
     cursor: pointer; /* Change cursor to pointer */  
     transition: color 0.3s ease-in-out; /* Smooth transition for color change */  
+    margin-right: 17px;
 }  
 
 /* Hover effect for cart icon */  
@@ -120,3 +117,41 @@
     z-index: 1; /* Đảm bảo nó ở trên cùng */  
     overflow-y: auto; /* Cho phép cuộn nếu nội dung quá nhiều */  
 }  
+
+/* YourComponent.css */
+
+/* User info container */
+.user-info {
+    position: relative; /* Position relative to position the dropdown */
+    display: inline-block;
+  }
+  
+  /* Dropdown menu styles */
+  .dropdown-menu {
+    position: absolute;
+    top: 40px; /* Adjust based on your layout */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 150px; /* Adjust based on your preference */
+  }
+  
+  .dropdown-item {
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* User icon container to make it clickable */
+  .user-icon-container {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
