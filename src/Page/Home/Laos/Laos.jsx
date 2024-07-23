@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { FaYoutube } from "react-icons/fa";
-import CountUp from 'react-countup';
+// import CountUp from 'react-countup';
 import './Laos.css';
+import CountUp from 'react-countup';
+
 
 const Laos = () => {
     const [showModal, setShowModal] = useState(false);
