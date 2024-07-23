@@ -42,7 +42,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
         </li>
         <li className='sidebar-list-item'>
           <Link to="/user" className="sidebar-link">
-            <BsPeopleFill className='icon' /> Customers
+            <BsPeopleFill className='icon' /> User
           </Link>
         </li>
         <li className='sidebar-list-item'>

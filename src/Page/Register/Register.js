@@ -43,7 +43,7 @@ const RegisterForm = () => {
             localStorage.setItem('token', token);
 
             const user_id = response.data.user_id;
-            localStorage.setItem('userId', user_id);
+            localStorage.setItem('user_id', user_id);
             
             // Prepare cart data
             const cartData = {
@@ -92,7 +92,6 @@ const RegisterForm = () => {
                 </div>
             </div>
             <form className='register-form' onSubmit={handleSubmit}>
-            <h1 className='register-h1'>Register</h1>
                 <div className="form-group">
                     <label htmlFor="username">Username:</label>
                     <input
