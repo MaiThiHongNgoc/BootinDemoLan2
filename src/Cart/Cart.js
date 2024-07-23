@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService'; // Ensure this import is correct
+import './Cart.css'; // Import the CSS file for styling
 
-const Cart = ({ userId }) => {
+const Cart = ({ userId, onClose }) => {
     const [purchasedProducts, setPurchasedProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const cartRef = useRef();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -29,29 +31,43 @@ const Cart = ({ userId }) => {
         fetchProducts();
     }, [userId]);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (cartRef.current && !cartRef.current.contains(event.target)) {
+                onClose();
+            }
+        };
+        
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [onClose]);
+
     return (
-        <div className="purchased-products-content">
-            {loading && <p>Loading purchased products...</p>}
-            {error && <p>{error}</p>}
-            <h2>Your Purchased Products</h2>
-            {purchasedProducts.length === 0 ? (
-                <p>You haven't purchased any products yet!</p>
-            ) : (
-                <ul>
-                    {purchasedProducts.map(item => (
-                        <li key={item.cart_item_id}>
-                            <h4>Product Name: {item.product.product_name}</h4>
-                            <p>Author: {item.product.author.author_name}</p>
-                            <p>Price: ${item.product.price}</p>
-                            <p>Quantity: {item.quantity}</p>
-                            <p>Description: {item.product.description}</p>
-                            {item.product.imgProducts && item.product.imgProducts.length > 0 && (
-                                <img src={item.product.imgProducts[0].img_url} alt={item.product.product_name} />
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            )}
+        <div className="cart-overlay">
+            <div className="cart-container" ref={cartRef}>
+                {loading && <p>Loading purchased products...</p>}
+                {error && <p>{error}</p>}
+                <h2>Your Purchased Products</h2>
+                {purchasedProducts.length === 0 ? (
+                    <p>You haven't purchased any products yet!</p>
+                ) : (
+                    <ul className="cart-products-list">
+                        {purchasedProducts.map(item => (
+                            <li key={item.cart_item_id} className="cart-product-item">
+                                <h4>Product Name: {item.product.product_name}</h4>
+                                <p>Author: {item.product.author.author_name}</p>
+                                <p>Price: ${item.product.price}</p>
+                                <p>Quantity: {item.quantity}</p>
+                                {item.product.imgProducts && item.product.imgProducts.length > 0 && (
+                                    <img src={item.product.imgProducts[0].img_url} alt={item.product.product_name} />
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 };

@@ -11,6 +11,12 @@ const Header = () => {
     const [activeLink, setActiveLink] = useState(null);  
     const { isLoggedIn, cart_id } = useContext(AuthContext);  
     const [showCart, setShowCart] = useState(false);   
+
+    const userId = localStorage.getItem('user_id'); // or wherever you get the user ID from
+
+    const handleCartClose = () => {
+        setShowCart(false);
+    };
     
     const handleLinkClick = (link) => {  
         setActiveLink(link);  
@@ -62,7 +68,7 @@ const Header = () => {
 
             {showCart && (  
                 <div className="cart-sidebar">  
-                    <Cart/>
+                    <Cart userId={userId} onClose={handleCartClose}/>
                 </div>  
             )}  
         </div>  

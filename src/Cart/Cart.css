@@ -1,0 +1,32 @@
+
+
+/* List of products */
+.cart-products-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual product item */
+.cart-product-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+}
+
+.cart-product-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Close button for the cart */
+.cart-close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
