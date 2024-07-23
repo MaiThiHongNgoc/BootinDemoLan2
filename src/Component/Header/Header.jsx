@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';  
 import { Link } from 'react-router-dom';  
 import { RxAvatar } from 'react-icons/rx';  
-import { FiShoppingCart } from 'react-icons/fi';    
+import { FiShoppingCart } from 'react-icons/fi';   
+import Search from '../../Search/Search'
 import './Header.css';  
 import { AuthContext } from '../../AuthContext';  
 import Cart from '../../Cart/Cart';
@@ -23,7 +24,7 @@ const Header = () => {
         <div className="Header">  
             <div className="navbar-header-container1">  
                 <div className='navbar-header-category'>  
-                    {/* Optional category links or content */}  
+                <Search/>
                 </div>  
             </div>  
             <div className="navbar-header-container2">  
