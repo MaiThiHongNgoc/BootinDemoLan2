@@ -26,6 +26,7 @@ import OrderList from "./Backend/Order/orderList";
 import OrderDetailList from "./Backend/orderDetail/orderDetailList";  
 import Staff from "./Backend/staff/Staff";  
 import ImageList from "./Backend/Image/ImageList";  
+import RegisterForm from "./Page/Register/Register";
 
 function App() {  
   return (  
@@ -44,7 +45,8 @@ function App() {
             <Route path="/author" element={<Author />} />  
             <Route path="/contact" element={<Contact />} />  
 
-            <Route path="/login" element={<Login />} />  
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<RegisterForm />} />  
             <Route path="/cart" element={<Cart />} />  
 
             {/* Admin Routes */}  
