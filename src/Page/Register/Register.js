@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { RxSlash } from 'react-icons/rx';
+import Header from '../../Component/Header/Header';
 import './register.css';
+import Footer from '../../Component/Footer/Footer';
 
 const RegisterForm = () => {
     const [formData, setFormData] = useState({
@@ -71,11 +74,27 @@ const RegisterForm = () => {
     };
 
     return (
+    <div>
+        <Header/>
         <div className="container">
-            <h2>Đăng Ký</h2>
+            <div className='register-page'>
+                <div className='register-content'>
+                    <h1 className='register-header'>Register</h1>
+                    <div className='register-breadcrumb'>
+                        <div className='register-path'>
+                            <a className='register-link' href='#'>Login</a>
+                            <span className='register-delimiter'>
+                                <i className='register-icon'><RxSlash /></i>
+                            </span>
+                            <span className='register-current'>Register</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <form onSubmit={handleSubmit}>
+            <h1 className='register-h1'>Register</h1>
                 <div className="form-group">
-                    <label htmlFor="username">Tên đăng nhập:</label>
+                    <label htmlFor="username">Username:</label>
                     <input
                         type="text"
                         id="username"
@@ -86,7 +105,7 @@ const RegisterForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Mật khẩu:</label>
+                    <label htmlFor="password">Password:</label>
                     <input
                         type="password"
                         id="password"
@@ -108,7 +127,7 @@ const RegisterForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="phone">Số điện thoại:</label>
+                    <label htmlFor="phone">Phone:</label>
                     <input
                         type="tel"
                         id="phone"
@@ -119,11 +138,16 @@ const RegisterForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <button type="submit">Đăng Ký</button>
+                    <button type="submit">Register</button>
                 </div>
                 {error && <p className="error">{error}</p>}
             </form>
+            <p className='register-to'>
+                Login to your account <Link to="/login">Login here</Link>
+            </p>
         </div>
+        <Footer/>
+    </div>    
     );
 };
 
