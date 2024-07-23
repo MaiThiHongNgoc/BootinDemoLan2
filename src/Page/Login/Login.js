@@ -31,12 +31,10 @@ const Login = () => {
             });
 
             const user = userResponse.data;
-<<<<<<< HEAD
+
             localStorage.setItem('user_id', user.user_id);
             
-=======
-            localStorage.setItem('userId', user.user_id);
->>>>>>> 7d9feb9746628e145b91a98d076e40fced33e4ab
+            //localStorage.setItem('userId', user.user_id);
 
             // Redirect based on role
             if (userRole === 'ADMIN') {
