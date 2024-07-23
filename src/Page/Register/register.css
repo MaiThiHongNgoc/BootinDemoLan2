@@ -7,23 +7,17 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
-
 .form-group {
     margin-bottom: 15px;
 }
 
-label {
+.form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-input {
+.form-group input {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -31,7 +25,7 @@ input {
     box-sizing: border-box;
 }
 
-button {
+.form-group button {
     width: 100%;
     padding: 10px;
     background-color: #28a745;
@@ -42,7 +36,7 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+.form-group button:hover {
     background-color: #218838;
 }
 
@@ -52,3 +46,4 @@ button:hover {
     text-align: center;
     margin-top: 10px;
 }
+
