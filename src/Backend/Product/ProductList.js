@@ -111,8 +111,8 @@ const ProductList = () => {
                                     <td>{product.price}</td>
                                     <td>{product.categories.category_name}</td>
                                     <td>
-                                        {product.img_products && product.img_products.map(img_product => (
-                                            <img key={img_product.img_id} src={img_product.img_url} alt={img_product.img_name} className="product-image" />
+                                        {product.imgProducts && product.imgProducts.map(imgProducts => (
+                                            <img key={imgProducts.img_id} src={imgProducts.img_url} alt={imgProducts.img_name} className="product-image" />
                                         ))}
                                     </td>
                                     <td>

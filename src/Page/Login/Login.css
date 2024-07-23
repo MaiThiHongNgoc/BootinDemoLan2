@@ -129,9 +129,8 @@
     list-style: none;
     background-color: transparent;
 }
-.login-breadcrumb-path{
 
-}
+.login-breadcrumb-path {}
 
 .login-link {
     color: #666;
@@ -170,12 +169,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transform: translate(41%, -10%);
+    transform: translate(79%, -10%);
     width: 100%;
     max-width: 400px;
     border-radius: 8px;
 }
-.login-form{
+
+.login-form {
     width: 50%;
     float: left;
     position: relative;
@@ -183,7 +183,8 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-.login-h1{
+
+.login-h1 {
     font-size: 30px;
     margin-top: 12px;
     margin-bottom: 12px;

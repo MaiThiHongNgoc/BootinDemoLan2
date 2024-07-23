@@ -1,63 +1,155 @@
+/* UserList.css */
 
-.user-list-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  
-  .user-list-table, .user-list-table th, .user-list-table td {
-    border: 1px solid #ddd;
-  }
-  
-  .user-list-table th, .user-list-table td {
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .user-list-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .user-list-button-add {
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #4CAF50; /* Màu xanh */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    margin-right: 20px;
-  }
-  
-  .user-list-button-edit, .user-list-button-delete {
-    display: inline-block;
-    margin-right: 10px; /* Khoảng cách giữa các button */
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-  }
-  
-  .user-list-button-edit {
-    background-color: #008CBA; /* Màu xanh dương */
-    color: white;
-  }
-  
-  .user-list-button-delete {
-    background-color: #f44336; /* Màu đỏ */
-    color: white;
-  }
-  .user-list-table select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* General container styling */
+.container_user {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;/* Subtle shadow for depth */
+  padding: 20px;
 }
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #333;
+}
+
+/* Search input styling */
 .user-search {
-  width: 25%;
-  padding: 8px;
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
+/* Table styling */
+.user-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.user-list-table th,
+.user-list-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.user-list-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.user-list-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.user-list-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Button styling */
+.user-list-button-edit {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.user-list-button-edit:hover {
+  background-color: #0056b3;
+}
+
+.user-list-button-delete {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.user-list-button-delete:hover {
+  background-color: #c82333;
+}
+
+/* Form modal styling */
+.user-form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.user-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  max-width: 500px;
+  width: 100%;
+  border: 1px solid #ddd; /* Added border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.user-form input,
+.user-form select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.user-form button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-form button:hover {
+  background-color: #218838;
+}
+
+.user-form .close-button {
+  background-color: #dc3545;
+  margin-left: 10px;
+}
+
+.user-form .close-button:hover {
+  background-color: #c82333;
+}
+
+/* Pagination styling */
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  background-color: #f86d72;
+  color: white;
+  border-color: #f86d72;
+}

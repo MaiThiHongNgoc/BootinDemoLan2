@@ -15,7 +15,6 @@ import PageNotFound from "./Page/404";
 import Cart from "./Cart/Cart";  
 
 import { AuthProvider } from "./AuthContext";  
-import Header from "./Component/Header/Header";  
 
 import Admin from "./Backend/Admin/Admin";  
 import UserList from "./Backend/User/UserList";  

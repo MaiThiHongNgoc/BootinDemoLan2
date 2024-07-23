@@ -8,6 +8,7 @@ const UserList = () => {
   const [editingUser, setEditingUser] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     loadUsers();
@@ -16,7 +17,14 @@ const UserList = () => {
   const loadUsers = async () => {
     try {
       const response = await getUsers();
-      setUsers(response.data);
+      console.log('Response from getUsers:', response); // Log entire response
+      if (Array.isArray(response)) {
+        setUsers(response); // Handle case where response is an array
+      } else if (response && Array.isArray(response.data)) {
+        setUsers(response.data); // Handle case where data is in response.data
+      } else {
+        console.error('Unexpected response structure:', response);
+      }
     } catch (error) {
       console.error('Failed to fetch users', error);
     }
@@ -27,12 +35,13 @@ const UserList = () => {
     setShowForm(true);
   };
 
-  const handleDelete = async (user_id) => {
+  const handleDelete = async (userId) => {
     try {
-      await deleteUser(user_id);
+      await deleteUser(userId);
       loadUsers();
     } catch (error) {
       console.error('Failed to delete user', error);
+      setError('Failed to delete user. Please try again.');
     }
   };
 
@@ -60,13 +69,14 @@ const UserList = () => {
   };
 
   const filteredUsers = users.filter(user =>
-    user.username.toLowerCase().includes(searchQuery.toLowerCase())
+    user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (user.role && user.role.role_name.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   return (
-    <div className="container">
+    <div className="container_user">
       <h1>User Management</h1>
-      <button className="user-list-button-add" onClick={handleAddCustomer}>Add Customer</button>
+      {error && <p className="error-message">{error}</p>}
       {showForm && (
         <UserForm user={editingUser} onSave={handleFormClose} />
       )}
@@ -93,7 +103,7 @@ const UserList = () => {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.phone}</td>
-              <td>{user.role.role_name}</td>
+              <td>{user.role ? user.role.role_name : 'No role'}</td>
               <td>
                 <button className="user-list-button-edit" onClick={() => handleEdit(user)}>Edit</button>
                 <button className="user-list-button-delete" onClick={() => handleDelete(user.user_id)}>Delete</button>
