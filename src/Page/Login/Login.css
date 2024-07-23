@@ -3,13 +3,13 @@
     height: auto;
     background: transparent;
     padding-top: 20px;
-    padding-bottom: 70px;
+    /* padding-bottom: 70px; */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.login-container h2 {
+/* .login-container h2 {
     margin: 0 0 30px;
     font-size: 24px;
     background-position: center;
@@ -19,7 +19,7 @@
     width: 100%;
     color: #fff;
     height: 250px;
-}
+} */
 
 .login-field {
     margin-bottom: 15px;
@@ -32,9 +32,11 @@
 
 .login-field label {
     align-self: flex-start;
-    font-size: 16px;
-    color: #333;
+    display: block;
+    font-weight: 500;
+    max-width: 100%;
     margin-bottom: 5px;
+    color: #666;
 }
 
 .login-field input {
@@ -72,6 +74,7 @@
 }
 
 .login-register-link {
+    margin-bottom: 60px;
     margin-top: 20px;
     font-size: 14px;
     color: #333;
@@ -106,7 +109,7 @@
     height: 88px;
 }
 
-.login-heading {
+.login-header {
     text-transform: capitalize;
     margin-top: 0;
     margin-bottom: 10px;
@@ -126,6 +129,9 @@
     list-style: none;
     background-color: transparent;
 }
+.login-breadcrumb-path{
+
+}
 
 .login-link {
     color: #666;
@@ -140,8 +146,7 @@
 
 .login-icon {
     font-size: 17px;
-    margin-right: 0px;
-    margin-bottom: 0px;
+    margin: 0px;
     display: inline-block;
     transform: rotate(10deg);
     color: #666;
@@ -165,8 +170,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transform: translate(140%, -10%);
+    transform: translate(41%, -10%);
     width: 100%;
     max-width: 400px;
     border-radius: 8px;
+}
+.login-form{
+    width: 50%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.login-h1{
+    font-size: 30px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-family: Merriweather, serif;
+    font-weight: 700;
+    line-height: 1.3;
 }
