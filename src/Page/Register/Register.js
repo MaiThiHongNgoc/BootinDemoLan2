@@ -91,7 +91,7 @@ const RegisterForm = () => {
                     </div>
                 </div>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form className='register-form' onSubmit={handleSubmit}>
             <h1 className='register-h1'>Register</h1>
                 <div className="form-group">
                     <label htmlFor="username">Username:</label>
@@ -137,9 +137,7 @@ const RegisterForm = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <button type="submit">Register</button>
-                </div>
+                    <button className='register-button' type="submit">Register</button>
                 {error && <p className="error">{error}</p>}
             </form>
             <p className='register-to'>
