@@ -20,6 +20,7 @@
 }
 
 .form-group input {
+    outline: none;
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -29,17 +30,19 @@
 
 .form-group button {
     width: 100%;
+    max-width: 400px;
     padding: 10px;
-    background-color: #28a745;
+    font-size: 16px;
+    background-color: #f86d72;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .form-group button:hover {
-    background-color: #218838;
+    background-color: #d75a60;
 }
 
 .error {

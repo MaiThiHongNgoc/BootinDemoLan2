@@ -14,7 +14,6 @@
     padding-bottom: 0;
     position: relative;
     border-bottom: none;
-    z-index: 2;
     line-height: 24px;
     display: block;
 }
