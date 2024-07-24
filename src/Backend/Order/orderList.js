@@ -95,6 +95,21 @@ const OrderList = () => {
         order.user.username.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    const getStatusClass = (status) => {
+        switch (status) {
+            case 'PENDING':
+                return 'select-status-pending';
+            case 'COMPLETED':
+                return 'select-status-completed';
+            case 'PROCESSING':
+                return 'select-status-processing';
+            case 'CANCELLED':
+                return 'select-status-cancelled';
+            default:
+                return '';
+        }
+    };
+
     return (
         <div className="container">
             <h1>Order Management</h1>
@@ -120,7 +135,6 @@ const OrderList = () => {
                 <table className="order-list-table">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Order ID</th>
                             <th>User Name</th>
                             <th>Email</th>
@@ -131,17 +145,13 @@ const OrderList = () => {
                             <th>Status</th>
                             <th>Payment Method</th>
                             <th>Actions</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredOrders.map((order) => (
                             <React.Fragment key={order.order_id}>
                                 <tr>
-                                    <td>
-                                        <button className="toggle-button" onClick={() => handleToggleDetails(order.order_id)}>
-                                            {expandedOrderId === order.order_id ? '-' : '+'}
-                                        </button>
-                                    </td>
                                     <td>{order.order_id}</td>
                                     <td>{order.user.username}</td>
                                     <td>{order.user.email}</td>
@@ -153,18 +163,24 @@ const OrderList = () => {
                                         <select
                                             name="status"
                                             value={order.status}
+                                            className={getStatusClass(order.status)}
                                             onChange={(e) => handleStatusChange(e, order)}
                                         >
-                                            <option value="PENDING">Pending</option>
-                                            <option value="COMPLETED">Completed</option>
-                                            <option value="PROCESSING">Processing</option>
-                                            <option value="CANCELLED">Cancelled</option>
+                                            <option className='select-status-pending' value="PENDING">Pending</option>
+                                            <option className='select-status-completed' value="COMPLETED">Completed</option>
+                                            <option className='select-status-processing' value="PROCESSING">Processing</option>
+                                            <option  className='select-status-cancelled'value="CANCELLED">Cancelled</option>
                                         </select>
                                     </td>
                                     <td>{order.paymentMethods.method_name}</td>
                                     <td>
                                         <button className="order-list-button-edit" onClick={() => handleEdit(order)}>Edit</button>
                                         <button className="order-list-button-delete" onClick={() => handleDelete(order.order_id)}>Delete</button>
+                                    </td>
+                                    <td>
+                                        <button className="toggle-button" onClick={() => handleToggleDetails(order.order_id)}>
+                                            {expandedOrderId === order.order_id ? '-' : '+'}
+                                        </button>
                                     </td>
                                 </tr>
 
@@ -174,17 +190,28 @@ const OrderList = () => {
                                             <h3>Order Details</h3>
                                             {order.orderDetails.map((detail) => (
                                                 <div key={detail.order_detail_id}>
-                                                    <p>Product Name: {detail.products.product_name}</p>
-                                                    <p>Quantity: {detail.quantity}</p>
-                                                    <p>Total Price: ${detail.total_price}</p>
-                                                    <p>Description: {detail.products.description}</p>
-                                                    {detail.products.imgProducts.length > 0 && (
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product Name</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                            <th>Total Price</th>
+                                                            <th>Description:</th>
+                                                            <th>Image Product</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <td> {detail.products.product_name}</td>
+                                                    <td> {detail.products.price}</td>
+                                                    <td> {detail.quantity}</td>
+                                                    <td> ${detail.total_price}</td>
+                                                    <td> {detail.products.description}</td>
+                                                    <td> {detail.products.imgProducts.length > 0 && (
                                                         <img
                                                             src={detail.products.imgProducts[0].img_url}
                                                             alt={detail.products.imgProducts[0].img_name}
                                                             className="product-image"
                                                         />
-                                                    )}
+                                                    )}</td>
                                                 </div>
                                             ))}
                                         </td>

@@ -57,30 +57,6 @@
     border-radius: 10px;
     font-size: 16px;
   }
-/* orderForm.css */
-.select-pending {
-  background-color: yellow;
-}
-
-.select-completed {
-  background-color: green;
-}
-
-.select-cancelled {
-  background-color: red;
-}
-
-.option-pending {
-  background-color: yellow;
-}
-
-.option-completed {
-  background-color: green;
-}
-
-.option-cancelled {
-  background-color: red;
-}
 .toggle-button {
   cursor: pointer;
   background-color: #007bff;
@@ -96,3 +72,25 @@
   margin-left: 10px;
   margin-top: 5px;
 }
+/* orderList.css */
+
+.select-status-pending {
+  background-color: orange;
+  color: white;
+}
+
+.select-status-completed {
+  background-color: green;
+  color: white;
+}
+
+.select-status-processing {
+  background-color: blue;
+  color: white;
+}
+
+.select-status-cancelled {
+  background-color: red;
+  color: white;
+}
+
