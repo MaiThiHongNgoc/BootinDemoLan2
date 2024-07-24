@@ -101,7 +101,6 @@
     color: #2b2b2b;
     right: 0;
     font-size: 24px;
-    z-index: -1;
     cursor: pointer;
 }
 .join-submit{
