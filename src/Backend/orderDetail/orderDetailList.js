@@ -9,7 +9,6 @@ const OrderDetailList = () => {
     const [showForm, setShowForm] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
-
     useEffect(() => {
         loadOrderDetails();
     }, []);
@@ -17,14 +16,14 @@ const OrderDetailList = () => {
     const loadOrderDetails = async () => {
         try {
             const response = await getOrderDetails(0); // Assuming pagination, pass appropriate page number
-            setOrderDetails(response.data.content); // Adjust based on your API response structure
+            setOrderDetails(response.data.content || []); // Ensure `response.data.content` is always an array
         } catch (error) {
             console.error('Failed to fetch order details', error);
         }
     };
 
-    const handleEdit = (orderDetails) => {
-        setEditingOrderDetail(orderDetails);
+    const handleEdit = (orderDetail) => {
+        setEditingOrderDetail(orderDetail);
         setShowForm(true);
     };
 
@@ -46,13 +45,14 @@ const OrderDetailList = () => {
         setShowForm(false);
         loadOrderDetails();
     };
+
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
-        };
+    };
 
-    // Filter authors based on search query
-    const filteredOrderDetail = orderDetails.filter(orderDetails =>
-        orderDetails.orders.user.username.toLowerCase().includes(searchQuery.toLowerCase())
+    // Filter orderDetails based on search query
+    const filteredOrderDetail = (orderDetails || []).filter(orderDetail =>
+        orderDetail.orders.user.username.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -102,7 +102,6 @@ const OrderDetailList = () => {
                             <td>{orderDetail.orders.total_amount}$</td>
                             <td>{new Date(orderDetail.orders.order_date).toUTCString()}</td>
                             <td>{orderDetail.orders.status}</td>
-
                             <td>
                                 <button className="order-detail-button-edit" onClick={() => handleEdit(orderDetail)}>Edit</button>
                                 <button className="order-detail-button-delete" onClick={() => handleDelete(orderDetail.order_detail_id)}>Delete</button>

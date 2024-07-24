@@ -140,7 +140,7 @@ const RegisterForm = () => {
                 {error && <p className="error">{error}</p>}
             </form>
             <p className='register-to'>
-                Login to your account <Link to="/login">Login here</Link>
+                Login to your account? <Link to="/login">Login here</Link>
             </p>
         </div>
         <Footer/>

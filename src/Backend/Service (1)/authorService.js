@@ -4,17 +4,10 @@ const API_URL = 'http://localhost:9191/api/author/v1/';
 
 // Lấy danh sách tác giả
 export const getAuthors = async () => {
-  const token = localStorage.getItem('token');
-  const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
-  const role = payload.scope;
   try {
-   
-    const response = await axios.get(API_URL, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return response.data;
+    const response = await axios.get(API_URL);
+    console.log(response.data);
+    return response.data; 
   } catch (error) {
     console.error('Failed to fetch authors', error);
     throw error;
