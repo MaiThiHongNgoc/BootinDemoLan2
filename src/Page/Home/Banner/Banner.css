@@ -34,7 +34,6 @@
     bottom: 20px;
     left: 20px;
     color: #fff;
-    z-index: 1;
     transition: opacity 0.3s ease;
   }
   
@@ -56,7 +55,6 @@
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
-    /* z-index: 1000; */
   }
   
   .banner-info a:hover {
@@ -67,9 +65,6 @@
     opacity: 0;
   }
   
-  .zoomed {
-    /* z-index: 1000; */
-  }
   
   .banner-info-container {
     position: absolute;
