@@ -61,7 +61,7 @@ const updateUser = async (user) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Failed to create category', error);
+        console.error('Failed to delete user with ID ${userId}', error);
         throw error;
     }
 };
@@ -82,7 +82,7 @@ const deleteUser = async (user_id) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Failed to create category', error);
+        console.error('Failed to delete user with ID ${userId}', error);
         throw error;
     }
 };

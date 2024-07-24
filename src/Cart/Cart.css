@@ -1,32 +1,32 @@
 
-
-/* List of products */
 .cart-products-list {
     list-style-type: none;
     padding: 0;
-    margin: 0;
 }
 
-/* Individual product item */
 .cart-product-item {
     border-bottom: 1px solid #ddd;
-    padding: 10px 15px;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
 }
 
-.cart-product-item img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-top: 10px;
+.cart-product-item:last-child {
+    border-bottom: none;
 }
 
-/* Close button for the cart */
-.cart-close-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
+.cart-product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+h4, p {
+    margin: 5px 0;
+}
+
+h2 {
+    margin-bottom: 20px;
 }

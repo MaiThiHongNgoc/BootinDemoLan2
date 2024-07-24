@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
+
 import Home from './Page/Home/Home';
 import Shop from "./Page/Shop/Shop";
 import Blog from "./Page/Blog/Blog";
@@ -13,10 +14,13 @@ import Featured from "./Page/Home/OurBookStore/Featured/Featured";
 import Login from "./Page/Login/Login";
 import PageNotFound from "./Page/404";
 import Cart from "./Cart/Cart";
+
 import RegisterForm from "./Page/Register/Register";
+import Logout from "./Page/LogOut/LogOut";
 
 import { AuthProvider } from "./AuthContext";
 import { CartProvider } from "./Cart/CartContext"; // Import CartProvider
+
 
 
 import Admin from "./Backend/Admin/Admin";
@@ -29,6 +33,7 @@ import OrderDetailList from "./Backend/orderDetail/orderDetailList";
 import Staff from "./Backend/staff/Staff";
 import ImageList from "./Backend/Image/ImageList";
 
+    
 function App() {
   return (
     <div className="App">

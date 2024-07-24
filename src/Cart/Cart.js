@@ -1,27 +1,26 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService'; // Ensure this import is correct
-import './Cart.css'; // Import the CSS file for styling
+import React, { useEffect, useState, useRef, useContext } from 'react';
+import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService';
+import { CartContext } from './CartContext'; // Assuming you have a CartContext for state management
+import './Cart.css';
 
 const Cart = ({ userId, onClose }) => {
     const [purchasedProducts, setPurchasedProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const cartRef = useRef();
+    const { cartUpdated } = useContext(CartContext);
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const data = await getPurchasedProductsByUserId(userId);
-                console.log("Fetched Data:", data); // Debugging fetched data
                 if (Array.isArray(data) && data.length > 0) {
                     const cartData = data[0];
                     setPurchasedProducts(cartData.cart_Product || []);
                 } else {
-                    console.error("Unexpected data structure:", data);
                     setError('Unexpected data structure');
                 }
             } catch (error) {
-                console.error("Error fetching data:", error); // Debugging error
                 setError('Failed to fetch purchased products');
             } finally {
                 setLoading(false);
@@ -29,7 +28,7 @@ const Cart = ({ userId, onClose }) => {
         };
 
         fetchProducts();
-    }, [userId]);
+    }, [userId, cartUpdated]); // Depend on cartUpdated to re-fetch products when the cart is updated
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -37,7 +36,7 @@ const Cart = ({ userId, onClose }) => {
                 onClose();
             }
         };
-        
+
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
@@ -61,7 +60,7 @@ const Cart = ({ userId, onClose }) => {
                                 <p>Price: ${item.product.price}</p>
                                 <p>Quantity: {item.quantity}</p>
                                 {item.product.imgProducts && item.product.imgProducts.length > 0 && (
-                                    <img src={item.product.imgProducts[0].img_url} alt={item.product.product_name} />
+                                    <img src={item.product.imgProducts[0].img_url} alt={item.product.product_name} className="cart-product-image" />
                                 )}
                             </li>
                         ))}

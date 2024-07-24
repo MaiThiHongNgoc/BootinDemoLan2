@@ -5,6 +5,8 @@ import './Login.css';
 import Footer from '../../Component/Footer/Footer';
 import { RxSlash } from 'react-icons/rx';
 import { jwtDecode } from 'jwt-decode';
+import Header from "./../../Component/Header/Header";  
+
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -52,6 +54,7 @@ const Login = () => {
 
     return (
         <div>
+            <Header />
             <div className="login-container">
                 <div className='login-page'>
                     <div className='login-content'>
@@ -68,7 +71,6 @@ const Login = () => {
                     </div>
                 </div>
                 <form className='login-form' onSubmit={handleSubmit}>
-                <h1 className='login-h1'>Login</h1>
                     <div className="login-field">
                         <label>Username:</label>
                         <input
