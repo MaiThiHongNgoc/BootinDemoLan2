@@ -56,7 +56,7 @@
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
-    z-index: 1;
+    /* z-index: 1000; */
   }
   
   .banner-info a:hover {
@@ -68,7 +68,7 @@
   }
   
   .zoomed {
-    z-index: 2;
+    /* z-index: 1000; */
   }
   
   .banner-info-container {
@@ -76,7 +76,7 @@
     bottom: 20px;
     left: 20px;
     color: #fff;
-    z-index: 1; /* Đảm bảo chữ hiển thị trên ảnh */
+     /*Đảm bảo chữ hiển thị trên ảnh*/
   }
   .banner-img1{
     width: 150px;

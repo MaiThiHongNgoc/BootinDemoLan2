@@ -14,6 +14,8 @@ import Featured from "./Page/Home/OurBookStore/Featured/Featured";
 import Login from "./Page/Login/Login";
 import PageNotFound from "./Page/404";
 import Cart from "./Cart/Cart";
+import viewCart from "./Cart/viewCart";
+import checkOut from "./Cart/checkOut";
 
 import RegisterForm from "./Page/Register/Register";
 import Logout from "./Page/LogOut/LogOut";
@@ -55,6 +57,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<RegisterForm />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/viewcart" element={<viewCart />} />
+              <Route path="/checkout" element={<checkOut />} />
 
               {/* Admin Routes */}
               <Route path="/admin" element={<Admin />} />

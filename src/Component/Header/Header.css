@@ -89,11 +89,14 @@
 }  
 
 .cart-icon {  
-    font-size: 1.8rem; /* Same size as login icon */  
-    color: #333; /* Default color for cart icon */  
-    cursor: pointer; /* Change cursor to pointer */  
-    transition: color 0.3s ease-in-out; /* Smooth transition for color change */  
-    margin-right: 17px;
+    font-size: 1.8rem; /* Adjust the size as needed */
+    color: #333; /* Default color */
+    transition: color 0.3s ease-in-out; /* Smooth transition for color change */
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+    margin-bottom: 20px; /* Adjusted to 20px */
+    margin-right: 20px; /* Right margin of 20px */
+    width: 30px;
+    height: 30px;
 }  
 
 /* Hover effect for cart icon */  
@@ -117,14 +120,29 @@
     z-index: 1; /* Đảm bảo nó ở trên cùng */  
     overflow-y: auto; /* Cho phép cuộn nếu nội dung quá nhiều */  
 }  
-
-/* YourComponent.css */
-
-/* User info container */
-.user-info {
-    position: relative; /* Position relative to position the dropdown */
+.cart-icon-container {
+    position: relative;
     display: inline-block;
-  }
+}
+
+.cart-icon-badge {
+    position: absolute;
+    top: -10px; /* Adjust as needed */
+    right: -10px; /* Adjust as needed */
+    background-color: #ff0000;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    /* Ensure the badge is visible above other content */
+    z-index: 1;
+}
+
   
   /* Dropdown menu styles */
   .dropdown-menu {

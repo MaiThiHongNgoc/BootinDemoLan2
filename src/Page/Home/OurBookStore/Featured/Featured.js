@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getProducts } from '../../../../Backend/Service (1)/productService';
-import { FiSearch, FiShoppingCart } from 'react-icons/fi'; // Import icons from react-icons
-import { useNavigate } from 'react-router-dom'; 
+import { addProductToCart as addProductToCartService } from '../../../../Backend/Service (1)/cartItemsService';
+import { FiSearch, FiShoppingCart, FiCheck } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../AuthContext';
+import { getPurchasedProductsByUserId } from '../../../../Backend/Service (1)/cartService';
 import '../TopRating/TopRating.css';
 
 const Featured = () => {
@@ -9,11 +12,21 @@ const Featured = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showNotification, setShowNotification] = useState(false);
+  const [pendingProduct, setPendingProduct] = useState(null);
+  const [cartIconState, setCartIconState] = useState({});
   const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     loadRandomProducts();
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn && pendingProduct) {
+      handleAddProductToCart(pendingProduct);
+      setPendingProduct(null);
+    }
+  }, [isLoggedIn, pendingProduct]);
 
   const loadRandomProducts = async () => {
     setLoading(true);
@@ -32,34 +45,68 @@ const Featured = () => {
   };
 
   const handleSearchClick = (product) => {
-    // Handle search click logic
     console.log('Search clicked for:', product);
   };
 
   const handleCartClick = (product) => {
+    if (!isLoggedIn) {
+      setPendingProduct(product);
+      setShowNotification(true);
+    } else {
+      handleAddProductToCart(product);
+    }
+  };
+
+  const handleAddProductToCart = async (product) => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      setShowNotification(true); // Show message to log in
+    const user_id = localStorage.getItem('user_id');
+
+    if (!token || !user_id) {
+      setShowNotification(true);
       return;
     }
 
-    // Decode the token to get user role information
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jwtPayload = JSON.parse(atob(base64));
-    const userRole = jwtPayload.scope; // Assuming role is stored in the JWT payload
+    try {
+      const cartData = await getPurchasedProductsByUserId(user_id);
+      console.log('Cart data:', cartData);
 
-    if (userRole !== 'USER') {
-      setShowNotification(true); // Show message to log in
-      return;
+      if (cartData.length > 0) {
+        const cartId = cartData[0].cart_id;
+        console.log('Cart ID:', cartId);
+
+        await addProductToCartService(cartId, product.product_id, 1, token);
+        console.log('Product added to cart:', product);
+
+        // Update cart icon state to spinning
+        setCartIconState((prevState) => ({
+          ...prevState,
+          [product.product_id]: 'spinning',
+        }));
+
+        setTimeout(() => {
+          // Update cart icon state to checkmark after spinning
+          setCartIconState((prevState) => ({
+            ...prevState,
+            [product.product_id]: 'checkmark',
+          }));
+        }, 1000);
+      } else {
+        console.error('No cart found for user');
+        setError('No cart found for user.');
+        setShowNotification(true);
+      }
+    } catch (error) {
+      console.error('Failed to add product to cart:', error.message);
+      setError('Failed to add product to cart.');
+      setShowNotification(true);
     }
-
-    // Handle add to cart logic
-    console.log('Add to cart clicked for:', product);
   };
 
   const handleCloseNotification = () => {
     setShowNotification(false);
+    if (!isLoggedIn) {
+      navigate('/login');
+    }
   };
 
   return (
@@ -82,8 +129,8 @@ const Featured = () => {
                   <button onClick={() => handleSearchClick(product)}>
                     <FiSearch />
                   </button>
-                  <button onClick={() => handleCartClick(product)}>
-                    <FiShoppingCart />
+                  <button onClick={() => handleCartClick(product)} className={`cart-icon ${cartIconState[product.product_id]}`}>
+                    {cartIconState[product.product_id] === 'checkmark' ? <FiCheck /> : <FiShoppingCart />}
                   </button>
                 </div>
               </div>
@@ -97,5 +144,4 @@ const Featured = () => {
     </div>
   );
 };
-
 export default Featured;

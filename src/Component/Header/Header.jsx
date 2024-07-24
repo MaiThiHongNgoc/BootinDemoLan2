@@ -1,21 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { RxAvatar } from 'react-icons/rx';
 import { FiShoppingCart } from 'react-icons/fi';
-import Search from '../../Search/Search'
+import Search from '../../Search/Search';
 import './Header.css';
 import { AuthContext } from '../../AuthContext';
 import Cart from '../../Cart/Cart';
 import Logout from '../../Page/LogOut/LogOut';
+import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService'; // Adjust path accordingly
+import { mergeProducts } from '../../Cart/productUtils'; // Adjust path accordingly
 
 const Header = () => {
     const [activeLink, setActiveLink] = useState(null);
-    const { isLoggedIn, cart_id } = useContext(AuthContext);
+    const { isLoggedIn, userId } = useContext(AuthContext); // Assuming userId is in AuthContext
     const [showCart, setShowCart] = useState(false);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-
-    const userId = localStorage.getItem('user_id'); // or wherever you get the user ID from
+    const [totalQuantity, setTotalQuantity] = useState(0);
 
     const handleCartClose = () => {
         setShowCart(false);
@@ -28,9 +28,29 @@ const Header = () => {
     const toggleCart = () => {
         setShowCart(!showCart);
     };
+
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
-      };
+    };
+
+    useEffect(() => {
+        const fetchCartDetails = async () => {
+            if (userId) {
+                try {
+                    const data = await getPurchasedProductsByUserId(userId);
+                    if (Array.isArray(data) && data.length > 0) {
+                        const cartData = data[0];
+                        const { totalQuantity } = mergeProducts(cartData.cart_Product || []);
+                        setTotalQuantity(totalQuantity);
+                    }
+                } catch (error) {
+                    console.error('Failed to fetch cart details', error);
+                }
+            }
+        };
+
+        fetchCartDetails();
+    }, [userId]);
 
     return (
         <div className="Header">
@@ -64,7 +84,12 @@ const Header = () => {
             </div>
 
             <div className="navbar-header-container3">
-            <FiShoppingCart className="cart-icon" onClick={toggleCart} aria-label="Shopping Cart" /> 
+                <div className="cart-icon-container" onClick={toggleCart}>
+                    <FiShoppingCart className="cart-icon" aria-label="Shopping Cart" />
+                    {totalQuantity > 0 && (
+                        <span className="cart-icon-badge">{totalQuantity}</span>
+                    )}
+                </div>
                 <div className="user-info">
                     <div className="user-icon-container" onClick={toggleDropdown}>
                         <RxAvatar className="login-icon" aria-label="User Info" />

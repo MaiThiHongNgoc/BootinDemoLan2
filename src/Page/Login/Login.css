@@ -143,14 +143,6 @@
     margin: 0 8px;
 }
 
-.login-icon {
-    font-size: 17px;
-    margin: 0px;
-    display: inline-block;
-    transform: rotate(10deg);
-    color: #666;
-}
-
 .login-pas {
     font-size: 30px;
     margin-top: 12px;

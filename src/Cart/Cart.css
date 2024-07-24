@@ -1,32 +1,104 @@
 
+
+.cart-loading, .cart-error, .cart-title, .cart-empty {
+    text-align: left;
+}
+
 .cart-products-list {
     list-style-type: none;
     padding: 0;
+    margin-left: 10%;
+    z-index: 1;
 }
 
 .cart-product-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
     display: flex;
     align-items: center;
-}
-
-.cart-product-item:last-child {
-    border-bottom: none;
+    margin-bottom: 20px;
 }
 
 .cart-product-image {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 150px;
     object-fit: cover;
-    border-radius: 4px;
-    margin-right: 10px;
+    margin-right: 20px;
+}
+.cart-product-details {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 150px;
+    padding: 2%;
 }
 
-h4, p {
-    margin: 5px 0;
+.cart-product-name,
+.cart-product-author,
+.cart-product-price {
+    margin: 0;
+    line-height: 1.5;
+    text-align: left;
+    padding: 3px;
+}
+.cart-product-name{
+    color: #2b2b2b;
+    padding-right: 20px;
+    font-weight: 400;
+    font-size: 1.2rem;
+    font-family: Merriweather, serif;
+}
+.cart-product-name:hover{
+    color: #f86d72;
+}
+.cart-product-author{
+    color: #909090;
+    font-style: normal;
+}
+.cart-product-price{
+    color: #f86d72;
+    font-size: 1rem;
+    font-family: Merriweather, serif;
+
+}
+.cart-product-price2{
+    font-size: 1.3rem;
+    font-family: Merriweather, serif;
+    text-align: right;
+    padding: 10px;
+    padding-right: 20px;
 }
 
-h2 {
-    margin-bottom: 20px;
+.cart-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-button {
+    padding: 15px; /* Increase padding for larger buttons */
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ccc; /* Add a 1px border */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    width: 35%; /* Set a fixed width to make buttons square */
+    height: 10%; /* Set a fixed height to make buttons square */
+    box-sizing: border-box; /* Ensure padding and border are included in width and height */
+    margin: 5%;
+}
+
+.cart-view-button {
+    background-color: #f86d72; /* Green */
+}
+
+.cart-checkout-button {
+    color: #666;
+    background-color: #fff; /* Red */
+}
+
+.cart-button:hover {
+    background-color: #f86d72;
+    color: #fff;
 }
