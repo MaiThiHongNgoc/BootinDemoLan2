@@ -79,6 +79,6 @@
     text-decoration: none;
 }
 .gift-a:hover{
-    background: rgb(123, 66, 66);
+    background: red;
     color: #fff;
 }
