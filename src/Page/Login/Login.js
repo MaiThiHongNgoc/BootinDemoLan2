@@ -63,7 +63,7 @@ const Login = () => {
                             <div className='login-breadcrumb-path'>
                                 <a className='login-link' href='#'>Home</a>
                                 <span className='login-delimiter'>
-                                    <i className='login-icon'><RxSlash /></i>
+                                    <i className='login-icons'><RxSlash /></i>
                                 </span>
                                 <span className='login-current'>Login</span>
                             </div>
