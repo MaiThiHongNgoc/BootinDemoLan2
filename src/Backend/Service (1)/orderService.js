@@ -31,7 +31,31 @@ const getOrder = async () => {
         });
         return response.data;
     } catch (error) {
-        console.error('Failed to fetch orders', error);
+        console.error('Failed to fetch orders:', error.message);
+        throw error;
+    }
+};
+
+const getOrderByUserId = async () => {
+    const userId = localStorage.getItem('user_id');
+    const token = getToken();
+
+    // Kiểm tra quyền admin, nếu không cần thiết thì có thể loại bỏ
+    checkAdminRole(token);
+
+    if (!userId) {
+        throw new Error('User ID is not available in localStorage');
+    }
+
+    try {
+        const response = await axios.get(`${API_URL}${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch orders by user ID:', error.message);
         throw error;
     }
 };
@@ -48,7 +72,7 @@ const createOrder = async (order) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Failed to create order', error);
+        console.error('Failed to create order:', error.message);
         throw error;
     }
 };
@@ -65,11 +89,10 @@ const updateOrder = async (id, order) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Failed to update order', error);
+        console.error('Failed to update order:', error.message);
         throw error;
     }
 };
-
 
 const deleteOrder = async (order_id) => {
     const token = getToken();
@@ -83,7 +106,7 @@ const deleteOrder = async (order_id) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Failed to delete order', error);
+        console.error('Failed to delete order:', error.message);
         throw error;
     }
 };
@@ -100,9 +123,9 @@ const fetchPaymentMethods = async () => {
         });
         return response.data;
     } catch (error) {
-        console.error('Failed to fetch payment methods', error);
+        console.error('Failed to fetch payment methods:', error.message);
         throw error;
     }
 };
 
-export { getOrder, createOrder, updateOrder, deleteOrder, fetchPaymentMethods };
+export { getOrder, getOrderByUserId, createOrder, updateOrder, deleteOrder, fetchPaymentMethods };

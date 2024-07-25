@@ -93,4 +93,21 @@
   background-color: red;
   color: white;
 }
+.option-status-pending{
+  color:  orange;
+  background-color: white;
+}
+.option-status-completed{
+  color:  green;
+  background-color: white;
+}
+.option-status-processing{
+  color:  blue;
+  background-color: white;
+}
+.option-status-cancelled{
+  color:  red;
+  background-color: white;
+}
+
 

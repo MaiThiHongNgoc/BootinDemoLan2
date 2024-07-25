@@ -34,6 +34,7 @@ import OrderList from "./Backend/Order/orderList";
 import OrderDetailList from "./Backend/orderDetail/orderDetailList";
 import Staff from "./Backend/staff/Staff";
 import ImageList from "./Backend/Image/ImageList";
+import CreateOrderForm from "./Page/Order/order";
 
     
 function App() {
@@ -59,6 +60,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/viewcart" element={<viewCart />} />
               <Route path="/checkout" element={<checkOut />} />
+              <Route path="createorder" element={<CreateOrderForm />} />
 
               {/* Admin Routes */}
               <Route path="/admin" element={<Admin />} />

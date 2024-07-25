@@ -45,7 +45,7 @@ export const getCartItemsByUserId = async (userId) => {
     if (!token) throw new Error('Token not found. Please log in.');
 
     try {
-        const response = await axios.get(`${API_URL}cart?user_id=${userId}`, {
+        const response = await axios.get(`${API_URL}${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

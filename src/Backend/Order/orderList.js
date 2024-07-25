@@ -137,6 +137,8 @@ const OrderList = () => {
                         <tr>
                             <th>Order ID</th>
                             <th>User Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Address</th>
@@ -154,6 +156,8 @@ const OrderList = () => {
                                 <tr>
                                     <td>{order.order_id}</td>
                                     <td>{order.user.username}</td>
+                                    <td>{order.first_name}</td>
+                                    <td>{order.last_name}</td>
                                     <td>{order.user.email}</td>
                                     <td>{order.user.phone}</td>
                                     <td>{order.address}</td>
@@ -166,10 +170,10 @@ const OrderList = () => {
                                             className={getStatusClass(order.status)}
                                             onChange={(e) => handleStatusChange(e, order)}
                                         >
-                                            <option className='select-status-pending' value="PENDING">Pending</option>
-                                            <option className='select-status-completed' value="COMPLETED">Completed</option>
-                                            <option className='select-status-processing' value="PROCESSING">Processing</option>
-                                            <option  className='select-status-cancelled'value="CANCELLED">Cancelled</option>
+                                            <option className='option-status-pending' value="PENDING">Pending</option>
+                                            <option className='option-status-completed' value="COMPLETED">Completed</option>
+                                            <option className='option-status-processing' value="PROCESSING">Processing</option>
+                                            <option  className='option-status-cancelled'value="CANCELLED">Cancelled</option>
                                         </select>
                                     </td>
                                     <td>{order.paymentMethods.method_name}</td>
