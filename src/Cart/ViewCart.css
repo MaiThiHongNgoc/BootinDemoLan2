@@ -1,0 +1,92 @@
+.viewcart-container {
+    display: flex;
+    padding: 20px;
+    width: 100%;
+}
+
+.view_table1 {
+    width: 70%;
+    margin-left: 5%;
+}
+
+.viewcart-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.viewcart-products-table {
+    width: 100%;
+    border-collapse: separate; /* Use separate to control border-spacing */
+    border-spacing: 0;
+}
+
+.viewcart-products-table th,
+.viewcart-products-table td {
+    border-bottom: 1px solid #ddd; /* Only horizontal borders */
+    padding: 10px;
+    text-align: left;
+}
+
+.viewcart-products-table th {
+    background-color: #f4f4f4;
+}
+
+.viewcart-summary {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+    width: 100%;
+    margin-left: 30%;
+}
+
+.viewcart-product-item {
+    display: flex;
+    align-items: center;
+}
+
+.viewcart-product-image {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.viewcart-product-details {
+    flex-grow: 1;
+}
+.input-quantity{
+    width: 20%;
+}
+.viewcart-quantity{
+    text-align: center;
+    justify-content: center;
+}
+.quantity-button {
+    background-color: #f86d72;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 5px; /* Adjust spacing between buttons */
+    font-size: 16px; /* Adjust font size if needed */
+}
+
+
+.viewcart-remove-button {
+    background-color: #f86d72;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.viewcart-summary p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.viewcart-error {
+    color: red;
+    font-size: 16px;
+}
