@@ -3,7 +3,10 @@ import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService
 import { CartContext } from './CartContext'; // Adjust path accordingly
 import { updateCartItem, deleteCartItem } from '../Backend/Service (1)/cartItemsService';
 import { mergeProducts } from './productUtils';
+import { RxSlash } from 'react-icons/rx';
 import { AiFillDelete } from "react-icons/ai";
+import Header from '../Component/Header/Header';
+import Footer from '../Component/Footer/Footer';
 import './ViewCart.css';
 
 const ViewCart = ({ userId }) => {
@@ -71,9 +74,25 @@ const ViewCart = ({ userId }) => {
     }
 
     return (
+        <div>
+            <Header/>
+        <div className='viewcart-page'>
+            <div className='viewcart-content'>
+                <h1 className='viewcart-header'>Cart</h1>
+                <div className='viewcart-breadcrumb'>
+                    <div className='viewcart-path'>
+                        <a className='viewcart-link'href='#'>Home</a>
+                        <span className='viewcart-delimiter'>
+                            <i className='viewcart-icon'><RxSlash /></i>
+                        </span>
+                        <span className='viewcart-current'>Cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div className="viewcart-container">
             <div className='view_table1'>
-                <h2 className="viewcart-title">Your Cart</h2>
                 {error && <p className="viewcart-error">{error}</p>}
                 <table className="viewcart-products-table">
                     <thead>
@@ -145,6 +164,8 @@ const ViewCart = ({ userId }) => {
                 </div>
             </div>
         </div>
+        <Footer/>
+    </div>
     );
 };
 
