@@ -21,29 +21,26 @@ const CreateOrderForm = ({ orderDetail }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Nhận dữ liệu từ API
+                // Fetch cart items
                 const cartOrders = await getPurchasedProductsByUserId();
                 console.log('Cart orders:', cartOrders);
-                
-                // Kiểm tra dữ liệu trả về từ API
+
                 if (!cartOrders || !Array.isArray(cartOrders)) {
                     console.error('Invalid data format:', cartOrders);
                     return;
                 }
-    
-                // Flatten the cart orders if needed and extract cart_Product
+
+                // Extract and process cart products
                 const allCartProducts = cartOrders.flatMap(order => order.cart_Product || []);
                 console.log('All Cart Products:', allCartProducts);
-                
-                setCartItems(allCartProducts); // Lưu trữ các sản phẩm trong giỏ hàng
-    
-                
-                console.log('User ID from localStorage:', user_id);
+
+                setCartItems(allCartProducts);
+
                 if (!user_id) {
                     console.error('User ID not found in localStorage');
                     return;
                 }
-    
+
                 if (orderDetail) {
                     const orderDetails = allCartProducts.map(item => ({
                         products: { product_id: item.product.product_id },
@@ -51,25 +48,23 @@ const CreateOrderForm = ({ orderDetail }) => {
                         total_price: item.total_price
                     }));
                     console.log('Order Details:', orderDetails);
-    
+
                     setFormData(prevState => ({
                         ...prevState,
-                        user: { user_id: user_id },  // Lấy user_id từ formData
+                        user: { user_id: user_id },
                         total_amount: allCartProducts.reduce((acc, item) => acc + item.total_price, 0),
                         status: 'PENDING'
                     }));
-                    
+
                     setFormOrderDetail(orderDetails);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-    
+
         fetchData();
-    }, [orderDetail]);
-    
-    
+    }, [orderDetail, user_id]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -101,8 +96,9 @@ const CreateOrderForm = ({ orderDetail }) => {
         e.preventDefault();
         try {
             console.log('Submitting formData:', formData);
+            console.log('Order Details for submission:', formOrderDetail);
     
-            // Create the order and get the new order ID
+            // Create the order
             const orderResponse = await createOrder(formData);
             const orderId = orderResponse.order_id;
             console.log('Order created:', orderId);
@@ -111,7 +107,7 @@ const CreateOrderForm = ({ orderDetail }) => {
                 throw new Error('Invalid order ID');
             }
     
-            // Create order details with the new order ID
+            // Prepare and send order details
             const orderDetailsPromises = formOrderDetail.map(detail =>
                 createOrderDetail({
                     orders: { order_id: orderId },
@@ -119,12 +115,12 @@ const CreateOrderForm = ({ orderDetail }) => {
                 })
             );
     
+            console.log('Order Details Promises:', orderDetailsPromises);
+    
             // Wait for all order details to be created
             const orderDetailsResponses = await Promise.all(orderDetailsPromises);
             console.log('Order details created:', orderDetailsResponses);
-            
-            // Perform actions after successful submission, e.g., redirect
-            // window.location.href = '/success-page';
+    
         } catch (error) {
             console.error('Error creating order:', error.response ? error.response.data : error.message);
         }

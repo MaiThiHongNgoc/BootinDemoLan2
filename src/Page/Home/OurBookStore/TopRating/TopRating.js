@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { getProducts } from '../../../../Backend/Service (1)/productService';
-import { addProductToCart as addProductToCartService } from '../../../../Backend/Service (1)/cartItemsService';
+import { addProductToCart } from '../../../../Backend/Service (1)/cartItemsService'; // Ensure the import path is correct
 import './TopRating.css';
 import { FiSearch, FiShoppingCart, FiCheck } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
@@ -74,7 +74,9 @@ const TopRating = () => {
         const cartId = cartData[0].cart_id;
         console.log('Cart ID:', cartId);
 
-        await addProductToCartService(cartId, product.product_id, 1, token);
+        // Calculate total_price
+        const totalPrice = product.price; // Assuming the price is per unit
+        await addProductToCart(cartId, product.product_id, 1, totalPrice, token);
         console.log('Product added to cart:', product);
 
         // Update cart icon state to spinning

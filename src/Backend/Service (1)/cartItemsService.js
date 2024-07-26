@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL2 = 'http://localhost:9191/api/cartitems/v1/';
 
-export const addProductToCart = async (cartId, product_id, quantity, token) => {
+export const addProductToCart = async (cartId, product_id, quantity, total_price, token) => {
     try {
         const response = await axios.post(`${API_URL2}`, {
             cart: {
@@ -11,7 +11,8 @@ export const addProductToCart = async (cartId, product_id, quantity, token) => {
             product: {
                 product_id: product_id  // Ensure backend expects 'product_id' inside 'product'
             },
-            quantity: quantity  // Send the quantity
+            quantity: quantity, // Send the quantity
+            total_price: total_price
         }, {
             headers: {
                 'Content-Type': 'application/json',
