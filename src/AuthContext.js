@@ -5,17 +5,24 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [pendingAction, setPendingAction] = useState(null); // Track pending actions
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    // Check if token exists in localStorage
     const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token);
+    if (token) {
+      setIsLoggedIn(true);
+      const storedUserId = localStorage.getItem('user_id');
+      setUserId(storedUserId);
+    } else {
+      setIsLoggedIn(false);
+    }
   }, []);
 
   const login = (token) => {
     localStorage.setItem('token', token);
     setIsLoggedIn(true);
-    // Execute any pending action (e.g., add to cart)
+    const storedUserId = localStorage.getItem('user_id');
+    setUserId(storedUserId);
     if (pendingAction) {
       pendingAction();
       setPendingAction(null); // Clear the pending action
@@ -25,6 +32,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
+    setUserId(null); // Clear userId on logout
   };
 
   const addPendingAction = (action) => {
@@ -32,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, addPendingAction }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, addPendingAction, userId }}>
       {children}
     </AuthContext.Provider>
   );

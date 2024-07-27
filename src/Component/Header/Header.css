@@ -127,8 +127,8 @@
 
 .cart-icon-badge {
     position: absolute;
-    top: -10px; /* Adjust as needed */
-    right: -10px; /* Adjust as needed */
+    top: -9px; /* Adjust as needed */
+    right: 5px; /* Adjust as needed */
     background-color: #ff0000;
     color: #ffffff;
     border-radius: 50%;

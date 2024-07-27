@@ -71,8 +71,6 @@ const TopRating = () => {
         const cartData = await getPurchasedProductsByUserId(user_id);
         if (cartData.length > 0) {
             const cartId = cartData[0].cart_id;
-
-            // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
             const existingItem = cartData[0].cart_Product.find(item => item.product.product_id === product.product_id);
 
             if (existingItem) {
@@ -94,12 +92,17 @@ const TopRating = () => {
                 [product.product_id]: 'spinning'
             }));
 
+            // Đặt lại trạng thái biểu tượng giỏ hàng sau 1 giây
             setTimeout(() => {
                 setCartIconState(prevState => ({
                     ...prevState,
                     [product.product_id]: 'checkmark'
                 }));
             }, 1000);
+
+            // Cập nhật số lượng giỏ hàng nếu cần
+            // Nếu có component phụ thuộc vào số lượng giỏ hàng, hãy cập nhật lại tại đây
+            // Ví dụ: fetchCartDetails();
 
         } else {
             console.error('No cart found for user');
@@ -112,6 +115,7 @@ const TopRating = () => {
         setShowNotification(true);
     }
 };
+
 
 
   const handleCloseNotification = () => {

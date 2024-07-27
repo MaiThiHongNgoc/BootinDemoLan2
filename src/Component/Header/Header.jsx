@@ -38,11 +38,9 @@ const Header = () => {
             if (userId) {
                 try {
                     const data = await getPurchasedProductsByUserId(userId);
-                    console.log('Fetched data:', data); // Log dữ liệu
                     if (Array.isArray(data) && data.length > 0) {
                         const cartData = data[0];
                         const { totalQuantity } = mergeProducts(cartData.cart_Product || []);
-                        console.log('Total quantity:', totalQuantity); // Log số lượng
                         setTotalQuantity(totalQuantity);
                     }
                 } catch (error) {
@@ -50,10 +48,9 @@ const Header = () => {
                 }
             }
         };
-        console.log('Total quantity:', totalQuantity);
+
         fetchCartDetails();
     }, [userId]);
-
 
     return (
         <div className="Header">
@@ -93,7 +90,6 @@ const Header = () => {
                         <span className="cart-icon-badge">{totalQuantity}</span>
                     )}
                 </div>
-
                 <div className="user-info">
                     <div className="user-icon-container" onClick={toggleDropdown}>
                         <RxAvatar className="login-icon" aria-label="User Info" />
