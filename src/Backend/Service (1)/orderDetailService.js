@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:9191/api/orderdetail/v1/'; // Adjust the URL based on your Spring Boot API
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:9191/api/orderdetail/v1/'; // Use environment variable
 
 const decodeToken = (token) => {
     try {
@@ -12,8 +12,8 @@ const decodeToken = (token) => {
 };
 
 const checkAdminRole = (role) => {
-    if (role !== 'ADMIN') {
-        throw new Error('Unauthorized: Only admins can access this resource.');
+    if (role !== 'ADMIN' && role !== 'USER') {
+        throw new Error('Unauthorized: Only admins and users can access this resource.');
     }
 };
 
@@ -33,9 +33,9 @@ const getOrderDetails = async (page) => {
             }
         });
 
-        return response.data; // Return the data directly
+        return response.data;
     } catch (error) {
-        console.error('Failed to fetch order details:', error.message);
+        console.error('Failed to fetch order details:', error.response?.data || error.message);
         throw error;
     }
 };
@@ -50,9 +50,9 @@ const createOrderDetail = async (orderDetail) => {
                 Authorization: `Bearer ${token}`
             }
         });
-        return response.data; // Return the data directly
+        return response.data;
     } catch (error) {
-        console.error('Failed to create order detail:', error.message);
+        console.error('Failed to create order detail:', error.response?.data || error.message);
         throw error;
     }
 };
@@ -69,9 +69,9 @@ const updateOrderDetail = async (orderDetail) => {
                 Authorization: `Bearer ${token}`
             }
         });
-        return response.data; // Return the data directly
+        return response.data;
     } catch (error) {
-        console.error('Failed to update order detail:', error.message);
+        console.error('Failed to update order detail:', error.response?.data || error.message);
         throw error;
     }
 };
@@ -87,7 +87,7 @@ const deleteOrderDetail = async (order_detail_id) => {
             }
         });
     } catch (error) {
-        console.error('Failed to delete order detail:', error.message);
+        console.error('Failed to delete order detail:', error.response?.data || error.message);
         throw error;
     }
 };

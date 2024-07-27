@@ -14,9 +14,10 @@ const getToken = () => {
 const checkAdminRole = (token) => {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const role = payload.scope;
-    if (role !== 'ADMIN') {
-        throw new Error('Unauthorized: Only admins can access this resource.');
+    if (role !== 'ADMIN' && role !== 'USER') {
+        throw new Error('Unauthorized: Only admins and users can access this resource.');
     }
+    
 };
 
 const getOrder = async () => {

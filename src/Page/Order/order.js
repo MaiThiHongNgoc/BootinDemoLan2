@@ -3,7 +3,7 @@ import { createOrder } from '../../Backend/Service (1)/orderService';
 import { createOrderDetail } from '../../Backend/Service (1)/orderDetailService';
 import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService';
 
-const CreateOrderForm = ({ orderDetail }) => {
+const CreateOrderForm = () => {
     const user_id = localStorage.getItem('user_id');
     const [formData, setFormData] = useState({
         user: { user_id: user_id },
@@ -23,8 +23,6 @@ const CreateOrderForm = ({ orderDetail }) => {
             try {
                 // Fetch cart items
                 const cartOrders = await getPurchasedProductsByUserId();
-                console.log('Cart orders:', cartOrders);
-
                 if (!cartOrders || !Array.isArray(cartOrders)) {
                     console.error('Invalid data format:', cartOrders);
                     return;
@@ -32,8 +30,6 @@ const CreateOrderForm = ({ orderDetail }) => {
 
                 // Extract and process cart products
                 const allCartProducts = cartOrders.flatMap(order => order.cart_Product || []);
-                console.log('All Cart Products:', allCartProducts);
-
                 setCartItems(allCartProducts);
 
                 if (!user_id) {
@@ -41,18 +37,16 @@ const CreateOrderForm = ({ orderDetail }) => {
                     return;
                 }
 
-                if (orderDetail) {
+                if (allCartProducts.length > 0) {
                     const orderDetails = allCartProducts.map(item => ({
+                        orders: { order_id: item.cart.cart_id }, // assuming cart_id maps to order_id
                         products: { product_id: item.product.product_id },
-                        quantity: item.quantity,
-                        total_price: item.total_price
+                        quantity: item.quantity
                     }));
-                    console.log('Order Details:', orderDetails);
-
                     setFormData(prevState => ({
                         ...prevState,
                         user: { user_id: user_id },
-                        total_amount: allCartProducts.reduce((acc, item) => acc + item.total_price, 0),
+                        total_amount: allCartProducts.reduce((acc, item) => acc + item.product.price * item.quantity, 0),
                         status: 'PENDING'
                     }));
 
@@ -64,7 +58,7 @@ const CreateOrderForm = ({ orderDetail }) => {
         };
 
         fetchData();
-    }, [orderDetail, user_id]);
+    }, [user_id]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -95,39 +89,41 @@ const CreateOrderForm = ({ orderDetail }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log('Submitting formData:', formData);
-            console.log('Order Details for submission:', formOrderDetail);
-    
+        
             // Create the order
             const orderResponse = await createOrder(formData);
-            const orderId = orderResponse.order_id;
-            console.log('Order created:', orderId);
-    
+            const orderId = orderResponse.order_id;    
             if (!orderId) {
                 throw new Error('Invalid order ID');
             }
     
-            // Prepare and send order details
-            const orderDetailsPromises = formOrderDetail.map(detail =>
-                createOrderDetail({
-                    orders: { order_id: orderId },
-                    ...detail
-                })
-            );
-    
-            console.log('Order Details Promises:', orderDetailsPromises);
-    
+            // Verify the structure of order details
+            const orderDetailsPromises = formOrderDetail.map(detail => {
+                // Ensure the order_id is correctly included
+                const orderDetailPayload = {
+                    ...detail,
+                    orders: { order_id: orderId }
+                };
+                return createOrderDetail(orderDetailPayload);
+            });
+            
             // Wait for all order details to be created
             const orderDetailsResponses = await Promise.all(orderDetailsPromises);
             console.log('Order details created:', orderDetailsResponses);
     
         } catch (error) {
-            console.error('Error creating order:', error.response ? error.response.data : error.message);
+            if (error.response) {
+                console.error('Error creating order:', error.response.data);
+            } else if (error.request) {
+                console.error('Error creating order: No response received from server');
+            } else {
+                console.error('Error creating order:', error.message);
+            }
         }
     };
     
     
-
+    
     return (
         <form onSubmit={handleSubmit}>
             <input
@@ -159,14 +155,6 @@ const CreateOrderForm = ({ orderDetail }) => {
                 name="payment_payment_method_id"
                 placeholder="Payment Method ID"
                 value={formData.paymentMethods.payment_method_id}
-                onChange={handleChange}
-                required
-            />
-            <input
-                type="number"
-                name="total_amount"
-                placeholder="Total Amount"
-                value={formData.total_amount}
                 onChange={handleChange}
                 required
             />

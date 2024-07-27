@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { getProducts } from '../../../../Backend/Service (1)/productService';
-import { addProductToCart } from '../../../../Backend/Service (1)/cartItemsService'; // Ensure the import path is correct
+import { addProductToCart, updateCartItem } from '../../../../Backend/Service (1)/cartItemsService'; // Ensure the import path is correct
 import './TopRating.css';
 import { FiSearch, FiShoppingCart, FiCheck } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
@@ -62,47 +62,57 @@ const TopRating = () => {
     const user_id = localStorage.getItem('user_id');
 
     if (!token || !user_id) {
-      setShowNotification(true);
-      return;
+        setShowNotification(true);
+        return;
     }
 
     try {
-      const cartData = await getPurchasedProductsByUserId(user_id);
-      console.log('Cart data:', cartData);
+        // Lấy dữ liệu giỏ hàng của người dùng
+        const cartData = await getPurchasedProductsByUserId(user_id);
+        if (cartData.length > 0) {
+            const cartId = cartData[0].cart_id;
 
-      if (cartData.length > 0) {
-        const cartId = cartData[0].cart_id;
-        console.log('Cart ID:', cartId);
+            // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+            const existingItem = cartData[0].cart_Product.find(item => item.product.product_id === product.product_id);
 
-        // Calculate total_price
-        const totalPrice = product.price; // Assuming the price is per unit
-        await addProductToCart(cartId, product.product_id, 1, totalPrice, token);
-        console.log('Product added to cart:', product);
+            if (existingItem) {
+                // Nếu sản phẩm đã tồn tại, cập nhật số lượng
+                await updateCartItem(existingItem.cart_item_id, {
+                    cart: { cart_id: cartId },
+                    product: { product_id: product.product_id },
+                    quantity: existingItem.quantity + 1,
+                    total_price: (existingItem.quantity + 1) * product.price
+                });
+            } else {
+                // Nếu sản phẩm chưa tồn tại, thêm sản phẩm mới vào giỏ hàng
+                await addProductToCart(cartId, product.product_id, 1, token);
+            }
 
-        // Update cart icon state to spinning
-        setCartIconState((prevState) => ({
-          ...prevState,
-          [product.product_id]: 'spinning',
-        }));
+            // Cập nhật trạng thái biểu tượng giỏ hàng
+            setCartIconState(prevState => ({
+                ...prevState,
+                [product.product_id]: 'spinning'
+            }));
 
-        setTimeout(() => {
-          // Update cart icon state to checkmark after spinning
-          setCartIconState((prevState) => ({
-            ...prevState,
-            [product.product_id]: 'checkmark',
-          }));
-        }, 1000);
-      } else {
-        console.error('No cart found for user');
-        setError('No cart found for user.');
-        setShowNotification(true);
-      }
+            setTimeout(() => {
+                setCartIconState(prevState => ({
+                    ...prevState,
+                    [product.product_id]: 'checkmark'
+                }));
+            }, 1000);
+
+        } else {
+            console.error('No cart found for user');
+            setError('No cart found for user.');
+            setShowNotification(true);
+        }
     } catch (error) {
-      console.error('Failed to add product to cart:', error.message);
-      setError('Failed to add product to cart.');
-      setShowNotification(true);
+        console.error('Failed to add product to cart:', error.message);
+        setError('Failed to add product to cart.');
+        setShowNotification(true);
     }
-  };
+};
+
 
   const handleCloseNotification = () => {
     setShowNotification(false);

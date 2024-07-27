@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService';
-import { CartContext } from './CartContext'; // Adjust path accordingly
+import { CartContext } from './CartContext'; // Điều chỉnh đường dẫn theo yêu cầu
 import { updateCartItem, deleteCartItem } from '../Backend/Service (1)/cartItemsService';
 import { mergeProducts } from './productUtils';
 import { RxSlash } from 'react-icons/rx';
@@ -8,6 +8,7 @@ import { AiFillDelete } from 'react-icons/ai';
 import Header from '../Component/Header/Header';
 import Footer from '../Component/Footer/Footer';
 import './ViewCart.css';
+import { Link } from 'react-router-dom';
 
 const ViewCart = ({ userId }) => {
     const [cartItems, setCartItems] = useState([]);
@@ -23,11 +24,9 @@ const ViewCart = ({ userId }) => {
             setError('');
             try {
                 const data = await getPurchasedProductsByUserId(userId);
-                console.log(data[0].cart_id)
                 if (Array.isArray(data) && data.length > 0) {
                     const cartData = data[0];
                     const { mergedProducts, totalQuantity, totalPrice } = mergeProducts(cartData.cart_Product || []);
-                    console.log(mergedProducts)
                     setCartItems(mergedProducts);
                     setTotalQuantity(totalQuantity);
                     setTotalPrice(totalPrice);
@@ -48,34 +47,37 @@ const ViewCart = ({ userId }) => {
         };
 
         fetchCartItems();
-    }, [userId, cartUpdated]);
+    }, [userId]);
 
     const handleQuantityChange = async (productId, newQuantity) => {
-        if (newQuantity < 1) return; // Ensure quantity is at least 1
+        if (newQuantity < 1) return; // Đảm bảo số lượng ít nhất là 1
+    
         try {
-            // Tìm cartItemId từ cartItems dựa trên productId
             const itemToUpdate = cartItems.find(item => item.product.product_id === productId);
             if (!itemToUpdate) {
                 throw new Error('Item to update not found.');
-            }    
-            // Lấy cart_id từ cartItems (giả định cart_id đã có trong itemToUpdate)
+            }
+            
             const data = await getPurchasedProductsByUserId(userId);
             const cart_id = data[0].cart_id;
-            // Cập nhật thông tin
+            
             const updatedItem = {
-                cart: { cart_id:  cart_id},
+                cart: { cart_id },
                 product: { product_id: productId },
                 quantity: newQuantity,
                 total_price: newQuantity * itemToUpdate.product.price
             };
     
-            // Gửi yêu cầu cập nhật với cart_item_id
-            await updateCartItem(itemToUpdate.cart_item_id, updatedItem); 
+            // Cập nhật thông tin giỏ hàng
+            await updateCartItem(itemToUpdate.cart_item_id, updatedItem);
+    
+            // Cập nhật giỏ hàng trong trạng thái
             const updatedCartItems = cartItems.map(item =>
                 item.product.product_id === productId
                     ? { ...item, quantity: newQuantity }
                     : item
             );
+    
             setCartItems(updatedCartItems);
             setTotalQuantity(updatedCartItems.reduce((acc, item) => acc + item.quantity, 0));
             setTotalPrice(updatedCartItems.reduce((acc, item) => acc + item.quantity * item.product.price, 0));
@@ -89,19 +91,22 @@ const ViewCart = ({ userId }) => {
 
     const handleRemoveItem = async (cartItemId) => {
         try {
-            await deleteCartItem(cartItemId); // Chỉ truyền cartItemId
+            await deleteCartItem(cartItemId);
             const updatedCartItems = cartItems.filter(item => item.cart_item_id !== cartItemId);
-            console.log(updatedCartItems)
+
+            // Cập nhật trạng thái
+            const updatedTotalQuantity = updatedCartItems.reduce((acc, item) => acc + item.quantity, 0);
+            const updatedTotalPrice = updatedCartItems.reduce((acc, item) => acc + item.quantity * item.product.price, 0);
+
             setCartItems(updatedCartItems);
-            setTotalQuantity(updatedCartItems.reduce((acc, item) => acc + item.quantity, 0));
-            setTotalPrice(updatedCartItems.reduce((acc, item) => acc + item.quantity * item.product.price, 0));
+            setTotalQuantity(updatedTotalQuantity);
+            setTotalPrice(updatedTotalPrice);
             updateCart(updatedCartItems);
         } catch (error) {
             setError('Failed to remove item from cart');
             console.error('Remove item error:', error);
         }
     };
-    
 
     if (loading) {
         return <p className="viewcart-loading">Loading cart items...</p>;
@@ -142,9 +147,9 @@ const ViewCart = ({ userId }) => {
                             {cartItems.map(item => {
                                 const subtotal = item.quantity * item.product.price;
                                 return (
-                                    <tr key={item.cart_item_id}> {/* Sử dụng cart_item_id làm key */}
+                                    <tr key={item.cart_item_id}>
                                         <td>
-                                            {item.product.imgProducts && item.product.imgProducts.length > 0 && (
+                                            {item.product.imgProducts?.[0]?.img_url && (
                                                 <img src={item.product.imgProducts[0].img_url} alt={item.product.product_name} className="viewcart-product-image" />
                                             )}
                                         </td>
@@ -168,7 +173,12 @@ const ViewCart = ({ userId }) => {
                                                 className='input-quantity'
                                                 min="1"
                                                 value={item.quantity}
-                                                onChange={(e) => handleQuantityChange(item.product.product_id, parseInt(e.target.value, 10))}
+                                                onChange={(e) => {
+                                                    const newQuantity = parseInt(e.target.value, 10);
+                                                    if (!isNaN(newQuantity)) {
+                                                        handleQuantityChange(item.product.product_id, newQuantity);
+                                                    }
+                                                }}
                                             />
                                             <button
                                                 className="quantity-button"
@@ -195,6 +205,9 @@ const ViewCart = ({ userId }) => {
                         <p>Total Quantity: {totalQuantity}</p>
                         <p>Total Price: ${totalPrice.toFixed(2)}</p>
                     </div>
+                    <button className="viewcart-remove-button">
+                        <Link to="/createorder">Proceed to Checkout</Link>
+                    </button>
                 </div>
             </div>
             <Footer />
