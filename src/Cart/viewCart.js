@@ -135,32 +135,32 @@ const ViewCart = ({ userId }) => {
                     <table className="viewcart-products-table">
                         <thead>
                             <tr>
-                                <th>Image</th>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Subtotal</th>
-                                <th>Action</th>
+                                <th className='viewcart-remove'></th>
+                                <th className='viewcart-thumbnail'>Product</th>
+                                <th className='viewcart-name'>Price</th>
+                                <th className='viewcart-price'>Quantity</th>
+                                <th className='viewcart-quantity'>Subtotal</th>
+                                <th className='viewcart-subtotal'></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='viewcart-tbody'>
                             {cartItems.map(item => {
                                 const subtotal = item.quantity * item.product.price;
                                 return (
                                     <tr key={item.cart_item_id}>
-                                        <td>
+                                        <td className='viewcart-item'>
                                             {item.product.imgProducts?.[0]?.img_url && (
                                                 <img src={item.product.imgProducts[0].img_url} alt={item.product.product_name} className="viewcart-product-image" />
                                             )}
                                         </td>
-                                        <td>
+                                        <td className='viewcart-cart'>
                                             <div className='viewcart-product-details'>
                                                 <h4 className="viewcart-product-name">{item.product.product_name}</h4>
                                                 <p className="viewcart-product-author">{item.product.author.author_name}</p>
                                             </div>
                                         </td>
                                         <td className="viewcart-product-price">${item.product.price}</td>
-                                        <td className="viewcart-quantity">
+                                        <td className="viewcart-quanti">
                                             <button
                                                 className="quantity-button"
                                                 onClick={() => handleQuantityChange(item.product.product_id, item.quantity - 1)}
@@ -188,8 +188,8 @@ const ViewCart = ({ userId }) => {
                                             </button>
                                         </td>
                                         <td className="viewcart-product-subtotal">${subtotal.toFixed(2)}</td>
-                                        <td>
-                                            <button className="viewcart-remove-button" onClick={() => handleRemoveItem(item.cart_item_id)}>
+                                        <td className='viewcart-number'>
+                                            <button className="viewcart-button" onClick={() => handleRemoveItem(item.cart_item_id)}>
                                                 <AiFillDelete />
                                             </button>
                                         </td>
@@ -199,14 +199,14 @@ const ViewCart = ({ userId }) => {
                         </tbody>
                     </table>
                 </div>
-                <div>
+                <div className='viewcart-createo'>
                     <div className="viewcart-summary">
-                        <h3>Cart Summary</h3>
+                        <h2>Cart totals</h2>
                         <p>Total Quantity: {totalQuantity}</p>
                         <p>Total Price: ${totalPrice.toFixed(2)}</p>
                     </div>
                     <button className="viewcart-remove-button">
-                        <Link to="/checkout">Proceed to Checkout</Link>
+                        <Link className='viewcart-wc' to="/createorder">Proceed to Checkout</Link>
                     </button>
                 </div>
             </div>
