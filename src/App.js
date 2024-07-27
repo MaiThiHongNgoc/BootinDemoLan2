@@ -26,6 +26,7 @@ import { CartProvider } from "./Cart/CartContext"; // Import CartProvider
 
 
 import Admin from "./Backend/Admin/Admin";
+import DashBoard from "./Backend/Admin/Home";
 import UserList from "./Backend/User/UserList";
 import CategoryList from "./Backend/Category/CategoryList";
 import AuthorList from "./Backend/Author/AuthorList";
@@ -63,16 +64,18 @@ function App() {
               <Route path="createorder" element={<CreateOrderForm />} />
 
               {/* Admin Routes */}
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/user" element={<UserList />} />
-              <Route path="/category" element={<CategoryList />} />
-              <Route path="/authors" element={<AuthorList />} />
-              <Route path="/products" element={<ProductList />} />
-              <Route path="/order" element={<OrderList />} />
-              <Route path="/orderdetail" element={<OrderDetailList />} />
-              <Route path="/image" element={<ImageList />} />
-              <Route path="/staff" element={<Staff />} />
-
+              <Route path="/admin" element={<Admin />}>
+                <Route index element={<DashBoard />} />
+                <Route path="dashboard" element={<DashBoard />} />
+                <Route path="user" element={<UserList />} />
+                <Route path="category" element={<CategoryList />} />
+                <Route path="authors" element={<AuthorList />} />
+                <Route path="products" element={<ProductList />} />
+                <Route path="order" element={<OrderList />} />
+                <Route path="orderdetail" element={<OrderDetailList />} />
+                <Route path="image" element={<ImageList />} />
+                <Route path="staff" element={<Staff />} />
+              </Route>
               {/* Not Found Route */}
               <Route path="*" element={<PageNotFound />} />
             </Routes>

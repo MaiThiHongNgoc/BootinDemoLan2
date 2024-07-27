@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import './Admin.css';
 import Header from './Header';
@@ -36,7 +36,9 @@ function Admin() {
     <div className='grid-container'>
       <Header toggleSidebar={toggleSidebar} />
       <Sidebar openSidebarToggle={openSidebarToggle} toggleSidebar={toggleSidebar} />
-      <Home openSidebarToggle={openSidebarToggle} />
+      <div className="content">
+        <Outlet />
+      </div>
     </div>
   );
 }
