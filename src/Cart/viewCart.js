@@ -161,12 +161,14 @@ const ViewCart = ({ userId }) => {
                                         </td>
                                         <td className="viewcart-product-price">${item.product.price}</td>
                                         <td className="viewcart-quanti">
+                                            <div className='viewcart-quanti2'>
                                             <button
                                                 className="quantity-button"
                                                 onClick={() => handleQuantityChange(item.product.product_id, item.quantity - 1)}
                                             >
                                                 -
                                             </button>
+                                            
                                             <input
                                                 type="number"
                                                 id={`quantity-${item.product.product_id}`}
@@ -186,6 +188,7 @@ const ViewCart = ({ userId }) => {
                                             >
                                                 +
                                             </button>
+                                            </div>
                                         </td>
                                         <td className="viewcart-product-subtotal">${subtotal.toFixed(2)}</td>
                                         <td className='viewcart-number'>
