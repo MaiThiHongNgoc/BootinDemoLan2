@@ -15,10 +15,7 @@ import Login from "./Page/Login/Login";
 import PageNotFound from "./Page/404";
 import Cart from "./Cart/Cart";
 import ViewCart from "./Cart/viewCart";
-import checkOut from "./Cart/checkOut";
-
 import RegisterForm from "./Page/Register/Register";
-import Logout from "./Page/LogOut/LogOut";
 
 import { AuthProvider } from "./AuthContext";
 import { CartProvider } from "./Cart/CartContext"; // Import CartProvider
@@ -35,7 +32,7 @@ import OrderList from "./Backend/Order/orderList";
 import OrderDetailList from "./Backend/orderDetail/orderDetailList";
 //import Staff from "./Backend/staff/Staff";
 import ImageList from "./Backend/Image/ImageList";
-import CreateOrderForm from "./Page/Order/order";
+import CheckOut from "./Cart/checkOut";
 
     
 function App() {
@@ -60,8 +57,7 @@ function App() {
               <Route path="/register" element={<RegisterForm />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/viewcart" element={<ViewCart />} />
-              <Route path="/checkout" element={<checkOut />} />
-              <Route path="createorder" element={<CreateOrderForm />} />
+              <Route path="/checkout" element={<CheckOut />} />
 
               {/* Admin Routes */}
               <Route path="/admin" element={<Admin />}>

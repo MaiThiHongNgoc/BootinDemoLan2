@@ -37,19 +37,14 @@ const getOrder = async () => {
     }
 };
 
-const getOrderByUserId = async () => {
-    const userId = localStorage.getItem('user_id');
+const getOrderById = async (orderId) => {
     const token = getToken();
 
     // Kiểm tra quyền admin, nếu không cần thiết thì có thể loại bỏ
     checkAdminRole(token);
 
-    if (!userId) {
-        throw new Error('User ID is not available in localStorage');
-    }
-
     try {
-        const response = await axios.get(`${API_URL}${userId}`, {
+        const response = await axios.get(`${API_URL}${orderId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -129,4 +124,4 @@ const fetchPaymentMethods = async () => {
     }
 };
 
-export { getOrder, getOrderByUserId, createOrder, updateOrder, deleteOrder, fetchPaymentMethods };
+export { getOrder, getOrderById, createOrder, updateOrder, deleteOrder, fetchPaymentMethods };
