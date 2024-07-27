@@ -209,7 +209,7 @@ const ViewCart = ({ userId }) => {
                         <p>Total Price: ${totalPrice.toFixed(2)}</p>
                     </div>
                     <button className="viewcart-remove-button">
-                        <Link className='viewcart-wc' to="/createorder">Proceed to Checkout</Link>
+                        <Link className='viewcart-wc' to="/checkout">Proceed to Checkout</Link>
                     </button>
                 </div>
             </div>

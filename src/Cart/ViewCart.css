@@ -163,6 +163,7 @@
 .viewcart-summary{
     margin-top: 0;
     position: relative;
+    border: 1px solid #f5f5f5;
 }
 .viewcart-summary h2{
     height: 55.8px;
@@ -247,6 +248,7 @@
     width: 100%;
     border-collapse: separate; /* Use separate to control border-spacing */
     border-spacing: 0;
+    border: 1px solid #f5f5f5;
 }
 
 /* .viewcart-products-table th, */
