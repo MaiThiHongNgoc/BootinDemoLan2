@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; // Import jwtDecode correctly
-import './Staff.css';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import OrderDetailList from '../orderDetail/orderDetailList';

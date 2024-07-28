@@ -4,6 +4,7 @@ import { CartContext } from './CartContext'; // Adjust path accordingly
 import { mergeProducts } from './productUtils'; // Adjust path accordingly
 import { Link } from 'react-router-dom'; // Import Link
 import './Cart.css';
+import { AuthContext } from '../AuthContext'
 
 const Cart = ({ userId, onClose }) => {
     const [purchasedProducts, setPurchasedProducts] = useState([]);
@@ -13,6 +14,7 @@ const Cart = ({ userId, onClose }) => {
     const [error, setError] = useState('');
     const cartRef = useRef();
     const { cartUpdated } = useContext(CartContext);
+    const { updateCart } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchProducts = async () => {

@@ -9,10 +9,12 @@ import Cart from '../../Cart/Cart';
 import Logout from '../../Page/LogOut/LogOut';
 import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService'; // Adjust path accordingly
 import { mergeProducts } from '../../Cart/productUtils'; // Adjust path accordingly
+import { CartContext } from '../../Cart/CartContext'; // Adjust path accordingly
 
 const Header = () => {
     const [activeLink, setActiveLink] = useState(null);
-    const { isLoggedIn, userId } = useContext(AuthContext); // Assuming userId is in AuthContext
+    const { isLoggedIn, userId } = useContext(AuthContext);
+    const { cartUpdated } = useContext(CartContext); // Get cartUpdated from CartContext
     const [showCart, setShowCart] = useState(false);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [totalQuantity, setTotalQuantity] = useState(0);
@@ -53,7 +55,7 @@ const Header = () => {
         };
 
         fetchCartDetails();
-    }, [userId]); // Re-run effect when userId changes
+    }, [userId, cartUpdated]); // Re-run effect when userId or cartUpdated changes
 
     return (
         <div className="Header">

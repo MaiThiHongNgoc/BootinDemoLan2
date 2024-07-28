@@ -1,57 +1,114 @@
 .author-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column; /* Để các phần tử trong form xếp dọc */
+  overflow-y: auto;
+  grid-area: main;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+}
+
+.author-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.author-form input {
+  width: calc(100% - 12px);
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.author-form input[type="number"] {
+  width: calc(100% - 12px);
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.author-form .form-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.author-form-button-save {
+  align-self: flex-end;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.author-form-button-save:hover {
+  background-color: #45a049;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Medium <= 992px */
+@media screen and (max-width: 992px) {
+  .author-form {
+    max-width: 100%;
+    padding: 15px;
   }
-  
-  .author-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
+
+  .author-form input {
+    font-size: 13px;
+    padding: 7px;
   }
-  
-  .author-form input{ 
-    width: calc(100% - 12px);
-    padding: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  .author-form input[type="number"] {
-    width: calc(100% - 12px);
-    padding: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  .author-form .form-actions {
-    margin-top: 10px;
-    display: flex;
-    justify-content: flex-end; /* Để các phần tử trong .form-actions căn phải */
-  }
-  
+
   .author-form-button-save {
-    align-self: flex-end; /* Đẩy nút Save sang phía cuối */
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #4CAF50; /* Màu nền xanh */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền */
+    padding: 8px 18px;
+    font-size: 15px;
   }
-  
-  .author-form-button-save:hover {
-    background-color: #45a049;
+}
+
+/* Small <= 768px */
+@media screen and (max-width: 768px) {
+  .author-form {
+    max-width: 100%;
+    padding: 10px;
   }
-  
+
+  .author-form input {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .author-form-button-save {
+    padding: 7px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Extra Small <= 576px */
+@media screen and (max-width: 576px) {
+  .author-form {
+    max-width: 100%;
+    padding: 8px;
+  }
+
+  .author-form input {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .author-form-button-save {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+}

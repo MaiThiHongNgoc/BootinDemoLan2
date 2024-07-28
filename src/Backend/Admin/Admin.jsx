@@ -4,7 +4,6 @@ import { jwtDecode } from 'jwt-decode';
 import './Admin.css';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Home from './Home';
 
 function Admin() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
