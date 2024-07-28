@@ -108,15 +108,8 @@ const deleteOrder = async (order_id) => {
 };
 
 const fetchPaymentMethods = async () => {
-    const token = getToken();
-    checkAdminRole(token);
-
     try {
-        const response = await axios.get(PAYMENT_API_URL, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        const response = await axios.get(PAYMENT_API_URL);
         return response.data;
     } catch (error) {
         console.error('Failed to fetch payment methods:', error.message);

@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { createOrder } from '../Backend/Service (1)/orderService';
+import { createOrder, fetchPaymentMethods } from '../Backend/Service (1)/orderService';
 import { createOrderDetail } from '../Backend/Service (1)/orderDetailService';
 import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService';
 import { deleteCartItem } from '../Backend/Service (1)/cartItemsService';
 import { showMessage } from './utils'; // Import showMessage function
 import './CheckOut.css';
-import axios from 'axios';
 
 const CheckOut = () => {
   const user_id = localStorage.getItem('user_id');
-  const token = localStorage.getItem('token');
-
   const [formData, setFormData] = useState({
     user: { user_id: user_id },
     first_name: '',
@@ -24,8 +21,6 @@ const CheckOut = () => {
   const [cartItems, setCartItems] = useState([]);
   const [deleteCart, setDeleteCart] = useState([]);
   const [paymentMethods, setPaymentMethods] = useState([]);
-  const [orderId, setOrderId] = useState([]);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +34,13 @@ const CheckOut = () => {
         const allCartProducts = cartOrders.flatMap(order => order.cart_Product || []);
         setCartItems(allCartProducts);
         setDeleteCart(allCartProducts);
+
+        const paymentMethodResponse = await fetchPaymentMethods();
+        if (Array.isArray(paymentMethodResponse)) {
+          setPaymentMethods(paymentMethodResponse);
+        } else {
+          console.error('Payment methods data is not an array:', paymentMethodResponse);
+        }
 
         if (!user_id) {
           console.error('User ID not found in localStorage');
@@ -60,20 +62,13 @@ const CheckOut = () => {
           setFormOrderDetail(orderDetails);
         }
 
-        const paymentMethodResponse = await axios.get('http://localhost:9191/api/paymentmethods/v1/', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        setPaymentMethods(paymentMethodResponse.data);
-
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [user_id, token]);
+  }, [user_id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -173,26 +168,30 @@ const CheckOut = () => {
         />
         <div className="form-group">
           <label>Select payment method:</label>
-          {paymentMethods.map(method => (
-            <div key={method.payment_method_id} className="form-check">
-              <div className='form-check-display'>
-              <input
-                type="radio"
-                id={`payment_method_${method.payment_method_id}`}
-                name="payment_payment_method_id"
-                value={method.payment_method_id.toString()} // Ensure value is a string
-                checked={formData.paymentMethods.payment_method_id === method.payment_method_id.toString()} // Ensure type consistency
-                onChange={handleChange}
-                className="form-check-input"
-                required
-              />
-              <label htmlFor={`payment_method_${method.payment_method_id}`} className="form-check-label">
-                {method.method_name}
-              </label>
+          {paymentMethods.length > 0 ? (
+            paymentMethods.map(method => (
+              <div key={method.payment_method_id} className="form-check">
+                <div className='form-check-display'>
+                  <input
+                    type="radio"
+                    id={`payment_method_${method.payment_method_id}`}
+                    name="payment_payment_method_id"
+                    value={method.payment_method_id.toString()} // Ensure value is a string
+                    checked={formData.paymentMethods.payment_method_id === method.payment_method_id.toString()} // Ensure type consistency
+                    onChange={handleChange}
+                    className="form-check-input"
+                    required
+                  />
+                  <label htmlFor={`payment_method_${method.payment_method_id}`} className="form-check-label">
+                    {method.method_name}
+                  </label>
+                </div>
+                {method.description && <p className="payment-method-description">{method.description}</p>}
               </div>
-              {method.description && <p className="payment-method-description">{method.description}</p>}
-              </div>            
-          ))}
+            ))
+          ) : (
+            <p>No payment methods available.</p>
+          )}
         </div>
 
         <div className="cart-items-container">
