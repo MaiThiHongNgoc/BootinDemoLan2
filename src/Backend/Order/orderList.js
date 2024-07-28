@@ -1,7 +1,10 @@
+// src/components/OrderList.js
 import React, { useState, useEffect } from 'react';
-import { getOrder, updateOrder, deleteOrder, createOrder } from '../Service (1)/orderService';
+import { getOrder, updateOrder, deleteOrder } from '../Service (1)/orderService';
 import './orderList.css';
 import OrderForm from './orderForm';
+import OrderDetails from './orderDetail'; // Import component OrderDetails
+import { Link } from 'react-router-dom';
 
 const OrderList = () => {
     const [orders, setOrders] = useState([]);
@@ -88,7 +91,6 @@ const OrderList = () => {
             setLoading(false);
         }
     };
-    
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
@@ -180,7 +182,7 @@ const OrderList = () => {
                                             <option className='option-status-pending' value="PENDING">Pending</option>
                                             <option className='option-status-completed' value="COMPLETED">Completed</option>
                                             <option className='option-status-processing' value="PROCESSING">Processing</option>
-                                            <option  className='option-status-cancelled'value="CANCELLED">Cancelled</option>
+                                            <option className='option-status-cancelled' value="CANCELLED">Cancelled</option>
                                         </select>
                                     </td>
                                     <td>{order.paymentMethods.method_name}</td>
@@ -189,44 +191,16 @@ const OrderList = () => {
                                         <button className="order-list-button-delete" onClick={() => handleDelete(order.order_id)}>Delete</button>
                                     </td>
                                     <td>
-                                        <button className="toggle-button" onClick={() => handleToggleDetails(order.order_id)}>
-                                            {expandedOrderId === order.order_id ? '-' : '+'}
-                                        </button>
+                                    <Link to={`/admin/orderdetail/${order.order_id}`} className="order-list-button-details">View Details</Link>
                                     </td>
+
                                 </tr>
 
                                 {expandedOrderId === order.order_id && (
                                     <tr>
-                                        <td colSpan="11" className="order-details">
-                                            <h3>Order Details</h3>
-                                            {order.orderDetails.map((detail) => (
-                                                <div key={detail.order_detail_id}>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Product Name</th>
-                                                            <th>Price</th>
-                                                            <th>Quantity</th>
-                                                            <th>Total Price</th>
-                                                            <th>Description:</th>
-                                                            <th>Image Product</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <td> {detail.products.product_name}</td>
-                                                    <td> {detail.products.price}</td>
-                                                    <td> {detail.quantity}</td>
-                                                    <td> ${detail.total_price}</td>
-                                                    <td> {detail.products.description}</td>
-                                                    <td> {detail.products.imgProducts.length > 0 && (
-                                                        <img
-                                                            src={detail.products.imgProducts[0].img_url}
-                                                            alt={detail.products.imgProducts[0].img_name}
-                                                            className="product-image"
-                                                        />
-                                                    )}</td>
-                                                </div>
-                                            ))}
+                                        <td colSpan="12">
+                                            <OrderDetails order={order} />
                                         </td>
-
                                     </tr>
                                 )}
                             </React.Fragment>

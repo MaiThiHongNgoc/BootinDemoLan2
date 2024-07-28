@@ -29,10 +29,10 @@ import CategoryList from "./Backend/Category/CategoryList";
 import AuthorList from "./Backend/Author/AuthorList";
 import ProductList from "./Backend/Product/ProductList";
 import OrderList from "./Backend/Order/orderList";
-import OrderDetailList from "./Backend/orderDetail/orderDetailList";
 //import Staff from "./Backend/staff/Staff";
 import ImageList from "./Backend/Image/ImageList";
 import CheckOut from "./Cart/checkOut";
+import OrderDetails from "./Backend/Order/orderDetail";
 
     
 function App() {
@@ -68,7 +68,7 @@ function App() {
                 <Route path="authors" element={<AuthorList />} />
                 <Route path="products" element={<ProductList />} />
                 <Route path="order" element={<OrderList />} />
-                <Route path="orderdetail" element={<OrderDetailList />} />
+                <Route path="orderdetail/:orderId" element={<OrderDetails />} />
                 <Route path="image" element={<ImageList />} />
                 {/* <Route path="staff" element={<Staff />} /> */}
               </Route>

@@ -144,18 +144,21 @@
     width: 25%;
     margin-bottom: 0.5em;
     display: flex;
+
   }
   
   .form-check-input {
     margin-right: 0.5em; /* Space between radio button and label */
     vertical-align: middle; /* Aligns the radio button with the middle of the text */
+    width: 25%;
   }
   
   .form-check-label {
-    width: 150px;
-    display: inline-block; /* Ensures the label is in-line with the radio button */
+    width: 700px;
     text-align: left; /* Aligns text to the left */
     margin-left: 7px;
+    /* border: 1px solid red; */
+
   }
   
   .payment-method-description {

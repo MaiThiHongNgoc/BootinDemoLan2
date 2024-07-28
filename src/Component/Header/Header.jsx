@@ -42,15 +42,18 @@ const Header = () => {
                         const cartData = data[0];
                         const { totalQuantity } = mergeProducts(cartData.cart_Product || []);
                         setTotalQuantity(totalQuantity);
+                    } else {
+                        setTotalQuantity(0); // Set to 0 if no data
                     }
                 } catch (error) {
                     console.error('Failed to fetch cart details', error);
+                    setTotalQuantity(0); // Set to 0 in case of error
                 }
             }
         };
 
         fetchCartDetails();
-    }, [userId]);
+    }, [userId]); // Re-run effect when userId changes
 
     return (
         <div className="Header">
