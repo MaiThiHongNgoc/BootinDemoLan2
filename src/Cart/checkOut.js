@@ -24,6 +24,8 @@ const CheckOut = () => {
   const [cartItems, setCartItems] = useState([]);
   const [deleteCart, setDeleteCart] = useState([]);
   const [paymentMethods, setPaymentMethods] = useState([]);
+  const [orderId, setOrderId] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -228,7 +230,7 @@ const CheckOut = () => {
             </tbody>
           </table>
         </div>
-        <button className="submit-button" type="submit">Submit</button>
+        <button className="submit-button" type="submit"></button>
       </form>
     </div>
   );

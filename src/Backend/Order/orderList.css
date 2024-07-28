@@ -109,5 +109,27 @@
   color:  red;
   background-color: white;
 }
+.order-list-button-details {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem; /* Adjust font size */
+  color: white; /* Text color */
+  background-color: #007bff; /* Background color of the button */
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.order-list-button-details:hover {
+  background-color: #0056b3; /* Darker shade for hover effect */
+  color: white; /* Lighter text color on hover */
+}
+
+.order-list-button-details:active {
+  background-color: #004494; /* Even darker shade for active state */
+}
+
 
 

@@ -36,7 +36,6 @@ const OrderDetails = () => {
     // Check if order exists before rendering
     return (
         <div className="order-detail-page">
-            <button onClick={handleBack} className="back-button">Back to Orders</button>
             {order ? (
                 <div className="order-details">
                     <h1>Order ID: {order.order_id}</h1>
@@ -84,6 +83,7 @@ const OrderDetails = () => {
                             ))}
                         </tbody>
                     </table>
+                    <button onClick={handleBack} className="back-button">Back to Orders</button>
                 </div>
             ) : (
                 <p>No order details available.</p>
