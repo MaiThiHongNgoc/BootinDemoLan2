@@ -230,7 +230,7 @@ const CheckOut = () => {
             </tbody>
           </table>
         </div>
-        <button className="submit-button" type="submit"></button>
+        <button className="submit-button" type="submit">Submit</button>
       </form>
     </div>
   );
