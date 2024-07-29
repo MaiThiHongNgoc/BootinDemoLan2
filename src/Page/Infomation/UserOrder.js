@@ -49,7 +49,7 @@ const UserOrder = () => {
                     <div className="order-details">
                         <h2>Order Details</h2>
                         {order.orderDetails.map(detail => (
-                            <div key={detail.order_detail_id} className="product-container">
+                            <div key={detail.order_detail_id} className="product-content">
                                 <h3>{detail.products.product_name}</h3>
                                 <p><strong>Author:</strong> {detail.products.author.author_name}</p>
                                 <p><strong>Price:</strong> ${detail.products.price.toFixed(2)}</p>
