@@ -181,4 +181,13 @@
     display: inline-block;
     cursor: pointer;
   }
+  .infomation{
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+  }
+  .infomation:hover{
+    background-color: #f1f1f1;
+  }
   

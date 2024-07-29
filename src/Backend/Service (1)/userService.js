@@ -50,7 +50,7 @@ const updateUser = async (user) => {
     const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
     const role = payload.scope;
     try {
-        if (role !== 'ADMIN') {
+        if (role !== 'ADMIN' && role !== 'USER') {
             throw new Error('Unauthorized: Only admins can create categories.');
         }
 

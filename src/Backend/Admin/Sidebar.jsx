@@ -50,11 +50,11 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
             <BsListCheck className='icon' /> Order
           </Link>
         </li>
-        <li className='sidebar-list-item'>
+        {/* <li className='sidebar-list-item'>
           <Link to="/admin/createorder" className="sidebar-link"> 
             <BsListCheck className='icon' /> Order Detail
           </Link>
-        </li>
+        </li> */}
       </ul>
     </aside>
   );

@@ -3,8 +3,10 @@ import { createOrder, fetchPaymentMethods } from '../Backend/Service (1)/orderSe
 import { createOrderDetail } from '../Backend/Service (1)/orderDetailService';
 import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService';
 import { deleteCartItem } from '../Backend/Service (1)/cartItemsService';
-import { showMessage } from './utils'; // Import showMessage function
+import { showMessage } from './message'; // Import showMessage function
+//import {showMessage} from './message' // Import showMessage function
 import { PayPalButton } from 'react-paypal-button-v2'; // Import PayPalButton
+
 import './CheckOut.css';
 
 const CheckOut = () => {

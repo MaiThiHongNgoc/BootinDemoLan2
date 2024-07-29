@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { getProducts } from '../../Backend/Service (1)/productService';
 import { getCategories } from '../../Backend/Service (1)/categoryService';
 import { getAuthors } from '../../Backend/Service (1)/authorService';
+import { addProductToCart, updateCartItem } from '../../Backend/Service (1)/cartItemsService';
+import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService';
 import { IoSearch } from "react-icons/io5";
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
-import { FiSearch, FiShoppingCart } from "react-icons/fi";
+import { FiSearch, FiShoppingCart, FiCheck } from "react-icons/fi";
 import { RxSlash } from "react-icons/rx";
 import './Shop.css';
 
@@ -14,7 +16,6 @@ const Shop = () => {
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(8);
   const [totalPages, setTotalPages] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedPriceRange, setSelectedPriceRange] = useState([0, 1000]);
@@ -22,8 +23,8 @@ const Shop = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [loginRequired, setLoginRequired] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [cartIconState, setCartIconState] = useState({});
 
   useEffect(() => {
     loadProducts(currentPage, selectedCategory, selectedPriceRange, selectedAuthor, searchQuery);
@@ -87,29 +88,65 @@ const Shop = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleSearchClick = (product) => {
-    // Implement search click functionality
+    console.log('Search clicked for:', product);
+  };
+
+  const handleAddProductToCart = async (product) => {
+    const token = localStorage.getItem('token');
+    const user_id = localStorage.getItem('user_id');
+
+    if (!token || !user_id) {
+      setShowNotification(true);
+      return;
+    }
+
+    try {
+      // Get user's cart data
+      const cartData = await getPurchasedProductsByUserId(user_id);
+      if (cartData.length > 0) {
+        const cartId = cartData[0].cart_id;
+        const existingItem = cartData[0].cart_Product.find(item => item.product.product_id === product.product_id);
+
+        if (existingItem) {
+          // If product already exists, update quantity
+          await updateCartItem(existingItem.cart_item_id, {
+            cart: { cart_id: cartId },
+            product: { product_id: product.product_id },
+            quantity: existingItem.quantity + 1,
+            total_price: (existingItem.quantity + 1) * product.price
+          });
+        } else {
+          // If product does not exist, add new item to cart
+          await addProductToCart(cartId, product.product_id, 1, token);
+        }
+
+        // Update cart icon state
+        setCartIconState(prevState => ({
+          ...prevState,
+          [product.product_id]: 'spinning'
+        }));
+
+        // Reset cart icon state after 1 second
+        setTimeout(() => {
+          setCartIconState(prevState => ({
+            ...prevState,
+            [product.product_id]: 'checkmark'
+          }));
+        }, 1000);
+      } else {
+        console.error('No cart found for user');
+        setError('No cart found for user.');
+        setShowNotification(true);
+      }
+    } catch (error) {
+      console.error('Failed to add product to cart:', error.message);
+      setError('Failed to add product to cart.');
+      setShowNotification(true);
+    }
   };
 
   const handleCartClick = (product) => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      setShowNotification(true); // Show notification if not logged in
-      return;
-    }
-
-    // Decode the token to get user role information
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jwtPayload = JSON.parse(atob(base64));
-    const userRole = jwtPayload.scope; // Assuming role is stored in the JWT payload
-
-    if (userRole !== 'USER') {
-      setShowNotification(true); // Show notification if role is not 'USER'
-      return;
-    }
-
-    // Handle add to cart logic
-    console.log('Add to cart clicked for:', product);
+    handleAddProductToCart(product);
   };
 
   const handleCloseNotification = () => {
@@ -123,7 +160,7 @@ const Shop = () => {
         <h1 className='shop-product'>Products</h1>
         <div className='shop-bread'>
           <div className='shop-crumb'>
-            <a href='#' className='shop-a'>Home</a>
+            <a href='/' className='shop-a'>Home</a>
             <span className='shop-delimiter'>
               <i className='shop-i'><RxSlash /></i>
             </span>
@@ -217,8 +254,11 @@ const Shop = () => {
                         <button onClick={() => handleSearchClick(product)}>
                           <FiSearch />
                         </button>
-                        <button onClick={() => handleCartClick(product)}>
-                          <FiShoppingCart />
+                        <button
+                          onClick={() => handleCartClick(product)}
+                          className={`cart-icon ${cartIconState[product.product_id]}`}
+                        >
+                          {cartIconState[product.product_id] === 'checkmark' ? <FiCheck /> : <FiShoppingCart />}
                         </button>
                       </div>
                     </div>
@@ -228,29 +268,28 @@ const Shop = () => {
                   </div>
                 ))}
               </div>
-              {/* Pagination */}
-              <ul className="customer-pagination">
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <li key={index} className={`customer-page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                    <button onClick={() => paginate(index + 1)} className="customer-page-link">
-                      {index + 1}
-                    </button>
-                  </li>
+              <div className="pagination">
+                {[...Array(totalPages)].map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => paginate(index + 1)}
+                    className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+                  >
+                    {index + 1}
+                  </button>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
         </div>
       </div>
-      <Footer />
-      
-      {/* Notification Message */}
       {showNotification && (
-        <div className='login-required-message'>
-          <span>Please log in to add items to the cart. <a href="/login">Log in here</a></span>
-          <button className='close-button' onClick={handleCloseNotification}>×</button>
+        <div className="notification">
+          <p>Please log in to add items to your cart.</p>
+          <button onClick={handleCloseNotification}>Close</button>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

@@ -1,0 +1,40 @@
+/* UserOrder.css */
+
+.order-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.order-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+.product-container {
+    margin-bottom: 20px; /* Khoảng cách giữa các sản phẩm */
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
+    gap: 15px; /* Khoảng cách giữa các phần tử bên trong sản phẩm */
+}
+
+.product-images img {
+    max-width: 100px;
+    max-height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column; /* Căn chỉnh các chi tiết sản phẩm theo chiều dọc */
+}

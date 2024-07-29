@@ -10,6 +10,7 @@ import Logout from '../../Page/LogOut/LogOut';
 import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService'; // Adjust path accordingly
 import { mergeProducts } from '../../Cart/productUtils'; // Adjust path accordingly
 import { CartContext } from '../../Cart/CartContext'; // Adjust path accordingly
+import Infomation from '../../Page/Infomation/Infomation';
 
 const Header = () => {
     const [activeLink, setActiveLink] = useState(null);
@@ -104,6 +105,7 @@ const Header = () => {
                         <div className="dropdown-menu">
                             <Link to="/login" className="dropdown-item">Login</Link>
                             <Logout />
+                            <Link to='/infomation' className='infomation'>Infomation</Link>
                         </div>
                     )}
                 </div>
