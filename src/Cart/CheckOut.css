@@ -1,192 +1,234 @@
-/* General Styles for the Form */
-.checkout-form {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-input {
+.checkout-page{
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    background-image: url(https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/05/Breadcumd.jpg);
+    margin: 0 0 100px;
+    font-size: 20px;
+    background-position: 50%;
+    padding-top: 130px;
+    padding-bottom: 130px;
+    text-align: center;
 }
+.checkout-content{
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 100%;
+    height: 88px;
+}
+.checkout-header{
+    text-transform: capitalize;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #2b2b2b;
+    font-weight: 700;
+    font-family: Merriweather, serif;
+    line-height: 1.3;
+}
+.checkout-breadcrumb{
+    height: 28.8px;
+    margin: 0;
+    color: #f86d72;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 400;
+    list-style: none;
+    background-color: transparent;
+}
+.checkout-link{
+    color: #666;
+    position: relative;
+    text-decoration: none;
+    background: 0 0;
+}
+.checkout-delimiter{
+    margin: 0 8px;
+}
+.checkout-icon{
+    font-size: 17px;
+    margin: 0px;
+    display: inline-block;
+    transform: rotate(10deg);
+    color: #666;
+}
+.checkout-on{
+    height: 500.5px;
+    clear: both;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.checkout-details{
+    width: 58.33333%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.checkout-h3{
+    text-align: justify;
+    margin-top: 25px;
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-transform: capitalize;
+    color: #2b2b2b;
+    font-family: Merriweather, serif;
+    font-weight: 700;
+    line-height: 1.3;
+}
+.checkout-form{
 
-.form-input:focus {
-    border-color: #007bff;
+}
+.check-first{
+    margin-bottom: 30px;
+    margin-left: 0;
+    margin-right: 50px;
+    width: 47%;
+    float: left;
+}
+.check-last{
+    margin-bottom: 30px;
+    margin-left: 0;
+    margin-right: 0;
+    width: 47%;
+    float: left;
+}
+.check-first p{
+    margin: 0 0 12px;
+}
+.check-name{
+    color: #2b2b2b;
+    float: left;
+    margin-bottom: 10px;
+    display: block;
+    font-weight: 500;
+    max-width: 100%;
+}
+.check-given{
+    width: 100%;
+    float: left;
+}
+.checkout-text{
+    width: 100%;
+    border-width: 0 0 2px;
+    border-color: hsla(0, 0%, 56%, .25);
+    padding: 0;
+    height: 40px;
+    line-height: 40px;
+    color: #2b2b2b;
+    font-family: inherit;
+    font-size: inherit;
     outline: none;
 }
-
-.submit-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-}
-
-.submit-button:hover {
-    background-color: #0056b3;
-}
-
-.cart-items-container {
-    margin-top: 20px;
-}
-
-.cart-items-table {
+.check-amount{
     width: 100%;
+    float: left;
+}
+.checkout-ment{
+    width: 100%;
+    border-width: 0 0 2px;
+    border-color: hsla(0, 0%, 56%, .25);
+    padding: 0;
+    height: 40px;
+    line-height: 40px;
+    color: #2b2b2b;
+    outline: none;
+}
+.check-fir{
+    margin-bottom: 30px;
+    margin-left: 0;
+    margin-right: 0;
+    clear: both;
+}
+.check-fir p{
+    margin: 0 0 12px;
+}
+.checkout-cart{
+    text-align: justify;
+    width: 41.66667%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.checkout-cart h3{
+    margin-top: 25px;
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-transform: capitalize;
+    color: #2b2b2b;
+    font-family: Merriweather, serif;
+    font-weight: 700;
+    line-height: 1.3;
+}
+.checkout-order{
+    background: #f5f5f5;
+}
+.checkout-shop{
+    padding: 20px;
+}
+.checkout-shop table{
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: 21px;
+    border: 1px solid #f5f5f5;
     border-collapse: collapse;
-    margin-top: 20px;
+    border-spacing: 0;
 }
-
-.cart-items-table thead {
-    background-color: #007bff;
-    color: white;
-}
-
-.cart-items-table th {
-    padding: 10px;
-    text-align: left;
-}
-
-.cart-items-table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.cart-items-table td {
-    padding: 10px;
-}
-
-.product-image {
-    max-width: 50px;
-    max-height: 50px;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-/* Notification Messages */
-/* Style cho thông báo */
-.message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #f86d72; /* Màu nền mặc định cho thông báo lỗi */
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    font-size: 1rem;
+.checkout-shop thead{
     display: flex;
-    align-items: center;
-    max-width: 500px;
-    opacity: 0;
-    transition: opacity 1s ease, transform 1s ease; /* Thêm hiệu ứng chuyển động */
-    transform: translateY(-20px);
+    justify-content: space-around;
+    background: #fff;
+    border: 0;
+    border-bottom: 1px solid #f5f5f5;
 }
-
-.message.show {
-    opacity: 1;
-    transform: translateY(0);
+.checkout-shop th{
+    /* display: block; */
+    /* width: 100%; */
+    color: #2b2b2b;
+    font-weight: 700;
+    text-transform: capitalize;
+    padding: 10px;
+    font-family: Merriweather, serif;
+    font-size: 15px;
+    border: 0;
+    vertical-align: bottom;
+    /* text-align: left; */
+    border-bottom: 1px solid #f5f5f5;
 }
-
-.message.success {
-    background-color: #28a745; /* Màu nền cho thông báo thành công */
-}
-
-.message.error {
-    background-color: #dc3545; /* Màu nền cho thông báo lỗi */
-}
-
-.message .icon {
-    margin-right: 20px; /* Khoảng cách giữa biểu tượng và văn bản */
-}
-
-.message .close-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
+.checkout-button{
+    color: #fff;
+    background: #2b2b2b;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: Merriweather, serif;
+    padding: 0 50px;
+    line-height: 50px;
+    font-weight: 700;
     cursor: pointer;
-    margin-left: auto;
-    transition: color 0.3s ease;
-    padding-left: 10px;
+    border: 0;
+    margin: 0;
+    transition: all .3s ease;
 }
-
-.message .close-btn:hover {
-    color: #f86d72; /* Màu sắc khi hover vào nút đóng */
+.checkout-button:hover{
+    background: #f86d72;
 }
-
-.form-group {
-    margin-bottom: 1em;
-  }
-  
-  .form-check {
-    margin: 1.5em 0;
-  }
-  .form-check-input[type="radio"] {
-    /* Adjust the size of the radio button */
-    width: 17px; /* Adjust size as needed */
-    height: 17px; /* Adjust size as needed */
-    margin: auto 0;
-    vertical-align: middle; /* Aligns the radio button with the middle of the text */
-  }
-  .form-check-display{
-    width: 25%;
-    margin-bottom: 0.5em;
-    display: flex;
-
-  }
-  
-  .form-check-input {
-    margin-right: 0.5em; /* Space between radio button and label */
-    vertical-align: middle; /* Aligns the radio button with the middle of the text */
-    width: 25%;
-  }
-  
-  .form-check-label {
-    width: 700px;
-    text-align: left; /* Aligns text to the left */
-    margin-left: 7px;
-    /* border: 1px solid red; */
-
-  }
-  
-  .payment-method-description {
-    display: block; /* Makes the description start on a new line */
-    margin-top: 0.5em; /* Adds space above the description */
-    font-size: 0.9em; /* Slightly smaller font size for description */
-    color: #555; /* Darker gray color for better readability */
-    text-align: left; /* Ensures description text starts from the left */
-  }
-  
-
-@media (max-width: 768px) {
-    .form-input {
-        font-size: 14px;
-    }
-
-    .submit-button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-
-    .cart-items-table {
-        font-size: 14px;
-    }
-
-    .product-image {
-        max-width: 40px;
-        max-height: 40px;
-    }
+.checkout-tr{
+    border-bottom: 1px solid #f5f5f5;
 }
+.checkout-td{
+    color: #666;
+    text-transform: capitalize;
+    padding: 10px;
+    font-family: Merriweather, serif;
+    font-size: 14px;
+    border: 0;
+    vertical-align: bottom;
+}
+/* .checkout-id{
+    wi
+} */

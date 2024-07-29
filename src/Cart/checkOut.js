@@ -4,9 +4,10 @@ import { createOrderDetail } from '../Backend/Service (1)/orderDetailService';
 import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService';
 import { deleteCartItem } from '../Backend/Service (1)/cartItemsService';
 import { showMessage } from './message'; // Import showMessage function
-//import {showMessage} from './message' // Import showMessage function
 import { PayPalButton } from 'react-paypal-button-v2'; // Import PayPalButton
-
+import { RxSlash } from 'react-icons/rx';
+import Header from '../Component/Header/Header';
+import Footer from '../Component/Footer/Footer';
 import './CheckOut.css';
 
 const CheckOut = () => {
@@ -20,20 +21,23 @@ const CheckOut = () => {
     total_amount: '',
     status: 'PENDING'
   });
+
   const [formOrderDetail, setFormOrderDetail] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [deleteCart, setDeleteCart] = useState([]);
-  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [paymentMethods, setPaymentMethods] = useState([]); // Add state for payment methods
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch cart items
         const cartOrders = await getPurchasedProductsByUserId();
         if (!cartOrders || !Array.isArray(cartOrders)) {
           console.error('Invalid data format:', cartOrders);
           return;
         }
 
+        // Extract and process cart products
         const allCartProducts = cartOrders.flatMap(order => order.cart_Product || []);
         setCartItems(allCartProducts);
         setDeleteCart(allCartProducts);
@@ -52,7 +56,7 @@ const CheckOut = () => {
 
         if (allCartProducts.length > 0) {
           const orderDetails = allCartProducts.map(item => ({
-            orders: { order_id: item.cart.cart_id },
+            orders: { order_id: item.cart.cart_id }, // assuming cart_id maps to order_id
             products: { product_id: item.product.product_id },
             quantity: item.quantity
           }));
@@ -62,9 +66,9 @@ const CheckOut = () => {
             total_amount: allCartProducts.reduce((acc, item) => acc + item.product.price * item.quantity, 0),
             status: 'PENDING'
           }));
+
           setFormOrderDetail(orderDetails);
         }
-
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -75,12 +79,20 @@ const CheckOut = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === 'payment_payment_method_id') {
+    if (name.startsWith('user_')) {
+      setFormData(prevState => ({
+        ...prevState,
+        user: {
+          ...prevState.user,
+          [name.replace('user_', '')]: value
+        }
+      }));
+    } else if (name.startsWith('payment_')) {
       setFormData(prevState => ({
         ...prevState,
         paymentMethods: {
-          payment_method_id: value
+          ...prevState.paymentMethods,
+          [name.replace('payment_', '')]: value
         }
       }));
     } else {
@@ -102,7 +114,8 @@ const CheckOut = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const orderResponse = await createOrder(formData);
       const orderId = orderResponse.order_id;
@@ -122,129 +135,129 @@ const CheckOut = () => {
       console.log('Order details created:', orderDetailsResponses);
 
       await deleteCarts();
-
-      showMessage('Đặt hàng thành công!', 'success');
     } catch (error) {
       if (error.response) {
         console.error('Error creating order:', error.response.data);
-        showMessage('Có lỗi xảy ra khi tạo đơn hàng. Vui lòng thử lại.', 'error');
       } else if (error.request) {
         console.error('Error creating order: No response received from server');
-        showMessage('Không nhận được phản hồi từ máy chủ. Vui lòng thử lại.', 'error');
       } else {
         console.error('Error creating order:', error.message);
-        showMessage('Có lỗi xảy ra khi tạo đơn hàng. Vui lòng thử lại.', 'error');
       }
     }
   };
 
   return (
-    <div className="checkout-container">
-      <form className="checkout-form" onSubmit={e => e.preventDefault()}>
-        <input
-          className="form-input"
-          type="text"
-          name="first_name"
-          placeholder="First Name"
-          value={formData.first_name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          className="form-input"
-          type="text"
-          name="last_name"
-          placeholder="Last Name"
-          value={formData.last_name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          className="form-input"
-          type="text"
-          name="address"
-          placeholder="Address"
-          value={formData.address}
-          onChange={handleChange}
-          required
-        />
-        <div className="form-group">
-          <label>Select payment method:</label>
-          {paymentMethods.length > 0 ? (
-            paymentMethods.map(method => (
-              <div key={method.payment_method_id} className="form-check">
-                <div className='form-check-display'>
-                  <input
-                    type="radio"
-                    id={`payment_method_${method.payment_method_id}`}
-                    name="payment_payment_method_id"
-                    value={method.payment_method_id.toString()} // Ensure value is a string
-                    checked={formData.paymentMethods.payment_method_id === method.payment_method_id.toString()} // Ensure type consistency
-                    onChange={handleChange}
-                    className="form-check-input"
-                    required
-                  />
-                  <label htmlFor={`payment_method_${method.payment_method_id}`} className="form-check-label">
-                    {method.method_name}
-                  </label>
-                </div>
-                {method.description && <p className="payment-method-description">{method.description}</p>}
+    <div>
+      <Header />
+      <div className='checkout'>
+        <div className='checkout-page'>
+          <div className='checkout-content'>
+            <h1 className='checkout-header'>CheckOut</h1>
+            <div className='checkout-breadcrumb'>
+              <div className='checkout-path'>
+                <a className='checkout-link' href='#'>Home</a>
+                <span className='checkout-delimiter'>
+                  <i className='checkout-icon'><RxSlash /></i>
+                </span>
+                <span className='checkout-current'>CheckOut</span>
               </div>
-            ))
-          ) : (
-            <p>No payment methods available.</p>
-          )}
+            </div>
+          </div>
         </div>
-
-        <div className="cart-items-container">
-          <h3>Cart Items:</h3>
-          <table className="cart-items-table">
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-                <th>Description</th>
-                <th>Image</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems.map(item => (
-                <tr key={item.cart_item_id}>
-                  <td>{item.product.product_name}</td>
-                  <td>${item.product.price}</td>
-                  <td>{item.quantity}</td>
-                  <td>${(item.product.price * item.quantity).toFixed(2)}</td>
-                  <td>{item.product.description}</td>
-                  <td>
-                    {item.product.imgProducts && item.product.imgProducts.length > 0 && (
-                      <img
-                        src={item.product.imgProducts[0].img_url}
-                        alt={item.product.imgProducts[0].img_name}
-                        className="product-image"
-                      />
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className='checkout-container'>
+          <form className='checkout-on' onSubmit={handleSubmit}>
+            <div className='checkout-details'>
+              <h3 className='checkout-h3'>Billing details</h3>
+              <div className='checkout-form'>
+                <p className='check-first'>
+                  <label className='check-name'>First name</label>
+                  <span className='check-given'>
+                    <input className='checkout-text'
+                      type="text"
+                      name="first_name"
+                      value={formData.first_name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </span>
+                </p>
+                <p className='check-last'>
+                  <label className='check-name'>Last name</label>
+                  <span className='check-given'>
+                    <input className='checkout-text'
+                      type="text"
+                      name="last_name"
+                      value={formData.last_name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </span>
+                </p>
+                <p className='check-first'>
+                  <label className='check-name'>Address</label>
+                  <span className='check-given'>
+                    <input className='checkout-text'
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      required
+                    />
+                  </span>
+                </p>
+                <p className='check-fir'>
+                  <label className='check-name'>Payment ID</label>
+                  <span className='check-amount'>
+                    <input className='checkout-ment'
+                      type="number"
+                      name="payment_payment_method_id"
+                      value={formData.paymentMethods.payment_method_id}
+                      onChange={handleChange}
+                      required
+                    />
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className='checkout-cart'>
+              <h3>Cart Items</h3>
+              <div className='checkout-order'>
+                <div className='checkout-shop'>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Product Name</th>
+                        <th>Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody className='checkout-id'>
+                      {cartItems.map(item => (
+                        <tr className='checkout-tr' key={item.cart_item_id}>
+                          <td className='checkout-td'>{item.product.product_name} x {item.quantity}</td>
+                          <td className='checkout-td'>${(item.product.price * item.quantity).toFixed(2)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <div className="paypal-button-container">
+                    <PayPalButton
+                      amount={formData.total_amount}
+                      onSuccess={(details, data) => {
+                        alert("Transaction completed by " + details.payer.name.given_name);
+                        handleSubmit(); // Call handleSubmit to create the order in your backend
+                      }}
+                      options={{
+                        clientId: "AW0tj92Vn8SKiT2ATHitvUrd4yDJYuxG0iau6Rc6a82z06ZuiLxKldbh-EPQOobFV8SPQ9Mz3pKCRPto" // Replace with your PayPal client ID
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-
-        <div className="paypal-button-container">
-          <PayPalButton
-            amount={formData.total_amount}
-            onSuccess={(details, data) => {
-              alert("Transaction completed by " + details.payer.name.given_name);
-              handleSubmit(); // Call handleSubmit to create the order in your backend
-            }}
-            options={{
-              clientId: "AW0tj92Vn8SKiT2ATHitvUrd4yDJYuxG0iau6Rc6a82z06ZuiLxKldbh-EPQOobFV8SPQ9Mz3pKCRPto" // Replace with your PayPal client ID
-            }}
-          />
-        </div>
-      </form>
+      </div>
+      <Footer />
     </div>
   );
 };

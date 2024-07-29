@@ -1,8 +1,5 @@
 .search-col-lg {
-    top: 20px;
-    left: 10px;
-    width: 206%;
-    height: 31.4px;
+    width: 208.66667%;
     float: left;
     position: relative;
     min-height: 1px;
@@ -17,18 +14,18 @@
 }
 
 .search-category {
-    width: 23%;
-    height: 24px;
+    width: 22%;
     display: inline-block;
     position: relative;
     cursor: pointer;
 }
 
 .search-pwd-drop {
-    line-height: 1.6em;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
     color: #666;
     font-family: Muli, sans-serif;
-    font-weight: 500;
 }
 
 .search-pwd-drop:hover {
@@ -85,7 +82,6 @@
     cursor: pointer;
     text-align: center;
     width: 258.05px;
-    height: 31.4px;
     display: inline-block;
     position: relative;
 }
@@ -115,7 +111,6 @@
     height: 24px;
     outline: none;
     border: 0;
-    color: #abb8c3;
     vertical-align: middle;
     margin-top: -4px;
 }
