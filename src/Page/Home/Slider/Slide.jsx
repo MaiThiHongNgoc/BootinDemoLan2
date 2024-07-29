@@ -70,7 +70,7 @@ const Slideshow = () => {
             className={`item ${index === currentIndex ? `active ${transitionClass}` : ''}`}
             style={{ backgroundImage: `url(${item.image})` }}
           >
-            <div className="content">
+            <div className="content-slide">
               <h2 className="title">{item.title}</h2>
               <p className="description">{item.description}</p>
               <button>Read More</button>

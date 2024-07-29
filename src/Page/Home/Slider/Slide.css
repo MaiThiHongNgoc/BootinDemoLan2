@@ -7,6 +7,7 @@
   overflow: hidden;
   height: 100vh;
   position: relative;
+  z-index: 1; /* Lower z-index for the entire slide component */
 }
 
 .slider {
@@ -30,12 +31,12 @@
   top: 0;
   left: 0;
   opacity: 0;
-  z-index: 0;
+  z-index: 2; /* Lower z-index */
 }
 
 .item.active {
   opacity: 1;
-  z-index: 1;
+  z-index: 3; /* Higher than inactive items but still low */
 }
 
 /* Checkerboard effect */
@@ -139,7 +140,7 @@
   }
 }
 
-.content {
+.content-slide {
   width: min(30vw, 400px);
   position: absolute;
   top: 50%;
@@ -149,6 +150,7 @@
   color: white;
   text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
   display: block;
+  z-index: 3; /* Higher z-index for content */
 }
 
 .nav {
@@ -156,6 +158,7 @@
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 3; /* Higher z-index for navigation */
 }
 
 .btn {

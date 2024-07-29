@@ -126,7 +126,7 @@
     height: 100%; /* Chiều cao đầy đủ */  
     background-color: white; /* Thay đổi màu nền nếu cần */  
     box-shadow: -2px 0 5px rgba(0,0,0,0.5);  
-    z-index: 1; /* Đảm bảo nó ở trên cùng */  
+    z-index: 10; /* Đảm bảo nó ở trên cùng */  
     overflow-y: auto; /* Cho phép cuộn nếu nội dung quá nhiều */  
 }  
 .cart-icon-container {
@@ -149,7 +149,7 @@
     font-size: 12px;
     font-weight: bold;
     /* Ensure the badge is visible above other content */
-    z-index: 1;
+    z-index: 10;
 }
 
   
