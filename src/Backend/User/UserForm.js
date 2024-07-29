@@ -18,7 +18,7 @@ const UserForm = ({ user, onSave }) => {
       setFormData({
         username: user.username,
         email: user.email,
-        password: '',
+        password: user.password,
         phone: user.phone,  
         role: { role_id: user.role.role_id },
       });
@@ -81,15 +81,6 @@ const UserForm = ({ user, onSave }) => {
         name="phone"
         value={formData.phone}
         onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
         />
       </div>
       <button className="user-form-button-save" type="submit">Save</button>
