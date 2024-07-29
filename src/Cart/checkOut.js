@@ -4,6 +4,7 @@ import { createOrderDetail } from '../Backend/Service (1)/orderDetailService';
 import { getPurchasedProductsByUserId } from '../Backend/Service (1)/cartService';
 import { deleteCartItem } from '../Backend/Service (1)/cartItemsService';
 import { showMessage } from './utils'; // Import showMessage function
+import { PayPalButton } from 'react-paypal-button-v2'; // Import PayPalButton
 import './CheckOut.css';
 
 const CheckOut = () => {
@@ -99,8 +100,7 @@ const CheckOut = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       const orderResponse = await createOrder(formData);
       const orderId = orderResponse.order_id;
@@ -138,7 +138,7 @@ const CheckOut = () => {
 
   return (
     <div className="checkout-container">
-      <form className="checkout-form" onSubmit={handleSubmit}>
+      <form className="checkout-form" onSubmit={e => e.preventDefault()}>
         <input
           className="form-input"
           type="text"
@@ -229,7 +229,19 @@ const CheckOut = () => {
             </tbody>
           </table>
         </div>
-        <button className="submit-button" type="submit">Submit</button>
+
+        <div className="paypal-button-container">
+          <PayPalButton
+            amount={formData.total_amount}
+            onSuccess={(details, data) => {
+              alert("Transaction completed by " + details.payer.name.given_name);
+              handleSubmit(); // Call handleSubmit to create the order in your backend
+            }}
+            options={{
+              clientId: "AW0tj92Vn8SKiT2ATHitvUrd4yDJYuxG0iau6Rc6a82z06ZuiLxKldbh-EPQOobFV8SPQ9Mz3pKCRPto" // Replace with your PayPal client ID
+            }}
+          />
+        </div>
       </form>
     </div>
   );

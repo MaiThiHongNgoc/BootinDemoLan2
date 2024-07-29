@@ -1,11 +1,20 @@
-.Header{
+.Header {
     max-width: 100%;
     height: 150px;
     display: flex;
     justify-content: space-between;
-    padding-top: 20px;
-
+    align-items: center;
+    z-index: 1;
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 0 20px; /* Add padding if necessary */
+    background-color: #fff;
 }
+
+
 .navbar-header-container1{
     width: 20%;
 }
