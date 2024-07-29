@@ -6,7 +6,6 @@ const API_URL = 'http://localhost:9191/api/author/v1/';
 export const getAuthors = async () => {
   try {
     const response = await axios.get(API_URL);
-    console.log(response.data);
     return response.data; 
   } catch (error) {
     console.error('Failed to fetch authors', error);
