@@ -85,11 +85,11 @@ const Shop = () => {
     setSearchQuery(event.target.value);
   };
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const handleSearchClick = (product) => {
-    console.log('Search clicked for:', product);
+  const handleSearchClick = () => {
+    loadProducts(currentPage, selectedCategory, selectedPriceRange, selectedAuthor, searchQuery);
   };
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleAddProductToCart = async (product) => {
     const token = localStorage.getItem('token');
@@ -101,14 +101,12 @@ const Shop = () => {
     }
 
     try {
-      // Get user's cart data
       const cartData = await getPurchasedProductsByUserId(user_id);
       if (cartData.length > 0) {
         const cartId = cartData[0].cart_id;
         const existingItem = cartData[0].cart_Product.find(item => item.product.product_id === product.product_id);
 
         if (existingItem) {
-          // If product already exists, update quantity
           await updateCartItem(existingItem.cart_item_id, {
             cart: { cart_id: cartId },
             product: { product_id: product.product_id },
@@ -116,17 +114,14 @@ const Shop = () => {
             total_price: (existingItem.quantity + 1) * product.price
           });
         } else {
-          // If product does not exist, add new item to cart
           await addProductToCart(cartId, product.product_id, 1, token);
         }
 
-        // Update cart icon state
         setCartIconState(prevState => ({
           ...prevState,
           [product.product_id]: 'spinning'
         }));
 
-        // Reset cart icon state after 1 second
         setTimeout(() => {
           setCartIconState(prevState => ({
             ...prevState,
@@ -151,6 +146,9 @@ const Shop = () => {
 
   const handleCloseNotification = () => {
     setShowNotification(false);
+    if (!localStorage.getItem('token')) {
+      window.location.href = '/login';
+    }
   };
 
   return (
@@ -179,7 +177,7 @@ const Shop = () => {
               onChange={handleSearchChange}
               className="shop-search-input"
             />
-            <button className='shop-btn'>
+            <button className='shop-btn' onClick={handleSearchClick}>
               <i className='shop-icon'><IoSearch /></i>
             </button>
           </div>
@@ -221,10 +219,7 @@ const Shop = () => {
             <h3>Authors</h3>
             <ul className='shop-ul'>
               <li>
-                <span>
-                  <input className='shop-ton' value="anna-hillton" name='filter_author' type='checkbox'/>
-                </span>
-                <button onClick={() => handleAuthorChange({ target: { value: '' } })} className="shop-filter-ton">
+                <button onClick={() => handleAuthorChange({ target: { value: '' } })} className="shop-filter-button">
                   All Authors
                 </button>
               </li>
@@ -241,8 +236,6 @@ const Shop = () => {
         <div className="customer-shop-content">
           {loading ? (
             <p>Loading...</p>
-          ) : error ? (
-            <p>{error}</p>
           ) : (
             <div>
               <div className="customer-shop-grid">
@@ -268,7 +261,7 @@ const Shop = () => {
                   </div>
                 ))}
               </div>
-              <div className="pagination">
+              <div className="customer-pagination">
                 {[...Array(totalPages)].map((_, index) => (
                   <button
                     key={index}
@@ -283,12 +276,14 @@ const Shop = () => {
           )}
         </div>
       </div>
+
       {showNotification && (
-        <div className="notification">
-          <p>Please log in to add items to your cart.</p>
-          <button onClick={handleCloseNotification}>Close</button>
+        <div className="login-required-message">
+         <p>Please log in to add items to the cart. <a href="/login">Log in here</a></p>
+         <button className="close-button" onClick={handleCloseNotification}>×</button>
         </div>
       )}
+
       <Footer />
     </div>
   );
