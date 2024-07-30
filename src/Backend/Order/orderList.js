@@ -1,4 +1,3 @@
-// src/components/OrderList.js
 import React, { useState, useEffect } from 'react';
 import { getOrder, updateOrder, deleteOrder } from '../Service (1)/orderService';
 import './orderList.css';
@@ -13,6 +12,9 @@ const OrderList = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [searchStatus, setSearchStatus] = useState('');
     const [expandedOrderId, setExpandedOrderId] = useState(null);
 
     useEffect(() => {
@@ -96,13 +98,37 @@ const OrderList = () => {
         setSearchQuery(e.target.value);
     };
 
+    const handleStartDateChange = (e) => {
+        setStartDate(e.target.value);
+    };
+
+    const handleEndDateChange = (e) => {
+        setEndDate(e.target.value);
+    };
+
+    const handleStatusFilterChange = (e) => {
+        setSearchStatus(e.target.value);
+    };
+
     const handleToggleDetails = (order_id) => {
         setExpandedOrderId(expandedOrderId === order_id ? null : order_id);
     };
 
-    const filteredOrders = orders.filter(order =>
-        order.user.username.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredOrders = orders.filter(order => {
+        const isUsernameMatch = order.user.username.toLowerCase().includes(searchQuery.toLowerCase());
+        const isFirstName = order.first_name.toLowerCase().includes(searchQuery.toLowerCase());
+        const isLastName = order.last_name.toLowerCase().includes(searchQuery.toLowerCase());
+        const email = order.user.email.toLowerCase().includes(searchQuery.toLowerCase());
+
+        const orderDate = new Date(order.order_date);
+        const isDateInRange = startDate && endDate
+            ? orderDate >= new Date(startDate) && orderDate <= new Date(endDate)
+            : true;
+
+        const isStatusMatch = searchStatus ? order.status === searchStatus : true;
+
+        return (isUsernameMatch || isFirstName || isLastName || email) && isDateInRange && isStatusMatch;
+    });
 
     const getStatusClass = (status) => {
         switch (status) {
@@ -131,11 +157,36 @@ const OrderList = () => {
             )}
             <input
                 type="text"
-                placeholder="Search orders..."
+                placeholder="Search orders by username, first name, last name, or email..."
                 value={searchQuery}
                 onChange={handleSearchChange}
                 className="order-search"
             />
+            <input
+                type="date"
+                value={startDate}
+                onChange={handleStartDateChange}
+                className="order-search-date"
+                placeholder="Start Date"
+            />
+            <input
+                type="date"
+                value={endDate}
+                onChange={handleEndDateChange}
+                className="order-search-date"
+                placeholder="End Date"
+            />
+            <select
+                value={searchStatus}
+                onChange={handleStatusFilterChange}
+                className="order-search-status"
+            >
+                <option value="">All Statuses</option>
+                <option value="PENDING">Pending</option>
+                <option value="COMPLETED">Completed</option>
+                <option value="PROCESSING">Processing</option>
+                <option value="CANCELLED">Cancelled</option>
+            </select>
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
@@ -191,9 +242,8 @@ const OrderList = () => {
                                         <button className="order-list-button-delete" onClick={() => handleDelete(order.order_id)}>Delete</button>
                                     </td>
                                     <td>
-                                    <Link to={`/admin/orderdetail/${order.order_id}`} className="order-list-button-details">View Details</Link>
+                                        <Link to={`/admin/orderdetail/${order.order_id}`} className="order-list-button-details">View Details</Link>
                                     </td>
-
                                 </tr>
 
                                 {expandedOrderId === order.order_id && (

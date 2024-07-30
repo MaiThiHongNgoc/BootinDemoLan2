@@ -130,6 +130,32 @@
 .order-list-button-details:active {
   background-color: #004494; /* Even darker shade for active state */
 }
+.order-search-date {
+  margin: 10px 0;
+  padding: 8px;
+}
+/* Styling for the status filter */
+.order-search-status {
+  width: 150px;
+  margin: 10px 0;
+  padding: 8px;
+}
+/* Styling for the date range inputs */
+.order-search-date {
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.order-search-status {
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
 
 
 
