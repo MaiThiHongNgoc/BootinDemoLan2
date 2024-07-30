@@ -17,10 +17,6 @@ const CheckOut = () => {
     first_name: '',
     last_name: '',
     address: '',
-    city: '',
-    state: '',
-    postal_code: '',
-    country: '',
     phone_number: '',
     email: '',
     paymentMethods: { payment_method_id: '' },
@@ -118,8 +114,7 @@ const CheckOut = () => {
 
   const handleSubmit = async () => {
     const requiredFields = [
-      'first_name', 'last_name', 'address', 'city', 'state', 'postal_code',
-      'country', 'phone_number', 'email', 'paymentMethods_payment_method_id'
+      'first_name', 'last_name', 'address', 'phone_number', 'email', 'paymentMethods_payment_method_id'
     ];
   
    // Kiểm tra các trường bắt buộc
@@ -161,7 +156,7 @@ const CheckOut = () => {
       console.log('Order details created:', orderDetailsResponses);
   
       // Xóa các mặt hàng trong giỏ hàng
-      // await deleteCarts();
+       await deleteCarts();
       
       // Hiển thị thông báo thành công và làm sạch localStorage
       showMessage('Order placed successfully!', 'success');  
@@ -188,7 +183,7 @@ const CheckOut = () => {
       <div className='checkout-page'></div>
       <div className="checkout-container">
         <div className="checkout-form-section">
-          <h2 className='check-h2'>Billing details</h2>
+          {/* <h2 className='check-h2'>Billing details</h2> */}
           <form className="checkout-form" onSubmit={e => e.preventDefault()}>
             <div className="form-row">
               <div className="form-group required">
@@ -221,50 +216,6 @@ const CheckOut = () => {
                 name="address"
                 placeholder="Address"
                 value={formData.address}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group required">
-              <input
-                className="form-input"
-                type="text"
-                name="city"
-                placeholder="City"
-                value={formData.city}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group required">
-              <input
-                className="form-input"
-                type="text"
-                name="state"
-                placeholder="State"
-                value={formData.state}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group required">
-              <input
-                className="form-input"
-                type="text"
-                name="postal_code"
-                placeholder="Postal Code"
-                value={formData.postal_code}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group required">
-              <input
-                className="form-input"
-                type="text"
-                name="country"
-                placeholder="Country"
-                value={formData.country}
                 onChange={handleChange}
                 required
               />
