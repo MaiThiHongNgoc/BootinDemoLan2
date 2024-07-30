@@ -17,11 +17,11 @@ const UserList = () => {
   const loadUsers = async () => {
     try {
       const response = await getUsers();
-      console.log('Response from getUsers:', response); // Log entire response
+      console.log('Response from getUsers:', response); // Log toàn bộ phản hồi
       if (Array.isArray(response)) {
-        setUsers(response); // Handle case where response is an array
+        setUsers(response); // Xử lý trường hợp phản hồi là mảng
       } else if (response && Array.isArray(response.data)) {
-        setUsers(response.data); // Handle case where data is in response.data
+        setUsers(response.data); // Xử lý trường hợp dữ liệu nằm trong response.data
       } else {
         console.error('Unexpected response structure:', response);
       }
@@ -69,8 +69,9 @@ const UserList = () => {
   };
 
   const filteredUsers = users.filter(user =>
-    user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (user.role && user.role.role_name.toLowerCase().includes(searchQuery.toLowerCase()))
+    user.role && user.role.role_name === 'USER' && // Lọc người dùng với vai trò 'user'
+    (user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (user.role && user.role.role_name.toLowerCase().includes(searchQuery.toLowerCase())))
   );
 
   return (

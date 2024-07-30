@@ -63,18 +63,6 @@
     background-color: #0056b3;
 }
 
-.product-button-delete {
-    background-color: #dc3545;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-}
-
-.product-button-delete:hover {
-    background-color: #c82333;
-}
-
 .pagination {
     list-style: none;
     display: flex;
@@ -120,4 +108,40 @@
     background-color: #f86d72;
     color: white;
     border-color: #f86d72;
+}
+.api-select {
+    margin-left: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 18%;
+}
+.product-button-delete {
+    background-color: #dc3545; /* Màu đỏ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.product-button-delete:c82333 {
+    background-color: #c0392b; /* Đỏ đậm hơn khi hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Nút Restore */
+.product-button-restore {
+    background-color: #27ae60; /* Màu xanh lá cây */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.product-button-restore:hover {
+    background-color: #28a745; /* Xanh lá đậm hơn khi hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
