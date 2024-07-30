@@ -1,15 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import './Infomation.css'; // Import CSS nếu cần
+import { NavLink, Outlet } from "react-router-dom";
+import './Infomation.css';
+import Header from "../../Component/Header/Header";
+import Footer from "../../Component/Footer/Footer";
 
 const Infomation = () => {
     return (
-        <div className="infomation-container">
-            <h2>Information</h2>
-            <nav>
-                <Link to='/myinfo' className="infomation-link">My Information</Link>
-                <Link to='/userorder' className="infomation-link">User Orders</Link>
-            </nav>
+        <div>
+            <Header />
+            <div className="infomation-content">
+                <h1 className="information-h1">Your Profile</h1>
+            </div>
+            <div className="infomation-container">
+                <div>
+                    <NavLink
+                        to='/infomation/myinfo'
+                        className={({ isActive }) => "infomation-link" + (isActive ? " active" : "")}
+                    >
+                        My Information
+                    </NavLink>
+                    <NavLink
+                        to='/infomation/userorder'
+                        className={({ isActive }) => "infomation-link" + (isActive ? " active" : "")}
+                    >
+                        User Orders
+                    </NavLink>
+                </div>
+                <Outlet />
+            </div>
+            <Footer />
         </div>
     );
 };

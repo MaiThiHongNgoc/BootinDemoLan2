@@ -23,7 +23,7 @@ const Footer = () => {
                   <div className='footer-wpb'>
                     <p className='footer-line'>
                     <i className='footer-map'><RiMapPinLine /></i>
-                      1998 Wall Street 707, washington DC, USA</p>
+                     Số 8 Tôn Thất Thuyết-Nam Từ Liêm-Hà Nội.</p>
                     <ul className='footer-mail'>
                       <i className='footer-email'><MdOutlineEmail /></i>
                       <li className='footer-diep'>quachdangdiep@gmail.com</li>

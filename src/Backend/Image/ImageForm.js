@@ -107,27 +107,29 @@ const ImageForm = ({ img_product, onSave }) => {
         />
       </div>
       <div className="image-form-field">
-        <label className="image-form-label">Product</label>
-        {loading ? (
-          <p className="image-form-loading">Loading products...</p>
-        ) : error ? (
-          <p className="image-form-error">{error}</p>
-        ) : (
-          <select
-            name="product"
-            value={formData.products.product_id}
-            onChange={handleChange}
-            className="image-form-select"
-          >
-            <option value="">Select product...</option>
-            {products.map((product) => (
-              <option key={product.product_id} value={product.product_id}>
-                {product.product_name}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
+  <label className="image-form-label">Product</label>
+  {loading ? (
+    <p className="image-form-loading">Loading products...</p>
+  ) : error ? (
+    <p className="image-form-error">{error}</p>
+  ) : (
+    <div className="image-form-select-container">
+      <select
+        name="product"
+        value={formData.products.product_id}
+        onChange={handleChange}
+        className="image-form-select"
+      >
+        <option value="">Select product...</option>
+        {products.map((product) => (
+          <option key={product.product_id} value={product.product_id}>
+            {product.product_name}
+          </option>
+        ))}
+      </select>
+    </div>
+  )}
+</div>
       <button type="submit" className="image-form-button">Save</button>
     </form>
   );

@@ -46,6 +46,7 @@ function App() {
           <CartProvider> {/* Wrap with CartProvider */}
             <Routes>
               <Route path="/" element={<Home />}>
+                <Route index element={<TopRating />} />
                 <Route path="topRating" element={<TopRating />} />
                 <Route path="bestSeller" element={<BestSellers />} />
                 <Route path="featured" element={<Featured />} />
@@ -65,9 +66,11 @@ function App() {
               
               
 
-              <Route path="/infomation" element={< Infomation/>} />
-              <Route path="/myinfo" element={<Personal_Infomation />} />
-              <Route path="/userorder" element={<UserOrder />} />
+              <Route path="/infomation" element={< Infomation/>} >
+                <Route path="myinfo" element={<Personal_Infomation />} />
+                <Route path="userorder" element={<UserOrder />} />
+              </Route>
+              
 
 
               {/* Admin Routes */}

@@ -105,7 +105,7 @@ const Header = () => {
                         <div className="dropdown-menu">
                             <Link to="/login" className="dropdown-item">Login</Link>
                             <Logout />
-                            <Link to='/infomation' className='infomation'>Infomation</Link>
+                            <Link to='/infomation' className='infomation'>Your Profile</Link>
                         </div>
                     )}
                 </div>
