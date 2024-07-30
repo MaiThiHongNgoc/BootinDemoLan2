@@ -1,7 +1,18 @@
 /* PersonalInformation.css */
 .btn-container {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    background: #f5f5f5;
+    width: 40%;
     padding: 20px;
     font-family: Arial, sans-serif;
+}
+.btn-container h2{
+    margin-top:  25px;
+    font-size: 25px;
+    margin-bottom: 30px;
+    text-transform: capitalize;
+    color: #2b2b2b;
 }
 
 .btn-edit {
@@ -21,4 +32,31 @@
 
 .user-form {
     margin-top: 20px;
+}
+.content-book{
+    border: 0;
+    border-bottom: 1px solid #f5f5f5;
+    background: #fff;
+}
+.content-book p{
+    color: #2b2b2b;
+    font-weight: 700;
+    text-transform: capitalize;
+    padding: 15px;
+    font-family: Merriweather, serif;
+    border: 1px solid #f5f5f5;
+}
+.user-list-button-edit{
+    color: #fff;
+    /* background: #2b2b2b; */
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: Merriweather, serif;
+    padding: 0 50px;
+    line-height: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 0;
+    margin-top: 50px;
 }

@@ -48,7 +48,7 @@ const PersonalInformation = () => {
         <div className="btn-container">
             <h2>Personal Information</h2>
             {user ? (
-                <div>
+                <div className="content-book">
                     {showForm && (
                         <div className="user-form">
                             <UserForm user={editingUser} onSave={handleFormClose} />
