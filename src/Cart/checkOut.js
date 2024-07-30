@@ -174,8 +174,6 @@ const CheckOut = () => {
       }
     }
   };
-  
-
 
 
   return (
