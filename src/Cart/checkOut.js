@@ -117,38 +117,38 @@ const CheckOut = () => {
   };
 
   const handleSubmit = async () => {
-    const missingFields = [];
     const requiredFields = [
       'first_name', 'last_name', 'address', 'city', 'state', 'postal_code',
       'country', 'phone_number', 'email', 'paymentMethods_payment_method_id'
     ];
   
-    requiredFields.forEach(field => {
-      if (!formData[field] || (field === 'paymentMethods_payment_method_id' && !formData.paymentMethods.payment_method_id)) {
-        missingFields.push(field);
+   // Kiểm tra các trường bắt buộc
+   const missingFields = requiredFields.filter(field => {
+    if (field === 'paymentMethods_payment_method_id') {
+      return !formData.paymentMethods.payment_method_id;
+    }
+    return !formData[field];
+  });
+  
+  
+  if (missingFields.length > 0) {
+    missingFields.forEach(field => {
+      const fieldElement = document.querySelector(`[name="${field}"]`);
+      if (fieldElement) {
+        fieldElement.classList.add('error');
       }
     });
-  
-    if (missingFields.length > 0) {
-      missingFields.forEach(field => {
-        const fieldElement = document.querySelector(`[name="${field}"]`);
-        if (fieldElement) {
-          fieldElement.classList.add('error');
-        }
-      });
-      showMessage('Please fill out all required fields.', 'error');
-      return;
-    }
+    showMessage('Please fill out all required fields.', 'error');
+    return;
+  }
+
   
     try {
-      // Log formData để kiểm tra
-      console.log('Submitting order with data:', formData);
-  
-      // Create order
+      // Tạo đơn hàng
       const orderResponse = await createOrder(formData);
-      const order_id = orderResponse.order_id; // Assuming API returns the order ID
+      const order_id = orderResponse.order_id; // Giả sử API trả về ID đơn hàng
   
-      // Create order details
+      // Tạo chi tiết đơn hàng
       const orderDetailsPromises = formOrderDetail.map(detail => {
         const orderDetailPayload = {
           ...detail,
@@ -160,11 +160,11 @@ const CheckOut = () => {
       const orderDetailsResponses = await Promise.all(orderDetailsPromises);
       console.log('Order details created:', orderDetailsResponses);
   
-      // Delete cart items
-      await deleteCarts();
-  
-      showMessage('Order placed successfully!', 'success');// Clear localStorage after successful order
-  
+      // Xóa các mặt hàng trong giỏ hàng
+      // await deleteCarts();
+      
+      // Hiển thị thông báo thành công và làm sạch localStorage
+      showMessage('Order placed successfully!', 'success');  
     } catch (error) {
       if (error.response) {
         console.error('Error creating order:', error.response.data);
@@ -366,7 +366,6 @@ const CheckOut = () => {
 
         </div>
       </div>
-
       <Footer />
     </div>
   );
