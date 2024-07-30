@@ -170,7 +170,7 @@ const OrderList = () => {
                                     <td>{order.user.email}</td>
                                     <td>{order.user.phone}</td>
                                     <td>{order.address}</td>
-                                    <td>{new Date(order.order_date).toUTCString()}</td>
+                                    <td>{new Date(order.order_date).toLocaleString()}</td>
                                     <td>{order.total_amount.toFixed(2)}</td>
                                     <td>
                                         <select

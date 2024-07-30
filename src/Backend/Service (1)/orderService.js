@@ -23,7 +23,6 @@ const checkAdminRole = (token) => {
 const getOrder = async () => {
     const token = getToken();
     checkAdminRole(token);
-
     try {
         const response = await axios.get(API_URL, {
             headers: {

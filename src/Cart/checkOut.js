@@ -91,12 +91,19 @@ const CheckOut = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-    localStorage.setItem(name, value); // Save new fields to localStorage
-  };
+    if (name.startsWith('payment')) {
+        setFormData(prevState => ({
+            ...prevState,
+            paymentMethods: { payment_method_id: value }
+        }));
+    } else {
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+};
+
 
   const deleteCarts = async () => {
     try {
@@ -112,74 +119,60 @@ const CheckOut = () => {
   const handleSubmit = async () => {
     const missingFields = [];
     const requiredFields = [
-      'first_name', 'last_name', 'address', 'city', 'state', 'postal_code',
-      'country', 'phone_number', 'email', 'paymentMethods_payment_method_id'
+        'first_name', 'last_name', 'address', 'city', 'state', 'postal_code',
+        'country', 'phone_number', 'email', 'paymentMethods_payment_method_id'
     ];
   
     requiredFields.forEach(field => {
-      if (!formData[field] || (field === 'paymentMethods_payment_method_id' && !formData.paymentMethods.payment_method_id)) {
-        missingFields.push(field);
-      }
+        if (!formData[field] || (field === 'paymentMethods_payment_method_id' && !formData.paymentMethods.payment_method_id)) {
+            missingFields.push(field);
+        }
     });
   
     if (missingFields.length > 0) {
-      missingFields.forEach(field => {
-        const fieldElement = document.querySelector(`[name="${field}"]`);
-        if (fieldElement) {
-          fieldElement.classList.add('error');
-        }
-      });
-      showMessage('Please fill out all required fields.', 'error');
-      return;
+        missingFields.forEach(field => {
+            const fieldElement = document.querySelector(`[name="${field}"]`);
+            if (fieldElement) {
+                fieldElement.classList.add('error');
+            }
+        });
+        showMessage('Please fill out all required fields.', 'error');
+        return;
     }
   
     try {
-      const fixedFields = {
-        user: formData.user,
-        first_name: formData.first_name,
-        last_name: formData.last_name,
-        address: formData.address,
-        city: formData.city,
-        state: formData.state,
-        postal_code: formData.postal_code,
-        country: formData.country,
-        phone_number: formData.phone_number,
-        email: formData.email,
-        paymentMethods: formData.paymentMethods,
-        total_amount: formData.total_amount,
-        status: formData.status
-      };
+        const orderResponse = await createOrder(formData); // Ensure the API handles the formData correctly
+        const order_id = orderResponse.order_id; // Assuming API returns the order ID
+
+        const orderDetailsPromises = formOrderDetail.map(detail => {
+            const orderDetailPayload = {
+                ...detail,
+                orders: { order_id: order_id } // Ensure order_id is correctly set
+            };
+            return createOrderDetail(orderDetailPayload);
+        });
   
-      await createOrder(fixedFields);
+        const orderDetailsResponses = await Promise.all(orderDetailsPromises);
+        console.log('Order details created:', orderDetailsResponses);
   
-      const orderDetailsPromises = formOrderDetail.map(detail => {
-        const orderDetailPayload = {
-          ...detail,
-          orders: { order_id: fixedFields.order_id }
-        };
-        return createOrderDetail(orderDetailPayload);
-      });
+        await deleteCarts();
   
-      const orderDetailsResponses = await Promise.all(orderDetailsPromises);
-      console.log('Order details created:', orderDetailsResponses);
-  
-      await deleteCarts();
-  
-      showMessage('Order placed successfully!', 'success');
-      localStorage.clear(); // Clear localStorage after successful order
+        showMessage('Order placed successfully!', 'success');
+        localStorage.clear(); // Clear localStorage after successful order
     } catch (error) {
-      if (error.response) {
-        console.error('Error creating order:', error.response.data);
-        showMessage('An error occurred while creating the order. Please try again.', 'error');
-      } else if (error.request) {
-        console.error('Error creating order: No response received from server');
-        showMessage('No response received from the server. Please try again.', 'error');
-      } else {
-        console.error('Error creating order:', error.message);
-        showMessage('An error occurred while creating the order. Please try again.', 'error');
-      }
+        if (error.response) {
+            console.error('Error creating order:', error.response.data);
+            showMessage('An error occurred while creating the order. Please try again.', 'error');
+        } else if (error.request) {
+            console.error('Error creating order: No response received from server');
+            showMessage('No response received from the server. Please try again.', 'error');
+        } else {
+            console.error('Error creating order:', error.message);
+            showMessage('An error occurred while creating the order. Please try again.', 'error');
+        }
     }
-  };
+};
+
   
   return (
     <div>
