@@ -157,7 +157,7 @@ const CheckOut = () => {
   
       // Xóa các mặt hàng trong giỏ hàng
        await deleteCarts();
-
+       
       
       // Hiển thị thông báo thành công và làm sạch localStorage
       showMessage('Order placed successfully!', 'success');  

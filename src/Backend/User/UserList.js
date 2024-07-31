@@ -106,7 +106,7 @@ const UserList = () => {
               <td>{user.phone}</td>
               <td>{user.role ? user.role.role_name : 'No role'}</td>
               <td>
-                <button className="user-list-button-edit" onClick={() => handleEdit(user)}>Edit</button>
+                <button className="user-list-button-editt" onClick={() => handleEdit(user)}>Edit</button>
                 <button className="user-list-button-delete" onClick={() => handleDelete(user.user_id)}>Delete</button>
               </td>
             </tr>
