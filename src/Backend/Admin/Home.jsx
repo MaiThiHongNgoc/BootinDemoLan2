@@ -43,7 +43,7 @@ function DashBoard() {
       try {
         // Fetch products, users, and orders
         const productResponse = await getProducts();
-        const productsData = productResponse;
+        const productsData = productResponse.content;
 
         const userResponse = await getUsers();
         const usersData = userResponse;
