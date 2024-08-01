@@ -30,7 +30,6 @@ const TopRating = () => {
 
   const loadRandomProducts = async () => {
     setLoading(true);
-    setError('');
     try {
       const response = await getProducts();
       const allProducts = response.content;
@@ -62,61 +61,49 @@ const TopRating = () => {
     const user_id = localStorage.getItem('user_id');
 
     if (!token || !user_id) {
-        setShowNotification(true);
-        return;
+      setShowNotification(true);
+      return;
     }
 
     try {
-        // Lấy dữ liệu giỏ hàng của người dùng
-        const cartData = await getPurchasedProductsByUserId(user_id);
-        if (cartData.length > 0) {
-            const cartId = cartData[0].cart_id;
-            const existingItem = cartData[0].cart_Product.find(item => item.product.product_id === product.product_id);
+      const cartData = await getPurchasedProductsByUserId(user_id);
+      if (cartData.length > 0) {
+        const cartId = cartData[0].cart_id;
+        const existingItem = cartData[0].cart_Product.find(item => item.product.product_id === product.product_id);
 
-            if (existingItem) {
-                // Nếu sản phẩm đã tồn tại, cập nhật số lượng
-                await updateCartItem(existingItem.cart_item_id, {
-                    cart: { cart_id: cartId },
-                    product: { product_id: product.product_id },
-                    quantity: existingItem.quantity + 1,
-                    total_price: (existingItem.quantity + 1) * product.price
-                });
-            } else {
-                // Nếu sản phẩm chưa tồn tại, thêm sản phẩm mới vào giỏ hàng
-                await addProductToCart(cartId, product.product_id, 1, token);
-            }
-
-            // Cập nhật trạng thái biểu tượng giỏ hàng
-            setCartIconState(prevState => ({
-                ...prevState,
-                [product.product_id]: 'spinning'
-            }));
-
-            // Đặt lại trạng thái biểu tượng giỏ hàng sau 1 giây
-            setTimeout(() => {
-                setCartIconState(prevState => ({
-                    ...prevState,
-                    [product.product_id]: 'checkmark'
-                }));
-            }, 1000);
-
-            // Cập nhật số lượng giỏ hàng nếu cần
-            // Nếu có component phụ thuộc vào số lượng giỏ hàng, hãy cập nhật lại tại đây
-            // Ví dụ: fetchCartDetails();
-
+        if (existingItem) {
+          await updateCartItem(existingItem.cart_item_id, {
+            cart: { cart_id: cartId },
+            product: { product_id: product.product_id },
+            quantity: existingItem.quantity + 1,
+            total_price: (existingItem.quantity + 1) * product.price
+          });
         } else {
-            console.error('No cart found for user');
-            setError('No cart found for user.');
-            setShowNotification(true);
+          await addProductToCart(cartId, product.product_id, 1, token);
         }
-    } catch (error) {
-        console.error('Failed to add product to cart:', error.message);
-        setError('Failed to add product to cart.');
+
+        setCartIconState(prevState => ({
+          ...prevState,
+          [product.product_id]: 'spinning'
+        }));
+
+        setTimeout(() => {
+          setCartIconState(prevState => ({
+            ...prevState,
+            [product.product_id]: 'checkmark'
+          }));
+        }, 1000);
+      } else {
+        console.error('No cart found for user');
+        setError('No cart found for user.');
         setShowNotification(true);
+      }
+    } catch (error) {
+      console.error('Failed to add product to cart:', error.message);
+      setError('Failed to add product to cart.');
+      setShowNotification(true);
     }
-};
-
-
+  };
 
   const handleCloseNotification = () => {
     setShowNotification(false);
@@ -137,7 +124,7 @@ const TopRating = () => {
           </div>
         )}
         <div className="top-rating-grid">
-          {products.map((product) => (
+          {products.map(product => (
             <div key={product.product_id} className="top-rating-card">
               <div className="top-rating-image-container">
                 <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="top-rating-image" />
@@ -145,7 +132,10 @@ const TopRating = () => {
                   <button onClick={() => handleSearchClick(product)}>
                     <FiSearch />
                   </button>
-                  <button onClick={() => handleCartClick(product)} className={`cart-icon ${cartIconState[product.product_id]}`}>
+                  <button 
+                    onClick={() => handleCartClick(product)} 
+                    className={`cart-icon ${cartIconState[product.product_id]}`}
+                  >
                     {cartIconState[product.product_id] === 'checkmark' ? <FiCheck /> : <FiShoppingCart />}
                   </button>
                 </div>

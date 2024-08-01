@@ -37,6 +37,7 @@ import OrderDetails from "./Backend/Order/orderDetail";
 import Infomation from "./Page/Infomation/Infomation";
 import Personal_Infomation from "./Page/Infomation/Personal_information";
 import UserOrder from "./Page/Infomation/UserOrder";
+import Logout from "./Page/LogOut/LogOut";
 
     
 function App() {
@@ -64,6 +65,7 @@ function App() {
               <Route path="/viewcart" element={<ViewCart />} />
               <Route path="/checkout" element={<CheckOut />} />
               <Route path="/bill/:orderId" element={<Bill />} />
+              <Route path="/logout" element={<Logout />} />
 
               
               

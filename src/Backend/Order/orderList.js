@@ -74,13 +74,13 @@ const OrderList = () => {
         }
 
         if (order.status === 'COMPLETED') {
-            alert('Cannot change the status of a cancelled order.');
+            alert('Cannot change the status of a completed order.');
             return;
         }
 
         const isConfirmed = window.confirm("Are you sure you want to proceed with the payment?");
         if (!isConfirmed) {
-            return; // Dừng lại nếu người dùng không xác nhận
+            return; // Stop if user does not confirm
         }
 
         const updatedOrder = { ...order, status: updatedStatus };
@@ -124,21 +124,24 @@ const OrderList = () => {
         setExpandedOrderId(expandedOrderId === order_id ? null : order_id);
     };
 
-    const filteredOrders = orders.filter(order => {
-        const isUsernameMatch = order.user.username.toLowerCase().includes(searchQuery.toLowerCase());
-        const isFirstName = order.first_name.toLowerCase().includes(searchQuery.toLowerCase());
-        const isLastName = order.last_name.toLowerCase().includes(searchQuery.toLowerCase());
-        const email = order.user.email.toLowerCase().includes(searchQuery.toLowerCase());
+    // Filter and sort orders
+    const filteredOrders = orders
+        .filter(order => {
+            const isUsernameMatch = order.user.username.toLowerCase().includes(searchQuery.toLowerCase());
+            const isFirstName = order.first_name.toLowerCase().includes(searchQuery.toLowerCase());
+            const isLastName = order.last_name.toLowerCase().includes(searchQuery.toLowerCase());
+            const email = order.user.email.toLowerCase().includes(searchQuery.toLowerCase());
 
-        const orderDate = new Date(order.order_date);
-        const isDateInRange = startDate && endDate
-            ? orderDate >= new Date(startDate) && orderDate <= new Date(endDate)
-            : true;
+            const orderDate = new Date(order.order_date);
+            const isDateInRange = startDate && endDate
+                ? orderDate >= new Date(startDate) && orderDate <= new Date(endDate)
+                : true;
 
-        const isStatusMatch = searchStatus ? order.status === searchStatus : true;
+            const isStatusMatch = searchStatus ? order.status === searchStatus : true;
 
-        return (isUsernameMatch || isFirstName || isLastName || email) && isDateInRange && isStatusMatch;
-    });
+            return (isUsernameMatch || isFirstName || isLastName || email) && isDateInRange && isStatusMatch;
+        })
+        .sort((a, b) => b.order_id - a.order_id); // Sort by order_id in descending order
 
     const getStatusClass = (status) => {
         switch (status) {
