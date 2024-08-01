@@ -166,7 +166,7 @@ const CheckOut = () => {
       // Xóa các mặt hàng trong giỏ hàng
        await deleteCarts();
        
-      
+       navigate(`/bill/${order_id}`);
       // Hiển thị thông báo thành công và làm sạch localStorage
       showMessage('Order placed successfully!', 'success');  
     } catch (error) {
@@ -180,8 +180,9 @@ const CheckOut = () => {
         console.error('Error creating order:', error.message);
         showMessage('An error occurred while creating the order. Please try again.', 'error');
       }
+
     }
-    navigate('/bill/${order_id}');
+
   };
 
 

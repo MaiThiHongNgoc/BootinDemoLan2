@@ -1,34 +1,119 @@
+/* Bill.css */
 .bill-page {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+.bill-page h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.order-summary {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary h2 {
+  font-size: 22px;
+  color: #555;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.order-summary p {
+  font-size: 16px;
+  color: #666;
+  margin: 8px 0;
+}
+
+.order-summary h3 {
+  font-size: 20px;
+  color: #333;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.order-table th, .order-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.order-table th {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.order-table td {
+  color: #555;
+}
+
+.order-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.order-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.order-table th {
+  font-size: 18px;
+}
+
+.order-table td {
+  font-size: 16px;
+}
+
+a {
+  display: block;
+  margin-top: 20px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #f86d72;
+  text-align: center;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .bill-page {
+    padding: 15px;
   }
-  
-  .order-summary h2,
+
+  .order-summary h2 {
+    font-size: 20px;
+  }
+
   .order-summary h3 {
-    margin-top: 20px;
+    font-size: 18px;
   }
-  
-  .order-summary p {
-    margin: 5px 0;
-  }
-  
-  .order-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
+
   .order-table th, .order-table td {
-    border: 1px solid #ddd;
+    font-size: 14px;
     padding: 8px;
-    text-align: left;
   }
-  
-  .order-table th {
-    background-color: #f2f2f2;
+
+  a {
+    font-size: 14px;
   }
-  
+}
