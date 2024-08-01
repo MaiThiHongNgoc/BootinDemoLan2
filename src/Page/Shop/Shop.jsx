@@ -37,8 +37,8 @@ const Shop = () => {
     setError('');
     try {
       const response = await getProducts(page - 1, category, priceRange, author, search);
-      const { content, totalPages } = response;
-      setProducts(Array.isArray(content) ? content : []);
+      const {  totalPages } = response;
+      setProducts(Array.isArray(response) ?  response: []);
       setTotalPages(totalPages || 0);
     } catch (error) {
       console.error('Failed to fetch products', error);

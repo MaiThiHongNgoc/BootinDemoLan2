@@ -33,7 +33,7 @@ const Featured = () => {
     setError('');
     try {
       const response = await getProducts();
-      const allProducts = response.content;
+      const allProducts = response;
       const randomProducts = allProducts.sort(() => 0.5 - Math.random()).slice(0, 10);
       setProducts(randomProducts);
     } catch (error) {
