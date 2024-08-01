@@ -43,11 +43,7 @@ const getOrderById = async (orderId) => {
     checkAdminRole(token);
 
     try {
-        const response = await axios.get(`${API_URL}${orderId}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        const response = await axios.get(`${API_URL}${orderId}`);
         return response.data;
     } catch (error) {
         console.error('Failed to fetch orders by user ID:', error.message);
