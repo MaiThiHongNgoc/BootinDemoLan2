@@ -11,8 +11,8 @@ const Bill = ({ orderId }) => {
     const fetchOrderDetails = async () => {
       try {
         const data = await getOrderDetailById(orderId); // Fetch order details by order ID
-        setOrderDetails(data);
         console.log('Fetched order details:', data);
+        setOrderDetails(data); // Update state with the fetched data
       } catch (error) {
         console.error('Error fetching order details:', error);
       }
