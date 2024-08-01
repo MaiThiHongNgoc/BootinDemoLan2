@@ -151,7 +151,7 @@ const TopRating = () => {
                 </div>
               </div>
               <h2 className="top-rating-product-name">{product.product_name}</h2>
-              <p className="top-rating-author-name">{product.author.author_name}</p>
+               <p className="top-rating-author-name">{product.author.author_name}</p>
               <p className="top-rating-price">Price: ${product.price}</p>
             </div>
           ))}
