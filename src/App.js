@@ -15,6 +15,7 @@ import Login from "./Page/Login/Login";
 import PageNotFound from "./Page/404";
 import Cart from "./Cart/Cart";
 import ViewCart from "./Cart/viewCart";
+import Bill from "./Cart/Bill";
 import RegisterForm from "./Page/Register/Register";
 
 import { AuthProvider } from "./AuthContext";
@@ -62,6 +63,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/viewcart" element={<ViewCart />} />
               <Route path="/checkout" element={<CheckOut />} />
+              <Route path="/bill/:orderId" element={<Bill />} />
 
               
               

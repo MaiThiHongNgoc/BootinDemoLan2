@@ -1,62 +1,87 @@
-/* PersonalInformation.css */
+/* Container for the entire personal information section */
 .btn-container {
-    margin-top: 30px;
-    margin-bottom: 50px;
-    background: #f5f5f5;
-    width: 40%;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 40px 20px;
+    background: #f9f9f9;
     font-family: Arial, sans-serif;
-}
-.btn-container h2{
-    margin-top:  25px;
-    font-size: 25px;
-    margin-bottom: 30px;
-    text-transform: capitalize;
-    color: #2b2b2b;
+    box-sizing: border-box;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 
-.btn-edit {
-    background-color: #007bff;
+/* Title styling */
+.btn-container h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Container for user information content */
+.content-book {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+}
+
+/* Styling for individual user info items */
+.content-book p {
+    font-size: 16px;
+    color: #444;
+    margin: 10px 0;
+    line-height: 1.6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Strong emphasis for key details */
+.content-book p strong {
+    color: #222;
+    font-weight: 600;
+    flex: 1;
+}
+
+/* Edit button styling */
+.user-list-button-edit {
+    background-color: #f86d72;
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.btn-edit:hover {
-    background-color: #0056b3;
-}
-
-.user-form {
+    font-family: Merriweather, serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
     margin-top: 20px;
 }
-.content-book{
-    border: 0;
-    border-bottom: 1px solid #f5f5f5;
+
+.user-list-button-edit:hover {
+    background-color: #ffffff;
+    color: #f86d72;
+    border: 1px solid #f86d72;
+}
+
+/* Form container styling */
+.user-form {
+    width: 100%;
+    max-width: 600px;
     background: #fff;
-}
-.content-book p{
-    color: #2b2b2b;
-    font-weight: 700;
-    text-transform: capitalize;
-    padding: 15px;
-    font-family: Merriweather, serif;
-    border: 1px solid #f5f5f5;
-}
-.user-list-button-edit{
-    color: #fff;
-    /* background: #2b2b2b; */
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: Merriweather, serif;
-    padding: 0 50px;
-    line-height: 50px;
-    font-weight: 700;
-    cursor: pointer;
-    border: 0;
-    margin-top: 50px;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    margin-top: 20px;
 }

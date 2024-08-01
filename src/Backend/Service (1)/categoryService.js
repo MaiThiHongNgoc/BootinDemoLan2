@@ -11,11 +11,7 @@ const getCategories = async () => {
     try {
        
 
-        const response = await axios.get(API_URL, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        const response = await axios.get(API_URL);
         return response.data;
     } catch (error) {
         console.error('Failed to fetch categories', error);

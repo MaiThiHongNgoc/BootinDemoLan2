@@ -86,7 +86,7 @@
   position: relative;
   padding: 0;
   display: block;
-  height: 294.4px;
+  overflow-y: auto;
 }
 
 .shop-filter h3 {

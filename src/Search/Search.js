@@ -12,9 +12,9 @@ const Search = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await getCategories();
-        setCategories(response?.data || []); // Ensure response.data is an array
-        console.log(response.data);
+        const data = await getCategories();
+        console.log(data); // Log response data to check structure
+        setCategories(data); // Ensure response.data is an array
       } catch (error) {
         console.error("Error fetching categories:", error);
         setCategories([]); // Fallback to an empty array on error
@@ -27,15 +27,6 @@ const Search = () => {
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);
   };
-  const loadCategories = async () => {
-    try {
-      const data = await getCategories();
-      setCategories(data);
-    } catch (error) {
-      console.error('Failed to fetch categories', error);
-    }
-  };
-
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
@@ -48,13 +39,17 @@ const Search = () => {
           <span className='search-pwd-drop'>Browse Category</span>
           <span className='search-caret'><RiArrowDownSLine /></span>
           <ul className={`search-menu ${isDropdownVisible ? 'visible' : ''}`}>
-          {categories.map(category => (
-                <li key={category.category_id}>
-                  <button onClick={() => handleCategoryChange({ target: { value: category.category_id } })} className="shop-filter-button">
-                    {category.category_name}
-                  </button>
-                </li>
-              ))}
+            {categories.map(category => (
+              <li key={category.category_id}>
+                <button
+                  type="button"
+                  onClick={() => handleCategoryChange({ target: { value: category.category_id } })}
+                  className="shop-filter-button"
+                >
+                  {category.category_name}
+                </button>
+              </li>
+            ))}
           </ul>
           <input type='hidden' name='search-cat' className='search-product' value={selectedCategory} />
         </div>

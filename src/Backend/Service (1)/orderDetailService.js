@@ -92,4 +92,22 @@ const deleteOrderDetail = async (order_detail_id) => {
     }
 };
 
-export { getOrderDetails, createOrderDetail, updateOrderDetail, deleteOrderDetail };
+const getOrderDetailById = async (order_detail_id) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('Token not found. Please log in.');
+
+    try {
+        const response = await axios.get(`${API_URL}${order_detail_id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch order detail by ID:', error.response?.data || error.message);
+        throw error;
+    }
+};
+
+
+export { getOrderDetails, createOrderDetail, updateOrderDetail, deleteOrderDetail,getOrderDetailById };

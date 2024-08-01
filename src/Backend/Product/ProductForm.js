@@ -11,7 +11,7 @@ const ProductForm = ({ product, onSave }) => {
         description: '',
         price: '',
         categories: { category_id: '' },
-        //imgProducts: [{ img_id: '' }]
+        is_deleted: true
     });
 
     const [authors, setAuthors] = useState([]);
@@ -30,7 +30,7 @@ const ProductForm = ({ product, onSave }) => {
                 description: product.description,
                 price: product.price,
                 categories: { category_id: product.categories.category_id },
-                //imgProducts: product.imgProducts.length > 0 ? product.imgProducts : [{ img_id: '' }]
+                is_deleted: product.is_deleted
             });
         } else {
             setFormData({
@@ -39,7 +39,7 @@ const ProductForm = ({ product, onSave }) => {
                 description: '',
                 price: '',
                 categories: { category_id: '' },
-                //imgProducts: [{ img_id: '' }]
+                is_deleted: true
             });
         }
     }, [product]);
@@ -64,6 +64,7 @@ const ProductForm = ({ product, onSave }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+
         setFormData(prevState => {
             if (name === 'author_id') {
                 return {
@@ -75,33 +76,11 @@ const ProductForm = ({ product, onSave }) => {
                     ...prevState,
                     categories: { ...prevState.categories, category_id: value }
                 };
-            } else if (name.startsWith('img_id')) {
-                const index = parseInt(name.split('_')[1], 10);
-                const updatedImgProducts = [...prevState.imgProducts];
-                updatedImgProducts[index] = { img_id: value };
-                return {
-                    ...prevState,
-                    imgProducts: updatedImgProducts
-                };
             } else {
                 return { ...prevState, [name]: value };
             }
         });
     };
-
-    // const handleAddImageField = () => {
-    //     setFormData(prevState => ({
-    //         ...prevState,
-    //         imgProducts: [...prevState.imgProducts, { img_id: '' }]
-    //     }));
-    // };
-
-    // const handleRemoveImageField = (index) => {
-    //     setFormData(prevState => ({
-    //         ...prevState,
-    //         imgProducts: prevState.imgProducts.filter((_, i) => i !== index)
-    //     }));
-    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -117,7 +96,7 @@ const ProductForm = ({ product, onSave }) => {
                 description: '',
                 price: '',
                 categories: { category_id: '' },
-                imgProducts: [{ img_id: '' }]
+                is_deleted: true
             });
             onSave();
         } catch (error) {
@@ -143,6 +122,7 @@ const ProductForm = ({ product, onSave }) => {
                     name="product_name"
                     value={formData.product_name}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div>
@@ -151,6 +131,7 @@ const ProductForm = ({ product, onSave }) => {
                     name="author_id"
                     value={formData.author.author_id}
                     onChange={handleChange}
+                    required
                 >
                     <option value="">Select author...</option>
                     {authors.map(author => (
@@ -167,6 +148,7 @@ const ProductForm = ({ product, onSave }) => {
                     name="description"
                     value={formData.description}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div>
@@ -176,6 +158,7 @@ const ProductForm = ({ product, onSave }) => {
                     name="price"
                     value={formData.price}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div>
@@ -184,6 +167,7 @@ const ProductForm = ({ product, onSave }) => {
                     name="category_id"
                     value={formData.categories.category_id}
                     onChange={handleChange}
+                    required
                 >
                     <option value="">Select category...</option>
                     {categories.map(category => (
@@ -193,21 +177,6 @@ const ProductForm = ({ product, onSave }) => {
                     ))}
                 </select>
             </div>
-            {/* <div>
-                <label>Images</label>
-                {formData.imgProducts.map((img, index) => (
-                    <div key={index} className="image-field">
-                        <input
-                            type="number"
-                            name={`img_id_${index}`}
-                            value={img.img_id}
-                            onChange={handleChange}
-                        />
-                        <button type="button" onClick={() => handleRemoveImageField(index)}>Remove</button>
-                    </div>
-                ))}
-                <button type="button" onClick={handleAddImageField}>Add Image</button>
-            </div> */}
             <button className="product-form-button-save" type="submit">Save</button>
         </form>
     );

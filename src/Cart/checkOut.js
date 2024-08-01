@@ -7,6 +7,8 @@ import { showMessage } from './message';
 import { PayPalButton } from 'react-paypal-button-v2';
 import Header from '../Component/Header/Header'
 import Footer from '../Component/Footer/Footer'
+import { useNavigate } from 'react-router-dom';
+
 
 import './CheckOut.css';
 
@@ -29,6 +31,7 @@ const CheckOut = () => {
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -113,6 +116,11 @@ const CheckOut = () => {
   };
 
   const handleSubmit = async () => {
+     // Xác nhận trước khi thanh toán
+    const isConfirmed = window.confirm("Are you sure you want to proceed with the payment?");
+    if (!isConfirmed) {
+    return; // Dừng lại nếu người dùng không xác nhận
+    }
     const requiredFields = [
       'first_name', 'last_name', 'address', 'phone_number', 'email', 'paymentMethods_payment_method_id'
     ];
@@ -173,6 +181,7 @@ const CheckOut = () => {
         showMessage('An error occurred while creating the order. Please try again.', 'error');
       }
     }
+    navigate('/bill/${order_id}');
   };
 
 
