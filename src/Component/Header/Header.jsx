@@ -7,34 +7,26 @@ import './Header.css';
 import { AuthContext } from '../../AuthContext';
 import Cart from '../../Cart/Cart';
 import Logout from '../../Page/LogOut/LogOut';
-import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService'; // Adjust path accordingly
-import { mergeProducts } from '../../Cart/productUtils'; // Adjust path accordingly
-import { CartContext } from '../../Cart/CartContext'; // Adjust path accordingly
+import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService'; // Ensure this path is correct
+import { mergeProducts } from '../../Cart/productUtils'; // Ensure this path is correct
+import { CartContext } from '../../Cart/CartContext'; // Ensure this path is correct
 import Infomation from '../../Page/Infomation/Infomation';
 
 const Header = () => {
     const [activeLink, setActiveLink] = useState(null);
     const { isLoggedIn, userId } = useContext(AuthContext);
-    const { cartUpdated } = useContext(CartContext); // Get cartUpdated from CartContext
+    const { cartUpdated } = useContext(CartContext);
     const [showCart, setShowCart] = useState(false);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [totalQuantity, setTotalQuantity] = useState(0);
 
-    const handleCartClose = () => {
-        setShowCart(false);
-    };
+    const handleCartClose = () => setShowCart(false);
 
-    const handleLinkClick = (link) => {
-        setActiveLink(link);
-    };
+    const handleLinkClick = (link) => setActiveLink(link);
 
-    const toggleCart = () => {
-        setShowCart(!showCart);
-    };
+    const toggleCart = () => setShowCart(!showCart);
 
-    const toggleDropdown = () => {
-        setIsDropdownVisible(!isDropdownVisible);
-    };
+    const toggleDropdown = () => setIsDropdownVisible(!isDropdownVisible);
 
     useEffect(() => {
         const fetchCartDetails = async () => {
@@ -46,17 +38,20 @@ const Header = () => {
                         const { totalQuantity } = mergeProducts(cartData.cart_Product || []);
                         setTotalQuantity(totalQuantity);
                     } else {
-                        setTotalQuantity(0); // Set to 0 if no data
+                        setTotalQuantity(0);
                     }
                 } catch (error) {
                     console.error('Failed to fetch cart details', error);
-                    setTotalQuantity(0); // Set to 0 in case of error
+                    setTotalQuantity(0);
                 }
             }
         };
 
-        fetchCartDetails();
-    }, [userId, cartUpdated]); // Re-run effect when userId or cartUpdated changes
+        fetchCartDetails(); // Initial fetch
+        const intervalId = setInterval(fetchCartDetails,800);
+
+        return () => clearInterval(intervalId); // Cleanup on unmount
+    }, [userId, cartUpdated]);
 
     return (
         <div className="Header">
