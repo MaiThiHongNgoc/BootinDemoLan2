@@ -58,7 +58,7 @@ const PersonalInformation = () => {
                     <p>Name: {user.username}</p>
                     <p>Email: {user.email}</p>
                     <p>Phone: {user.phone}</p>
-                    <p>Created At: {(user.created_at)}</p>
+                    <p>Created At: {new Date(user.created_at).toLocaleString()}</p>
 
                     {/* Add other user properties if available */}
                     <button className="user-list-button-edit" onClick={() => handleEdit(user)}>Edit</button>

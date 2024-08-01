@@ -78,7 +78,7 @@ const OrderList = () => {
             return;
         }
 
-        const isConfirmed = window.confirm("Are you sure you want to proceed with the payment?");
+        const isConfirmed = window.confirm("You have comment change status");
         if (!isConfirmed) {
             return; // Stop if user does not confirm
         }

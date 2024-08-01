@@ -9,6 +9,7 @@ import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import { FiSearch, FiShoppingCart, FiCheck } from "react-icons/fi";
 import { RxSlash } from "react-icons/rx";
+import { showMessage } from '../../Cart/message'; // Adjust the path as needed
 import './Shop.css';
 
 const Shop = () => {
@@ -124,10 +125,11 @@ const Shop = () => {
 
         setTimeout(() => {
           setCartIconState(prevState => ({
-            ...prevState,
-            [product.product_id]: 'checkmark'
+              ...prevState,
+              [product.product_id]: 'checkmark'
           }));
-        }, 1000);
+          showMessage('Product successfully added to cart!', 'success'); // Use showMessage
+      }, 1000);
       } else {
         console.error('No cart found for user');
         setError('No cart found for user.');

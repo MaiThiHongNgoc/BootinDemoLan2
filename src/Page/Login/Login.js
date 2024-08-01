@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import Footer from '../../Component/Footer/Footer';
 import { RxSlash } from 'react-icons/rx';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import Header from "../../Component/Header/Header";  
 
 const Login = () => {
@@ -49,6 +49,8 @@ const Login = () => {
             } else if (userRole === 'USER') {
                 navigate('/'); // Redirect to user home page
             }
+            // Reload the page after navigation
+            window.location.reload();
         } catch (error) {
             console.error('Login failed:', error); // Improved error logging
             setError('Login failed. Please check your credentials and try again.');

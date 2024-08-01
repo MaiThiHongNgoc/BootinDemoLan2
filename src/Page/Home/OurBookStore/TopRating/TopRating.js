@@ -6,8 +6,9 @@ import { FiSearch, FiShoppingCart, FiCheck } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContext';
 import { getPurchasedProductsByUserId } from '../../../../Backend/Service (1)/cartService';
+import { showMessage } from '../../../../Cart/message'; // Adjust the path as needed
 
-const TopRating = () => {
+const BestSellers = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -89,9 +90,10 @@ const TopRating = () => {
 
         setTimeout(() => {
           setCartIconState(prevState => ({
-            ...prevState,
-            [product.product_id]: 'checkmark'
+              ...prevState,
+              [product.product_id]: 'checkmark'
           }));
+          showMessage('Product successfully added to cart!', 'success'); // Use showMessage
         }, 1000);
       } else {
         console.error('No cart found for user');
@@ -151,4 +153,4 @@ const TopRating = () => {
   );
 };
 
-export default TopRating;
+export default BestSellers;

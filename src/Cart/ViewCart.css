@@ -184,6 +184,7 @@
 .viewcart-remove-button{
     display: inline-block;
     padding-top: 9px;
+    margin-top: 20px;
 }
 .viewcart-wc{
     background: #f86d72;
