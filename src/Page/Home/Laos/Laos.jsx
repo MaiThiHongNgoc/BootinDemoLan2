@@ -22,54 +22,6 @@ const Laos = () => {
     return (
         <div className="laos-jsx">
             <div className="laos-full">
-                <div className="laos-column">
-                    <div className="laos-inner">
-                        <div className="laos-wpb">
-                            <div className="laos-counterup">
-                                <div className="laos-number">
-                                    <CountUp end={4500} duration={2} separator="" />
-                                </div>
-                                <h4 className="laos-title">ACTIVE READERS</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="laos-column">
-                    <div className="laos-inner">
-                        <div className="laos-wpb">
-                            <div className="laos-counterup">
-                                <div className="laos-number">
-                                    <CountUp end={2000} duration={2} separator="" />
-                                </div>
-                                <h4 className="laos-title">TOTAL PAGES</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="laos-column">
-                    <div className="laos-inner">
-                        <div className="laos-wpb">
-                            <div className="laos-counterup">
-                                <div className="laos-number">
-                                    <CountUp end={160} duration={2} separator="" />
-                                </div>
-                                <h4 className="laos-title">CUP OF COFFEE</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="laos-column">
-                    <div className="laos-inner">
-                        <div className="laos-wpb">
-                            <div className="laos-counterup">
-                                <div className="laos-number">
-                                    <CountUp end={1000} duration={2} separator="" />
-                                </div>
-                                <h4 className="laos-title">Fan follow us</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div className="laos-vc">
                 <div className="laos-col">
