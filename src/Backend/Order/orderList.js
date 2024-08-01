@@ -42,7 +42,7 @@ const OrderList = () => {
         setLoading(true);
         try {
             await deleteOrder(order_id);
-            await loadOrders();
+            loadOrders(); // Reload orders without scroll issue
         } catch (error) {
             setError('Failed to delete order. Please try again later.');
         } finally {
@@ -72,7 +72,11 @@ const OrderList = () => {
             alert('Cannot change the status of a cancelled order.');
             return;
         }
-    
+        const isConfirmed = window.confirm("Are you sure you want to proceed with the payment?");
+        if (!isConfirmed) {
+            return; // Dừng lại nếu người dùng không xác nhận
+        }
+
         const updatedOrder = { ...order, status: updatedStatus };
     
         const payload = {
@@ -86,7 +90,7 @@ const OrderList = () => {
         setLoading(true);
         try {
             await updateOrder(updatedOrder.order_id, payload);
-            await loadOrders();
+            loadOrders(); // Reload orders without scroll issue
         } catch (error) {
             setError(`Failed to update status: ${error.message}`);
         } finally {
