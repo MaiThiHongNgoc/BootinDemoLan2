@@ -15,6 +15,7 @@ const Bill = () => {
         const details = await getOrderById(orderId);
         console.log("Order details:", details);
         setOrderDetails(details[0]); // Assuming the response is an array with one item
+
       } catch (error) {
         console.error('Error fetching order details:', error);
       }
