@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Header from '../Component/Header/Header';
 import Footer from '../Component/Footer/Footer';
 import './Bill.css';
 import { getOrderById } from '../Backend/Service (1)/orderService';
-import { Link } from 'react-router-dom';
 
 const Bill = () => {
   const { orderId } = useParams();
   const [orderDetails, setOrderDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
+      setLoading(true);
       try {
         const details = await getOrderById(orderId);
         console.log("Order details:", details);
-        setOrderDetails(details[0]); // Assuming the response is an array with one item
+
+        // Sắp xếp orderDetails theo order_id từ lớn đến nhỏ
+        const sortedDetails = details[0]?.orderDetails?.sort((a, b) => b.order_id - a.order_id) || [];
+        setOrderDetails({ ...details[0], orderDetails: sortedDetails }); // Assuming the response is an array with one item
       } catch (error) {
         console.error('Error fetching order details:', error);
+        setError('Failed to fetch order details. Please try again later.');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -26,8 +34,16 @@ const Bill = () => {
     }
   }, [orderId]);
 
-  if (!orderDetails) {
+  if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
+  if (!orderDetails) {
+    return <div>No order details available.</div>;
   }
 
   return (
@@ -39,7 +55,7 @@ const Bill = () => {
           <h2>Order Details</h2>
           <p>Order ID: {orderDetails.order_id || 'N/A'}</p>
           <p>Status: {orderDetails.status || 'N/A'}</p>
-          <p>Total Amount: ${orderDetails.total_amount.toFixed(2) || 'N/A'}</p>
+          <p>Total Amount: ${orderDetails.total_amount?.toFixed(2) || 'N/A'}</p>
           <p>Date: {orderDetails.order_date ? new Date(orderDetails.order_date).toLocaleString() : 'N/A'}</p>
 
           <h3>Billing Information</h3>
@@ -60,7 +76,7 @@ const Bill = () => {
               </tr>
             </thead>
             <tbody>
-              {orderDetails.orderDetails.map((item) => (
+              {orderDetails.orderDetails?.map((item) => (
                 <tr key={item.order_detail_id}>
                   <td>{item.products?.product_name || 'N/A'}</td>
                   <td>
