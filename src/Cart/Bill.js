@@ -10,8 +10,9 @@ const Bill = ({ orderId }) => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const details = await getOrderDetailById(orderId); // Fetch order details by order ID
-        setOrderDetails(details);
+        const data = await getOrderDetailById(orderId); // Fetch order details by order ID
+        setOrderDetails(data);
+        console.log('Fetched order details:', data);
       } catch (error) {
         console.error('Error fetching order details:', error);
       }
