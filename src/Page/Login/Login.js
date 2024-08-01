@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import Footer from '../../Component/Footer/Footer';
 import { RxSlash } from 'react-icons/rx';
-import { jwtDecode } from 'jwt-decode';
-import Header from "./../../Component/Header/Header";  
-
+import {jwtDecode} from 'jwt-decode';
+import Header from "../../Component/Header/Header";  
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate(); // For navigation
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,9 +19,15 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:9191/auth/login/', { username, password });
             const token = response.data.token;
-            localStorage.setItem('token', token);
 
-            // Decode the token to get user role information
+            // Check for existing token
+            if (localStorage.getItem('token')) {
+                window.alert("Please log out first");
+                return;
+            }
+
+            // Store token and decode it
+            localStorage.setItem('token', token);
             const decodedToken = jwtDecode(token);
             const userRole = decodedToken.scope; // Assuming role is stored in the 'scope' field
 
@@ -33,18 +39,15 @@ const Login = () => {
             });
 
             const user = userResponse.data;
-
             localStorage.setItem('user_id', user.user_id);
-            
-            //localStorage.setItem('userId', user.user_id);
 
             // Redirect based on role
             if (userRole === 'ADMIN') {
-                window.location.href = '/admin'; // Redirect to admin page
+                navigate('/admin'); // Redirect to admin page
             } else if (userRole === 'STAFF') {
-                window.location.href = '/staff'; // Redirect to staff page
+                navigate('/staff'); // Redirect to staff page
             } else if (userRole === 'USER') {
-                window.location.href = '/'; // Redirect to user home page
+                navigate('/'); // Redirect to user home page
             }
         } catch (error) {
             console.error('Login failed:', error); // Improved error logging
