@@ -82,7 +82,7 @@
   font-size: 16px;
 }
 
-a {
+.bill-link {
   display: block;
   margin-top: 20px;
   font-size: 16px;
@@ -91,7 +91,7 @@ a {
   text-align: center;
 }
 
-a:hover {
+.bill-link:hover {
   text-decoration: underline;
 }
 

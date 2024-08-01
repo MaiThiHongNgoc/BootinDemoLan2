@@ -82,7 +82,7 @@ const Bill = () => {
             </tbody>
           </table>
         </div>
-        <Link to="/">Back to Home</Link>
+        <Link to="/" className='bill-link'>Back to Home</Link>
       </div>
       <Footer />
     </div>

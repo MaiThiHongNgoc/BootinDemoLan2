@@ -35,7 +35,7 @@ const ProductList = () => {
                     }
                 }); // Gọi API cho sản phẩm bình thường
             }
-            setProducts(response.data.content || []); // Xử lý cấu trúc dữ liệu trả về từ axios
+            setProducts(response.data || []); // Xử lý cấu trúc dữ liệu trả về từ axios
             setTotalProducts(response.data.totalElements || 0); // Xử lý cấu trúc dữ liệu trả về từ axios
         } catch (error) {
             console.error('Failed to fetch products', error);
