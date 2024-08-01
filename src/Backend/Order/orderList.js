@@ -67,7 +67,7 @@ const OrderList = () => {
 
     const handleStatusChange = async (e, order) => {
         const updatedStatus = e.target.value;
-    
+
         if (order.status === 'CANCELLED') {
             alert('Cannot change the status of a cancelled order.');
             return;
@@ -77,13 +77,14 @@ const OrderList = () => {
             alert('Cannot change the status of a cancelled order.');
             return;
         }
+
         const isConfirmed = window.confirm("Are you sure you want to proceed with the payment?");
         if (!isConfirmed) {
             return; // Dừng lại nếu người dùng không xác nhận
         }
 
         const updatedOrder = { ...order, status: updatedStatus };
-    
+
         const payload = {
             user: { user_id: updatedOrder.user.user_id },
             address: updatedOrder.address,
@@ -91,7 +92,7 @@ const OrderList = () => {
             total_amount: updatedOrder.total_amount,
             status: updatedStatus
         };
-    
+
         setLoading(true);
         try {
             await updateOrder(updatedOrder.order_id, payload);
