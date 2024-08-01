@@ -72,6 +72,11 @@ const OrderList = () => {
             alert('Cannot change the status of a cancelled order.');
             return;
         }
+
+        if (order.status === 'COMPLETED') {
+            alert('Cannot change the status of a cancelled order.');
+            return;
+        }
         const isConfirmed = window.confirm("Are you sure you want to proceed with the payment?");
         if (!isConfirmed) {
             return; // Dừng lại nếu người dùng không xác nhận
