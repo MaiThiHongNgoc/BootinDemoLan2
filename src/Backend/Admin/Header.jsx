@@ -29,6 +29,7 @@ function Header({ OpenSidebar }) {
           <div className="menu">
             <Link to="/login" className="item">Login</Link>
             <Logout />
+            <Link to="/infomation" className='infomation'>infomation</Link>
           </div>
         )}
       </div>

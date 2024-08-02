@@ -86,8 +86,13 @@ const OrderList = () => {
         const updatedOrder = { ...order, status: updatedStatus };
 
         const payload = {
+            order_id: updatedOrder.order_id,
             user: { user_id: updatedOrder.user.user_id },
+            first_name: updatedOrder.first_name,
+            last_name: updatedOrder.last_name,
             address: updatedOrder.address,
+            phone_number: updatedOrder.phone_number,
+            email: updatedOrder.email,
             paymentMethods: { payment_method_id: updatedOrder.paymentMethods.payment_method_id },
             total_amount: updatedOrder.total_amount,
             status: updatedStatus
