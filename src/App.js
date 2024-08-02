@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect} from "react";
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
@@ -17,6 +17,7 @@ import Cart from "./Cart/Cart";
 import ViewCart from "./Cart/viewCart";
 import Bill from "./Cart/Bill";
 import RegisterForm from "./Page/Register/Register";
+import ProductDetail from "./Page/Shop/productDetail";
 
 import { AuthProvider } from "./AuthContext";
 import { CartProvider } from "./Cart/CartContext"; // Import CartProvider
@@ -41,6 +42,18 @@ import Logout from "./Page/LogOut/LogOut";
 
     
 function App() {
+  useEffect(() => {
+    // Load the chatbot script
+    const script = document.createElement("script");
+    script.src = "https://cdn.fchat.vn/assets/embed/webchat.js?id=66ac86d4e2726d04e65be297";
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Cleanup the script when the component unmounts
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
@@ -55,6 +68,7 @@ function App() {
               </Route>
 
               <Route path="/shop" element={<Shop />} />
+              <Route path="/product/:productId" element={<ProductDetail/>} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/author" element={<Author />} />
               <Route path="/contact" element={<Contact />} />

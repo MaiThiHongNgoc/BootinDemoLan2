@@ -91,3 +91,38 @@ export const deleteProduct = async (id) => {
         throw error;
     }
 };
+
+// Get product details by ID
+export const getProductById = async (id) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('Token not found. Please log in.');
+  
+    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
+    const role = payload.scope;
+  
+    try {
+      if (role !== 'ADMIN' && role !== 'USER') {
+        throw new Error(`Unauthorized: Only admins and users can view product ${id}.`);
+      }
+      const response = await axios.get(`${API_URL}${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error(`Failed to get product ${id}:`, error.response?.data || error.message);
+      throw error;
+    }
+  };
+  
+  // Search for products by name
+  export const searchProducts = async (searchQuery) => {
+    try {
+      const response = await axios.get(`${API_URL}?search=${searchQuery}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Failed to search products:`, error.response?.data || error.message);
+      throw error;
+    }
+  };

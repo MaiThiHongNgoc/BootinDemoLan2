@@ -322,6 +322,7 @@ input[type="range"]::-ms-thumb {
     font-weight: 400;
     font-family: Merriweather, serif;
     text-transform: capitalize;
+    text-decoration: none;
 }
 .customer-shop-product-name:hover{
   color: #f86d72;

@@ -9,6 +9,7 @@ import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import { FiSearch, FiShoppingCart, FiCheck } from "react-icons/fi";
 import { RxSlash } from "react-icons/rx";
+import { Link } from 'react-router-dom';
 import './Shop.css';
 
 const Shop = () => {
@@ -241,6 +242,7 @@ const Shop = () => {
               <div className="customer-shop-grid">
                 {products.map((product) => (
                   <div key={product.product_id} className="customer-shop-card">
+                    <Link to={`/product/${product.product_id}`}></Link>
                     <div className="customer-shop-image-container">
                       <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="customer-shop-image" />
                       <div className="customer-shop-icons">
@@ -255,7 +257,10 @@ const Shop = () => {
                         </button>
                       </div>
                     </div>
-                    <h2 className="customer-shop-product-name">{product.product_name}</h2>
+                    {/* <h2 className="customer-shop-product-name">{product.product_name}</h2> */}
+                    <Link to={`/product/${product.product_id}`} className="customer-shop-product-name">
+                        {product.product_name}
+                      </Link>
                     <p className="customer-shop-author-name">{product.author.author_name}</p>
                     <p className="customer-shop-price">Price: ${product.price}</p>
                   </div>

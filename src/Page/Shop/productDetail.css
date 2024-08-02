@@ -1,0 +1,71 @@
+.proDetail{
+  background-image: url(https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/05/Breadcumd.jpg);
+    margin: 0 0 100px;
+    font-size: 20px;
+    background-position: 50%;
+    padding-top: 100px;
+    padding-bottom: 248px;
+    text-align: center;
+    height: 200px;
+    width: 100%;
+}
+.product-detail {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .product-name {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .product-author,
+  .product-category,
+  .product-price,
+  .product-description {
+    margin-bottom: 10px;
+  }
+  
+  .product-quantity {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .product-quantity label {
+    margin-right: 10px;
+  }
+  
+  .quantity-input {
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+  }
+  
+  .add-to-cart-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-to-cart-button:hover {
+    background-color: #218838;
+  }
+  
+  .success-message {
+    color: #28a745;
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  
