@@ -188,13 +188,13 @@ const Shop = () => {
             <h3>Categories</h3>
             <ul>
               <li>
-                <button onClick={() => handleCategoryChange({ target: { value: '' } })} className="shop-filter-button">
+                <button onClick={() => handleCategoryChange({ target: { value: '' } })} className="shop-fil-button">
                   All Categories
                 </button>
               </li>
               {categories.map(category => (
                 <li key={category.category_id}>
-                  <button onClick={() => handleCategoryChange({ target: { value: category.category_id } })} className="shop-filter-button">
+                  <button onClick={() => handleCategoryChange({ target: { value: category.category_id } })} className="shop-fil-button">
                     {category.category_name}
                   </button>
                 </li>
@@ -222,13 +222,13 @@ const Shop = () => {
             <h3>Authors</h3>
             <ul className='shop-ul'>
               <li>
-                <button onClick={() => handleAuthorChange({ target: { value: '' } })} className="shop-filter-button">
+                <button onClick={() => handleAuthorChange({ target: { value: '' } })} className="shop-fil-button">
                   All Authors
                 </button>
               </li>
               {authors.map(author => (
                 <li key={author.author_id}>
-                  <button onClick={() => handleAuthorChange({ target: { value: author.author_id } })} className="shop-filter-button">
+                  <button onClick={() => handleAuthorChange({ target: { value: author.author_id } })} className="shop-fil-button">
                     {author.author_name}
                   </button>
                 </li>

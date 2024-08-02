@@ -130,7 +130,7 @@
   border: 1px solid #ccc;
 }
 
-.shop-filter-button {
+.shop-fil-button {
   text-align: left;
   width: 100%;
   cursor: pointer;
@@ -212,7 +212,7 @@ input[type="range"]::-ms-thumb {
 .shop-ul span:hover{
   border: 2px solid #f86d72;
 }
-.shop-filter-ton{
+.shop-fil-ton{
   color: #666;
   margin-bottom: 0;
   font-weight: 400;
@@ -225,7 +225,7 @@ input[type="range"]::-ms-thumb {
   outline: none;
 }
 
-.shop-filter-button:hover {
+.shop-filbutton:hover {
   background-color: #ddd;
 }
 
