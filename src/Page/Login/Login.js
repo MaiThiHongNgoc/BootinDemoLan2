@@ -20,12 +20,6 @@ const Login = () => {
             const response = await axios.post('http://localhost:9191/auth/login/', { username, password });
             const token = response.data.token;
 
-            // Check for existing token
-            if (localStorage.getItem('token')) {
-                window.alert("Please log out first");
-                return;
-            }
-
             // Store token and decode it
             localStorage.setItem('token', token);
             const decodedToken = jwtDecode(token);

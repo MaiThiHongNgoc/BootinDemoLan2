@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getProductById } from '../../Backend/Service (1)/productService';
 import { addProductToCart, updateCartItem } from '../../Backend/Service (1)/cartItemsService';
 import './productDetail.css';
@@ -8,17 +8,19 @@ import Footer from '../../Component/Footer/Footer';
 import { AuthContext } from '../../AuthContext';
 import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService';
 import { RxSlash } from "react-icons/rx";
+import { showMessage } from '../../Cart/message';
 
 const ProductDetail = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  const { updateCart } = useContext(AuthContext);
   const [showNotification, setShowNotification] = useState(false);
   const [cartIconState, setCartIconState] = useState({});
+  const { updateCart } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -41,56 +43,63 @@ const ProductDetail = () => {
   const handleAddProductToCart = async (product) => {
     const token = localStorage.getItem('token');
     const user_id = localStorage.getItem('user_id');
+
     if (!token || !user_id) {
       setShowNotification(true);
       return;
     }
+
     try {
       const cartData = await getPurchasedProductsByUserId(user_id);
       if (cartData.length > 0) {
         const cartId = cartData[0].cart_id;
-        const existingItem = cartData[0].cart_Product.find(item => item.product_id === product.product_id);
+        const existingItem = cartData[0].cart_Product.find(item => item.product.product_id === product.product_id);
+
         if (existingItem) {
           await updateCartItem(existingItem.cart_item_id, {
             cart: { cart_id: cartId },
             product: { product_id: product.product_id },
             quantity: existingItem.quantity + 1,
-            total_price: (existingItem.quantity + 1) * product.price,
+            total_price: (existingItem.quantity + 1) * product.price
           });
         } else {
-          // Đảm bảo product_id không phải là null
-          if (product.product_id) {
-            await addProductToCart(cartId, product.product_id, 1, token);
-          } else {
-            console.error('ID sản phẩm là null hoặc không xác định');
-            setError('Không thêm được sản phẩm vào giỏ hàng. Thiếu ID sản phẩm.');
-            setShowNotification(true);
-          }
+          await addProductToCart(cartId, product.product_id, 1, token);
         }
-        setCartIconState(prevState => ({ ...prevState, [product.product_id]: 'spinning' }));
+
+        setCartIconState(prevState => ({
+          ...prevState,
+          [product.product_id]: 'spinning'
+        }));
+
         setTimeout(() => {
-          setCartIconState(prevState => ({ ...prevState, [product.product_id]: 'checkmark' }));
+          setCartIconState(prevState => ({
+              ...prevState,
+              [product.product_id]: 'checkmark'
+          }));
+          showMessage('Product successfully added to cart!', 'success'); // Use showMessage
         }, 1000);
       } else {
-        console.error('Không tìm thấy giỏ hàng cho người dùng');
-        setError('Không tìm thấy giỏ hàng cho người dùng.');
+        console.error('No cart found for user');
+        setError('No cart found for user.');
         setShowNotification(true);
       }
     } catch (error) {
-      console.error('Không thêm được sản phẩm vào giỏ hàng:', error.message);
-      setError('Không thêm được sản phẩm vào giỏ hàng.');
+      console.error('Failed to add product to cart:', error.message);
+      setError('Failed to add product to cart.');
       setShowNotification(true);
     }
   };
 
-  const handleCartClick = (product) => {
-    handleAddProductToCart(product);
+  const handleCartClick = () => {
+    if (product) {
+      handleAddProductToCart(product);
+    }
   };
 
   const handleCloseNotification = () => {
     setShowNotification(false);
     if (!localStorage.getItem('token')) {
-      window.location.href = '/đăng nhập';
+      navigate('/đăng nhập');
     }
   };
 
@@ -98,7 +107,7 @@ const ProductDetail = () => {
     <div>
       <Header />
       <div className='proDetail'>
-      <h1 className='shop-product'>Products</h1>
+        <h1 className='shop-product'>Products</h1>
         <div className='shop-bread'>
           <div className='shop-crumb'>
             <a href='/' className='shop-a'>Home</a>
@@ -108,11 +117,12 @@ const ProductDetail = () => {
             <span className='shop-current'>Products
             <i className='shop-i'><RxSlash /></i>
             </span>
-            {/* <span className='shop-current'>{product.product_name}</span> */}
           </div>
         </div>
       </div>
       <div className="product-detail">
+        {loading && <p>Loading...</p>}
+        {error && <p className="error-message">{error}</p>}
         {product && (
           <>
             <h1 className="product-name">{product.product_name}</h1>
@@ -132,7 +142,12 @@ const ProductDetail = () => {
             {success && <p className="success-message">Đã thêm vào giỏ hàng!</p>}
           </>
         )}
-        <div className="product-detail-buttons"></div>
+        {showNotification && (
+          <div className="notification">
+            <p>{error || 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.'}</p>
+            <button onClick={handleCloseNotification}>Đóng</button>
+          </div>
+        )}
       </div>
       <Footer />
     </div>
