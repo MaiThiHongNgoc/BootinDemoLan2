@@ -3,7 +3,7 @@
     padding-top: 0;
     padding-bottom: 0;
     width: 100%;
-    height: 6896px;
+    height: 5800px;
 }
 .blog-title{
     background-image: url(https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/05/Breadcumd.jpg);
@@ -67,11 +67,9 @@
     padding-left: 15px;
     padding-right: 15px;
     max-width: 100%;
-    height: 6447.7px;
 }
 .blog-posts{
     width: 100%;
-    height: 6447.7px;
     margin-left: -15px;
     margin-right: -15px;
 }
@@ -379,7 +377,7 @@
     left: 15px;
     width: 75%;
     float: left;
-    height: 6447.48px;
+    /* height: 6447.48px; */
     position: relative;
     min-height: 1px;
     padding-left: 15px;
@@ -387,7 +385,7 @@
 }
 .blog-content-area{
     width: 100%;
-    height: 6447.48px;
+    /* height: 6447.48px; */
     background: 0 0;
     padding: 0;
     border: none;
@@ -399,8 +397,6 @@
     display: block;
 }
 .blog-site{
-    width: 100%;
-    height: 6343.68px;
 }
 .blog-list-post{
     width: 100%;
@@ -482,6 +478,7 @@
     margin-top: 8px;
 }
 .blog-post-buton{
+    margin-right: 15px;
     color: #909090;
     font-size: 14px;
     position: relative;
@@ -517,6 +514,7 @@
     transition: all 0.3s ease;
 }
 .blog-meta-link{
+    margin-right: 15px;
     color: #909090;
     font-size: 14px;
     position: relative;

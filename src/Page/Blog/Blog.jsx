@@ -211,15 +211,15 @@ const Blog = () => {
                   <article className='blog-post-3976'>
                     <div className='blog-single-thumb'>
                       <a href='#' className='blog-nail'>
-                        <img src='https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2018/05/Image-1.jpg' className='blog-full'/>
+                        <img src='https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2018/05/Image-2-1.jpg' className='blog-full'/>
                       </a>
                     </div>
                     <div className='blog-post-conte'>
                       <div className='post-category'>
-                        <a href='#'>Life Style</a>
+                        <a href='#'>Men</a>
                       </div>
                       <h3 className='blog-entry'>
-                        <a href="#">Book news missed  this week</a>
+                        <a href="#">Book fashion for  children</a>
                       </h3>
                       <div className='blog-entry-meta'>
                         <div className='blog-post-buton'>
@@ -251,7 +251,7 @@ const Blog = () => {
                   <article className='blog-post-3976'>
                     <div className='blog-single-thumb'>
                       <a href='#' className='blog-nail'>
-                        <img src='https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2018/05/Image-1.jpg' className='blog-full'/>
+                        <img src='https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2018/05/Image-3-1.jpg' className='blog-full'/>
                       </a>
                     </div>
                     <div className='blog-post-conte'>
@@ -259,14 +259,94 @@ const Blog = () => {
                         <a href='#'>Life Style</a>
                       </div>
                       <h3 className='blog-entry'>
-                        <a href="#">Book news missed  this week</a>
+                        <a href="#">Walk Around With Streetwear</a>
                       </h3>
                       <div className='blog-entry-meta'>
                         <div className='blog-post-buton'>
                           <i className='blog-clock'><LuClock9 /></i>
                           <span className='blog-mark'>
                             <a className='blog-rel' href="#">
-                              <time datetime="2024-01-03T10:38:01+00:00">January 3, 2024</time>
+                              <time datetime="2024-01-03T10:38:01+00:00">May 8, 2019</time>
+                            </a>
+                          </span>
+                        </div>
+                        <span className='blog-meta-link'>
+                          <i className='blog-user'><FaUser /></i>
+                          <a className='blog-admin' href='#'>admin</a>
+                        </span>
+                        <span className='blog-comments-link'>
+                          <i className='blog-comments'><FaRegComment /></i>
+                          1
+                          <span>Comment</span>
+                        </span>
+                      </div>
+                      <p className='blog-excerpt'>
+                        Nunc aliquet, justo non commodo congue, velit sem pulvinar enim, ac bibendum mi mi eget libero. Maecenas 
+                      ac viverra enim, et laoreet lacus. Etiam nisi diam, sagittis ac quam at, posuere hendrerit eros. Praesent 
+                      aliquam tincidunt tempor.Lorem ipsum dolor sit amet, consectetur adipiscing elit....
+                      </p>
+                      <a className='blog-read' href='#'>Read more</a>
+                    </div>
+                  </article>
+                  <article className='blog-post-3976'>
+                    <div className='blog-single-thumb'>
+                      <a href='#' className='blog-nail'>
+                        <img src='https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2017/04/Image-4.jpg' className='blog-full'/>
+                      </a>
+                    </div>
+                    <div className='blog-post-conte'>
+                      <div className='post-category'>
+                        <a href='#'>Fashion</a>
+                      </div>
+                      <h3 className='blog-entry'>
+                        <a href="#">Lorem ipsum dolor sit amet enim</a>
+                      </h3>
+                      <div className='blog-entry-meta'>
+                        <div className='blog-post-buton'>
+                          <i className='blog-clock'><LuClock9 /></i>
+                          <span className='blog-mark'>
+                            <a className='blog-rel' href="#">
+                              <time datetime="2024-01-03T10:38:01+00:00">May 8, 2019</time>
+                            </a>
+                          </span>
+                        </div>
+                        <span className='blog-meta-link'>
+                          <i className='blog-user'><FaUser /></i>
+                          <a className='blog-admin' href='#'>admin</a>
+                        </span>
+                        <span className='blog-comments-link'>
+                          <i className='blog-comments'><FaRegComment /></i>
+                          1
+                          <span>Comment</span>
+                        </span>
+                      </div>
+                      <p className='blog-excerpt'>
+                        Nunc aliquet, justo non commodo congue, velit sem pulvinar enim, ac bibendum mi mi eget libero. Maecenas 
+                      ac viverra enim, et laoreet lacus. Etiam nisi diam, sagittis ac quam at, posuere hendrerit eros. Praesent 
+                      aliquam tincidunt tempor.Lorem ipsum dolor sit amet, consectetur adipiscing elit....
+                      </p>
+                      <a className='blog-read' href='#'>Read more</a>
+                    </div>
+                  </article>
+                  <article className='blog-post-3976'>
+                    <div className='blog-single-thumb'>
+                      <a href='#' className='blog-nail'>
+                        <img src='https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2017/04/Image-6-1.jpg' className='blog-full'/>
+                      </a>
+                    </div>
+                    <div className='blog-post-conte'>
+                      <div className='post-category'>
+                        <a href='#'>Fashion</a>
+                      </div>
+                      <h3 className='blog-entry'>
+                        <a href="#">Post format audio blogs</a>
+                      </h3>
+                      <div className='blog-entry-meta'>
+                        <div className='blog-post-buton'>
+                          <i className='blog-clock'><LuClock9 /></i>
+                          <span className='blog-mark'>
+                            <a className='blog-rel' href="#">
+                              <time datetime="2024-01-03T10:38:01+00:00">May 8, 2019</time>
                             </a>
                           </span>
                         </div>

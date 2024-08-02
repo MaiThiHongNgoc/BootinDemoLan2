@@ -149,7 +149,6 @@
     font-size: 12px;
     font-weight: bold;
     /* Ensure the badge is visible above other content */
-    z-index: 10;
 }
 
   

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { getProducts } from '../../../../Backend/Service (1)/productService';
-import { addProductToCart as addProductToCartService } from '../../../../Backend/Service (1)/cartItemsService';
+import { addProductToCart, updateCartItem } from '../../../../Backend/Service (1)/cartItemsService'; // Ensure the import path is correct
 import { FiSearch, FiShoppingCart, FiCheck } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContext';
 import { getPurchasedProductsByUserId } from '../../../../Backend/Service (1)/cartService';
-import '../TopRating/TopRating.css';
+import { showMessage } from '../../../../Cart/message'; // Adjust the path as needed
 
 const BestSellers = () => {
   const [products, setProducts] = useState([]);
@@ -30,7 +30,6 @@ const BestSellers = () => {
 
   const loadRandomProducts = async () => {
     setLoading(true);
-    setError('');
     try {
       const response = await getProducts();
       const allProducts = response.content;
@@ -68,27 +67,32 @@ const BestSellers = () => {
 
     try {
       const cartData = await getPurchasedProductsByUserId(user_id);
-      console.log('Cart data:', cartData);
-
       if (cartData.length > 0) {
         const cartId = cartData[0].cart_id;
-        console.log('Cart ID:', cartId);
+        const existingItem = cartData[0].cart_Product.find(item => item.product.product_id === product.product_id);
 
-        await addProductToCartService(cartId, product.product_id, 1, token);
-        console.log('Product added to cart:', product);
+        if (existingItem) {
+          await updateCartItem(existingItem.cart_item_id, {
+            cart: { cart_id: cartId },
+            product: { product_id: product.product_id },
+            quantity: existingItem.quantity + 1,
+            total_price: (existingItem.quantity + 1) * product.price
+          });
+        } else {
+          await addProductToCart(cartId, product.product_id, 1, token);
+        }
 
-        // Update cart icon state to spinning
-        setCartIconState((prevState) => ({
+        setCartIconState(prevState => ({
           ...prevState,
-          [product.product_id]: 'spinning',
+          [product.product_id]: 'spinning'
         }));
 
         setTimeout(() => {
-          // Update cart icon state to checkmark after spinning
-          setCartIconState((prevState) => ({
-            ...prevState,
-            [product.product_id]: 'checkmark',
+          setCartIconState(prevState => ({
+              ...prevState,
+              [product.product_id]: 'checkmark'
           }));
+          showMessage('Product successfully added to cart!', 'success'); // Use showMessage
         }, 1000);
       } else {
         console.error('No cart found for user');
@@ -121,7 +125,7 @@ const BestSellers = () => {
           </div>
         )}
         <div className="top-rating-grid">
-          {products.map((product) => (
+          {products.map(product => (
             <div key={product.product_id} className="top-rating-card">
               <div className="top-rating-image-container">
                 <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="top-rating-image" />
@@ -129,7 +133,10 @@ const BestSellers = () => {
                   <button onClick={() => handleSearchClick(product)}>
                     <FiSearch />
                   </button>
-                  <button onClick={() => handleCartClick(product)} className={`cart-icon ${cartIconState[product.product_id]}`}>
+                  <button 
+                    onClick={() => handleCartClick(product)} 
+                    className={`cart-icon ${cartIconState[product.product_id]}`}
+                  >
                     {cartIconState[product.product_id] === 'checkmark' ? <FiCheck /> : <FiShoppingCart />}
                   </button>
                 </div>
@@ -144,4 +151,5 @@ const BestSellers = () => {
     </div>
   );
 };
+
 export default BestSellers;

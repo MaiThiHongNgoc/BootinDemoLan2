@@ -48,6 +48,7 @@ const CheckOut = () => {
 
         const paymentMethodResponse = await fetchPaymentMethods();
         if (Array.isArray(paymentMethodResponse)) {
+          console.log(paymentMethodResponse)
           setPaymentMethods(paymentMethodResponse);
         } else {
           console.error('Payment methods data is not an array:', paymentMethodResponse);
@@ -165,10 +166,8 @@ const CheckOut = () => {
   
       // Xóa các mặt hàng trong giỏ hàng
        await deleteCarts();
-       
        navigate(`/bill/${order_id}`);
-      // Hiển thị thông báo thành công và làm sạch localStorage
-      showMessage('Order placed successfully!', 'success');  
+      
     } catch (error) {
       if (error.response) {
         console.error('Error creating order:', error.response.data);
