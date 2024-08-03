@@ -18,6 +18,7 @@ import ViewCart from "./Cart/viewCart";
 import Bill from "./Cart/Bill";
 import RegisterForm from "./Page/Register/Register";
 import ProductDetail from "./Page/Shop/productDetail";
+import Review from "./Page/Shop/Review";
 
 import { AuthProvider } from "./AuthContext";
 import { CartProvider } from "./Cart/CartContext"; // Import CartProvider
@@ -72,7 +73,9 @@ function App() {
               </Route>
 
               <Route path="/shop" element={<Shop />} />
-              <Route path="/product/:productId" element={<ProductDetail/>} />
+              <Route path="/product/:productId" element={<ProductDetail/>} >
+              <Route path="review" element={<Review />} />
+              </Route>
               <Route path="/blog" element={<Blog />} />
               <Route path="/author" element={<Author />} />
               <Route path="/contact" element={<Contact />} />
