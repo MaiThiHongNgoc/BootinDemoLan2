@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getProductById } from '../../Backend/Service (1)/productService';
 import { addProductToCart, updateCartItem } from '../../Backend/Service (1)/cartItemsService';
+import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService';
 import './productDetail.css';
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import { AuthContext } from '../../AuthContext';
-import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService';
 import { RxSlash } from "react-icons/rx";
 import { showMessage } from '../../Cart/message';
-import { Link } from 'react-router-dom';
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -24,6 +23,8 @@ const ProductDetail = () => {
   const { updateCart } = useContext(AuthContext);
 
   useEffect(() => {
+    console.log('Product ID:', productId); // Debugging
+
     const fetchProduct = async () => {
       try {
         const data = await getProductById(productId);
@@ -60,11 +61,11 @@ const ProductDetail = () => {
           await updateCartItem(existingItem.cart_item_id, {
             cart: { cart_id: cartId },
             product: { product_id: product.product_id },
-            quantity: existingItem.quantity + 1,
-            total_price: (existingItem.quantity + 1) * product.price
+            quantity: existingItem.quantity + quantity,
+            total_price: (existingItem.quantity + quantity) * product.price
           });
         } else {
-          await addProductToCart(cartId, product.product_id, 1, token);
+          await addProductToCart(cartId, product.product_id, quantity, token);
         }
 
         setCartIconState(prevState => ({
@@ -77,10 +78,10 @@ const ProductDetail = () => {
               ...prevState,
               [product.product_id]: 'checkmark'
           }));
-          showMessage('Product successfully added to cart!', 'success'); // Use showMessage
+          showMessage('Product successfully added to cart!', 'success');
+          setSuccess(true);
         }, 1000);
       } else {
-        console.error('No cart found for user');
         setError('No cart found for user.');
         setShowNotification(true);
       }
@@ -97,6 +98,10 @@ const ProductDetail = () => {
     }
   };
 
+  const handleFeedbackClick = () => {
+    navigate('/feedback', { state: { productId } });
+  };
+
   const handleCloseNotification = () => {
     setShowNotification(false);
     if (!localStorage.getItem('token')) {
@@ -106,21 +111,23 @@ const ProductDetail = () => {
 
   return (
     <div>
-    <Header />
-    <div className='proDetail'>
-      <h1 className='shop-product'>Products</h1>
-      <div className='shop-bread'>
-        <div className='shop-crumb'>
-          <a href='/' className='shop-a'>Home</a>
-          <span className='shop-delimiter'>
-            <i className='shop-i'><RxSlash /></i>
-          </span>
-          <span className='shop-current'>Products
-          <i className='shop-i'><RxSlash /></i>
-          </span>
-          <span>{product && (<h4 className='shop-current'>{product.product_name}</h4>)}</span>
+      <Header />
+      <div className='proDetail'>
+        <h1 className='shop-product'>Products</h1>
+        <div className='shop-bread'>
+          <div className='shop-crumb'>
+            <Link to='/' className='shop-a'>Home</Link>
+            <span className='shop-delimiter'>
+              <i className='shop-i'><RxSlash /></i>
+            </span>
+            <span className='shop-current'>Products
+              <i className='shop-i'><RxSlash /></i>
+            </span>
+            <span>{product && (<h4 className='shop-current'>{product.product_name}</h4>)}</span>
+          </div>
         </div>
       </div>
+<<<<<<< Updated upstream
     </div>
     <div className="product-detail">
       {loading && <p>Loading...</p>}
@@ -139,32 +146,51 @@ const ProductDetail = () => {
               <button onClick={() => handleQuantityChange(-1)} className="pro-button">-</button>
               <input type="number" min="1" value={quantity} readOnly className="pro-input" />
               <button onClick={() => handleQuantityChange(1)} className="pro-button">+</button>
+=======
+      <div className="product-detail">
+        {loading && <p>Loading...</p>}
+        {error && <p className="error-message">{error}</p>}
+        {product && (
+          <>
+            <div className="product-image-container">
+              <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="product-image-detail" />
+>>>>>>> Stashed changes
             </div>
-            <button onClick={handleCartClick} className="add-to-cart-button">
-              Thêm vào giỏ hàng
-            </button>
-            {success && <p className="success-message">Đã thêm vào giỏ hàng!</p>}
-          </div>
-        </>
+            <div className="product-info">
+              <h1 className="product-name">{product.product_name}</h1>
+              <p className="product-author">Tác giả: {product.author.author_name}</p>
+              <p className="product-category">Thể loại: {product.categories.category_name}</p>
+              <p className="product-price">Giá: ${product.price}</p>
+              <div className="product-quantity">
+                <button onClick={() => handleQuantityChange(-1)} className="quantity-button">-</button>
+                <input type="number" min="1" value={quantity} readOnly className="quantity-input" />
+                <button onClick={() => handleQuantityChange(1)} className="quantity-button">+</button>
+              </div>
+              <button onClick={handleCartClick} className="add-to-cart-button">
+                Thêm vào giỏ hàng
+              </button>
+              {success && <p className="success-message">Đã thêm vào giỏ hàng!</p>}
+            </div>
+          </>
+        )}
+      </div>
+      {product && (
+        <div className="product-description-container">
+          <p className="product-description">{product.description}</p>
+        </div>
       )}
-    </div>
-    {product && (
-      <div className="product-description-container">
-        <p className="product-description">{product.description}</p>
-        
+      <Link to={`/feedback/${productId}`}>view</Link>
+      <div>
+        <button onClick={handleFeedbackClick}>Gửi Feedback</button>
       </div>
-    )}
-    <div>
-      <Link to="review">Review</Link>
+      {showNotification && (
+        <div className="notification">
+          <p>{error || 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.'}</p>
+          <button onClick={handleCloseNotification}>Đóng</button>
+        </div>
+      )}
+      <Footer />
     </div>
-    {showNotification && (
-      <div className="notification">
-        <p>{error || 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.'}</p>
-        <button onClick={handleCloseNotification}>Đóng</button>
-      </div>
-    )}
-    <Footer />
-  </div>
   );
 };
 
