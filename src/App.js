@@ -40,6 +40,8 @@ import Infomation from "./Page/Infomation/Infomation";
 import Personal_Infomation from "./Page/Infomation/Personal_information";
 import UserOrder from "./Page/Infomation/UserOrder";
 import Logout from "./Page/LogOut/LogOut";
+import FeedbackList from "./Page/FeedBack/FeedBackList";
+import FeedbackForm from "./Page/FeedBack/FeedBackForm";
 
     
 function App() {
@@ -87,6 +89,9 @@ function App() {
               <Route path="/checkout" element={<CheckOut />} />
               <Route path="/bill/:orderId" element={<Bill />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/feedback/:productId" element={<FeedbackList />} />
+              <Route path="/feedback" element={<FeedbackForm />} />
+
 
               
               

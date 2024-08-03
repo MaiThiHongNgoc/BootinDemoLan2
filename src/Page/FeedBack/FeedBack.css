@@ -1,0 +1,31 @@
+/* FeedbackList.css */
+.feedback-list {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.feedback-list h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.feedback-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.feedback-item .feedback-user,
+.feedback-item .feedback-product,
+.feedback-item .feedback-rating,
+.feedback-item .feedback-comment,
+.feedback-item .feedback-date {
+    margin-bottom: 10px;
+}
+
+.feedback-item strong {
+    display: block;
+    margin-bottom: 5px;
+}
