@@ -22,13 +22,13 @@ const Slideshow = () => {
         <div className="slide-container" key={index} style={{ backgroundImage: `url(${image})` }}>
           <div className={`title title${index + 1}`}>
             <div className="box-title4">
-              <h3>{index === 2 ? "SPECIAL OFFER" : "SUGGESTIONS FOR YOU"}</h3>
+              <h3>{index === 2 ? "collection book 2024 " : "collection book 2024 "}</h3>
             </div>
             <div className='box-title1'>
-              <h3>{index === 0 ? "Fresh Smoothie" : index === 1 ? "Orange Juice" : "Fresh Fruits Juice"}</h3>
+              <h3>{index === 0 ? "Explore the world of books" : index === 1 ? "Books You Should Read" : "Good Books for Life"}</h3>
             </div>
             <div className="box-title2">
-              <h3>{index === 2 ? "10% OFF ORDER FROM $100." : "Drink a smoothie every day to make you healthier."}</h3>
+              <h3>{index === 2 ? "40% DISCOUNT BOOKS DESIGN" : "40% DISCOUNT BOOKS DESIGN"}</h3>
             </div>
             <div className="box-title3">
               <Link className='button' to="/shop">SHOP NOW</Link>
