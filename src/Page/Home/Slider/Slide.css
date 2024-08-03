@@ -23,7 +23,7 @@
   font-size: 1rem;
   text-align: start;
   /* z-index: 5; */
-    font-family: Merriweather;
+    font-family:  Muli, sans-serif;
     text-transform: uppercase;
     height: auto;
     width: auto;
@@ -42,7 +42,7 @@
 }
 
 .box-title1 {
-  font-family: Merriweather;
+  font-family:  Muli, sans-serif;
   text-transform: capitalize;
   height: auto;
   width: auto;
@@ -90,6 +90,7 @@
 }
 
 .button {
+  border: 1px solid #f86d72;
   letter-spacing: 2px;
   font-size: 1.2rem;
   line-height: 1;
@@ -99,14 +100,16 @@
   display: inline-block;
   text-decoration: none;
   /* color: #000000; */
-   background-color: rgb(248, 109, 114);
+   background-color: #f86d72;
+   font-family:  Muli, sans-serif;
   /*font-family: Muli;
+
   outline: none;
   box-shadow: none;
   box-sizing: border-box;
   height: auto;
   width: auto;*/
-  color: rgb(255, 255, 255);
+  color: #fff;
   /* text-decoration: none;
   white-space: nowrap;
   text-align: inherit;
@@ -125,8 +128,9 @@
 }
 
 .button:hover {
-  color: #efefef;
-  background-color: red;
+  background-color: #fff;
+  border: 1px solid #f86d72;
+  color: #f86d72;
 }
 
 @media (max-width: 768px) {
