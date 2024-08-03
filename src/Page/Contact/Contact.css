@@ -113,7 +113,7 @@
 .contact-column{
     padding-left: 0;
     padding-right: 0;
-    width: 20%;
+    width: 30%;
     float: left;
     position: relative;
     min-height: 1px;
@@ -204,7 +204,7 @@
 .contact-column2{
     padding-left: 0;
     padding-right: 0;
-    width: 56%;
+    width: 70%;
     float: left;
     position: relative;
     min-height: 1px;
@@ -235,14 +235,15 @@
 
 }
 .contact-true-row{
-    transition: opacity .5s ease;
+    /* transition: opacity .5s ease;
     overflow: hidden;
     margin-left: -15px;
-    margin-right: -15px;
+    margin-right: -15px; */
+    padding-left: 125px;
     width: 85%;
-    height: 645px;
+    /* height: 645px;
     margin: 125px;
-    padding-top: 90px;
+    padding-top: 90px; */
 
 }
 .contact-sm-9{
