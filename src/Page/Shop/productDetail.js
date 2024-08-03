@@ -9,6 +9,7 @@ import { AuthContext } from '../../AuthContext';
 import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService';
 import { RxSlash } from "react-icons/rx";
 import { showMessage } from '../../Cart/message';
+import { Link } from 'react-router-dom';
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -150,8 +151,12 @@ const ProductDetail = () => {
     {product && (
       <div className="product-description-container">
         <p className="product-description">{product.description}</p>
+        
       </div>
     )}
+    <div>
+      <Link to="review">Review</Link>
+    </div>
     {showNotification && (
       <div className="notification">
         <p>{error || 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.'}</p>
