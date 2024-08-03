@@ -130,15 +130,15 @@ const ProductDetail = () => {
           <div className="product-image-container">
             <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="product-image-detail" />
           </div>
-          <div className="product-info">
+          <div className="product-into">
             <h1 className="product-name">{product.product_name}</h1>
-            <p className="product-author">Tác giả: {product.author.author_name}</p>
-            <p className="product-category">Thể loại: {product.categories.category_name}</p>
-            <p className="product-price">Giá: ${product.price}</p>
+            <p className="product-author">Author: {product.author.author_name}</p>
+            <p className="product-category">categories: {product.categories.category_name}</p>
+            <p className="product-price"> ${product.price}</p>
             <div className="product-quantity">
-              <button onClick={() => handleQuantityChange(-1)} className="quantity-button">-</button>
-              <input type="number" min="1" value={quantity} readOnly className="quantity-input" />
-              <button onClick={() => handleQuantityChange(1)} className="quantity-button">+</button>
+              <button onClick={() => handleQuantityChange(-1)} className="pro-button">-</button>
+              <input type="number" min="1" value={quantity} readOnly className="pro-input" />
+              <button onClick={() => handleQuantityChange(1)} className="pro-button">+</button>
             </div>
             <button onClick={handleCartClick} className="add-to-cart-button">
               Thêm vào giỏ hàng

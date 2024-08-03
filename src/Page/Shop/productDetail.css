@@ -20,24 +20,41 @@
 .product-image-container {
   flex: 1;
   max-width: 40%;
-  padding-right: 20px;
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .product-image-detail {
   width: 100%;
   height: auto;
+  border: 0;
+  vertical-align: top;
   margin-bottom: 20px;
 }
 
-.product-info {
+.product-into {
   flex: 2;
-  max-width: 60%;
+  max-width: 50%;
   text-align: left;
+  position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px
 }
 
 .product-name {
+  margin-top: 7px;
+  margin-bottom: 24px;
+  font-weight: 500;
+  line-height: 100%;
+  color: #2b2b2b;
   font-size: 2rem;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  font-family: Open Sans;
+  /* margin: .67em 0; */
 }
 
 .product-author,
@@ -105,4 +122,75 @@
   color: #28a745;
   margin-top: 10px;
   font-size: 1rem;
+}
+.product-author{
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  color: #2b2b2b;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: capitalize;
+}
+.product-category{
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  color: #2b2b2b;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: capitalize;
+}
+.product-price{
+  color: #f86d72;
+  font-size: 25px;
+  line-height: 100%;
+  font-family: Merriweather, serif;
+}
+.pro-button{
+  border: 1px solid hsla(0 , 0%, 56%, .25);
+  outline-color: transparent;
+  color: #666;
+  background: #fff;
+  float: left;
+  display: block;
+  padding: 0;
+    margin: 0;
+    vertical-align: text-top;
+    overflow: visible;
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 13px;
+    font-size: 16px;
+    text-align: center;
+    width: 43px;
+    height: 38px;
+}
+.pro-input{
+  font-weight: 400;
+  width: 43px;
+  font-size: 20px;
+  color: #2b2b2b;
+  background: #fff;
+  text-align: center;
+  float: left;
+  padding: 0;
+  line-height: 38px;
+  height: 38px;
+  border: 0 !important;
+}
+.add-to-cart-button{
+  font-size: 15px;
+  border: 1px solid #909090;
+  transition: none;
+    text-transform: uppercase;
+    padding: 0 25px;
+    height: 40px;
+    font-weight: 400;
+    line-height: 38px;
+    position: relative;
+    border-color: #f86d72;
+    background: #f86d72;
+    color: #fff;
+    float: left;
 }
