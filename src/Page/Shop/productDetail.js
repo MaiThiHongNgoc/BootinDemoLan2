@@ -127,8 +127,6 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-<<<<<<< Updated upstream
-    </div>
     <div className="product-detail">
       {loading && <p>Loading...</p>}
       {error && <p className="error-message">{error}</p>}
@@ -146,25 +144,7 @@ const ProductDetail = () => {
               <button onClick={() => handleQuantityChange(-1)} className="pro-button">-</button>
               <input type="number" min="1" value={quantity} readOnly className="pro-input" />
               <button onClick={() => handleQuantityChange(1)} className="pro-button">+</button>
-=======
-      <div className="product-detail">
-        {loading && <p>Loading...</p>}
-        {error && <p className="error-message">{error}</p>}
-        {product && (
-          <>
-            <div className="product-image-container">
-              <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="product-image-detail" />
->>>>>>> Stashed changes
-            </div>
-            <div className="product-info">
-              <h1 className="product-name">{product.product_name}</h1>
-              <p className="product-author">Tác giả: {product.author.author_name}</p>
-              <p className="product-category">Thể loại: {product.categories.category_name}</p>
-              <p className="product-price">Giá: ${product.price}</p>
-              <div className="product-quantity">
-                <button onClick={() => handleQuantityChange(-1)} className="quantity-button">-</button>
-                <input type="number" min="1" value={quantity} readOnly className="quantity-input" />
-                <button onClick={() => handleQuantityChange(1)} className="quantity-button">+</button>
+
               </div>
               <button onClick={handleCartClick} className="add-to-cart-button">
                 Thêm vào giỏ hàng
