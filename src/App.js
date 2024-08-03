@@ -43,13 +43,17 @@ import Logout from "./Page/LogOut/LogOut";
     
 function App() {
   useEffect(() => {
-    // Load the chatbot script
     const script = document.createElement("script");
     script.src = "https://cdn.fchat.vn/assets/embed/webchat.js?id=66ac86d4e2726d04e65be297";
     script.async = true;
+    script.onload = () => {
+      console.log("Chatbot script loaded successfully.");
+    };
+    script.onerror = () => {
+      console.error("Error loading chatbot script.");
+    };
     document.body.appendChild(script);
-
-    // Cleanup the script when the component unmounts
+  
     return () => {
       document.body.removeChild(script);
     };

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContext';
 import { getPurchasedProductsByUserId } from '../../../../Backend/Service (1)/cartService';
 import { showMessage } from '../../../../Cart/message'; // Adjust the path as needed
+import { Link } from 'react-router-dom';
 
 const TopRating = () => {
   const [products, setProducts] = useState([]);
@@ -128,6 +129,7 @@ const TopRating = () => {
         <div className="top-rating-grid">
           {products.map(product => (
             <div key={product.product_id} className="top-rating-card">
+              <Link to={`/product/${product.product_id}`}></Link>
               <div className="top-rating-image-container">
                 <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="top-rating-image" />
                 <div className="top-rating-icons">
@@ -142,7 +144,10 @@ const TopRating = () => {
                   </button>
                 </div>
               </div>
-              <h2 className="top-rating-product-name">{product.product_name}</h2>
+              {/* <h2 className="top-rating-product-name">{product.product_name}</h2> */}
+              <Link to={`/product/${product.product_id}`} className="customer-shop-product-name">
+                        {product.product_name}
+                      </Link>
                <p className="top-rating-author-name">{product.author.author_name}</p>
               <p className="top-rating-price">Price: ${product.price}</p>
             </div>

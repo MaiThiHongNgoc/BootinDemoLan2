@@ -2,6 +2,7 @@ import React from 'react';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import './Slide.css';
+import { Link } from 'react-router-dom';
 
 const Slideshow = () => {
   const images = [
@@ -30,7 +31,7 @@ const Slideshow = () => {
               <h3>{index === 2 ? "10% OFF ORDER FROM $100." : "Drink a smoothie every day to make you healthier."}</h3>
             </div>
             <div className="box-title3">
-              <a className='button' href="">SHOP NOW</a>
+              <Link className='button' to="/shop">SHOP NOW</Link>
             </div>
           </div>
         </div>

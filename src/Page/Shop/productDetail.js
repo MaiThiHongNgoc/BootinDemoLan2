@@ -99,38 +99,41 @@ const ProductDetail = () => {
   const handleCloseNotification = () => {
     setShowNotification(false);
     if (!localStorage.getItem('token')) {
-      navigate('/đăng nhập');
+      navigate('/login');
     }
   };
 
   return (
     <div>
-      <Header />
-      <div className='proDetail'>
-        <h1 className='shop-product'>Products</h1>
-        <div className='shop-bread'>
-          <div className='shop-crumb'>
-            <a href='/' className='shop-a'>Home</a>
-            <span className='shop-delimiter'>
-              <i className='shop-i'><RxSlash /></i>
-            </span>
-            <span className='shop-current'>Products
+    <Header />
+    <div className='proDetail'>
+      <h1 className='shop-product'>Products</h1>
+      <div className='shop-bread'>
+        <div className='shop-crumb'>
+          <a href='/' className='shop-a'>Home</a>
+          <span className='shop-delimiter'>
             <i className='shop-i'><RxSlash /></i>
-            </span>
-          </div>
+          </span>
+          <span className='shop-current'>Products
+          <i className='shop-i'><RxSlash /></i>
+          </span>
+          <span>{product && (<h4 className='shop-current'>{product.product_name}</h4>)}</span>
         </div>
       </div>
-      <div className="product-detail">
-        {loading && <p>Loading...</p>}
-        {error && <p className="error-message">{error}</p>}
-        {product && (
-          <>
+    </div>
+    <div className="product-detail">
+      {loading && <p>Loading...</p>}
+      {error && <p className="error-message">{error}</p>}
+      {product && (
+        <>
+          <div className="product-image-container">
+            <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="product-image-detail" />
+          </div>
+          <div className="product-info">
             <h1 className="product-name">{product.product_name}</h1>
-            <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="product-image" />
             <p className="product-author">Tác giả: {product.author.author_name}</p>
             <p className="product-category">Thể loại: {product.categories.category_name}</p>
             <p className="product-price">Giá: ${product.price}</p>
-            <p className="product-description">{product.description}</p>
             <div className="product-quantity">
               <button onClick={() => handleQuantityChange(-1)} className="quantity-button">-</button>
               <input type="number" min="1" value={quantity} readOnly className="quantity-input" />
@@ -140,17 +143,23 @@ const ProductDetail = () => {
               Thêm vào giỏ hàng
             </button>
             {success && <p className="success-message">Đã thêm vào giỏ hàng!</p>}
-          </>
-        )}
-        {showNotification && (
-          <div className="notification">
-            <p>{error || 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.'}</p>
-            <button onClick={handleCloseNotification}>Đóng</button>
           </div>
-        )}
-      </div>
-      <Footer />
+        </>
+      )}
     </div>
+    {product && (
+      <div className="product-description-container">
+        <p className="product-description">{product.description}</p>
+      </div>
+    )}
+    {showNotification && (
+      <div className="notification">
+        <p>{error || 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.'}</p>
+        <button onClick={handleCloseNotification}>Đóng</button>
+      </div>
+    )}
+    <Footer />
+  </div>
   );
 };
 
