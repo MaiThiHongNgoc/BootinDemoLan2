@@ -128,8 +128,7 @@ const Contact = () => {
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div className="contact-column1"></div>
+                          </div>                    
                           <div className="contact-column2">
                             <div className="contact-inner2">
                               <div className="contact-wbp1">
