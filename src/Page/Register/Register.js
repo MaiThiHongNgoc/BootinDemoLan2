@@ -92,7 +92,7 @@ const RegisterForm = () => {
                 </div>
             </div>
             <form className='register-form' onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div className="form-given">
                     <label htmlFor="username">Username:</label>
                     <input
                         type="text"
@@ -103,7 +103,7 @@ const RegisterForm = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-given">
                     <label htmlFor="password">Password:</label>
                     <input
                         type="password"
@@ -114,7 +114,7 @@ const RegisterForm = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-given">
                     <label htmlFor="email">Email:</label>
                     <input
                         type="email"
@@ -125,7 +125,7 @@ const RegisterForm = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-given">
                     <label htmlFor="phone">Phone:</label>
                     <input
                         type="tel"
