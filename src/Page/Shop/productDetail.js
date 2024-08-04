@@ -86,8 +86,7 @@ const ProductDetail = () => {
         setShowNotification(true);
       }
     } catch (error) {
-      console.error('Failed to add product to cart:', error.message);
-      setError('Failed to add product to cart.');
+      showMessage('Failed to add product to cart.');
       setShowNotification(true);
     }
   };
@@ -149,7 +148,6 @@ const ProductDetail = () => {
               <button onClick={handleCartClick} className="add-to-cart-button">
                 Thêm vào giỏ hàng
               </button>
-              {success && <p className="success-message">Đã thêm vào giỏ hàng!</p>}
             </div>
           </>
         )}
@@ -163,12 +161,6 @@ const ProductDetail = () => {
       <div>
         <button onClick={handleFeedbackClick}>Gửi Feedback</button>
       </div>
-      {showNotification && (
-        <div className="notification">
-          <p>{error || 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.'}</p>
-          <button onClick={handleCloseNotification}>Đóng</button>
-        </div>
-      )}
       <Footer />
     </div>
   );

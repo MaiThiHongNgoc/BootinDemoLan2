@@ -1,4 +1,4 @@
-import React,{ useEffect} from "react";
+import React, { useEffect } from "react";
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
@@ -43,7 +43,7 @@ import Logout from "./Page/LogOut/LogOut";
 import FeedbackList from "./Page/FeedBack/FeedBackList";
 import FeedbackForm from "./Page/FeedBack/FeedBackForm";
 
-    
+
 function App() {
   useEffect(() => {
     const script = document.createElement("script");
@@ -56,7 +56,7 @@ function App() {
       console.error("Error loading chatbot script.");
     };
     document.body.appendChild(script);
-  
+
     return () => {
       document.body.removeChild(script);
     };
@@ -75,8 +75,8 @@ function App() {
               </Route>
 
               <Route path="/shop" element={<Shop />} />
-              <Route path="/product/:productId" element={<ProductDetail/>} >
-              <Route path="review" element={<Review />} />
+              <Route path="/product/:productId" element={<ProductDetail />} >
+                <Route path="review" element={<Review />} />
               </Route>
               <Route path="/blog" element={<Blog />} />
               <Route path="/author" element={<Author />} />
@@ -93,29 +93,33 @@ function App() {
               <Route path="/feedback" element={<FeedbackForm />} />
 
 
-              
-              
 
-              <Route path="/infomation" element={< Infomation/>} >
+
+
+              <Route path="/infomation" element={< Infomation />} >
                 <Route path="myinfo" element={<Personal_Infomation />} />
                 <Route path="userorder" element={<UserOrder />} />
               </Route>
-              
+
 
 
               {/* Admin Routes */}
               <Route path="/admin" element={<Admin />}>
-                <Route index element={<DashBoard />} />
                 <Route path="dashboard" element={<DashBoard />} />
                 <Route path="user" element={<UserList />} />
                 <Route path="category" element={<CategoryList />} />
                 <Route path="authors" element={<AuthorList />} />
                 <Route path="products" element={<ProductList />} />
+                <Route path="/admin/products" element={<ProductList />} />
                 <Route path="order" element={<OrderList />} />
+                <Route path="/admin/order" element={<OrderList />} />
+                <Route path="/admin/orders/:status" element={<OrderList />} />
                 <Route path="orderdetail/:orderId" element={<OrderDetails />} />
                 <Route path="image" element={<ImageList />} />
                 {/* <Route path="staff" element={<Staff />} /> */}
               </Route>
+
+
               {/* Not Found Route */}
               <Route path="*" element={<PageNotFound />} />
             </Routes>

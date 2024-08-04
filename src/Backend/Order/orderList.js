@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { getOrder, updateOrder, deleteOrder } from '../Service (1)/orderService';
 import './orderList.css';
 import OrderForm from './orderForm';
-import OrderDetails from './orderDetail'; // Import component OrderDetails
-import { Link } from 'react-router-dom';
+import OrderDetails from './orderDetail'; 
+import { Link, useParams } from 'react-router-dom';
 
 const OrderList = () => {
     const [orders, setOrders] = useState([]);
@@ -16,10 +16,16 @@ const OrderList = () => {
     const [endDate, setEndDate] = useState('');
     const [searchStatus, setSearchStatus] = useState('');
     const [expandedOrderId, setExpandedOrderId] = useState(null);
+    
+    const { status } = useParams(); // Get status from URL params
 
     useEffect(() => {
+        console.log(status)
+        if (status) {
+            setSearchStatus(status);
+        }
         loadOrders();
-    }, []);
+    }, [status]);
 
     const loadOrders = async () => {
         setLoading(true);
@@ -42,7 +48,7 @@ const OrderList = () => {
         setLoading(true);
         try {
             await deleteOrder(order_id);
-            loadOrders(); // Reload orders without scroll issue
+            loadOrders();
         } catch (error) {
             setError('Failed to delete order. Please try again later.');
         } finally {
@@ -62,7 +68,7 @@ const OrderList = () => {
     };
 
     const refreshOrders = () => {
-        loadOrders(); // Reload orders after saving
+        loadOrders();
     };
 
     const handleStatusChange = async (e, order) => {
@@ -80,7 +86,7 @@ const OrderList = () => {
 
         const isConfirmed = window.confirm("You have comment change status");
         if (!isConfirmed) {
-            return; // Stop if user does not confirm
+            return;
         }
 
         const updatedOrder = { ...order, status: updatedStatus };
@@ -101,7 +107,7 @@ const OrderList = () => {
         setLoading(true);
         try {
             await updateOrder(updatedOrder.order_id, payload);
-            loadOrders(); // Reload orders without scroll issue
+            loadOrders();
         } catch (error) {
             setError(`Failed to update status: ${error.message}`);
         } finally {
@@ -129,7 +135,6 @@ const OrderList = () => {
         setExpandedOrderId(expandedOrderId === order_id ? null : order_id);
     };
 
-    // Filter and sort orders
     const filteredOrders = orders
         .filter(order => {
             const isUsernameMatch = order.user.username.toLowerCase().includes(searchQuery.toLowerCase());
@@ -146,7 +151,7 @@ const OrderList = () => {
 
             return (isUsernameMatch || isFirstName || isLastName || email) && isDateInRange && isStatusMatch;
         })
-        .sort((a, b) => b.order_id - a.order_id); // Sort by order_id in descending order
+        .sort((a, b) => b.order_id - a.order_id);
 
     const getStatusClass = (status) => {
         switch (status) {
@@ -170,7 +175,7 @@ const OrderList = () => {
                 <OrderForm
                     order={editingOrder}
                     onSave={handleFormClose}
-                    refreshOrders={refreshOrders} // Pass refreshOrders function
+                    refreshOrders={refreshOrders}
                 />
             )}
             <input
