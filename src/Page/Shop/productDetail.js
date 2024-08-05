@@ -140,6 +140,7 @@ const ProductDetail = () => {
             <p className="product-author">Author: {product.author.author_name}</p>
             <p className="product-category">categories: {product.categories.category_name}</p>
             <p className="product-price"> ${product.price}</p>
+            <p className="product-description">{product.description}</p>
             <div className="product-quantity">
               <button onClick={() => handleQuantityChange(-1)} className="pro-button">-</button>
               <input type="number" min="1" value={quantity} readOnly className="pro-input" />

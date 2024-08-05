@@ -76,7 +76,6 @@ function App() {
 
               <Route path="/shop" element={<Shop />} />
               <Route path="/product/:productId" element={<ProductDetail/>} >
-              <Route path="review" element={<Review />} />
               </Route>
               <Route path="/blog" element={<Blog />} />
               <Route path="/author" element={<Author />} />
