@@ -34,11 +34,11 @@
   }
   
   .card:nth-child(2) {
-    background-color: #ff6d00;
+    background-color: orange;
   }
   
   .card:nth-child(3) {
-    background-color: #2e7d32;
+    background-color: green;
   }
   
   .card:nth-child(4) {

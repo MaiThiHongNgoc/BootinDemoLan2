@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../../Component/Header/Header';
+import Footer from '../../Component/Footer/Footer';
+import { Link } from 'react-router-dom';
+import { RxSlash } from "react-icons/rx";
 
 const FeedbackForm = () => {
     const location = useLocation();
@@ -58,6 +62,24 @@ const FeedbackForm = () => {
     };
 
     return (
+        <div>
+            <Header/>
+        <div className='proDetail'>
+            <h1 className='shop-product'>Feadback</h1>
+            <div className='shop-bread'>
+            <div className='shop-crumb'>
+            <Link to='/' className='shop-a'>Home</Link>
+            <span className='shop-delimiter'>
+              <i className='shop-i'><RxSlash /></i>
+            </span>
+            <span className='shop-current'>Feadback
+            </span>
+          </div>
+        </div>
+        </div>
+
+
+
         <div className="feedback-form">
             <h2>Gửi Feedback</h2>
             {success && <p className="success-message">{success}</p>}
@@ -84,6 +106,8 @@ const FeedbackForm = () => {
                 </div>
                 <button type="submit">Gửi Feedback</button>
             </form>
+        </div>
+        <Footer/>
         </div>
     );
 };

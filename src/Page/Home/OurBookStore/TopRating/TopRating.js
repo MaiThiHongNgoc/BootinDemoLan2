@@ -38,7 +38,6 @@ const TopRating = () => {
       const randomProducts = allProducts.sort(() => 0.5 - Math.random()).slice(0, 10);
       setProducts(randomProducts);
     } catch (error) {
-      console.error('Failed to fetch products', error);
       setError('Failed to load products. Please try again later.');
     } finally {
       setLoading(false);
@@ -119,7 +118,6 @@ const TopRating = () => {
     <div className='top-rating'>
       <div className="top-rating-container">
         {loading && <p className="top-rating-loading">Loading...</p>}
-        {error && <p className="top-rating-error">{error}</p>}
         {showNotification && (
           <div className="login-required-message">
             <p>Please log in to add items to the cart. <a href="/login">Log in here</a></p>

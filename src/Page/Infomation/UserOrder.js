@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import './UserOrder.css';
+import { Link } from "react-router-dom";
 
 const UserOrder = () => {
     const [orders, setOrders] = useState([]);
@@ -18,7 +19,6 @@ const UserOrder = () => {
                 }
             });
 
-            // Sắp xếp orders theo order_id từ lớn đến nhỏ
             const sortedOrders = response.data.sort((a, b) => b.order_id - a.order_id);
             setOrders(sortedOrders);
         } catch (error) {
@@ -34,7 +34,6 @@ const UserOrder = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
-
     if (orders.length === 0) return <p>No orders found</p>;
 
     const groupedOrders = orders.reduce((acc, order) => {
@@ -74,6 +73,17 @@ const UserOrder = () => {
                                                 <p><strong>Author:</strong> {detail.products.author.author_name}</p>
                                                 <p><strong>Price:</strong> ${detail.products.price.toFixed(2)}</p>
                                                 <p><strong>Quantity:</strong> {detail.quantity}</p>
+                                                {order.status.toLowerCase() === 'completed' && (
+                                                    <Link
+                                                        to={{
+                                                            pathname: '/feedback',
+                                                            state: { productId: detail.products.product_id }
+                                                        }}
+                                                        className="feedback-button"
+                                                    >
+                                                        Leave Feedback
+                                                    </Link>
+                                                )}
                                             </div>
                                         </div>
                                     ))}

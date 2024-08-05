@@ -1,4 +1,4 @@
-import React,{ useEffect} from "react";
+import React, { useEffect } from "react";
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
@@ -18,7 +18,6 @@ import ViewCart from "./Cart/viewCart";
 import Bill from "./Cart/Bill";
 import RegisterForm from "./Page/Register/Register";
 import ProductDetail from "./Page/Shop/productDetail";
-import Review from "./Page/Shop/Review";
 
 import { AuthProvider } from "./AuthContext";
 import { CartProvider } from "./Cart/CartContext"; // Import CartProvider
@@ -40,10 +39,9 @@ import Infomation from "./Page/Infomation/Infomation";
 import Personal_Infomation from "./Page/Infomation/Personal_information";
 import UserOrder from "./Page/Infomation/UserOrder";
 import Logout from "./Page/LogOut/LogOut";
-import FeedbackList from "./Page/FeedBack/FeedBackList";
 import FeedbackForm from "./Page/FeedBack/FeedBackForm";
 
-    
+
 function App() {
   useEffect(() => {
     const script = document.createElement("script");
@@ -56,7 +54,7 @@ function App() {
       console.error("Error loading chatbot script.");
     };
     document.body.appendChild(script);
-  
+
     return () => {
       document.body.removeChild(script);
     };
@@ -75,8 +73,9 @@ function App() {
               </Route>
 
               <Route path="/shop" element={<Shop />} />
-              <Route path="/product/:productId" element={<ProductDetail/>} >
+              <Route path="/product/:productId" element={<ProductDetail />} >
               </Route>
+
               <Route path="/blog" element={<Blog />} />
               <Route path="/author" element={<Author />} />
               <Route path="/contact" element={<Contact />} />
@@ -88,33 +87,37 @@ function App() {
               <Route path="/checkout" element={<CheckOut />} />
               <Route path="/bill/:orderId" element={<Bill />} />
               <Route path="/logout" element={<Logout />} />
-              <Route path="/feedback/:productId" element={<FeedbackList />} />
               <Route path="/feedback" element={<FeedbackForm />} />
 
 
-              
-              
 
-              <Route path="/infomation" element={< Infomation/>} >
+
+
+              <Route path="/infomation" element={< Infomation />} >
+                <Route index element={<UserOrder />} />
                 <Route path="myinfo" element={<Personal_Infomation />} />
                 <Route path="userorder" element={<UserOrder />} />
               </Route>
-              
+
 
 
               {/* Admin Routes */}
               <Route path="/admin" element={<Admin />}>
-                <Route index element={<DashBoard />} />
                 <Route path="dashboard" element={<DashBoard />} />
                 <Route path="user" element={<UserList />} />
                 <Route path="category" element={<CategoryList />} />
                 <Route path="authors" element={<AuthorList />} />
                 <Route path="products" element={<ProductList />} />
+                <Route path="/admin/products" element={<ProductList />} />
                 <Route path="order" element={<OrderList />} />
+                <Route path="/admin/order" element={<OrderList />} />
+                <Route path="/admin/orders/:status" element={<OrderList />} />
                 <Route path="orderdetail/:orderId" element={<OrderDetails />} />
                 <Route path="image" element={<ImageList />} />
                 {/* <Route path="staff" element={<Staff />} /> */}
               </Route>
+
+
               {/* Not Found Route */}
               <Route path="*" element={<PageNotFound />} />
             </Routes>

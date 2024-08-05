@@ -60,6 +60,7 @@
     border-radius: 5px;
     border: 1px solid #f86d72;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
 /* Container for user information */
@@ -127,4 +128,21 @@
 .product-info p strong {
     font-weight: bold;
     color: #777;
+}
+
+.feedback-button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-top: 10px;
+    background-color: #f86d72;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.feedback-button:hover {
+    background-color: #fff;
+    color: #f86d72;
+    border: 1px solid #f86d72;
 }

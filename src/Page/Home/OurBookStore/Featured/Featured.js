@@ -118,7 +118,6 @@ const Featured = () => {
     <div className='top-rating'>
       <div className="top-rating-container">
         {loading && <p className="top-rating-loading">Loading...</p>}
-        {error && <p className="top-rating-error">{error}</p>}
         {showNotification && (
           <div className="login-required-message">
             <p>Please log in to add items to the cart. <a href="/login">Log in here</a></p>

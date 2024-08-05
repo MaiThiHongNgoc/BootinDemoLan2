@@ -3,12 +3,14 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getProductById } from '../../Backend/Service (1)/productService';
 import { addProductToCart, updateCartItem } from '../../Backend/Service (1)/cartItemsService';
 import { getPurchasedProductsByUserId } from '../../Backend/Service (1)/cartService';
+import axios from 'axios';
 import './productDetail.css';
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import { AuthContext } from '../../AuthContext';
 import { RxSlash } from "react-icons/rx";
 import { showMessage } from '../../Cart/message';
+import TopRating from '../Home/OurBookStore/TopRating/TopRating';
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -20,7 +22,11 @@ const ProductDetail = () => {
   const [success, setSuccess] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [cartIconState, setCartIconState] = useState({});
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [feedbackLoading, setFeedbackLoading] = useState(true);
+  const [feedbackError, setFeedbackError] = useState(null);
   const { updateCart } = useContext(AuthContext);
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     console.log('Product ID:', productId); // Debugging
@@ -30,12 +36,25 @@ const ProductDetail = () => {
         const data = await getProductById(productId);
         setProduct(data);
       } catch (error) {
-        setError('Không thể lấy thông tin chi tiết về sản phẩm. Vui lòng thử lại sau.');
+        setError('Cannot retrieve product details. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
+
+    const fetchFeedbacks = async () => {
+      try {
+        const response = await axios.get(`http://localhost:9191/feedback/${productId}`);
+        setFeedbacks(response.data);
+      } catch (err) {
+        setFeedbackError('Unable to fetch feedbacks. Please try again later.');
+      } finally {
+        setFeedbackLoading(false);
+      }
+    };
+
     fetchProduct();
+    fetchFeedbacks();
   }, [productId]);
 
   const handleQuantityChange = (amount) => {
@@ -75,8 +94,8 @@ const ProductDetail = () => {
 
         setTimeout(() => {
           setCartIconState(prevState => ({
-              ...prevState,
-              [product.product_id]: 'checkmark'
+            ...prevState,
+            [product.product_id]: 'checkmark'
           }));
           showMessage('Product successfully added to cart!', 'success');
           setSuccess(true);
@@ -86,8 +105,7 @@ const ProductDetail = () => {
         setShowNotification(true);
       }
     } catch (error) {
-      console.error('Failed to add product to cart:', error.message);
-      setError('Failed to add product to cart.');
+      showMessage('Failed to add product to cart.');
       setShowNotification(true);
     }
   };
@@ -98,10 +116,6 @@ const ProductDetail = () => {
     }
   };
 
-  const handleFeedbackClick = () => {
-    navigate('/feedback', { state: { productId } });
-  };
-
   const handleCloseNotification = () => {
     setShowNotification(false);
     if (!localStorage.getItem('token')) {
@@ -109,6 +123,23 @@ const ProductDetail = () => {
     }
   };
 
+  const renderStars = (rating) => {
+    const maxRating = 5; // Tổng số sao có thể có
+  
+    return (
+      <div className="stars">
+        {Array.from({ length: maxRating }, (_, index) => (
+          <span
+            key={index}
+            className={`star ${index < rating ? 'filled' : ''}`}
+            onClick={() => setRating(index + 1)}
+          >
+            &#9733; {/* Ký tự sao Unicode */}
+          </span>
+        ))}
+      </div>
+    );
+  };
   return (
     <div>
       <Header />
@@ -127,49 +158,59 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-    <div className="product-detail">
-      {loading && <p>Loading...</p>}
-      {error && <p className="error-message">{error}</p>}
-      {product && (
-        <>
-          <div className="product-image-container">
-            <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="product-image-detail" />
-          </div>
-          <div className="product-into">
-            <h1 className="product-name">{product.product_name}</h1>
-            <p className="product-author">Author: {product.author.author_name}</p>
-            <p className="product-category">categories: {product.categories.category_name}</p>
-            <p className="product-price"> ${product.price}</p>
-            <p className="product-description">{product.description}</p>
-            <div className="product-quantity">
-              <button onClick={() => handleQuantityChange(-1)} className="pro-button">-</button>
-              <input type="number" min="1" value={quantity} readOnly className="pro-input" />
-              <button onClick={() => handleQuantityChange(1)} className="pro-button">+</button>
-
+      <div className="product-detail">
+        {loading && <p>Loading...</p>}
+        {error && <p className="error-message">{error}</p>}
+        {product && (
+          <>
+            <div className="product-image-container">
+              <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="product-image-detail" />
+            </div>
+            <div className="product-into">
+              <h1 className="product-name">{product.product_name}</h1>
+              <p className="product-author">Author: {product.author.author_name}</p>
+              <p className="product-category">Categories: {product.categories.category_name}</p>
+              <p className="product-price">${product.price}</p>
+              <p className="product-description">{product.description}</p>
+              <div className="product-quantity">
+                <button onClick={() => handleQuantityChange(-1)} className="pro-button">-</button>
+                <input type="number" min="1" value={quantity} readOnly className="pro-input" />
+                <button onClick={() => handleQuantityChange(1)} className="pro-button">+</button>
               </div>
               <button onClick={handleCartClick} className="add-to-cart-button">
-                Thêm vào giỏ hàng
+                Add to Cart
               </button>
-              {success && <p className="success-message">Đã thêm vào giỏ hàng!</p>}
             </div>
           </>
         )}
       </div>
-      {product && (
-        <div className="product-description-container">
-          <p className="product-description">{product.description}</p>
+      {feedbackLoading && <p>Loading feedbacks...</p>}
+      {feedbackError && <p className="error-message">{feedbackError}</p>}
+      {feedbacks.length > 0 ? (
+        <div className="feedback-list">
+          <ul>
+            {feedbacks.map((feedback) => (
+              <li key={feedback.id} className="feedback-item">
+                <div className="feedback-user">
+                  <strong>User:</strong> {feedback.users.username}
+                </div>
+                <div className="feedback-rating">
+                  <strong></strong> {renderStars(feedback.rating)}
+                </div>
+                <div className="feedback-comment">
+                  <strong>Comment:</strong> {feedback.comment}
+                </div>
+                <div className="feedback-date">
+                  <strong>Date:</strong> {new Date(feedback.created_at).toLocaleDateString()}
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
+      ) : (
+        <p>No feedbacks available for this product.</p>
       )}
-      <Link to={`/feedback/${productId}`}>view</Link>
-      <div>
-        <button onClick={handleFeedbackClick}>Gửi Feedback</button>
-      </div>
-      {showNotification && (
-        <div className="notification">
-          <p>{error || 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.'}</p>
-          <button onClick={handleCloseNotification}>Đóng</button>
-        </div>
-      )}
+      <TopRating/>
       <Footer />
     </div>
   );

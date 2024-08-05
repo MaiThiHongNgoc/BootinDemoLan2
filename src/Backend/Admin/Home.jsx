@@ -5,6 +5,7 @@ import './DashBoard.css';
 import { getProducts } from '../Service (1)/productService';
 import { getUsers } from '../Service (1)/userService'; // Import your user service
 import { getOrder } from '../Service (1)/orderService';
+import { NavLink } from 'react-router-dom';
 
 // Function to format date to YYYY-MM-DD
 const formatDateToDay = (dateString) => {
@@ -93,29 +94,37 @@ function DashBoard() {
             <h3>PRODUCTS</h3>
             <BsFillArchiveFill className='card_icon' />
           </div>
+          <NavLink to="/admin/products">
           <h1>{products.length}</h1>
+          </NavLink>
         </div>
         <div className='card'>
           <div className='card-inner'>
-            <h3>CATEGORIES</h3>
+            <h3>PENDING</h3>
             <BsFillGrid3X3GapFill className='card_icon' />
           </div>
-          <h1>{[...new Set(products.map(p => p.categories.category_name))].length}</h1>
+          <NavLink to="/admin/orders/PENDING">
+          <h1>{orders.filter(order => order.status === "PENDING").length}</h1>
+          </NavLink>
         </div>
         <div className='card'>
           <div className='card-inner'>
-            <h3>USER</h3>
+            <h3>COMPLETED</h3>
             <BsPeopleFill className='card_icon' />
           </div>
-          <h1>{users.length}</h1>
+          <NavLink to="/admin/orders/COMPLETED">
+          <h1>{orders.filter(order => order.status === "COMPLETED").length}</h1>
+          </NavLink>
         </div>
         <div className='card'>
           <div className='card-inner'>
             <h3>ORDER</h3>
             <BsFillBellFill className='card_icon' />
           </div>
+          <NavLink to="/admin/order">
           <h1>{orders.length}</h1>
-        </div>
+          </NavLink>
+          </div>
       </div>
 
       <div className='charts'>

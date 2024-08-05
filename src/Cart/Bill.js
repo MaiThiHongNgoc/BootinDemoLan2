@@ -5,10 +5,12 @@ import Footer from '../Component/Footer/Footer';
 import './Bill.css';
 import { getOrderById } from '../Backend/Service (1)/orderService';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Bill = () => {
   const { orderId } = useParams();
   const [orderDetails, setOrderDetails] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -29,6 +31,9 @@ const Bill = () => {
   if (!orderDetails) {
     return <div>Loading...</div>;
   }
+  // const handleFeedbackClick = () => {
+  //   navigate('/feedback', { state: { productId } });
+  // };
 
   return (
     <div>
