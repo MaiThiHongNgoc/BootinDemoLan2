@@ -103,6 +103,7 @@ function App() {
 
               {/* Admin Routes */}
               <Route path="/admin" element={<Admin />}>
+              <Route index element={<DashBoard />} />
                 <Route path="dashboard" element={<DashBoard />} />
                 <Route path="user" element={<UserList />} />
                 <Route path="category" element={<CategoryList />} />
