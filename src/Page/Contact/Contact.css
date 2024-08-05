@@ -381,8 +381,69 @@ height: 377px;
 }
 
 .contact-error{
-    margin-right: 72%;
+    /* margin-right: 72%; */
     color: red;
-    margin-top: -45px;   
-    width: 30%;
+    /* margin-top: -45px;    */
+    width: 66%;
 }
+.contact-error2{
+    /* margin-right: 72%; */
+    color: red;
+    /* margin-top: -45px;    */
+    width: 69%;
+}
+ /* .contact-sm-3 {
+    writing-mode: vertical-rl; 
+    text-orientation: upright; 
+    transform: rotate(180deg); 
+    display: inline-block; 
+    margin-left: 20px; 
+    font-size: 24px; 
+    font-weight: bold; 
+    
+  }  */
+  /* .contact-sm-3 {
+  }
+  .contact-container-vertical {
+    writing-mode: horizontal-tb; 
+    text-orientation: initial; 
+    transform: none; 
+    display: inline; 
+    margin: 0; 
+    font-size: 24px; 
+    font-weight: bold; 
+    transform: rotate(180deg);
+    display: inline-block; 
+    margin-left: 20px; 
+    font-size: 24px; 
+    font-weight: bold; 
+    writing-mode: vertical-rl; 
+    text-orientation: upright;*/
+  
+ .vertical-container {
+    transform: rotate(0deg);
+    display: inline-block;
+    margin-left: 130px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .vertical-text {
+    margin: 0;
+    font-size: 60px;
+    font-weight: 500;
+    font-family: Merriweather, serif;
+    color: hsla(0, 0%, 56%, .2);
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 0px;
+    transform: rotate(-90deg);
+    transform-origin: right 100%;
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+  }
+
+
+  
+  

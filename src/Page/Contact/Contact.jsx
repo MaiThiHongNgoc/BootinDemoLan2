@@ -10,30 +10,42 @@ import Footer from '../../Component/Footer/Footer';
 
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitted(false);
-    setError('');
+    setErrors({});
 
-    const name = e.target[0].value;
-    const email = e.target[1].value;
-    const phone = e.target[2].value;
-    const message = e.target[3].value;
+    const name = e.target[0].value.trim();
+    const email = e.target[1].value.trim();
+    const phone = e.target[2].value.trim();
+    const message = e.target[3].value.trim();
 
-    if (!name || !email || !phone || !message) {
-      setError('Please fill in all fields.');
-      return;
+    let formErrors = {};
+
+    if (!name) {
+      formErrors.name = 'The field is required.';
     }
 
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      setError('Please enter a valid email address.');
-      return;
+    if (!email) {
+      formErrors.email = 'The field is required.';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      formErrors.email = 'Please enter a valid email address.';
     }
 
-    if (!/^\d+$/.test(phone)) {
-      setError('Please enter a valid phone number.');
+    if (!phone) {
+      formErrors.phone = 'The field is required.';
+    } else if (!/^\d+$/.test(phone)) {
+      formErrors.phone = 'Please enter a valid phone number.';
+    }
+
+    if (!message) {
+      formErrors.message = 'The field is required.';
+    }
+
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
       return;
     }
 
@@ -146,6 +158,13 @@ const Contact = () => {
                           </div>
                         </div>
                         <div className="contact-true-row">
+                        {/* <div class="contact-container-vertical">
+                          <h2 className="contact-sm-3">CONTACT</h2>
+                          </div> */}
+                          <div class="vertical-container">
+  <div class="vertical-text">Contact Us</div>
+</div>
+
                           <div className="contact-sm-9">
                             <div className='contact-vc-column'>
                               <div className='contact-wbpp'>
@@ -160,6 +179,7 @@ const Contact = () => {
                                               <input className='contact-input' placeholder='Name' required />
                                             </span>
                                           </p>
+                                          {errors.name && <p className='contact-error'>{errors.name}</p>}
                                         </div>
                                         <div className='contact-form-required'>
                                           <p className='contact-pp'>
@@ -167,6 +187,7 @@ const Contact = () => {
                                               <input className='contact-input' placeholder='Email' required />
                                             </span>
                                           </p>
+                                          {errors.email && <p className='contact-error'>{errors.email}</p>}
                                         </div>
                                         <div className='contact-form-required'>
                                           <p className='contact-pp'>
@@ -174,25 +195,26 @@ const Contact = () => {
                                               <input className='contact-input' placeholder='Phone Number' required />
                                             </span>
                                           </p>
+                                          {errors.phone && <p className='contact-error2'>{errors.phone}</p>}
                                         </div> 
                                       </div> 
                                       <div className="contact-mes">
                                         <span className='contact-wpc8'>
                                           <textarea className='contact-textarea' placeholder='Message' required></textarea>
                                         </span> 
+                                        {errors.message && <p className='contact-error'>{errors.message}</p>}
                                         <input className='contact-submit' type="submit" value="Send Message" />
                                         <span className='contact-spinner'></span> 
                                       </div>                                     
                                     </div>
                                   </form>
                                   {isSubmitted && <p className='contact-success'>Message submitted successfully!</p>}
-                                  {error && <p className='contact-error'>{error}</p>}
                                 </div>
                               </div>
                             </div>
-                          </div>            
-                        </div>                               
-                      </div> 
+                          </div> 
+                          </div>           
+                        </div> 
                     </article> 
                   </div>                
                 </div>
