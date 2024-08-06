@@ -12,6 +12,16 @@ export const getAuthors = async () => {
     throw error;
   }
 };
+// Lấy chi tiết tác giả theo ID
+export const getAuthorById = async (authorId) => {
+  try {
+    const response = await axios.get(`${API_URL}${authorId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Failed to fetch author ${authorId}`, error);
+    throw error;
+  }
+};
 
 // Thêm mới một tác giả
 export const addAuthor = async (author) => {

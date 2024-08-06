@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAuthors } from '../../Backend/Service (1)/authorService';
+import { Link } from 'react-router-dom';
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import './Author.css';
@@ -37,7 +38,7 @@ const Author = () => {
           <h1 className='author-product'> Product Author </h1>
           <div className='author-bread'>
             <div className='author-crumb'>
-              <a href='#' className='author-a'>Home</a>
+              <Link to='/' className='author-a'>Home</Link>
               <span className='author-delimiter'>
                 <i className='author-i'><RxSlash /></i>
               </span>
@@ -46,7 +47,6 @@ const Author = () => {
           </div>
         </div>
     
-
     <div className="customer-author-container">
       <div className="customer-author-grid">
         {currentAuthors.map((author) => (
@@ -54,7 +54,9 @@ const Author = () => {
             <div className="customer-author-image-container">
               <img src={author.url_img} alt={author.author_name} className="customer-author-image" />
             </div>
-            <h2>{author.author_name}</h2>
+            <Link to={`/author/${author.author_id}`} className="customer-author-product-name">
+              <span>{author.author_name}</span>
+            </Link>
             <p>Published Books: {author.published_book}</p>
           </div>
         ))}
@@ -75,5 +77,4 @@ const Author = () => {
   );
 };
 
-
-export default Author
+export default Author;
