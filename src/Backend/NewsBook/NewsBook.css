@@ -1,0 +1,170 @@
+/* Container cho phần tử chính */
+.book-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Tiêu đề */
+.book-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Nút thêm sách */
+.book-button-add {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.book-button-add:hover {
+    background-color: #218838;
+}
+
+/* Input tìm kiếm sách */
+.book-search {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+/* Select API Type */
+.api-select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+/* Bảng sách */
+.book-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.book-table th,
+.book-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+    /* Hiển thị một dòng nội dung và cắt bớt nếu cần */
+    white-space: nowrap; /* Không cho phép nội dung xuống dòng */
+    overflow: hidden; /* Ẩn nội dung bị tràn */
+    text-overflow: ellipsis; /* Hiển thị dấu ... khi nội dung bị cắt bớt */
+}
+
+.book-table th {
+    background-color: #f8f9fa;
+}
+
+/* Chỉ định chiều rộng cố định cho các cột */
+.book-table td.title {
+    width: 200px; /* Điều chỉnh chiều rộng theo nhu cầu */
+}
+
+.book-table td.description {
+    width: 300px; /* Điều chỉnh chiều rộng theo nhu cầu */
+}
+
+.book-image {
+    width: 100px;
+    height: auto;
+}
+
+/* Nút chỉnh sửa và xóa */
+.book-button-edit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.875rem;
+}
+
+.book-button-edit:hover {
+    background-color: #0056b3;
+}
+
+.book-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.875rem;
+}
+
+.book-button-restore {
+    background-color: #007bff;
+}
+
+.book-button-restore:hover {
+    background-color: #0056b3;
+}
+
+.book-button-delete {
+    background-color: #dc3545;
+}
+
+.book-button-delete:hover {
+    background-color: #c82333;
+}
+
+/* Trang phân trang */
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.page-item.active .page-link {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.page-link:hover {
+    background-color: #e2e6ea;
+}
+
+/* Thông báo lỗi */
+.error-message {
+    color: #dc3545;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+/* Cột mô tả */
+.book-table td.description {
+    max-width: 300px; /* Điều chỉnh chiều rộng tối đa nếu cần */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Không cho phép xuống dòng */
+}
+

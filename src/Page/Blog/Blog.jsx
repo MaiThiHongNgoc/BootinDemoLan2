@@ -20,7 +20,7 @@ const Blog = () => {
 
   useEffect(() => {
     // Fetch articles from the API
-    axios.get('http://localhost:9191/news-books')
+    axios.get('http://localhost:9191/api/news-books/')
       .then(response => {
         setArticles(response.data);
       })
@@ -145,7 +145,7 @@ const Blog = () => {
                     <p className='blog-excerpt'>{article.description || 'No Description'}</p>
                   </div>
                  <div className='read-more'>
-                 <a href={article.preview_Link || '#'}>
+                 <a target="_blank" href={article.preview_Link || '#'}>
                   <button className='button-blog'>Read More</button>
                   </a>
                  </div>

@@ -41,6 +41,7 @@ import Personal_Infomation from "./Page/Infomation/Personal_information";
 import UserOrder from "./Page/Infomation/UserOrder";
 import Logout from "./Page/LogOut/LogOut";
 import FeedbackForm from "./Page/FeedBack/FeedBackForm";
+import NewsBook from "./Backend/NewsBook/NewsBook";
 
 
 function App() {
@@ -118,6 +119,7 @@ function App() {
                 <Route path="/admin/orders/:status" element={<OrderList />} />
                 <Route path="orderdetail/:orderId" element={<OrderDetails />} />
                 <Route path="image" element={<ImageList />} />
+                <Route path="newsBook" element={<NewsBook />} />
                 {/* <Route path="staff" element={<Staff />} /> */}
               </Route>
 

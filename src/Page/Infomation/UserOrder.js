@@ -13,6 +13,10 @@ const UserOrder = () => {
             const token = localStorage.getItem('token');
             const userId = localStorage.getItem('user_id');
 
+            if (!token || !userId) {
+                throw new Error("User is not authenticated");
+            }
+
             const response = await axios.get(`http://localhost:9191/api/order/v1/userOrder/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -22,7 +26,7 @@ const UserOrder = () => {
             const sortedOrders = response.data.sort((a, b) => b.order_id - a.order_id);
             setOrders(sortedOrders);
         } catch (error) {
-            setError(error);
+            setError(error.response?.data?.message || error.message);
         } finally {
             setLoading(false);
         }
@@ -33,7 +37,7 @@ const UserOrder = () => {
     }, []);
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (error) return <p>Error: {error}</p>;
     if (orders.length === 0) return <p>No orders found</p>;
 
     const groupedOrders = orders.reduce((acc, order) => {
@@ -75,10 +79,7 @@ const UserOrder = () => {
                                                 <p><strong>Quantity:</strong> {detail.quantity}</p>
                                                 {order.status.toLowerCase() === 'completed' && (
                                                     <Link
-                                                        to={{
-                                                            pathname: '/feedback',
-                                                            state: { productId: detail.products.product_id }
-                                                        }}
+                                                        to={`/product/${detail.products.product_id}`} // Assuming product_id is available
                                                         className="feedback-button"
                                                     >
                                                         Leave Feedback

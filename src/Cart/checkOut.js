@@ -307,7 +307,7 @@ const CheckOut = () => {
                 </div>
               ))
             ) : (
-              <p>No payment methods available.</p>
+              <p>No orders yet.</p>
             )}
           </div>
           <div className="paypal-button-container">
