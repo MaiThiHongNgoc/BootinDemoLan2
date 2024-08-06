@@ -29,8 +29,6 @@ const ProductDetail = () => {
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
-    console.log('Product ID:', productId); // Debugging
-
     const fetchProduct = async () => {
       try {
         const data = await getProductById(productId);
@@ -45,7 +43,8 @@ const ProductDetail = () => {
     const fetchFeedbacks = async () => {
       try {
         const response = await axios.get(`http://localhost:9191/feedback/${productId}`);
-        setFeedbacks(response.data);
+        const sortedFeedbacks = response.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        setFeedbacks(sortedFeedbacks);
       } catch (err) {
         setFeedbackError('Unable to fetch feedbacks. Please try again later.');
       } finally {
@@ -116,6 +115,10 @@ const ProductDetail = () => {
     }
   };
 
+  const handleFeedbackClick = () => {
+    navigate('/feedback', { state: { productId } });
+  };
+
   const handleCloseNotification = () => {
     setShowNotification(false);
     if (!localStorage.getItem('token')) {
@@ -124,8 +127,8 @@ const ProductDetail = () => {
   };
 
   const renderStars = (rating) => {
-    const maxRating = 5; // Tổng số sao có thể có
-  
+    const maxRating = 5;
+
     return (
       <div className="stars">
         {Array.from({ length: maxRating }, (_, index) => (
@@ -134,12 +137,13 @@ const ProductDetail = () => {
             className={`star ${index < rating ? 'filled' : ''}`}
             onClick={() => setRating(index + 1)}
           >
-            &#9733; {/* Ký tự sao Unicode */}
+            &#9733;
           </span>
         ))}
       </div>
     );
   };
+
   return (
     <div>
       <Header />
@@ -180,6 +184,9 @@ const ProductDetail = () => {
               <button onClick={handleCartClick} className="add-to-cart-button">
                 Add to Cart
               </button>
+              <button onClick={handleFeedbackClick} className="add-to-cart-button">
+                fedd 
+              </button>
             </div>
           </>
         )}
@@ -187,30 +194,31 @@ const ProductDetail = () => {
       {feedbackLoading && <p>Loading feedbacks...</p>}
       {feedbackError && <p className="error-message">{feedbackError}</p>}
       {feedbacks.length > 0 ? (
-        <div className="feedback-list">
-          <ul>
-            {feedbacks.map((feedback) => (
-              <li key={feedback.id} className="feedback-item">
-                <div className="feedback-user">
-                  <strong>User:</strong> {feedback.users.username}
-                </div>
-                <div className="feedback-rating">
-                  <strong></strong> {renderStars(feedback.rating)}
-                </div>
-                <div className="feedback-comment">
-                  <strong>Comment:</strong> {feedback.comment}
-                </div>
-                <div className="feedback-date">
-                  <strong>Date:</strong> {new Date(feedback.created_at).toLocaleDateString()}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="feedback-list">
+      <ul>
+        {feedbacks.map((feedback) => (
+          <li key={feedback.id} className="feedback-item">
+            <div className="feedback-rating">
+              {renderStars(feedback.rating)}
+            </div>
+            <div className="feedback-user-date">
+              <span><strong>User:</strong> {feedback.users.username}</span>
+              <span><strong>Date:</strong> {new Date(feedback.created_at).toLocaleString()}</span>
+            </div>
+            <div className="feedback-comment">
+              <strong>Comment:</strong> {feedback.comment}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+    
+     
+     
       ) : (
         <p>No feedbacks available for this product.</p>
       )}
-      <TopRating/>
+      <TopRating />
       <Footer />
     </div>
   );

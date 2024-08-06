@@ -33,6 +33,7 @@ const FeedbackForm = () => {
                 setError('Chỉ người dùng có quyền ADMIN hoặc USER mới có thể gửi feedback.');
                 return;
             }
+            console.log(productId)
             const user_id = localStorage.getItem('user_id');
             await axios.post(
                 `http://localhost:9191/feedback/`,

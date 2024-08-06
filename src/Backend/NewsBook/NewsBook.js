@@ -125,6 +125,7 @@ const NewsBook = () => {
                     <table className="book-table">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Thumbnail</th>
@@ -135,6 +136,7 @@ const NewsBook = () => {
                         <tbody>
                             {filteredBooks.map((book) => (
                                 <tr key={book.id}>
+                                    <td>{book.id}</td>
                                     <td>{book.title}</td>
                                     <td>{(book.description && book.description.length > 35 ? book.description.substring(0, 35) + '...' : book.description) || null}</td>
                                     <td>
