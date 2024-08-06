@@ -580,3 +580,71 @@
 .blog-read:hover{
     background: red;
 }
+.blog-post-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .blog-post {
+    flex: 1 1 calc(50% - 20px); /* Hai sản phẩm mỗi hàng, với khoảng cách giữa chúng */
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-direction: column; /* Để sắp xếp nội dung theo chiều dọc */
+    position: relative; /* Để đặt nút "Read More" */
+  }
+  
+  .blog-thumbnail img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .blog-desc {
+    position: relative;
+    max-height: 100px; /* Điều chỉnh chiều cao nếu cần */
+    overflow: hidden;
+  }
+  
+  .blog-excerpt {
+    font-size: 1rem;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 10; /* Số dòng để hiển thị */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .read-more {
+    margin-top: auto; /* Đẩy nút xuống dưới cùng */
+    padding: 0; /* Loại bỏ padding */
+    text-align: right; /* Canh phải nội dung bên trong */
+  }
+  
+  .button-blog {
+    background-color: #f86d72;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Cách 10px từ viền bên phải */
+  }
+  
+  .button-blog:hover {
+    background-color: #0056b3; /* Màu khi hover */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .blog-post {
+      flex: 1 1 100%;
+    }
+  }
+  
