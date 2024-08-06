@@ -316,12 +316,6 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 5px 10px;
     cursor: pointer;
 }
-.viewcart-wc:hover{
-    background: red;
-}
-.viewcart-remove-button:hover{
-    background: red;
-}
 
 .viewcart-summary p {
     font-size: 18px;

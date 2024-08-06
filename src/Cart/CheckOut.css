@@ -246,7 +246,7 @@
 }
 
 .submit-button {
-  background-color: #4caf50; /* Pink background color */
+  background-color: #f86d72; /* Pink background color */
   color: #fff; /* White text color */
   border: none; /* Remove border */
   border-radius: 5px; /* Rounded corners */
@@ -265,12 +265,17 @@
 }
 
 .submit-button:hover {
-  background-color: #45a049; /* Slightly darker green on hover */
+  background-color: #f14e53; /* Slightly darker green on hover */
 }
 
 .submit-button:active {
-  background-color: #388e3c; /* Even darker green on click */
-  transform: scale(0.98); /* Slightly shrink the button on click */
+  background-color: #f14e53;
+  /*Evendarkergreenonclick*/transform: scale(0.98);
+   /* Slightly shrink the button on click */
+  -webkit-transform: scale(0.98);
+  -moz-transform: scale(0.98);
+  -ms-transform: scale(0.98);
+  -o-transform: scale(0.98);
 }
 
 .submit-button:focus {
