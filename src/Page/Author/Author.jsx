@@ -35,7 +35,7 @@ const Author = () => {
     <div>
       <Header/>
         <div className='author-title'>
-          <h1 className='author-product'> Product Author </h1>
+          <h1 className='author-product'>Product Author</h1>
           <div className='author-bread'>
             <div className='author-crumb'>
               <Link to='/' className='author-a'>Home</Link>
