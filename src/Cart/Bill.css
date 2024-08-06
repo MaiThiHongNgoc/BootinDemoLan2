@@ -22,6 +22,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
 .order-summary h2 {
@@ -39,11 +40,18 @@
 }
 
 .order-summary h3 {
-  font-size: 20px;
+  /* font-size: 20px;
   color: #333;
   margin-top: 30px;
   margin-bottom: 10px;
-}
+  */
+  padding-top: 20px;
+  font-size: 22px;
+  color: #555;
+  margin-bottom: 15px;
+  /* border-bottom: 2px solid #eee; */
+  padding-bottom: 10px;
+} 
 
 .order-table {
   width: 100%;
@@ -116,4 +124,8 @@
   a {
     font-size: 14px;
   }
+}
+.billing{
+  float: inline-end;
+  margin-top: -189px;
 }

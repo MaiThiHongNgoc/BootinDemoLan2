@@ -18,6 +18,7 @@ import ViewCart from "./Cart/viewCart";
 import Bill from "./Cart/Bill";
 import RegisterForm from "./Page/Register/Register";
 import ProductDetail from "./Page/Shop/productDetail";
+import AuthorDetail from "./Page/Author/AuthorDetail/AuthorDetail";
 
 import { AuthProvider } from "./AuthContext";
 import { CartProvider } from "./Cart/CartContext"; // Import CartProvider
@@ -40,7 +41,6 @@ import Personal_Infomation from "./Page/Infomation/Personal_information";
 import UserOrder from "./Page/Infomation/UserOrder";
 import Logout from "./Page/LogOut/LogOut";
 import FeedbackForm from "./Page/FeedBack/FeedBackForm";
-import AuthorBook from "./Page/Author/AuthorBook/AuthorBook";
 
 
 function App() {
@@ -78,11 +78,9 @@ function App() {
               </Route>
 
               <Route path="/blog" element={<Blog />} />
-
               <Route path="/author" element={<Author />} >
-              <Route path="/author/:authorId" element={<AuthorBook />} />
+              <Route path="/author/:authorId" element={<AuthorDetail />} />
               </Route>
-
               <Route path="/contact" element={<Contact />} />
 
               <Route path="/login" element={<Login />} />

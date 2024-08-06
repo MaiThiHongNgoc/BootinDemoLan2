@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../Component/Header/Header';
 import Footer from '../Component/Footer/Footer';
+import { RxSlash } from "react-icons/rx";
 import './Bill.css';
 import { getOrderById } from '../Backend/Service (1)/orderService';
 import { Link } from 'react-router-dom';
@@ -38,6 +39,20 @@ const Bill = () => {
   return (
     <div>
       <Header />
+      <div className="contact-title">
+          <div className="contact-page">
+            <h1 className="contact-h1">Bill</h1>
+            <div className="contact-breadcrumb">
+              <div className="contact-bwp">
+                <a className="contact-a" href="/">Home</a>
+                <span className="contact-delimiter">
+                  <i className="contact-slash"><RxSlash /></i>
+                </span>
+                <span className="contact-current">Bill</span>
+              </div>
+            </div>
+          </div>
+        </div>
       <div className="bill-page">
         <h1>Order Confirmation</h1>
         <div className="order-summary">
@@ -47,12 +62,13 @@ const Bill = () => {
           <p>Total Amount: ${orderDetails.total_amount.toFixed(2) || 'N/A'}</p>
           <p>Date: {orderDetails.order_date ? new Date(orderDetails.order_date).toLocaleString() : 'N/A'}</p>
 
+          <div className='billing'>
           <h3>Billing Information</h3>
           <p>Name: {orderDetails.first_name || 'N/A'} {orderDetails.last_name || 'N/A'}</p>
           <p>Address: {orderDetails.address || 'N/A'}</p>
           <p>Phone: {orderDetails.phone_number || 'N/A'}</p>
           <p>Email: {orderDetails.email || 'N/A'}</p>
-
+          </div>
           <h3>Products</h3>
           <table className="order-table">
             <thead>
@@ -91,6 +107,7 @@ const Bill = () => {
       </div>
       <Footer />
     </div>
+   
   );
 };
 
