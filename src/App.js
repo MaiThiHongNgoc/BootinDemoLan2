@@ -79,9 +79,8 @@ function App() {
               </Route>
 
               <Route path="/blog" element={<Blog />} />
-              <Route path="/author" element={<Author />} >
+              <Route path="/author" element={<Author />} />
               <Route path="/author/:authorId" element={<AuthorDetail />} />
-              </Route>
               <Route path="/contact" element={<Contact />} />
 
               <Route path="/login" element={<Login />} />
