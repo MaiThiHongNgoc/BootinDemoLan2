@@ -128,13 +128,15 @@ const ProductDetail = () => {
 
   const renderStars = (rating) => {
     const maxRating = 5;
-
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+  
     return (
       <div className="stars">
         {Array.from({ length: maxRating }, (_, index) => (
           <span
             key={index}
-            className={`star ${index < rating ? 'filled' : ''}`}
+            className={`star ${index < fullStars ? 'filled' : (hasHalfStar && index === fullStars ? 'half-filled' : '')}`}
             onClick={() => setRating(index + 1)}
           >
             &#9733;
@@ -143,6 +145,7 @@ const ProductDetail = () => {
       </div>
     );
   };
+  
 
   return (
     <div>

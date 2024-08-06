@@ -233,13 +233,38 @@
   color: #666;
 }
 
-.star {
-  color: gold;
-  font-size: 1.2em;
+.stars {
+  display: flex;
   cursor: pointer;
+}
+
+.star {
+  font-size: 24px;
+  color: lightgray; /* Default color for empty stars */
   margin-right: 2px;
+  position: relative;
 }
 
 .star.filled {
-  color: gold;
+  color: gold; /* Color for full stars */
 }
+
+.star.half-filled {
+  position: relative;
+}
+
+.star.half-filled::before {
+  content: '\2605'; /* Full star Unicode */
+  color: gold; /* Color for the filled part of the half-star */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%; /* Show only half of the star */
+  overflow: hidden; /* Hide the overflowing part */
+}
+
+.star:not(.filled):not(.half-filled) {
+  color: lightgray; /* Color for empty stars */
+}
+
+

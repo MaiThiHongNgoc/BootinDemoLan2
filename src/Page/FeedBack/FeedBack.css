@@ -1,17 +1,47 @@
-
-.feedback-form .star-rating {
+/* Định dạng cho khu vực đánh giá sao */
+.star-rating {
     display: flex;
-    gap: 5px;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px; /* Khoảng cách giữa các sao */
 }
 
-.feedback-form .star {
-    font-size: 24px;
+/* Định dạng cho các sao */
+.star-rating span {
     cursor: pointer;
-    color: #ccc;
-    transition: color 0.2s;
+    font-size: 24px; /* Kích thước sao */
+    transition: color 0.3s, transform 0.2s; /* Hiệu ứng chuyển màu và phóng to khi hover */
+    position: relative;
 }
 
-.feedback-form .star.selected,
-.feedback-form .star:hover {
-    color: #f39c12; /* Màu vàng cho sao đã chọn */
+.star-rating span:hover {
+    color: #ffc107; /* Màu sao khi hover */
+    transform: scale(1.2); /* Phóng to sao khi hover */
+}
+
+
+/* Định dạng cho thông báo thành công */
+.success-message {
+    color: #28a745; /* Màu xanh lá cây */
+    font-size: 1rem; /* Kích thước chữ */
+    margin-top: 10px; /* Khoảng cách phía trên */
+    padding: 10px; /* Khoảng cách bên trong */
+    background-color: #d4edda; /* Màu nền nhạt */
+    border: 1px solid #c3e6cb; /* Đường viền màu xanh lá cây nhạt */
+    border-radius: 5px; /* Bo tròn các góc */
+    display: flex;
+    align-items: center;
+}
+
+/* Định dạng cho thông báo lỗi */
+.error-message {
+    color: #dc3545; /* Màu đỏ */
+    font-size: 1rem; /* Kích thước chữ */
+    margin-top: 10px; /* Khoảng cách phía trên */
+    padding: 10px; /* Khoảng cách bên trong */
+    background-color: #f8d7da; /* Màu nền nhạt */
+    border: 1px solid #f5c6cb; /* Đường viền màu đỏ nhạt */
+    border-radius: 5px; /* Bo tròn các góc */
+    display: flex;
+    align-items: center;
 }
