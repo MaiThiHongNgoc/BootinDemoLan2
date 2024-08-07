@@ -69,7 +69,7 @@
 .detail-url{
     text-align: left;
     /* padding-right: 135px; */
-    margin-right: 120px;
+    margin-right: 100px;
     display: inline-block;
     position: relative;
     overflow: hidden;
@@ -93,7 +93,7 @@
 }
 .detail-info{
     text-align: left;
-    width: 65%;
+    width: 50%;
 }
 .detail-info h1{
     color: #2b2b2b;
