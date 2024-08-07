@@ -189,10 +189,6 @@ const Footer = () => {
           </div>
           <div className='footer-fluid'>
             <div className='footer-left'>
-              <div className='footer-222'>
-                <div className='footer-ft'>
-                  <div className='footer-coppyleft'>
-                    <div className='footer-ft'>
                       <p className='footer-bootin'>
                         Copyright © 2024
                         <a href='#' className='footer-ef'>
@@ -200,10 +196,6 @@ const Footer = () => {
                         </a>
                            - Made by Nhom1
                       </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
             <div className='footer-right'>
               <div className='footer-400'>
