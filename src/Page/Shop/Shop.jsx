@@ -243,8 +243,8 @@ const Shop = () => {
                 <input 
                   type="range" 
                   min="0" 
-                  max="1000" 
-                  step="50" 
+                  max="50" 
+                  step="5" 
                   value={selectedPriceRange[1]}
                   onChange={handlePriceChange} 
                   className="shop-filter-range"
