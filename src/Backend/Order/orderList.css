@@ -115,7 +115,7 @@
   padding: 0.2rem 0.8rem;
   font-size: 1rem; /* Adjust font size */
   color: white; /* Text color */
-  background-color: #007bff; /* Background color of the button */
+  background-color: #f86d72; /* Background color of the button */
   border: none;
   border-radius: 4px;
   text-decoration: none;
@@ -124,12 +124,12 @@
 }
 
 .order-list-button-details:hover {
-  background-color: #0056b3; /* Darker shade for hover effect */
+  background-color: #f86d72; /* Darker shade for hover effect */
   color: white; /* Lighter text color on hover */
 }
 
 .order-list-button-details:active {
-  background-color: #004494; /* Even darker shade for active state */
+  background-color: #ec2930; /* Even darker shade for active state */
 }
 
 .order-search-container{
