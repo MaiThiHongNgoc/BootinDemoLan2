@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import { RxSlash } from "react-icons/rx";
-import { FaStar } from 'react-icons/fa';
 import "./FeedBack.css";
 
 // Đối tượng ánh xạ mô tả cho các mức độ đánh giá
@@ -86,6 +85,22 @@ const FeedbackForm = () => {
     const [comment, setComment] = useState('');
     const [success, setSuccess] = useState('');
     const [error, setError] = useState('');
+    const [product, setProduct] = useState(null);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const response = await axios.get(`http://localhost:9191/api/products/v1/${productId}`);
+                setProduct(response.data);
+            } catch (err) {
+                console.error('Error fetching product:', err);
+            }
+        };
+
+        if (productId) {
+            fetchProduct();
+        }
+    }, [productId]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -137,30 +152,39 @@ const FeedbackForm = () => {
     return (
         <div>
             <Header />
-            <div className='proDetail'>
-                <h1 className='shop-product'>Feedback</h1>
-                <div className='shop-bread'>
-                    <div className='shop-crumb'>
-                        <Link to='/' className='shop-a'>Home</Link>
-                        <span className='shop-delimiter'>
-                            <i className='shop-i'><RxSlash /></i>
-                        </span>
-                        <span className='shop-current'>Feedback</span>
-                    </div>
+            <div className='shop-title'>
+               <h1 className='shop-product'>Feaback</h1>
+               <div className='shop-bread'>
+               <div className='shop-crumb'>
+                  <a href='/' className='shop-a'>Home</a>
+                <span className='shop-delimiter'>
+                  <i className='shop-i'><RxSlash /></i>
+                </span>
+                <span className='shop-current'>Feaback</span>
                 </div>
-            </div>
+             </div>
+             </div>
 
-            <div className="feedback-form">
+            <div className="feedback-form-container">
                 <h2>Gửi Feedback</h2>
+                {product && (
+                    <div className="product-info">
+                         <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="customer-shop-image" />
+                        <div className="product-details">
+                            <h3>{product.product_name}</h3>
+                            <p>{product.description}</p>
+                        </div>
+                    </div>
+                )}
                 {success && <p className="success-message">{success}</p>}
                 {error && <p className="error-message">{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label>Đánh giá:</label>
+                        <label className='title-feaback'>Đánh giá:</label>
                         <StarRating rating={rating} onRatingChange={setRating} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="comment">Nhận xét:</label>
+                        <label htmlFor="comment" className='title-feaback'>Nhận xét:</label>
                         <textarea
                             id="comment"
                             value={comment}
