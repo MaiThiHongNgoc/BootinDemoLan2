@@ -1,3 +1,4 @@
+
 /* Định dạng cho khu vực đánh giá sao */
 .star-rating {
     display: flex;
@@ -35,7 +36,7 @@
 
 /* Định dạng cho thông báo lỗi */
 .error-message {
-    color: #dc3545; /* Màu đỏ */
+    color: #f86d72; /* Màu đỏ */
     font-size: 1rem; /* Kích thước chữ */
     margin-top: 10px; /* Khoảng cách phía trên */
     padding: 10px; /* Khoảng cách bên trong */
@@ -44,4 +45,136 @@
     border-radius: 5px; /* Bo tròn các góc */
     display: flex;
     align-items: center;
+}
+/* FeedbackForm.css */
+.feedback-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    /* border-radius: 10px; */
+    background-color: #fff;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.product-info {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.product-details h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.product-details p {
+    margin: 5px 0 0;
+    color: #666;
+}
+.title-feaback{
+    text-align: left;
+    font-size: 1.4rem;
+    font-family: Merriweather, serif;
+}
+
+/* Định dạng cho khu vực đánh giá sao */
+.star-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px; /* Khoảng cách giữa các sao */
+}
+
+/* Định dạng cho các sao */
+.star-rating span {
+    cursor: pointer;
+    font-size: 24px; /* Kích thước sao */
+    transition: color 0.3s, transform 0.2s; /* Hiệu ứng chuyển màu và phóng to khi hover */
+    position: relative;
+}
+
+.star-rating span:hover {
+    color: #ffc107; /* Màu sao khi hover */
+    transform: scale(1.2); /* Phóng to sao khi hover */
+}
+
+/* Định dạng cho thông báo thành công */
+.success-message {
+    color: #28a745; /* Màu xanh lá cây */
+    font-size: 1rem; /* Kích thước chữ */
+    margin-top: 10px; /* Khoảng cách phía trên */
+    padding: 10px; /* Khoảng cách bên trong */
+    background-color: #d4edda; /* Màu nền nhẹ */
+    border: 1px solid #c3e6cb; /* Đường viền */
+    border-radius: 5px; /* Bo tròn góc */
+}
+
+/* Định dạng cho thông báo lỗi */
+.error-message {
+    color: #f86d72; /* Màu đỏ */
+    font-size: 1rem; /* Kích thước chữ */
+    margin-top: 10px; /* Khoảng cách phía trên */
+    padding: 10px; /* Khoảng cách bên trong */
+    background-color: #f8d7da; /* Màu nền nhẹ */
+    border: 1px solid #f5c6cb; /* Đường viền */
+    border-radius: 5px; /* Bo tròn góc */
+}
+
+/* Định dạng cho nhãn */
+label {
+    display: block; /* Hiển thị nhãn theo dòng */
+    margin-bottom: 5px; /* Khoảng cách phía dưới */
+    font-weight: bold; /* Chữ in đậm */
+}
+
+/* Định dạng cho nhóm form */
+.form-group {
+    margin-bottom: 15px; /* Khoảng cách giữa các nhóm form */
+}
+
+/* Định dạng cho ô nhập liệu */
+input[type="text"],
+textarea {
+    width: 100%; /* Chiều rộng đầy đủ */
+    padding: 10px; /* Khoảng cách bên trong */
+    border: 1px solid #ccc; /* Đường viền */
+    border-radius: 5px; /* Bo tròn góc */
+    box-sizing: border-box; /* Bao gồm cả đường viền và khoảng cách trong kích thước */
+    font-size: 16px; /* Kích thước chữ */
+}
+
+/* Định dạng cho nút */
+button {
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    background-color: #f86d72; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: none; /* Không đường viền */
+    border-radius: 5px; /* Bo tròn góc */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    font-size: 16px; /* Kích thước chữ */
+}
+
+button:hover {
+    background-color: #f86d72; /* Màu nền khi hover */
+}
+
+/* Định dạng cho các thông báo */
+.success-message,
+.error-message {
+    margin-top: 10px; /* Khoảng cách phía trên */
+    padding: 10px; /* Khoảng cách bên trong */
+    border-radius: 5px; /* Bo tròn góc */
+    font-size: 14px; /* Kích thước chữ */
+    text-align: center; /* Canh giữa chữ */
 }
