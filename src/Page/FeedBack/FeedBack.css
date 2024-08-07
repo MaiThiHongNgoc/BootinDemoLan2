@@ -47,22 +47,23 @@
     align-items: center;
 }
 /* FeedbackForm.css */
-.feedback-form-container {
+/* .feedback-form-container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     /* border: 1px solid #ccc; */
     /* border-radius: 10px; */
-    background-color: #fff;
+    /* background-color: #fff; */
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
+    /* margin-top: 50px; */
+    /* margin-bottom: 50px; 
+} */
 
 .product-info {
     display: flex;
-    margin-bottom: 20px;
-    align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px;
 }
 
 .product-image {
@@ -144,17 +145,17 @@ label {
 }
 
 /* Định dạng cho ô nhập liệu */
-.textarea {
-    width: 100%; /* Chiều rộng đầy đủ */
-    padding: 10px; /* Khoảng cách bên trong */
-    border: 1px solid #ccc; /* Đường viền */
-    border-radius: 5px; /* Bo tròn góc */
-    box-sizing: border-box; /* Bao gồm cả đường viền và khoảng cách trong kích thước */
-    font-size: 16px; /* Kích thước chữ */
+.feed-text {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-sizing: border-box; 
+    font-size: 16px; 
 }
 
 /* Định dạng cho nút */
-button {
+.feed {
     padding: 10px 20px; /* Khoảng cách bên trong */
     background-color: #f86d72; /* Màu nền */
     color: white; /* Màu chữ */
@@ -164,7 +165,7 @@ button {
     font-size: 16px; /* Kích thước chữ */
 }
 
-button:hover {
+.feed:hover {
     background-color: #f86d72; /* Màu nền khi hover */
 }
 
@@ -177,3 +178,51 @@ button:hover {
     font-size: 14px; /* Kích thước chữ */
     text-align: center; /* Canh giữa chữ */
 }
+.back-shop-image{
+    width: 100%;
+  height: auto;
+  border: 0;
+  vertical-align: top;
+  margin-bottom: 20px;
+}
+.product-img{
+    flex: 1;
+  max-width: 40%;
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.product-details h1{
+    margin-top: 7px;
+    margin-bottom: 24px;
+    font-weight: 500;
+    line-height: 100%;
+    color: #2b2b2b;
+    font-size: 2rem;
+    font-family: Open Sans;
+}
+.product-details{
+    /* position: sticky;
+    top: 35px; */
+    margin-bottom: -9px;
+    text-align: left;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+}
+.product-details p{
+    margin-top: 20px;
+    margin-bottom: 0;
+    margin: 0 0 12px;
+}
+/* .feed-form{
+    margin-bottom: -9px;
+    text-align: left;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+} */

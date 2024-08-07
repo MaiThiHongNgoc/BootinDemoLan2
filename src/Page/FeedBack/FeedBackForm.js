@@ -8,11 +8,11 @@ import "./FeedBack.css";
 
 // Đối tượng ánh xạ mô tả cho các mức độ đánh giá
 const ratingDescriptions = {
-    1: 'Tệ',
-    2: 'Không hài lòng',
-    3: 'Bình thường',
-    4: 'Hài lòng',
-    5: 'Tuyệt vời'
+    1: 'Currency',
+    2: 'Dissatisfied',
+    3: 'Normal',
+    4: 'Satisfied',
+    5: 'wonderful'
 };
 
 const StarRating = ({ rating, onRatingChange }) => {
@@ -153,47 +153,49 @@ const FeedbackForm = () => {
         <div>
             <Header />
             <div className='shop-title'>
-               <h1 className='shop-product'>Feaback</h1>
-               <div className='shop-bread'>
-               <div className='shop-crumb'>
-                  <a href='/' className='shop-a'>Home</a>
-                <span className='shop-delimiter'>
-                  <i className='shop-i'><RxSlash /></i>
-                </span>
-                <span className='shop-current'>Feaback</span>
+                <h1 className='shop-product'>Feaback</h1>
+                <div className='shop-bread'>
+                    <div className='shop-crumb'>
+                        <a href='/' className='shop-a'>Home</a>
+                        <span className='shop-delimiter'>
+                            <i className='shop-i'><RxSlash /></i>
+                        </span>
+                        <span className='shop-current'>Feaback</span>
+                    </div>
                 </div>
-             </div>
-             </div>
+            </div>
 
             <div className="feedback-form-container">
-                <h2>Gửi Feedback</h2>
                 {product && (
                     <div className="product-info">
-                         <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="customer-shop-image" />
+                        <div className="product-img">
+                            <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="back-shop-image" />
+                        </div>
                         <div className="product-details">
-                            <h3>{product.product_name}</h3>
+                            <h1>{product.product_name}</h1>
                             <p>{product.description}</p>
+                            <form className='feed-form' onSubmit={handleSubmit}>
+                            {success && <p className="success-message">{success}</p>}
+                            {error && <p className="error-message">{error}</p>}
+                            <div className="form-group">
+                                <label className='title-feaback'>Evaluations:</label>
+                                <StarRating rating={rating} onRatingChange={setRating} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="comment" className='title-feaback'>Comments:</label>
+                                <textarea className='feed-text'
+                                    id="comment"
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                />
+                            </div>
+                            <button className='feed' type="submit">Feedback</button>
+                        </form>
                         </div>
                     </div>
                 )}
                 {success && <p className="success-message">{success}</p>}
                 {error && <p className="error-message">{error}</p>}
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label className='title-feaback'>Đánh giá:</label>
-                        <StarRating rating={rating} onRatingChange={setRating} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="comment" className='title-feaback'>Nhận xét:</label>
-                        <textarea
-                            id="comment"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            className='textarea'
-                        />
-                    </div>
-                    <button type="submit">Gửi Feedback</button>
-                </form>
             </div>
             <Footer />
         </div>
