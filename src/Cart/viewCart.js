@@ -130,8 +130,7 @@ const ViewCart = ({ userId }) => {
                 </div>
             </div>
             <div className="viewcart-container">
-                <div className='view_table1'><h2>Shopping Cart</h2>
-                    {error && <p className="viewcart-error">{error}</p>}
+                <div className='view_table1'>
                     <table className="viewcart-products-table">
                         <thead>
                             <tr>
@@ -203,7 +202,6 @@ const ViewCart = ({ userId }) => {
                     </table>
                 </div>
                 <div className='viewcart-createo'>
-                    <h2>Detail Cart</h2>
                     <div className="viewcart-summary">
                         <h2>Cart totals</h2>
                         <p>Total Quantity: {totalQuantity}</p>

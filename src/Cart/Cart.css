@@ -14,7 +14,7 @@
 .cart-product-item {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin: 30px 0px;    
 }
 
 .cart-product-image {
@@ -101,4 +101,8 @@
 .cart-button:hover {
     background-color: #f86d72;
     color: #fff;
+}
+.cart-title, .cart-empty{
+    text-align: center;
+    margin-top: 20px;
 }

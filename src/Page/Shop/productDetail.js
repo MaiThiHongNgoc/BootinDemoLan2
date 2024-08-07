@@ -190,7 +190,7 @@ const ProductDetail = () => {
         )}
       </div>
       <div className='title-feedback'>
-      <h2>Feedback Review</h2>
+      <h2>Feedback</h2>
       </div>
     
       {feedbackLoading && <p>Loading feedbacks...</p>}
@@ -221,7 +221,7 @@ const ProductDetail = () => {
         <p>No feedbacks available for this product.</p>
       )}
       <div className='title-feedback'>
-      <h2>See more products</h2>
+      <h2>Related Products</h2>
       </div>
       <TopRating />
       <Footer />

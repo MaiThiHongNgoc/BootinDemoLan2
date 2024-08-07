@@ -65,7 +65,6 @@ const Cart = ({ userId, onClose }) => {
         <div className="cart-overlay">
             <div className="cart-container" ref={cartRef}>
                 {loading && <p className="cart-loading">Loading purchased products...</p>}
-                {error && <p className="cart-error">{error}</p>}
                 <h2 className="cart-title">Your Purchased Products</h2>
                 {validProducts.length === 0 ? (
                     <p className="cart-empty">You haven't purchased any products yet!</p>
