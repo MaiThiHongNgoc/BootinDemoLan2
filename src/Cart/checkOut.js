@@ -194,7 +194,7 @@ const CheckOut = () => {
           <h2 className='check-h2'>Billing details</h2>
           <form className="checkout-form" onSubmit={e => e.preventDefault()}>
             <div className="form-row">
-              <div className="form-group required">
+              <div className="form-group form-up required">
                 <input
                   className="form-input"
                   type="text"
@@ -205,7 +205,7 @@ const CheckOut = () => {
                   required
                 />
               </div>
-              <div className="form-group required">
+              <div className="form-group form-up required">
                 <input
                   className="form-input"
                   type="text"

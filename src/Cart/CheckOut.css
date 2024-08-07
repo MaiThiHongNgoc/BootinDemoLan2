@@ -55,6 +55,11 @@
     top: 0;
 }
 
+.form-up {
+  width: 50%;
+  margin-bottom: 25px;
+  position: relative;
+}
 .form-group.required .form-input {
     padding-right: 25px; /* Space for asterisk */
 }
