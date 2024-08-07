@@ -15,6 +15,7 @@ import './Shop.css';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,16 +30,20 @@ const Shop = () => {
   const [cartIconState, setCartIconState] = useState({});
 
   useEffect(() => {
-    loadProducts(currentPage, selectedCategory, selectedPriceRange, selectedAuthor, searchQuery);
+    loadProducts();
     loadCategories();
     loadAuthors();
-  }, [currentPage, selectedCategory, selectedPriceRange, selectedAuthor, searchQuery]);
+  }, []);
 
-  const loadProducts = async (page, category, priceRange, author, search) => {
+  useEffect(() => {
+    applyFilters();
+  }, [selectedCategory, selectedPriceRange, selectedAuthor, searchQuery, products]);
+
+  const loadProducts = async () => {
     setLoading(true);
     setError('');
     try {
-      const response = await getProducts(page - 1, category, priceRange, author, search);
+      const response = await getProducts();
       const { content, totalPages } = response;
       setProducts(Array.isArray(content) ? content : []);
       setTotalPages(totalPages || 0);
@@ -70,17 +75,46 @@ const Shop = () => {
     }
   };
 
+  const applyFilters = () => {
+    let filtered = products;
+
+    // Apply category filter
+    if (selectedCategory) {
+      filtered = filtered.filter(product => product.categories.category_id === selectedCategory);
+    }
+
+    // Apply price filter
+    filtered = filtered.filter(product => product.price >= selectedPriceRange[0] && product.price <= selectedPriceRange[1]);
+
+    // Apply author filter
+    if (selectedAuthor) {
+      filtered = filtered.filter(product => product.author.author_id === selectedAuthor);
+    }
+
+    // Apply search query filter
+    if (searchQuery) {
+      filtered = filtered.filter(product => 
+        product.product_name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    setFilteredProducts(filtered);
+  };
+
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
+    setCurrentPage(1); // Reset to the first page when filter changes
   };
 
   const handlePriceChange = (event) => {
     const value = event.target.value;
     setSelectedPriceRange([0, value]);
+    setCurrentPage(1); // Reset to the first page when filter changes
   };
 
   const handleAuthorChange = (event) => {
     setSelectedAuthor(event.target.value);
+    setCurrentPage(1); // Reset to the first page when filter changes
   };
 
   const handleSearchChange = (event) => {
@@ -88,7 +122,8 @@ const Shop = () => {
   };
 
   const handleSearchClick = () => {
-    loadProducts(currentPage, selectedCategory, selectedPriceRange, selectedAuthor, searchQuery);
+    setCurrentPage(1); // Reset to the first page when searching
+    applyFilters();
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -129,8 +164,8 @@ const Shop = () => {
               ...prevState,
               [product.product_id]: 'checkmark'
           }));
-          showMessage('Product successfully added to cart!', 'success'); // Use showMessage
-      }, 1000);
+          showMessage('Product successfully added to cart!', 'success');
+        }, 1000);
       } else {
         console.error('No cart found for user');
         setError('No cart found for user.');
@@ -242,7 +277,7 @@ const Shop = () => {
           ) : (
             <div>
               <div className="customer-shop-grid">
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <div key={product.product_id} className="customer-shop-card">
                     <Link to={`/product/${product.product_id}`}></Link>
                     <div className="customer-shop-image-container">
@@ -259,10 +294,9 @@ const Shop = () => {
                         </button>
                       </div>
                     </div>
-                    {/* <h2 className="customer-shop-product-name">{product.product_name}</h2> */}
                     <Link to={`/product/${product.product_id}`} className="customer-shop-product-name">
-                        {product.product_name}
-                      </Link>
+                      {product.product_name}
+                    </Link>
                     <p className="customer-shop-author-name">{product.author.author_name}</p>
                     <p className="customer-shop-price">Price: ${product.price}</p>
                   </div>
@@ -285,12 +319,13 @@ const Shop = () => {
       </div>
 
       {showNotification && (
-        <div className="login-required-message">
-         <p>Please log in to add items to the cart. <a href="/login">Log in here</a></p>
-         <button className="close-button" onClick={handleCloseNotification}>×</button>
+        <div className="notification-overlay">
+          <div className="notification-message">
+            <p>No cart found or please login first.</p>
+            <button onClick={handleCloseNotification}>Close</button>
+          </div>
         </div>
       )}
-
       <Footer />
     </div>
   );

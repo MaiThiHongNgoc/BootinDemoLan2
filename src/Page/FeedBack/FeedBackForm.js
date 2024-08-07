@@ -189,6 +189,7 @@ const FeedbackForm = () => {
                             id="comment"
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
+                            className='textarea'
                         />
                     </div>
                     <button type="submit">Gửi Feedback</button>

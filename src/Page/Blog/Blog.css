@@ -1,7 +1,4 @@
 .blog-main{
-    background: 0 0;
-    padding-top: 0;
-    padding-bottom: 0;
     width: 100%;
     height: 100%;
 }
@@ -382,6 +379,7 @@
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px;
+    margin-bottom: 30px;
 }
 .blog-content-area{
     width: 100%;

@@ -144,8 +144,7 @@ label {
 }
 
 /* Định dạng cho ô nhập liệu */
-input[type="text"],
-textarea {
+.textarea {
     width: 100%; /* Chiều rộng đầy đủ */
     padding: 10px; /* Khoảng cách bên trong */
     border: 1px solid #ccc; /* Đường viền */
