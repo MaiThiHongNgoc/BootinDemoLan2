@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductForm from './ProductForm';
 import './ProductList.css';
-import { getProducts, deleteProduct, updateProduct } from '../Service (1)/productService';
+import { updateProduct } from '../Service (1)/productService';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -14,7 +14,7 @@ const ProductList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(10);
     const [totalProducts, setTotalProducts] = useState(0);
-    const [apiType, setApiType] = useState('all'); // Trạng thái để chọn API
+    const [apiType, setApiType] = useState('all');
 
     useEffect(() => {
         loadProducts(currentPage, apiType);
@@ -26,17 +26,14 @@ const ProductList = () => {
         try {
             let response;
             if (apiType === 'deleted') {
-                response = await axios.get('http://localhost:9191/api/products/v1/false'); // Gọi API cho sản phẩm bị xóa tạm thời
+                response = await axios.get('http://localhost:9191/api/products/v1/false');
             } else {
                 response = await axios.get('http://localhost:9191/api/products/v1/', {
-                    params: {
-                        page: page - 1,
-                        size: productsPerPage
-                    }
-                }); // Gọi API cho sản phẩm bình thường
+                    params: { p: page }
+                });
             }
-            setProducts(response.data.content || []); // Xử lý cấu trúc dữ liệu trả về từ axios
-            setTotalProducts(response.data.totalElements || 0); // Xử lý cấu trúc dữ liệu trả về từ axios
+            setProducts(response.data.content || []);
+            setTotalProducts(response.data.totalElements || 0);
         } catch (error) {
             console.error('Failed to fetch products', error);
             setError('Failed to load products. Please try again later.');
@@ -52,20 +49,14 @@ const ProductList = () => {
 
     const handleDelete = async (product) => {
         try {
-            // Đặt giá trị is_deleted dựa trên trạng thái hiện tại của sản phẩm
             const updatedProduct = { ...product, is_deleted: !product.is_deleted };
-
-            // Gọi API cập nhật sản phẩm
             await updateProduct(product.product_id, updatedProduct);
-
-            // Tải lại danh sách sản phẩm sau khi cập nhật
             loadProducts(currentPage, apiType);
         } catch (error) {
             console.error('Failed to update product', error);
             setError('Failed to update product. Please try again later.');
         }
     };
-
 
     const handleAddProduct = () => {
         setEditingProduct(null);
@@ -148,7 +139,7 @@ const ProductList = () => {
                                             className={`product-button ${product.is_deleted ? 'product-button-delete' : 'product-button-restore'}`}
                                             onClick={() => handleDelete(product)}
                                         >
-                                            {product.is_deleted ? 'Delete' : 'Restore'} {/* Thay đổi nhãn */}
+                                            {product.is_deleted ? 'Delete' : 'Restore'}
                                         </button>
                                     </td>
                                 </tr>
@@ -156,14 +147,15 @@ const ProductList = () => {
                         </tbody>
                     </table>
                     <ul className="pagination">
-                        {Array.from({ length: totalPages }, (_, index) => (
-                            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                                <button onClick={() => paginate(index + 1)} className="page-link">
-                                    {index + 1}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+    {Array.from({ length: totalPages }, (_, index) => (
+        <li key={index} className={`page-item ${currentPage === index ? 'active' : ''}`}>
+            <button onClick={() => paginate(index)} className="page-link">
+                {index}
+            </button>
+        </li>
+    ))}
+</ul>
+
                 </>
             )}
         </div>

@@ -225,7 +225,6 @@ const OrderList = () => {
                             <th>User Name</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Email</th>
                             <th>Address</th>
                             <th>Order Date</th>
                             <th>Status</th>
@@ -242,7 +241,6 @@ const OrderList = () => {
                                     <td>{order.user.username}</td>
                                     <td>{order.first_name}</td>
                                     <td>{order.last_name}</td>
-                                    <td>{order.user.email}</td>
                                     <td>{order.address}</td>
                                     <td>{new Date(order.order_date).toLocaleString()}</td>
                                     <td>

@@ -44,28 +44,13 @@ function DashBoard() {
       try {
         // Fetch products, users, and orders
         const productResponse = await getProducts();
-        const productsData = productResponse.content;
+        const productsData = productResponse;
 
         const userResponse = await getUsers();
         const usersData = userResponse;
 
         const orderResponse = await getOrder();
         const orderData = orderResponse;
-
-        // Update card values
-        const productCount = productsData.length;
-        const categoryCount = [...new Set(productsData.map(p => p.categories.category_name))].length;
-        const userCount = usersData.length;
-        const alertCount = orderData.length;
-
-        // Format data for charts
-        const productSalesData = productsData.map(product => ({
-          name: product.product_name,
-          sales: orderData
-            .flatMap(order => order.orderDetails)
-            .filter(detail => detail.products.product_id === product.product_id)
-            .reduce((acc, detail) => acc + detail.quantity * detail.products.price, 0)
-        }));
 
         const orderDataFormatted = groupByDay(orderData); // Group data by day
 
@@ -94,8 +79,8 @@ function DashBoard() {
             <h3>PRODUCTS</h3>
             <BsFillArchiveFill className='card_icon' />
           </div>
-          <NavLink to="/admin/products">
-          <h1>{products.length}</h1>
+          <NavLink to="/admin/products" className={'number-product'}>
+          <h1 className='number-product'>{products.totalElements}</h1>
           </NavLink>
         </div>
         <div className='card'>
@@ -103,8 +88,8 @@ function DashBoard() {
             <h3>PENDING</h3>
             <BsFillGrid3X3GapFill className='card_icon' />
           </div>
-          <NavLink to="/admin/orders/PENDING">
-          <h1>{orders.filter(order => order.status === "PENDING").length}</h1>
+          <NavLink to="/admin/orders/PENDING" className={'number-product'}>
+          <h1 className='number-product'>{orders.filter(order => order.status === "PENDING").length}</h1>
           </NavLink>
         </div>
         <div className='card'>
@@ -112,8 +97,8 @@ function DashBoard() {
             <h3>COMPLETED</h3>
             <BsPeopleFill className='card_icon' />
           </div>
-          <NavLink to="/admin/orders/COMPLETED">
-          <h1>{orders.filter(order => order.status === "COMPLETED").length}</h1>
+          <NavLink to="/admin/orders/COMPLETED" className={'number-product'}>
+          <h1 className='number-product'>{orders.filter(order => order.status === "COMPLETED").length}</h1>
           </NavLink>
         </div>
         <div className='card'>
@@ -121,8 +106,8 @@ function DashBoard() {
             <h3>ORDER</h3>
             <BsFillBellFill className='card_icon' />
           </div>
-          <NavLink to="/admin/order">
-          <h1>{orders.length}</h1>
+          <NavLink to="/admin/order" className={'number-product'}>
+          <h1 className='number-product'>{orders.length}</h1>
           </NavLink>
           </div>
       </div>

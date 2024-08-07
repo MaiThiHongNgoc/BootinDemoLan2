@@ -83,7 +83,7 @@ const UserOrder = () => {
                                                 <p><strong>Price:</strong> ${detail.products.price.toFixed(2)}</p>
                                                 <p><strong>Quantity:</strong> {detail.quantity}</p>
                                                 {order.status.toLowerCase() === 'completed' && (
-                                                     <button onClick={() => handleFeedbackClick(detail.products.product_id)} className="add-to-cart-button">
+                                                     <button onClick={() => handleFeedbackClick(detail.products.product_id)} className="feedback-button">
                                                      Feedback
                                                    </button>
                                                 )}
