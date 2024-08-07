@@ -141,6 +141,10 @@
   width: 100%;
   cursor: pointer;
 }
+
+.shop-fil-button:hover{
+  color: #f86d72;
+}
 /* Đổi màu sắc của thanh trượt */
 input[type="range"] {
   width: 100%;
