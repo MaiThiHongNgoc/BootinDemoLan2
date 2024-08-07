@@ -59,8 +59,8 @@
     /* margin-bottom: 50px; 
 } */
 
-.product-info {
-    display: flex;
+.product-bank {
+  display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 20px;

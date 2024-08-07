@@ -167,7 +167,7 @@ const FeedbackForm = () => {
 
             <div className="feedback-form-container">
                 {product && (
-                    <div className="product-info">
+                    <div className="product-bank">
                         <div className="product-img">
                             <img src={product.imgProducts[0]?.img_url} alt={product.product_name} className="back-shop-image" />
                         </div>
