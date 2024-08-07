@@ -149,8 +149,6 @@
 }
 /* CSS cho các trường chọn ngày */
 .order-search-date {
-  width: 200px; /* Chiều rộng cố định cho các trường */
-  padding: 10px; /* Khoảng cách trong ô */
   border: 1px solid #ddd; /* Đường viền mảnh */
   border-radius: 4px; /* Bo góc nhẹ */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
@@ -188,17 +186,12 @@
 
 /* Container for filters and pagination */
 .filter-pagination-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  width: 80%;
 }
 
 .filter-container {
-  display: flex;
+  gap: 5%;
   flex-wrap: wrap;
-  gap: 10px;
   align-items: center;
   flex: 1; /* Take up available space */
 }
@@ -224,6 +217,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 16px;
+  margin: 0 5px;
 }
 
 /* Styling for status select dropdown */
@@ -232,11 +226,12 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 16px;
+  margin: 0 5px;
+
 }
 
 /* Styling for pagination buttons */
 .pagination-button {
-  padding: 8px 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #f4f4f4;

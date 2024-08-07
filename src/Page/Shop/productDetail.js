@@ -115,9 +115,7 @@ const ProductDetail = () => {
     }
   };
 
-  const handleFeedbackClick = () => {
-    navigate('/feedback', { state: { productId } });
-  };
+  
 
   const handleCloseNotification = () => {
     setShowNotification(false);
@@ -186,9 +184,6 @@ const ProductDetail = () => {
               </div>
               <button onClick={handleCartClick} className="add-to-cart-button">
                 Add to Cart
-              </button>
-              <button onClick={handleFeedbackClick} className="add-to-cart-button">
-                fedd 
               </button>
             </div>
           </>

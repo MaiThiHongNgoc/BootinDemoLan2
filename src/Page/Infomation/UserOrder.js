@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import './UserOrder.css';
-import { Link } from "react-router-dom";
 
 const UserOrder = () => {
     const [orders, setOrders] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate(); // Initialize navigate
 
     const fetchOrders = async () => {
         try {
@@ -30,6 +31,10 @@ const UserOrder = () => {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleFeedbackClick = (productId) => {
+        navigate('/feedback', { state: { productId } }); // Navigate correctly with productId
     };
 
     useEffect(() => {
@@ -78,12 +83,9 @@ const UserOrder = () => {
                                                 <p><strong>Price:</strong> ${detail.products.price.toFixed(2)}</p>
                                                 <p><strong>Quantity:</strong> {detail.quantity}</p>
                                                 {order.status.toLowerCase() === 'completed' && (
-                                                    <Link
-                                                        to={`/product/${detail.products.product_id}`} // Assuming product_id is available
-                                                        className="feedback-button"
-                                                    >
-                                                        Leave Feedback
-                                                    </Link>
+                                                     <button onClick={() => handleFeedbackClick(detail.products.product_id)} className="add-to-cart-button">
+                                                     Feedback
+                                                   </button>
                                                 )}
                                             </div>
                                         </div>

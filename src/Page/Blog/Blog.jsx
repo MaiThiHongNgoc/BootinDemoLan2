@@ -4,9 +4,10 @@ import { RxSlash } from "react-icons/rx";
 import { CiSearch } from "react-icons/ci";
 import { FaUser, FaRegComment } from "react-icons/fa";
 import Header from '../../Component/Header/Header';
-import Footer from '../../Component/Footer/Footer';
+//import Footer from '../../Component/Footer/Footer';
 import './Blog.css';
 import { Button } from '@mui/material';
+import Footer from '../../Component/Footer/Footer';
 
 const Blog = () => {
   const [articles, setArticles] = useState([]);
