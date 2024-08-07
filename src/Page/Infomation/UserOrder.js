@@ -42,7 +42,7 @@ const UserOrder = () => {
     }, []);
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
+    if (error) return <p>You are not logged in</p>;
     if (orders.length === 0) return <p>No orders found</p>;
 
     const groupedOrders = orders.reduce((acc, order) => {

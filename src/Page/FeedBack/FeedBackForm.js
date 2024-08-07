@@ -175,8 +175,6 @@ const FeedbackForm = () => {
                             <h1>{product.product_name}</h1>
                             <p>{product.description}</p>
                             <form className='feed-form' onSubmit={handleSubmit}>
-                            {success && <p className="success-message">{success}</p>}
-                            {error && <p className="error-message">{error}</p>}
                             <div className="form-group">
                                 <label className='title-feaback'>Evaluations:</label>
                                 <StarRating rating={rating} onRatingChange={setRating} />
