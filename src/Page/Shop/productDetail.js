@@ -159,9 +159,9 @@ const ProductDetail = () => {
               <i className='shop-i'><RxSlash /></i>
             </span>
             <span className='shop-current'>Products
-              <i className='shop-i'><RxSlash /></i>
+              <i className='shop-i'><RxSlash /></i> 
+              {product && (<h4 className='shop-current'>{product.product_name}</h4>)}
             </span>
-            <span>{product && (<h4 className='shop-current'>{product.product_name}</h4>)}</span>
           </div>
         </div>
       </div>
@@ -194,6 +194,10 @@ const ProductDetail = () => {
           </>
         )}
       </div>
+      <div className='title-feedback'>
+      <h2>Feedback Review</h2>
+      </div>
+    
       {feedbackLoading && <p>Loading feedbacks...</p>}
       {feedbackError && <p className="error-message">{feedbackError}</p>}
       {feedbacks.length > 0 ? (
@@ -221,6 +225,9 @@ const ProductDetail = () => {
       ) : (
         <p>No feedbacks available for this product.</p>
       )}
+      <div className='title-feedback'>
+      <h2>See more products</h2>
+      </div>
       <TopRating />
       <Footer />
     </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getOrder, updateOrder, deleteOrder } from '../Service (1)/orderService';
 import './orderList.css';
 import OrderForm from './orderForm';
-import OrderDetails from './orderDetail'; 
+import OrderDetails from './orderDetail';
 import { Link, useParams } from 'react-router-dom';
 
 const OrderList = () => {
@@ -16,7 +16,7 @@ const OrderList = () => {
     const [endDate, setEndDate] = useState('');
     const [searchStatus, setSearchStatus] = useState('');
     const [expandedOrderId, setExpandedOrderId] = useState(null);
-    
+
     const { status } = useParams(); // Get status from URL params
 
     useEffect(() => {
@@ -211,7 +211,6 @@ const OrderList = () => {
                     <option value="CANCELLED">Cancelled</option>
                 </select>
             </div>
-
         </div>
 
             {loading ? (

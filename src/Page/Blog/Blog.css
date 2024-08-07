@@ -7,7 +7,7 @@
 }
 .blog-title{
     background-image: url(https://wpbingosite.com/wordpress/bootin/wp-content/uploads/2019/05/Breadcumd.jpg);
-    margin: 0 0 100px;
+    margin: 0 0 25px;
     font-size: 20px;
     background-position: 50%;
     padding-top: 130px;
@@ -587,10 +587,12 @@
   }
   
   .blog-post {
+    width: 300px; /* Chiều rộng cố định */
     flex: 1 1 calc(50% - 20px); /* Hai sản phẩm mỗi hàng, với khoảng cách giữa chúng */
     box-sizing: border-box;
     background-color: #fff;
     padding: 10px;
+    flex-grow: 0;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
@@ -647,7 +649,8 @@
   /* Responsive Design */
   @media (max-width: 768px) {
     .blog-post {
-      flex: 1 1 100%;
+        width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng của hàng trên màn hình nhỏ */
+        height: auto; /* Chiều cao tự động để phù hợp với nội dung */
     }
   }
   
