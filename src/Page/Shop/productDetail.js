@@ -177,6 +177,14 @@ const ProductDetail = () => {
               <p className="product-category">Categories: {product.categories.category_name}</p>
               <p className="product-price">${product.price}</p>
               <p className="product-description">{product.description}</p>
+              <div className='detail-img-1'>
+      <img src={'https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F029fbfab-0605-4549-99bf-e0aeca0076c6_720x960.jpeg'} alt={'anh detail'} className='img-proDetail-1' />
+      <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlg9zygRkh9EqxzmeqeJe9Xo6nu-349_KBLA&s'} alt={'anh detail'} className='img-proDetail-1' />
+      <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStrS7th33WGFq18g3tS5IKdMYMOuhwAH4gpg&s'} alt={'anh detail'} className='img-proDetail-1' />
+      <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPBJW8loTjC0hRpFPmBBjyd-5nO5ZtjSynDg&s'} alt={'anh detail'} className='img-proDetail-1' />
+
+
+      </div>
               <div className="product-quantity">
                 <button onClick={() => handleQuantityChange(-1)} className="pro-button">-</button>
                 <input type="number" min="1" value={quantity} readOnly className="pro-input" />
