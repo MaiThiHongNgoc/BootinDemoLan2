@@ -170,46 +170,50 @@ const OrderList = () => {
 
     return (
         <div className="container">
-            <h1>Order Management</h1>
-            {showForm && (
-                <OrderForm
-                    order={editingOrder}
-                    onSave={handleFormClose}
-                    refreshOrders={refreshOrders}
+        <h1>Order Management</h1>
+        {showForm && (
+            <OrderForm
+                order={editingOrder}
+                onSave={handleFormClose}
+                refreshOrders={refreshOrders}
+            />
+        )}
+        <div className="filter-pagination-container">
+            <div className="filter-container">
+                <input
+                    type="text"
+                    placeholder="Search orders by username, first name, last name, or email..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    className="order-search"
                 />
-            )}
-            <input
-                type="text"
-                placeholder="Search orders by username, first name, last name, or email..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="order-search"
-            />
-            <input
-                type="date"
-                value={startDate}
-                onChange={handleStartDateChange}
-                className="order-search-date"
-                placeholder="Start Date"
-            />
-            <input
-                type="date"
-                value={endDate}
-                onChange={handleEndDateChange}
-                className="order-search-date"
-                placeholder="End Date"
-            />
-            <select
-                value={searchStatus}
-                onChange={handleStatusFilterChange}
-                className="order-search-status"
-            >
-                <option value="">All Statuses</option>
-                <option value="PENDING">Pending</option>
-                <option value="COMPLETED">Completed</option>
-                <option value="PROCESSING">Processing</option>
-                <option value="CANCELLED">Cancelled</option>
-            </select>
+                <input
+                    type="date"
+                    value={startDate}
+                    onChange={handleStartDateChange}
+                    className="order-search-date"
+                />
+                <input
+                    type="date"
+                    value={endDate}
+                    onChange={handleEndDateChange}
+                    className="order-search-date"
+                />
+                <select
+                    value={searchStatus}
+                    onChange={handleStatusFilterChange}
+                    className="order-search-status"
+                >
+                    <option value="">All Statuses</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="COMPLETED">Completed</option>
+                    <option value="PROCESSING">Processing</option>
+                    <option value="CANCELLED">Cancelled</option>
+                </select>
+            </div>
+
+        </div>
+
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
@@ -223,10 +227,8 @@ const OrderList = () => {
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Phone</th>
                             <th>Address</th>
                             <th>Order Date</th>
-                            <th>Total Amount</th>
                             <th>Status</th>
                             <th>Payment Method</th>
                             <th>Actions</th>
@@ -242,10 +244,8 @@ const OrderList = () => {
                                     <td>{order.first_name}</td>
                                     <td>{order.last_name}</td>
                                     <td>{order.user.email}</td>
-                                    <td>{order.user.phone}</td>
                                     <td>{order.address}</td>
                                     <td>{new Date(order.order_date).toLocaleString()}</td>
-                                    <td>{order.total_amount.toFixed(2)}</td>
                                     <td>
                                         <select
                                             name="status"
