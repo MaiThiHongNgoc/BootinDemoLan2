@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:9191/api/author/v1/';
 
+const token = localStorage.getItem('token');
 // Lấy danh sách tác giả
 export const getAuthors = async () => {
   try {
@@ -15,7 +16,11 @@ export const getAuthors = async () => {
 // Lấy chi tiết tác giả theo ID
 export const getAuthorById = async (authorId) => {
   try {
-    const response = await axios.get(`${API_URL}${authorId}`);
+    const response = await axios.get(`${API_URL}${authorId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     return response.data;
   } catch (error) {
     console.error(`Failed to fetch author ${authorId}`, error);

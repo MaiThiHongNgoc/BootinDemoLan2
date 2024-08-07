@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getOrder, updateOrder, deleteOrder } from '../Service (1)/orderService';
 import './orderList.css';
 import OrderForm from './orderForm';
-import OrderDetails from './orderDetail'; 
+import OrderDetails from './orderDetail';
 import { Link, useParams } from 'react-router-dom';
 
 const OrderList = () => {
@@ -16,7 +16,7 @@ const OrderList = () => {
     const [endDate, setEndDate] = useState('');
     const [searchStatus, setSearchStatus] = useState('');
     const [expandedOrderId, setExpandedOrderId] = useState(null);
-    
+
     const { status } = useParams(); // Get status from URL params
 
     useEffect(() => {
@@ -178,27 +178,31 @@ const OrderList = () => {
                     refreshOrders={refreshOrders}
                 />
             )}
-            <input
-                type="text"
-                placeholder="Search orders by username, first name, last name, or email..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="order-search"
-            />
-            <input
-                type="date"
-                value={startDate}
-                onChange={handleStartDateChange}
-                className="order-search-date"
-                placeholder="Start Date"
-            />
-            <input
-                type="date"
-                value={endDate}
-                onChange={handleEndDateChange}
-                className="order-search-date"
-                placeholder="End Date"
-            />
+            <div className="order-search-container">
+                <input
+                    type="text"
+                    placeholder="Search orders by username, first name, last name, or email..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    className="order-search"
+                />
+                <input
+                    type="date"
+                    value={startDate}
+                    onChange={handleStartDateChange}
+                    className="order-search-date"
+                    placeholder="Start Date"
+                />
+                <span> </span>
+                <input
+                    type="date"
+                    value={endDate}
+                    onChange={handleEndDateChange}
+                    className="order-search-date"
+                    placeholder="End Date"
+                />
+            </div>
+
             <select
                 value={searchStatus}
                 onChange={handleStatusFilterChange}

@@ -29,9 +29,8 @@ const NewsBook = () => {
                     : 'http://localhost:9191/api/news-books/'
             );
             
-            // Dữ liệu trả về là một mảng sách
             setBooks(response.data || []);
-            setTotalBooks(response.data.length || 0); // Tổng số sách là chiều dài của mảng
+            setTotalBooks(response.data.length || 0);
         } catch (error) {
             console.error('Failed to fetch books', error);
             setError('Failed to load books. Please try again later.');
@@ -42,7 +41,6 @@ const NewsBook = () => {
 
     const handleDelete = async (book) => {
         try {
-            // Xóa sách vĩnh viễn
             await deleteBook(book.id);
             loadBooks(apiType); // Tải lại danh sách sách
         } catch (error) {
@@ -51,9 +49,19 @@ const NewsBook = () => {
         }
     };
 
+    const handleUpdate = async (book) => {
+        try {
+            const updatedBook = { ...book, approved: false };
+            await updateBook(book.id, updatedBook); // Cập nhật thuộc tính approved
+            loadBooks(apiType); // Tải lại danh sách sách
+        } catch (error) {
+            console.error('Failed to update book', error);
+            setError('Failed to update book. Please try again later.');
+        }
+    };
+
     const handleRestore = async (book) => {
         try {
-            // Cập nhật trạng thái của sách thành chưa được xóa
             const updatedBook = { ...book, approved: true };
             await updateBook(book.id, updatedBook);
             loadBooks(apiType); // Tải lại danh sách sách
@@ -92,7 +100,6 @@ const NewsBook = () => {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    // Tính số trang (nếu cần phân trang)
     const totalPages = Math.ceil(totalBooks / booksPerPage);
 
     return (
@@ -164,7 +171,7 @@ const NewsBook = () => {
                                         ) : (
                                             <button
                                                 className={`book-button ${book.approved ? 'book-button-delete' : 'book-button-restore'}`}
-                                                onClick={() => handleDelete(book)}
+                                                onClick={() => handleUpdate(book)}
                                             >
                                                 {book.approved ? 'Delete' : 'Restore'}
                                             </button>
@@ -174,15 +181,6 @@ const NewsBook = () => {
                             ))}
                         </tbody>
                     </table>
-                    <ul className="pagination">
-                        {Array.from({ length: totalPages }, (_, index) => (
-                            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                                <button onClick={() => paginate(index + 1)} className="page-link">
-                                    {index + 1}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
                 </>
             )}
         </div>
