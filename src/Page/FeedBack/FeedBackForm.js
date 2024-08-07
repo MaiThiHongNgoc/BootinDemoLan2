@@ -72,7 +72,7 @@ const StarRating = ({ rating, onRatingChange }) => {
                 </span>
             ))}
             <span style={{ marginLeft: '10px', fontSize: '18px' }}>
-                {rating.toFixed(1)} sao - {ratingDescriptions[Math.round(rating)] || ''}
+                {rating.toFixed(1)} Star - {ratingDescriptions[Math.round(rating)] || ''}
             </span>
         </div>
     );
