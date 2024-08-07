@@ -8,6 +8,7 @@ import { PayPalButton } from 'react-paypal-button-v2';
 import Header from '../Component/Header/Header'
 import Footer from '../Component/Footer/Footer'
 import { useNavigate } from 'react-router-dom';
+import { RxSlash } from 'react-icons/rx';
 
 
 import './CheckOut.css';
@@ -188,7 +189,20 @@ const CheckOut = () => {
   return (
     <div>
       <Header />
-      <div className='checkout-page'></div>
+      <div className='checkout-page'>
+      <div className='viewcart-content'>
+                    <h1 className='viewcart-header'>CheckOut</h1>
+                    <div className='viewcart-breadcrumb'>
+                        <div className='viewcart-path'>
+                            <a className='viewcart-link' href='#'>Home</a>
+                            <span className='viewcart-delimiter'>
+                                <i className='viewcart-icon'><RxSlash /></i>
+                            </span>
+                            <span className='viewcart-current'>CheckOut</span>
+                        </div>
+                    </div>
+                </div>
+      </div>
       <div className="checkout-container">
         <div className="checkout-form-section">
           <h2 className='check-h2'>Billing details</h2>
