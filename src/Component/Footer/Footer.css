@@ -1,24 +1,18 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
 .footer{
     width: 100%;
-    height: 416.4px;
-    padding-top: 50px;
+    height: 369.4px;
     margin-top: 0;
     background: #f5f5f5;
+    padding-top: 75px;
     color: #666;
     font-size: 14px;
     padding-bottom: 0;
     position: relative;
     border-bottom: none;
     line-height: 24px;
-    display: block;
+    clear: both;
 }
 .footer-container{
-    width: 100%;
     margin-right: auto;
     margin-left: auto;
     max-width: 100%;
@@ -433,36 +427,4 @@
 }
 .footer-figure{
     margin-right: 77px;
-}
-@media (min-width: 768px) {
-    .footer-padding_1, .footer-padding_2, .footer-padding_3, .footer-padding_4 {
-        width: 25%;
-        float: left;
-        margin-bottom: 0;
-    }
-
-    .footer-left {
-        float: left;
-        width: 50%;
-        text-align: left;
-    }
-
-    .footer-right {
-        float: right;
-        width: 50%;
-        text-align: right;
-    }
-}
-
-@media (max-width: 767px) {
-    .footer-padding_1, .footer-padding_2, .footer-padding_3, .footer-padding_4 {
-        float: none;
-        width: 100%;
-    }
-
-    .footer-left, .footer-right {
-        float: none;
-        width: 100%;
-        text-align: center;
-    }
 }
