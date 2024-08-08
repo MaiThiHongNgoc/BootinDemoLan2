@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { RiArrowDownSLine } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 import { getCategories } from "../Backend/Service (1)/categoryService";
+import { searchProducts } from "../Backend/Service (1)/productService";
 import './Search.css';
 
 const Search = () => {
   const [categories, setCategories] = useState([]);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const data = await getCategories();
-        console.log(data); // Log response data to check structure
-        setCategories(data); // Ensure response.data is an array
+        console.log("Categories Data:", data);
+        setCategories(data);
       } catch (error) {
         console.error("Error fetching categories:", error);
-        setCategories([]); // Fallback to an empty array on error
+        setCategories([]);
       }
     };
 
@@ -32,9 +38,32 @@ const Search = () => {
     setSelectedCategory(event.target.value);
   };
 
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    setError('');
+    try {
+      const results = await searchProducts(searchQuery);
+      console.log("Search Results:", results);
+      if (results && results.content) {
+        setSearchResults(results.content);
+      } else {
+        setSearchResults([]);
+      }
+    } catch (error) {
+      console.error("Error searching products:", error);
+      setError('Failed to search products. Please try again.');
+      setSearchResults([]);
+    }
+  };
+
+  const handleProductClick = (productId) => {
+    console.log(`Navigating to product with ID: ${productId}`);
+    navigate(`/product/${productId}`);
+  };
+
   return (
     <div className='search-col-lg'>
-      <form className='search-ajax'>
+      <form className='search-ajax' onSubmit={handleSearch}>
         <div className='search-category' onClick={toggleDropdown}>
           <span className='search-pwd-drop'>Browse Category</span>
           <span className='search-caret'><RiArrowDownSLine /></span>
@@ -57,8 +86,20 @@ const Search = () => {
           <button className='search-btn' type='submit'>
             <i className='search-icon'><IoSearch /></i>
           </button>
-          <input className='search-input' placeholder='Search' />
-          <ul className='search-result'></ul>
+          <input
+            className='search-input'
+            placeholder='Search'
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {error && <div className="error-message">{error}</div>}
+          <ul className='search-result'>
+            {searchResults.map(product => (
+              <li key={product.product_id} onClick={() => handleProductClick(product.product_id)}>
+                {product.product_name}
+              </li>
+            ))}
+          </ul>
         </div>
         <input type='hidden' className='search-type' value="product" />
       </form>
