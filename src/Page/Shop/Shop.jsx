@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts } from '../../Backend/Service (1)/productService';
+import axios from 'axios';
 import { getCategories } from '../../Backend/Service (1)/categoryService';
 import { getAuthors } from '../../Backend/Service (1)/authorService';
 import { addProductToCart, updateCartItem } from '../../Backend/Service (1)/cartItemsService';
@@ -10,7 +10,7 @@ import Footer from '../../Component/Footer/Footer';
 import { FiSearch, FiShoppingCart, FiCheck } from "react-icons/fi";
 import { RxSlash } from "react-icons/rx";
 import { Link } from 'react-router-dom';
-import { showMessage } from '../../Cart/message'; // Adjust the path as needed
+import { showMessage } from '../../Cart/message'; // Adjust path if necessary
 import './Shop.css';
 
 const Shop = () => {
@@ -18,7 +18,7 @@ const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedPriceRange, setSelectedPriceRange] = useState([0, 1000]);
@@ -33,7 +33,7 @@ const Shop = () => {
     loadProducts();
     loadCategories();
     loadAuthors();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     applyFilters();
@@ -43,8 +43,10 @@ const Shop = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await getProducts();
-      const { content, totalPages } = response;
+      const response = await axios.get('http://localhost:9191/api/products/v1/', {
+        params: { p: currentPage } // Use 'p' query parameter for pagination
+      });
+      const { content, totalPages } = response.data;
       setProducts(Array.isArray(content) ? content : []);
       setTotalPages(totalPages || 0);
     } catch (error) {
@@ -93,7 +95,7 @@ const Shop = () => {
 
     // Apply search query filter
     if (searchQuery) {
-      filtered = filtered.filter(product => 
+      filtered = filtered.filter(product =>
         product.product_name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
@@ -103,18 +105,18 @@ const Shop = () => {
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
-    setCurrentPage(1); // Reset to the first page when filter changes
+    setCurrentPage(0); // Reset to the first page when filter changes
   };
 
   const handlePriceChange = (event) => {
     const value = event.target.value;
     setSelectedPriceRange([0, value]);
-    setCurrentPage(1); // Reset to the first page when filter changes
+    setCurrentPage(0); // Reset to the first page when filter changes
   };
 
   const handleAuthorChange = (event) => {
     setSelectedAuthor(event.target.value);
-    setCurrentPage(1); // Reset to the first page when filter changes
+    setCurrentPage(0); // Reset to the first page when filter changes
   };
 
   const handleSearchChange = (event) => {
@@ -122,11 +124,14 @@ const Shop = () => {
   };
 
   const handleSearchClick = () => {
-    setCurrentPage(1); // Reset to the first page when searching
+    setCurrentPage(0); // Reset to the first page when searching
     applyFilters();
   };
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    loadProducts(); // Load products for the selected page
+  };
 
   const handleAddProductToCart = async (product) => {
     const token = localStorage.getItem('token');
@@ -161,8 +166,8 @@ const Shop = () => {
 
         setTimeout(() => {
           setCartIconState(prevState => ({
-              ...prevState,
-              [product.product_id]: 'checkmark'
+            ...prevState,
+            [product.product_id]: 'checkmark'
           }));
           showMessage('Product successfully added to cart!', 'success');
         }, 1000);
@@ -243,14 +248,14 @@ const Shop = () => {
                 <input 
                   type="range" 
                   min="0" 
-                  max="50" 
+                  max="100" // Update max value
                   step="5" 
                   value={selectedPriceRange[1]}
                   onChange={handlePriceChange} 
                   className="shop-filter-range"
                 />
               </div>
-              <span id="price-display">$0 - ${selectedPriceRange[1]}</span>
+              <span id="price-display">${selectedPriceRange[0]} - ${selectedPriceRange[1]}</span>
             </div>
           </div>
           <div className="shop-filter">
@@ -306,10 +311,10 @@ const Shop = () => {
                 {[...Array(totalPages)].map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => paginate(index + 1)}
-                    className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+                    onClick={() => paginate(index)}
+                    className={`pagination-button ${currentPage === index ? 'active' : ''}`}
                   >
-                    {index + 1}
+                    {index}
                   </button>
                 ))}
               </div>

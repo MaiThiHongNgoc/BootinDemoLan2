@@ -11,7 +11,7 @@ const ProductList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
     const [productsPerPage] = useState(10);
     const [totalProducts, setTotalProducts] = useState(0);
     const [apiType, setApiType] = useState('all');
@@ -147,14 +147,14 @@ const ProductList = () => {
                         </tbody>
                     </table>
                     <ul className="pagination">
-    {Array.from({ length: totalPages }, (_, index) => (
-        <li key={index} className={`page-item ${currentPage === index ? 'active' : ''}`}>
-            <button onClick={() => paginate(index)} className="page-link">
-                {index}
-            </button>
-        </li>
-    ))}
-</ul>
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <li key={index} className={`page-item ${currentPage === index ? 'active' : ''}`}>
+                                <button onClick={() => paginate(index)} className="page-link">
+                                    {index}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
 
                 </>
             )}
