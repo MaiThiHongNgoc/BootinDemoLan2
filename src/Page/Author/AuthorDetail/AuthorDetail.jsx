@@ -34,7 +34,7 @@ const AuthorDetail = () => {
       <Header/>
     <div className='detail-title'>
       <div className='detail-jpg'>
-        <h1 className='detail-new'>Dang Diep</h1>
+        <h1 className='detail-new'>Author Detail</h1>
         <div className='detail-breadcrumb'>
           <div className='detail-bwp'>
             <a className='detail-a' href='http://localhost:3000/'>Home</a>
@@ -43,7 +43,6 @@ const AuthorDetail = () => {
               Author
             </span>
             <span className='detail-delimiter'>
-              <i className='detail-slash'><RxSlash /></i>
             </span>
           </div>
         </div>
@@ -56,8 +55,11 @@ const AuthorDetail = () => {
         </div>
       <div className='detail-info'>
       <h1>{author.author_name}</h1>
-      <p>Bio: {author.bio}</p>
-      <p>Published Books: {author.published_book}</p>
+            <p>Bio: {author.description}</p>
+            <p>Address: {author.address}</p>
+            <p>Year of Birth: {author.year_of_birth}</p>
+            <p>Gender: {author.gender}</p>
+            <p>Published Books: {author.published_book}</p>
       {/* Hiển thị thêm thông tin nếu cần */}
       <ul className='detail-ul'>
         <li>

@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import './UserOrder.css';
+import { updateOrder } from "../../Backend/Service (1)/orderService";
 
 const UserOrder = () => {
     const [orders, setOrders] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); // Initialize navigate
+    const navigate = useNavigate();
 
     const fetchOrders = async () => {
         try {
@@ -34,12 +35,46 @@ const UserOrder = () => {
     };
 
     const handleFeedbackClick = (productId) => {
-        navigate('/feedback', { state: { productId } }); // Navigate correctly with productId
+        navigate('/feedback', { state: { productId } });
     };
 
     useEffect(() => {
         fetchOrders();
     }, []);
+
+    const handleStatusChange = async (e, order) => {
+        e.preventDefault();
+        const updatedStatus = 'Delivered';
+        const isConfirmed = window.confirm("Your order has arrived");
+        if (!isConfirmed) {
+            return;
+        }
+
+        const updatedOrder = { ...order, status: updatedStatus };
+
+        const payload = {
+            order_id: updatedOrder.order_id,
+            user: { user_id: updatedOrder.user.user_id },
+            first_name: updatedOrder.first_name,
+            last_name: updatedOrder.last_name,
+            address: updatedOrder.address,
+            phone_number: updatedOrder.phone_number,
+            email: updatedOrder.email,
+            paymentMethods: { payment_method_id: updatedOrder.paymentMethods.payment_method_id },
+            total_amount: updatedOrder.total_amount,
+            status: updatedStatus
+        };
+
+        setLoading(true);
+        try {
+            await updateOrder(updatedOrder.order_id, payload);
+            fetchOrders();
+        } catch (error) {
+            setError(`Failed to update status: ${error.message}`);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>You are not logged in</p>;
@@ -83,9 +118,14 @@ const UserOrder = () => {
                                                 <p><strong>Price:</strong> ${detail.products.price.toFixed(2)}</p>
                                                 <p><strong>Quantity:</strong> {detail.quantity}</p>
                                                 {order.status.toLowerCase() === 'completed' && (
-                                                     <button onClick={() => handleFeedbackClick(detail.products.product_id)} className="feedback-button">
-                                                     Feedback
-                                                   </button>
+                                                    <button onClick={() => handleFeedbackClick(detail.products.product_id)} className="feedback-button">
+                                                        Feedback
+                                                    </button>
+                                                )}
+                                                {order.status.toLowerCase() === 'shipping' && (
+                                                    <button onClick={(e) => handleStatusChange(e, order)} className="feedback-button">
+                                                        Received The Goods
+                                                    </button>
                                                 )}
                                             </div>
                                         </div>

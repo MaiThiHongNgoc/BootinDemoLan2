@@ -297,7 +297,7 @@ input[type="range"]::-ms-thumb {
   align-items: center;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-.pagination-button{
+.pagination-button-shop{
   padding: 10px;
   margin: 10px;
   background-color: #f86d72;

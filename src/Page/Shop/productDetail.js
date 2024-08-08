@@ -174,6 +174,7 @@ const ProductDetail = () => {
             <div className="product-into">
               <h1 className="product-name">{product.product_name}</h1>
               <p className="product-author">Author: {product.author.author_name}</p>
+              <p className="product-author">publisher: Young publishers</p>
               <p className="product-category">Categories: {product.categories.category_name}</p>
               <p className="product-price">${product.price}</p>
               <p className="product-description">{product.description}</p>
@@ -202,7 +203,6 @@ const ProductDetail = () => {
       </div>
     
       {feedbackLoading && <p>Loading feedbacks...</p>}
-      {feedbackError && <p className="error-message">{feedbackError}</p>}
       {feedbacks.length > 0 ? (
       <div className="feedback-list">
       <ul>

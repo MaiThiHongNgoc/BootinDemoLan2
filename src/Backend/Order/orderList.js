@@ -204,11 +204,12 @@ const OrderList = () => {
                     onChange={handleStatusFilterChange}
                     className="order-search-status"
                 >
-                    <option value="">All Statuses</option>
-                    <option value="PENDING">Pending</option>
-                    <option value="COMPLETED">Completed</option>
-                    <option value="PROCESSING">Processing</option>
-                    <option value="CANCELLED">Cancelled</option>
+                    <option className='option-status-pending' value="Pending">Pending</option>
+                                            <option className='option-status-completed' value="Paid">Paid</option>
+                                            <option className='option-status-processing' value="Packaging">Packaging</option>
+                                            <option className='option-status-cancelled' value="Shipping">Shipping</option>
+                                            <option className='option-status-cancelled' value="Delivered">Delivered</option>
+                                            <option className='option-status-cancelled' value="Cancelled">Cancelled</option>
                 </select>
             </div>
         </div>
@@ -250,10 +251,12 @@ const OrderList = () => {
                                             className={getStatusClass(order.status)}
                                             onChange={(e) => handleStatusChange(e, order)}
                                         >
-                                            <option className='option-status-pending' value="PENDING">Pending</option>
-                                            <option className='option-status-completed' value="COMPLETED">Completed</option>
-                                            <option className='option-status-processing' value="PROCESSING">Processing</option>
-                                            <option className='option-status-cancelled' value="CANCELLED">Cancelled</option>
+                                            <option className='option-status-pending' value="Pending">Pending</option>
+                                            <option className='option-status-completed' value="Paid">Paid</option>
+                                            <option className='option-status-processing' value="Packaging">Packaging</option>
+                                            <option className='option-status-cancelled' value="Shipping">Shipping</option>
+                                            <option className='option-status-cancelled' value="Delivered">Delivered</option>
+                                            <option className='option-status-cancelled' value="Cancelled">Cancelled</option>
                                         </select>
                                     </td>
                                     <td>{order.paymentMethods.method_name}</td>

@@ -21,7 +21,7 @@ const Shop = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedPriceRange, setSelectedPriceRange] = useState([0, 1000]);
+  const [selectedPriceRange, setSelectedPriceRange] = useState([0, 100]);
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -312,7 +312,7 @@ const Shop = () => {
                   <button
                     key={index}
                     onClick={() => paginate(index)}
-                    className={`pagination-button ${currentPage === index ? 'active' : ''}`}
+                    className={`pagination-button-shop ${currentPage === index ? 'active' : ''}`}
                   >
                     {index}
                   </button>
